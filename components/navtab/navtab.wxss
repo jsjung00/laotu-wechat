@@ -1,0 +1,120 @@
+/* navbar CSS */
+/* consider changing nav-container height using the caspule position */
+
+.nav-container{
+  width: 750rpx;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.top-buffer{
+  width: 100%;
+  display: block;
+}
+
+.title-container{
+  /* Should take up the rest of the space, or 60% width */
+  flex-grow: 1;
+  /*background-color: orange;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 20px;
+}
+
+/* I want the icons stuff to be 20% width */
+.outside{
+  height: 100%;
+  /*background-color: powderblue;*/
+  display: flex;
+  align-items: center;
+}
+
+.capsule{
+  border-radius: 500px;
+  background-color: white;
+  height: 30px;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+}
+
+.icon-container{
+  width: 50%;
+  height: 100%;
+  /*background-color: peru;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+/* the home icon is a little too large, reduce size */ 
+.home{
+  /*height: 80%;*/
+  /*background-color: purple;*/
+}
+.completeChild{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon{
+  height: 100%;
+  width:100%;
+}
+
+/* Tabs CSS */
+.weui-tabs{
+  width:100%;
+  /*background-color: lightgreen;*/
+  /*flex-grow: 1;*/
+  display: flex;
+  flex-direction: column;
+}
+.weui-tabs-bar__wrp{
+  width:100%;
+}
+.weui-tabs-bar__content{
+  width:100%;
+  white-space:nowrap;
+  background-color: lightskyblue;
+  display: flex;
+}
+.weui-tabs-bar__item{
+  display:inline-block;
+  background-color: maroon;
+  /* This makes the tabs take up the entire space, makes the text in the center */
+  flex-grow: 1;
+  text-align: center;
+}
+.weui-tabs-bar__title{
+  display:inline-block;
+  border-bottom-width:2px;
+  border-bottom-style:solid;
+  border-bottom-color:transparent;
+  /*background-color: lime;*/
+  /* This makes the underline span the whole tab */
+  width: 100%;
+}
+/* I want the swiper to fill the rest of the weui-tabs container */ 
+.weui-tabs-swiper{
+  flex-grow: 1;
+}
+
+/*
+custom-component{
+  display: flex;
+  flex-direction: column;
+}*/
+
+

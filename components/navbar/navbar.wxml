@@ -1,0 +1,40 @@
+<!-- I need to have three cases 
+    1) I have both left and home
+    2) I have only home
+    3) I have none-->
+
+<custom-component>
+  <view class="top-buffer" style="height: {{statusHeight}}px"></view>
+  <view class="nav-container">
+    <view class="outside" id= "icons-container" style="width : {{capsuleContainerWidth}}px">
+      <!-- If there are both back and home buttons-->
+      <view wx:if="{{isBoth}}" class="capsule" style="width : {{capsuleWidth}}px">
+        <view class="icon-container">
+          <navigator class = "completeChild" open-type="navigateBack">
+            <image class="icon" mode="aspectFit" src="../../img/left-arrow.png"></image>
+          </navigator>
+        </view>
+        <view class="icon-container">
+          <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+            <image class="icon" mode="aspectFit" src="../../img/home.png"></image>
+          </navigator>
+        </view>
+      </view>
+      <!-- If there is only home-->      
+      <view wx:elif="{{isHome}}" class="capsule" style="width:{{capsuleHalfWidth}}px">
+        <view class="icon-container">
+          <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+            <image mode="aspectFit" src=".././../img/home.png"></image>  
+          </navigator>
+        </view>
+      </view>
+      <!-- If there is neither home nor back (homepage)-->
+      <view wx:else>
+      </view> 
+    </view>
+    <view class = "title-container">
+      <text id="title">{{title}}</text>
+    </view>
+    <view class="outside" style="width : {{capsuleContainerWidth}}px"></view>
+  </view>
+</custom-component>

@@ -1,0 +1,24 @@
+{
+  "name": "laotu-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsjung00/laotu-dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsjung00/laotu-dev/issues"
+  },
+  "homepage": "https://github.com/jsjung00/laotu-dev#readme",
+  "dependencies": {
+    "@miniprogram-component-plus/tabs": "^1.0.0",
+    "weui-miniprogram": "^1.0.5"
+  }
+}

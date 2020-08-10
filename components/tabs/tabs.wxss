@@ -1,0 +1,61 @@
+/* components/tabs.wxss */
+
+.weui-tabs{
+  background-color: chartreuse;
+  width: 100%;
+}
+
+.weui-tabs-bar__wrp {
+  border-bottom: 1px solid indigo;
+  position: fixed;
+  top: 0;
+  height: 30px; 
+  z-index:9999;
+  background-color: lightgreen;
+}
+
+.weui-tabs-swiper {
+  margin-top: 30px;
+  width: 100%;
+  height: 500px;
+  background-color: yellow;
+}
+
+.tab-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* padding: 40rpx; */
+  background-color: orange;
+}
+
+.weui-tabs-bar__title {
+  margin: 0px 10px;
+  background-color: blue;
+  width: 100%;
+}
+
+.tab-bar-title__selected {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.weui-tabs-bar__content{
+  width: 750rpx;
+  height: 100rpx;
+  background-color: brown;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.weui-tabs-bar__item{
+  /* NOTE: we use flex-grow here to have the tabs take up the entire space */
+  flex-grow: 1;
+  display: flex;
+  /* NOTE: use text-align center to get the text container div in the center */ 
+  text-align: center;
+}

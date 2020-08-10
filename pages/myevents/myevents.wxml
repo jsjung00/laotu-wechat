@@ -1,0 +1,33 @@
+<NavTab title="My Events" isHome="true" tabs="{{tabs}}"
+  activeTab="{{activeTab}}" 
+  swiperClass="weui-tabs-swiper"
+  bindtabclick="onTabClick"
+  bindchange="onChange"
+  activeClass="tab-bar-title__selected">
+  <block wx:for="{{tabs}}" wx:key="title">
+    <view class="tab-content" slot="tab-content-{{index}}">
+      <!-- We iterate over the data array which is the second element-->
+      <block wx:for="{{item[1]}}" wx:for-index="itemindex" wx:for-item="eventItem">
+        <view class="event-container">
+          <view id="content-container" data-index='{{index}}' data-itemindex='{{itemindex}}'bindtap="navHandler">
+            <view class="image-container">
+              <image mode="aspectFill" src="{{eventItem.imgSrc}}" style="height: 100%;width:100%"></image>
+            </view>
+            <view class="desc-container">
+              <view class="text-container">
+                <view class="event-desc">{{eventItem.title}}</view>
+                <view class="event-desc">{{eventItem.date}}</view>
+                <view class="event-desc">{{eventItem.location}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="fav-container">
+            <view id="favImg-container" style="height: 70%; width: {{widths.favImgContainer}}px">
+              <image bindtap="favorited" src="{{eventItem.favSrc ? eventItem.favSrc : 'https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png'}}" data-index='{{index}}' data-itemindex='{{itemindex}}' style="height: 100%; width: 100%" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+</NavTab>

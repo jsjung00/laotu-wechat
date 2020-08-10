@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "CustomNav" : "../../components/navbar/navbar",
+    "mp-dialog" : "/miniprogram_npm/weui-miniprogram/dialog/dialog",
+    "mp-navigation-bar": "/miniprogram_npm/weui-miniprogram/navigation-bar/navigation-bar"
+  }
+}

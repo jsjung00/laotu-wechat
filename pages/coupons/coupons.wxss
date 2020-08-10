@@ -1,0 +1,70 @@
+#container{
+  display: flex;
+  flex-direction: column;
+  width: 750rpx;
+  
+}
+
+#nav{
+  /*border-style: dotted;*/
+}
+
+#tabs{
+  border-style: solid;
+  overflow: hidden;
+
+}
+
+.weui-tabs{
+  background-color: chartreuse;
+}
+
+.weui-tabs-bar__wrp {
+  border-bottom: 1px solid indigo;
+  position: fixed;
+  top: 0;
+  height: 30px; 
+  z-index:9999;
+}
+
+.weui-tabs-swiper {
+  margin-top: 30px;
+  width: 100%;
+  height: 500px;
+  /*background-color: yellow;*/
+}
+
+.tab-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* padding: 40rpx; */
+  /*background-color: orange;*/
+}
+
+.weui-tabs-bar__title {
+  margin: 0px 10px;
+  /*background-color: blue;*/
+  width: 100%;
+}
+
+.tab-bar-title__selected {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.weui-tabs-bar__content{
+  /*background-color: brown;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.weui-tabs-bar__item{
+  /* NOTE: we use flex-grow here to have the tabs take up the entire space */
+  flex-grow: 1;
+  display: flex;
+  /* NOTE: use text-align center to get the text container div in the center */ 
+  text-align: center;
+}

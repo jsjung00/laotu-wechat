@@ -1,0 +1,8 @@
+<NavTab title="My Events" isHome="true" tabs="{{tabs}}"
+  activeTab="{{activeTab}}" 
+  swiperClass="weui-tabs-swiper"
+  bindtabclick="onTabClick"
+  bindchange="onChange"
+  activeClass="tab-bar-title__selected">
+  </NavTab>
+<text>Notification</text>

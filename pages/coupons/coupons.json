@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "CustomNav" : "../../components/navbar/navbar",
+    "mp-tabs" : "@miniprogram-component-plus/tabs"
+  },
+  "window": {
+    "navigationStyle" : "custom"
+  }
+}

@@ -1,0 +1,26 @@
+<view id="container">
+  <!--<view id="nav">
+    <CustomNav isBoth = "true" title="Coupons"/>
+  </view>-->
+  <view id="tabs">
+    <mp-tabs tabs="{{tabs}}" 
+      activeTab="{{activeTab}}" 
+      swiperClass="weui-tabs-swiper"
+      bindtabclick="onTabClick"
+      bindchange="onChange"
+      activeClass="tab-bar-title__selected">
+
+      <block wx:for="{{tabs}}" wx:key="title">
+        <view class="tab-content" slot="tab-content-{{index}}">
+          <block wx:for="{{item.data}}">
+            <view class="event-container">
+              <view class="event-desc">{{item.title}}</view>
+              <view class="event-desc">{{item.date}}</view>
+              <view class="event-desc">{{item.location}}</view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </mp-tabs>
+  </view>
+</view>

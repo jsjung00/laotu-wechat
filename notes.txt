@@ -1,0 +1,21 @@
+Consider changing the datastructure such that the key of the tab is not an number but rather the title
+
+I want the swiper to at the min cover the entire screen, be large enough to contain the table of events
+
+Consider making Profile Text size dynamic based on width of container w/o JS (too slow)
+
+I want to build a tabbar
+  a) I could build a tabs using WEUI, want to figure out how to get the text in the middle
+  b) I could build a custom tabbar just following the tutorials
+
+BUG: navbar is overlapping with the tab bar. 
+  a) build a component that contains both the navbar and the tabbar
+  b) add extra space to the tabbar on top by calculating the height of the tabbar
+  c) try to figure out how to get the tabbar below the navbar
+
+
+
+
+  
+
+

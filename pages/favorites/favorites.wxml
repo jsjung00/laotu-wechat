@@ -1,0 +1,25 @@
+<NavTab title="Favorites" isBoth="true" tabs="{{tabs}}"
+  activeTab="{{activeTab}}" 
+  swiperClass="weui-tabs-swiper"
+  bindtabclick="onTabClick"
+  bindchange="onChange"
+  activeClass="tab-bar-title__selected">
+  <block wx:for="{{tabs}}" wx:key="title">
+    <view class="tab-content" slot="tab-content-{{index}}">
+      <block wx:for="{{item.data}}">
+        <view class="event-container">
+          <view class="image-container">
+            <image mode="aspectFill" src="{{item.imgSrc}}" style="height: 100%;width:100%"></image>
+          </view>
+          <view class="desc-container">
+            <view class="text-container">
+              <view class="event-desc">{{item.title}}</view>
+              <view class="event-desc">{{item.date}}</view>
+              <view class="event-desc">{{item.location}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+</NavTab>

@@ -1,0 +1,63 @@
+<!--components/navtab.wxml-->
+<custom-component>
+  <view id="nav">
+    <view class="top-buffer" style="height: {{statusHeight}}px"></view>
+    <view class="nav-container">
+      <view class="outside" id= "icons-container" style="width : {{capsuleContainerWidth}}px">
+        <!-- If there are both back and home buttons-->
+        <view wx:if="{{isBoth}}" class="capsule" style="width : {{capsuleWidth}}px">
+          <view class="icon-container">
+            <navigator class = "completeChild" open-type="navigateBack">
+              <image class="icon" mode="aspectFit" src="../../img/left-arrow.png"></image>
+            </navigator>
+          </view>
+          <view class="icon-container">
+            <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+              <image class="icon" mode="aspectFit" src="../../img/home.png"></image>
+            </navigator>
+          </view>
+        </view>
+        <!-- If there is only home-->      
+        <view wx:elif="{{isHome}}" class="capsule" style="width:{{capsuleHalfWidth}}px">
+          <view class="icon-container">
+            <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+              <image mode="aspectFit" src=".././../img/home.png"></image>  
+            </navigator>
+          </view>
+        </view>
+        <!-- If there is neither home nor back (homepage)-->
+        <view wx:else>
+        </view> 
+      </view>
+      <view class = "title-container">
+        <text id="title">{{title}}</text>
+      </view>
+      <view class="outside" style="width : {{capsuleContainerWidth}}px"></view>
+    </view>
+  </view>
+  <!--Here I have the weui-tabs height set to include the entire window. See code in JS (attached)
+      Moreover, I have swiper take up entire weui tabs container using flex-grow-->  
+<view class="weui-tabs" style="height: {{tabsHeight}}px">
+    <view class="weui-tabs-bar__wrp">
+      <scroll-view scroll-x scroll-into-view="item_{{currentView}}" scroll-with-animation="{{animation}}">
+        <view class="weui-tabs-bar__content">
+          <block wx:for="{{tabs}}" wx:key="title">
+            <view id="item_{{index}}" class="weui-tabs-bar__item" style="background-color: {{tabBackgroundColor}}; color: {{activeTab === index ? tabActiveTextColor : tabInactiveTextColor}};" bindtap="handleTabClick" data-index="{{index}}">
+              <view class="weui-tabs-bar__title {{tabClass}} {{activeTab === index ? activeClass : ''}}" style="border-bottom-color: {{activeTab === index ? tabUnderlineColor : 'transparent'}}">
+                <!-- NOTE: the title is the first index-->
+                <text class="">{{item[0]}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+  <swiper class="mySwiper" class="{{swiperClass}}" current="{{activeTab}}" duration="{{duration}}" bindchange="handleSwiperChange" >
+      <swiper-item wx:for="{{tabs}}" wx:key="title">
+        <scroll-view style="height: 100%;" scroll-y scroll-with-animation>
+          <slot name="tab-content-{{index}}" style="height:100%;"></slot>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+</custom-component>
