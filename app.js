@@ -1,7 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-
+    
     //upload the capsle button information to help build nav bar
     this.globalData.headerButtonPos = wx.getMenuButtonBoundingClientRect();
 
@@ -39,7 +39,6 @@ App({
           })
         }
         else{
-          console.log("Did not get scope");
         }
       },
       fail: err => console.log("Get setting failed") 

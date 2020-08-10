@@ -26,17 +26,12 @@ view {
 
 #picture_container{
   height: 80%;
-  /*background-color: blue;
-  background-image: url("https://i.pinimg.com/236x/9a/da/96/9ada96a378cf24b35ec421125625cdc3.jpg");
-  background-size: cover;
-  background-position: center center;*/
   border-radius: 50%;
   margin-left: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-
 }
 #profile_text-container{
   height: 100%;

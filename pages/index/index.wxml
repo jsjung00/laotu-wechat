@@ -4,10 +4,11 @@
   <view id="body_container">
       <view id = "profile_container" class="profile">
         <view id = "picture_container" class="profile" style="width: {{widths.picture_container}}px">
-          <image mode="aspectFit" src="{{userInfo.avatarUrl}}"></image> 
+          <!--<image mode="aspectFit" src="{{userInfo.avatarUrl}}"></image>-->
+          <open-data style="height: 100%" mode="aspectFill" type="userAvatarUrl"></open-data> 
         </view>
         <view id = "profile_text-container" class="profile">
-          <text class="profile" id="profile_text" style="font-size : {{font_sizes.profile_text}}vh">{{userInfo.nickName}}</text> 
+          <open-data type="userNickName" class="profile" id="profile_text" style="font-size : {{font_sizes.profile_text}}vh"></open-data>
         </view>
       </view>
       <view id = "icons_container">
