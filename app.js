@@ -1,12 +1,22 @@
 //app.js
 App({
   onLaunch: function () {
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    } else {
+      wx.cloud.init({
+        // env 参数说明：
+        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
+        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
+        //   如不填则使用默认环境（第一个创建的环境）
+        env: 'laotudata-laotu',
+        traceUser: true,
+      })
+    }
     
+
     //upload the capsle button information to help build nav bar
     this.globalData.headerButtonPos = wx.getMenuButtonBoundingClientRect();
-
-    //upload events data
-    this.uploadData();
     
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -73,67 +83,9 @@ App({
     })
   },
   uploadData: function(){
-    //we would pull data from server
-    const eventsTabData = {
-      0 : {
-        title: 'Upcoming',
-        data : [{
-          navUrl: "/pages/store/store",
-          favSrc: "",
-          date: '12/2/2019',
-          title: 'Museum Visit',
-          location: 'Shanghai, China',
-          imgSrc: 'https://www.travelchinaguide.com/images/photogallery/2013/0923111908.jpg'
-        },{
-          navUrl: "/pages/store/store",
-          favSrc: "",
-          date: '2/3/2019',
-          title: 'Zoo Visit',
-          location: 'Beijing, China',
-          imgSrc: 'https://www.travelchinaguide.com/images/photogallery/2013/0923111908.jpg'
-        },
-        {
-          navUrl: "/pages/store/store",
-          favSrc: "",
-          date: '4/1/2019',
-          title: 'Palace Visit',
-          location: 'Beijing, China',
-          imgSrc: 'https://www.travelchinaguide.com/images/photogallery/2013/0923111908.jpg'
-        },
-        {
-          navUrl: "/pages/store/store",
-          favSrc: "",
-          date: '2/3/2019',
-          title: 'Zoo Visit',
-          location: 'Beijing, China',
-          imgSrc: 'https://www.travelchinaguide.com/images/photogallery/2013/0923111908.jpg'
-        },
-        {
-          navUrl: "/pages/store/store",
-          favSrc: "",
-          date: '4/1/2019',
-          title: 'Palace Visit',
-          location: 'Beijing, China',
-          imgSrc: 'https://www.travelchinaguide.com/images/photogallery/2013/0923111908.jpg'
-        }
-        ]
-      },
-      1 : {
-        title: 'Former',
-        data : [],
-      },
-    };
+    //expect eventsData to be an array of objects, favorited is an object with userID's as keys 
     //upload the events tab data to the global data
     this.globalData.eventsTabData = eventsTabData;
-
-    //init the favoriteEventsTabData
-    let favoriteData = {};
-    let eventsData = this.globalData.eventsTabData;
-    let eventsKeys = Object.keys(eventsData);
-    for (const key in eventsKeys){
-      favoriteData[key] = {};
-    };
-    this.globalData.favoriteEventsTabData = favoriteData;
   },
   globalData: {
     userInfo: null,

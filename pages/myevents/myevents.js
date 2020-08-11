@@ -29,18 +29,19 @@ Page({
     })
   },
   onLoad: function () {
-    /* HERE WE UPLOAD OUR tabData from the global data*/
-    //I will convert object into array of arrays
-    var _tabs = app.globalData.eventsTabData;
-    var tabs = this.objectToArray(_tabs);
-    console.log(tabs);
+    //get the eventsData from the cloud
+    this.parseEventsData();
+    var that = this;
+    setTimeout(function(){
+      console.log(that.data.tabs);
+    }, 3000);
 
-    this.setData({tabs});
+    //this.setData({tabs});
     
      /* Now I will initialize the isFavorited array */
     //this.initIsFavorited();
 
-    this.uploadSizes();
+    //this.uploadSizes();
 
 
     
@@ -170,5 +171,46 @@ Page({
       tabs.push(innerArray);
     });
     return tabs;
+  },
+  parseEventsData: function(){
+    //pull the eventsData from the cloud and create two tabData objects that contain title of tab and the data (past and upcoming events)
+    const db = wx.cloud.database();
+    const _ = db.command;
+    
+    //get the events data ordered chronologically
+    const events = db.collection('events').orderBy('datetime', 'desc');
+    //query events that are upcoming
+    const upcomingEvents = events.where({
+      datetime: _.gt(db.serverDate())
+    });
+    //query events that are past
+    const pastEvents = events.where({
+      datetime: _.lte(db.serverDate())
+    });
+    
+    var that = this;
+    //create the upcoming and past tabData
+    upcomingEvents.get()
+      .then(function(res){
+        const upcomingData = res.data;
+        //get the pastData
+        pastEvents.get()
+          .then(function(res){
+            const pastData = res.data;
+            //create our tabsData array object
+            var tabs = [{
+              title : "Upcoming",
+              data : upcomingData 
+            }, {
+              title : "Past",
+              data : pastData
+            }];
+            //upload to tabs
+            that.setData({tabs});
+            console.log("Events page tabs data set.");
+          })
+          .catch(err => console.error(err))
+      })
+      .catch(err => console.error(err));
   }
 })

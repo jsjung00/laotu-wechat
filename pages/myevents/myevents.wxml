@@ -7,7 +7,7 @@
   <block wx:for="{{tabs}}" wx:key="title">
     <view class="tab-content" slot="tab-content-{{index}}">
       <!-- We iterate over the data array which is the second element-->
-      <block wx:for="{{item[1]}}" wx:for-index="itemindex" wx:for-item="eventItem">
+      <block wx:for="{{item.data}}" wx:for-index="itemindex" wx:for-item="eventItem">
         <view class="event-container">
           <view id="content-container" data-index='{{index}}' data-itemindex='{{itemindex}}'bindtap="navHandler">
             <view class="image-container">
