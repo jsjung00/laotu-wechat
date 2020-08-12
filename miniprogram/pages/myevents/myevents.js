@@ -1,6 +1,8 @@
 /* Consider speeding up the page load by not calculating the width of a container to make it square */
 /** Developer Notes:
- * index represents the tab index (0, 1), while itemIndex represents the item in the array of items
+ * Once pull from cloud collection, each event is an object that comes preloaded with id, title, ect. 
+ * Then, given an array of favEventId's, each event object is given a isFavorited : boolean that is determined by the 
+ * array of favEventId's. The boolean is used to determine whether or not to show a full heart or not.  
  */
 const app = getApp();
 
@@ -29,9 +31,7 @@ Page({
     })
   },
   onLoad: function () {
-    //upload sizes
-    this.uploadSizes();
-
+    
     //get the eventsData from the cloud and set the tabsData to pageData
     this.parseEventsData();
 
@@ -229,5 +229,22 @@ Page({
           .catch(err => console.error(err))
       })
       .catch(err => console.error(err));
+  },
+  favoriteSize: function(event){
+    //function is called when the image of the favoritedHeart is loaded
+    //upload the width of favoriteImg-container to make it a square
+    let that = this;
+    //make favImg-container square
+    //get the height
+    let query = wx.createSelectorQuery();
+    query.select('#favImg-container').boundingClientRect(function(rect){
+      that.setData({
+        'widths.favImgContainer' : String(rect.height)
+      });
+    }).exec(); 
+  },
+  addIsFavorited: function(eventArr){
+    //given an array of event objects, function uses the user's favEventsId's array to add the boolean of whether it is favorited or not
+    //pull userFavEventIds = getFavEventIds();
   }
 })

@@ -46,11 +46,11 @@
   align-items: center;
   width: 100%;
   height: 20%;
-  background-color: palegoldenrod;
+  /*background-color: palegoldenrod;*/
 }
 #favImg-container{
-  background-color: palevioletred;
+  /*background-color: palevioletred;*/
   display: flex;
   justify-content: flex-start;
-  
+  margin-left: 10rpx;
 }

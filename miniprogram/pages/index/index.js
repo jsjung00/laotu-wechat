@@ -42,6 +42,17 @@ Page({
   },
   onLoad: function () {
 
+    wx.cloud.callFunction({
+      name: 'add',
+      data: {
+        a: 1,
+        b: 2,
+      },
+      success: function(res){
+        console.log(res.result.sum)
+      },
+      fail: console.error
+    })
 
     var that = this;
     that.sizes();
