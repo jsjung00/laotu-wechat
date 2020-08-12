@@ -6,7 +6,7 @@
   activeClass="tab-bar-title__selected">
   <block wx:for="{{tabs}}" wx:key="title">
     <view class="tab-content" slot="tab-content-{{index}}">
-      <!-- We iterate over the data array which is the second element-->
+      <!-- We iterate over the data array-->
       <block wx:for="{{item.data}}" wx:for-index="itemindex" wx:for-item="eventItem">
         <view class="event-container">
           <view id="content-container" data-index='{{index}}' data-itemindex='{{itemindex}}'bindtap="navHandler">
@@ -23,7 +23,7 @@
           </view>
           <view class="fav-container">
             <view id="favImg-container" style="height: 70%; width: {{widths.favImgContainer}}px">
-              <image bindtap="favorited" src="{{eventItem.favSrc ? eventItem.favSrc : 'https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png'}}" data-index='{{index}}' data-itemindex='{{itemindex}}' style="height: 100%; width: 100%" mode="aspectFit"></image>
+              <image bindtap="favorited" wx:if="{{true}}" src='https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png' data-index='{{index}}' data-itemindex='{{itemindex}}' style="height: 100%; width: 100%" mode="aspectFit"></image>
             </view>
           </view>
         </view>

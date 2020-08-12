@@ -16,8 +16,8 @@ Page({
     widths: {
       favImgContainer : "0"
     },
-    //key:value is index:bool
-    isFavorited: [],
+    //key:value is eventID: boolean
+    isFavorited: {},
     blankHeartSrc : "https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png",
     clickHeartSrc : "https://w7.pngwing.com/pngs/776/399/png-transparent-heart-computer-icons-red-heart-icon-dark-border-love-heart-desktop-wallpaper.png",
     currHeartSrc : "https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png",
@@ -29,19 +29,34 @@ Page({
     })
   },
   onLoad: function () {
-    //get the eventsData from the cloud
-    this.parseEventsData();
-    var that = this;
-    setTimeout(function(){
-      console.log(that.data.tabs);
-    }, 3000);
+    //upload sizes
+    this.uploadSizes();
 
+    //get the eventsData from the cloud and set the tabsData to pageData
+    this.parseEventsData();
+
+    //get the isFavorited boolean data structure from cloud and set to pageData
+    //getFavoritedData();
+    //DELETE below once implement getFavoritedData()
+    var isFavorited = {
+      "unique1" : true,
+      "unique2" : true,
+      "unique3" : true,
+      "unique4" : true,
+      "unique5" : false
+    };
+    this.setData({isFavorited});
+
+
+
+
+    var that = this;
     //this.setData({tabs});
     
      /* Now I will initialize the isFavorited array */
     //this.initIsFavorited();
 
-    //this.uploadSizes();
+    
 
 
     
@@ -78,6 +93,7 @@ Page({
     //get the height
     let query = wx.createSelectorQuery();
     query.select('#favImg-container').boundingClientRect(function(rect){
+      console.log(rect);
       that.setData({
         'widths.favImgContainer' : String(rect.height)
       });
@@ -174,6 +190,7 @@ Page({
   },
   parseEventsData: function(){
     //pull the eventsData from the cloud and create two tabData objects that contain title of tab and the data (past and upcoming events)
+    //then, it sets the data to the pageData
     const db = wx.cloud.database();
     const _ = db.command;
     

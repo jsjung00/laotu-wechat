@@ -1,3 +1,7 @@
+Consider changing the ordering of the events. Right now it is in chronological order, but that may mean that too many events are far
+ahead in advance.
+
+
 Consider changing the datastructure such that the key of the tab is not an number but rather the title
 
 I want the swiper to at the min cover the entire screen, be large enough to contain the table of events
