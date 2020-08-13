@@ -17,6 +17,19 @@ Page({
     })
   },
   onLoad: function () {
+    var that = this;
+
+    wx.cloud.callFunction({
+      name: 'getFavTabData',
+      success: function(res){
+        //Upload our tabData to the page
+        that.setData({
+          tabs: res.result.favTabData
+        })
+      },
+      fail: console.error
+    });
+    
     /* HERE WE UPLOAD OUR tabData */
     const tabData = app.globalData.favoriteEventsTabData;
     //console.log(tabData);
