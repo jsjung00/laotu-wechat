@@ -18,7 +18,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
-
+    //Call getFavTabData to get the tab data as an array
     wx.cloud.callFunction({
       name: 'getFavTabData',
       success: function(res){
@@ -29,17 +29,6 @@ Page({
       },
       fail: console.error
     });
-    
-    /* HERE WE UPLOAD OUR tabData */
-    const tabData = app.globalData.favoriteEventsTabData;
-    //console.log(tabData);
-    
-    //convert to array format
-    var tabs = this.objectToArray(tabData);
-    //DEVNOTE: THIS SUCKS, STANDARDIZE THE DATA FORMAT. THINK ABOUT IT
-    this.setData({ tabs });
-    console.log(tabs);
-
     
     
   

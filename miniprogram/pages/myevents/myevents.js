@@ -30,7 +30,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    //get and upload the tabsData
+    //Get and upload the tabsData
     wx.cloud.callFunction({
       name: 'getEventTabData',
       success: function(res){
@@ -44,8 +44,7 @@ Page({
 
     
 
-    
-    
+  
 
 
     

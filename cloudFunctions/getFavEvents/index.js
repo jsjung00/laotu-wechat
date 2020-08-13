@@ -15,7 +15,7 @@ const _  = db.command;
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
   var userID = wxContext.OPENID;
-  //We will use the openID parameter if the userID is null
+  //We will use the 'id' parameter if the userID is null
   if (!userID){
     userID = event.userID;
   }

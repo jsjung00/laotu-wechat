@@ -1,6 +1,6 @@
 /**
- * takes in parameter id which is the eventID of the favorited event
- * adds or removes the eventID from the user's list of favEvents
+ * takes in parameter 'id' which is the eventID of the favorited event
+ * adds or removes the eventID from the user's list of favEvents which is an array of id's (string of number)
  */
 const cloud = require('wx-server-sdk')
 
@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
   console.log(event.id);
   const wxContext = cloud.getWXContext()
   const userID = wxContext.OPENID;
-  /*get the user's favList*/
+  /*Get the user's favList which is an array of ID's*/
   let favEventsResponse = await db.collection('userFavEvents').doc(userID).get();
   let favEvents = favEventsResponse.data.favEvents;
 
@@ -26,7 +26,7 @@ exports.main = async (event, context) => {
     //event already exists- remove from list
     const eventIndex = favEvents.indexOf(String(event.id));
     favEvents.splice(eventIndex, 1);
-    //update cloud favEvents
+    //Update user's cloud favEvents
     try{
       return await db.collection('userFavEvents').doc(userID).update({
         data:{
@@ -39,7 +39,7 @@ exports.main = async (event, context) => {
     }
   }
   else{
-    //event doesn't exist, add to list
+    //Event doesn't exist in user's fav list, add to list
     try{
       return await db.collection('userFavEvents').doc(userID).update({
         data: {

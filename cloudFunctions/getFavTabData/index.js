@@ -13,7 +13,7 @@ const _ = db.command;
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
   const userID = wxContext.OPENID;
-  console.log(userID);
+  
   //Get the fav events
   try{
     //Pass in userID as a parameter since funky stuff happens with getWXContext

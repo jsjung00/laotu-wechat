@@ -93,16 +93,15 @@ exports.main = async (event, context) => {
     }
   }
   
-  upcomingEvents.forEach(elm => console.log(elm['_id']));
 
-  /* given the user's favEventId's, append isFavorited: Boolean to every event object in upcomingEvents and pastEvents */
+  /* given the user's favEventId's, append ('isFavorited': Boolean) to every event object in upcomingEvents and pastEvents */
   var newUpcomingEvents = upcomingEvents.map(v => {
-    //if eventID is in favEvents, add true boolean, add false boolean
+    //if eventID is in user's favEvents, add true boolean; else, add false boolean
     let bool = favEvents.includes(v['_id']);
     return Object.assign(v, {isFavorited : bool}) 
   });
   var newPastEvents = pastEvents.map(v => {
-    //if eventID is in favEvents, add true boolean, add false boolean
+    //if eventID is in favEvents, add true boolean, else false boolean
     let bool = favEvents.includes(v['_id']);
     return Object.assign(v, {isFavorited : bool}) 
   });
