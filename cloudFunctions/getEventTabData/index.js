@@ -1,4 +1,4 @@
-// 云函数入口文件
+// returns the tabs data array for EventsPage //
 const cloud = require('wx-server-sdk')
 cloud.init({
   env : 'laotudata-laotu',
@@ -92,16 +92,19 @@ exports.main = async (event, context) => {
       throw "failed to add faveventlist";
     }
   }
- 
+  
+  upcomingEvents.forEach(elm => console.log(elm['_id']));
 
   /* given the user's favEventId's, append isFavorited: Boolean to every event object in upcomingEvents and pastEvents */
   var newUpcomingEvents = upcomingEvents.map(v => {
     //if eventID is in favEvents, add true boolean, add false boolean
-    return v._id in favEvents ? Object.assign(v, {isFavorited : true}) : Object.assign(v, {isFavorited : false}) 
+    let bool = favEvents.includes(v['_id']);
+    return Object.assign(v, {isFavorited : bool}) 
   });
   var newPastEvents = pastEvents.map(v => {
     //if eventID is in favEvents, add true boolean, add false boolean
-    return v._id in favEvents ? Object.assign(v, {isFavorited : true}) : Object.assign(v, {isFavorited : false}) 
+    let bool = favEvents.includes(v['_id']);
+    return Object.assign(v, {isFavorited : bool}) 
   });
 
   //return our tabs data array

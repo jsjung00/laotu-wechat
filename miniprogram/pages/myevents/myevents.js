@@ -18,8 +18,6 @@ Page({
     widths: {
       favImgContainer : "0"
     },
-    //key:value is eventID: boolean
-    isFavorited: {},
     blankHeartSrc : "https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png",
     clickHeartSrc : "https://w7.pngwing.com/pngs/776/399/png-transparent-heart-computer-icons-red-heart-icon-dark-border-love-heart-desktop-wallpaper.png",
     currHeartSrc : "https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png",
@@ -31,31 +29,22 @@ Page({
     })
   },
   onLoad: function () {
-    
-    //get the eventsData from the cloud and set the tabsData to pageData
-    this.parseEventsData();
-
-    //get the isFavorited boolean data structure from cloud and set to pageData
-    //getFavoritedData();
-    //DELETE below once implement getFavoritedData()
-    var isFavorited = {
-      "unique1" : true,
-      "unique2" : true,
-      "unique3" : true,
-      "unique4" : true,
-      "unique5" : false
-    };
-    this.setData({isFavorited});
-
-
-
-
     var that = this;
-    //this.setData({tabs});
-    
-     /* Now I will initialize the isFavorited array */
-    //this.initIsFavorited();
+    //get and upload the tabsData
+    wx.cloud.callFunction({
+      name: 'getEventTabData',
+      success: function(res){
+        that.setData({
+          tabs : res.result.tabsData
+        });
+        console.log(res.result.tabsData);
+      },
+      fail: console.error
+    });
 
+    
+
+    
     
 
 
@@ -86,6 +75,33 @@ Page({
   },
   handleClick(e) {
       console.log("Handle Clicked");
+  },
+  clickHeart(e){
+    let that = this;
+    //get the current tab index
+    let tabindex = e.target.dataset.index;
+    //get the eventID
+    let eventID = e.target.dataset.id;
+    //inverse the isFavorited boolean that is stored in the page tabs
+    let changedTabsData = this.data.tabs;
+    //change the event data boolean
+    changedTabsData[tabindex].data.find(event => event._id === eventID).isFavorited = 
+      !changedTabsData[tabindex].data.find(event => event._id === eventID).isFavorited;
+    //update the tabs data with the changed boolean
+    this.setData({
+      tabs: changedTabsData
+    });
+
+    //Add or delete the eventID from the user's favEvent list
+    wx.cloud.callFunction({
+      name: 'addFavEvent',
+      data:{
+        id: eventID
+      },
+      success: function(res){
+        console.log(res);
+      }
+    });
   },
   uploadSizes(){
     let that = this;

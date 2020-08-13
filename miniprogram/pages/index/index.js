@@ -41,22 +41,6 @@ Page({
     })
   },
   onLoad: function () {
-    
-    wx.cloud.callFunction({
-      name: 'getAllEvents',
-      success: function(res){
-        console.log(res.result.data);
-      },
-      fail: console.error
-    });
-
-    wx.cloud.callFunction({
-      name: 'getUpcomingPastEvents',
-      success: function(res){
-        console.log(res);
-      },
-      fail: console.error
-    });
 
     var that = this;
     that.sizes();
