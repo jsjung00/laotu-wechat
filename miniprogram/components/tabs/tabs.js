@@ -6,7 +6,7 @@ Component({
    */
   properties: {
     //this is an array of objects that contain the tab "title" and
-    //the "data"
+    //the "data" (which is also an array)
     tabs : {
       type: Array,
       value : []

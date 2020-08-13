@@ -64,7 +64,8 @@ Page({
         that.fitText(id, 0.8);
       });
     });*/
-      
+
+   
    
 
     if (app.globalData.userInfo) {

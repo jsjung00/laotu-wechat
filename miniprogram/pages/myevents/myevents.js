@@ -42,6 +42,9 @@ Page({
       fail: console.error
     });
 
+    //Try to get the height of favImg-container
+    this.favoriteSize();
+
     
 
   
@@ -245,18 +248,78 @@ Page({
       })
       .catch(err => console.error(err));
   },
-  favoriteSize: function(event){
-    //function is called when the image of the favoritedHeart is loaded
-    //upload the width of favoriteImg-container to make it a square
+  favoriteSize: async function(){
+    /*function is called when the image of the favoritedHeart is loaded
+    upload the width of favoriteImg-container to make it a square */
+    console.log("Function favorite size is called");
     let that = this;
-    //make favImg-container square
-    //get the height
-    let query = wx.createSelectorQuery();
-    query.select('#favImg-container').boundingClientRect(function(rect){
-      that.setData({
-        'widths.favImgContainer' : String(rect.height)
-      });
-    }).exec(); 
+    var continueLooping = true;
+    var numLoops = 20;
+    var waitTimeout;
+    //Try to set get the height of the element- if fail, wait another 250ms before trying again
+    while(continueLooping && numLoops > 0){
+      //Decrease numLoops to allow max 5 seconds
+      numLoops -= 1;
+      console.log("Trying to get height.....");
+      
+      //Attempt to get height and set width
+      let query = wx.createSelectorQuery();
+      
+      //convert callback to promise
+      const queryPromise = () => {
+        return new Promise((resolve, reject) => {
+          query.select('#favImg-container').boundingClientRect(function(rect){  
+            //Check that the callback actually got the rectangle
+            if (!rect){
+              console.log("Callback failed to get rect");
+              reject("Failed to get rect");
+            }
+            else{
+              //Set the width equal to the height
+              that.setData({
+                'widths.favImgContainer' : String(rect.height)
+              });
+              //Set the continueLooping to false to stop looping
+              continueLooping = false;
+              resolve("Resolved!");
+            }
+          }).exec();
+        });
+      }
+      //Once the query is complete, we continue
+      try{
+        let _wait = await queryPromise();
+        //Sucessfully commpleted callback
+        console.log("successfully completed callback");
+      }
+      catch(err){
+        //Promise failed- callback failed. Wait another 250ms
+        await new Promise(resolve => {
+          waitTimeout = setTimeout(() => {
+            console.log("Waited 250ms");
+            resolve("resolved waiting");
+          }, 250);
+        }); 
+      }
+      
+      /*
+      queryPromise()
+        .then(() => {
+          //successfully completed callback
+          console.log("Sucessfully completed callback");
+        })
+        .catch(async () => {
+          //Failed to complete callback- wait another 250ms
+          console.log("Failed to complete callback");
+          await new Promise(resolve => {
+            waitTimeout = setTimeout(() => {
+              console.log("Waited 250ms");
+              resolve("resolved waiting");
+            }, 250);
+          }); 
+        })*/
+    }
+    return;
   },
   addIsFavorited: function(eventArr){
     //given an array of event objects, function uses the user's favEventsId's array to add the boolean of whether it is favorited or not

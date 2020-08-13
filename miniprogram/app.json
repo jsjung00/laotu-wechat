@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/myevents/myevents",
     "pages/store/store",
-    "pages/notification/notification"
+    "pages/notification/notification",
+    "pages/product/product"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -32,7 +33,7 @@
         "text": "Event"
       },
       {
-        "pagePath": "pages/store/store",
+        "pagePath": "pages/product/product",
         "iconPath": "img/store.jpg",
         "selectedIconPath": "img/store.jpg",
         "text": "Store"
