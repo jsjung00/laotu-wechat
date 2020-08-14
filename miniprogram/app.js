@@ -98,5 +98,6 @@ App({
     windowHeight : 0,
     eventsTabData: {},
     favoriteEventsTabData: {},
+    categoryActiveIndex: null
   }
 })
