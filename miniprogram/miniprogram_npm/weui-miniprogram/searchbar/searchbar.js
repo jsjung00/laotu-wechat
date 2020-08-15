@@ -132,6 +132,11 @@ Component({
     cancel: {
       type: Boolean,
       value: true
+    },
+    searchResultsData: {
+      //An array of strings of the search results
+      type: Array,
+      value: []
     }
   },
   data: {
@@ -144,12 +149,69 @@ Component({
   lifetimes: {
     // @ts-ignore
     attached() {
+      var that = this;
       // @ts-ignore
       if (this.data.focus) {
         this.setData({
           searchState: true
         });
       }
+      //Add our default search function. If user adds own search function to parameter, default will be overridden
+      var defaultSearch = function (value) {
+        //Should return a promise containing an array of result values
+        //Get the current user input
+        let userInput = value;
+        //Get the array of possible search results
+        let searchResultsData = that.data.searchResultsData;
+        if (searchResultsData.length < 1){
+          //Developer did not enter enough search results in to the component
+          console.error("Forgot to add possible search results to the component");
+        }
+
+        /*Search result generation: find all results that match the first n letters of the input- if none are found, try n-1.
+        If not a single letter matches, return an array containing text ["Could not find matching results."] */
+        let numChars = userInput.length;
+        if (numChars < 1){
+          //user has no input
+          console.error("User has no input yet search was called.");
+        }
+        for (let n = numChars; n > 0 ; n--){
+          //Try getting only results where the first n letters match. Continue to n-1, n-2... 1 letters match
+          let userInputSubStr = userInput.substring(0, n);
+          var matchResults = searchResultsData.map(function(res){
+            return res.startsWith(userInputSubStr);
+          });
+          if (matchResults.length > 0){
+            //Got results that matches the first n chars
+            break;
+          }
+          else{
+            //Didn't get any results that match the first n chars. Continue...
+          }
+        }
+        //If there are no match results, return an array with a certain text
+        if (matchResults.length < 1){
+          matchResults = ["Could not find matching results."];
+        }
+
+        //Create our array of objects that will be used for the searchbar
+        let matchResultsObjects = matchResults.map(function(res, index){
+          return ({text: res, value: index + 1});
+        });
+
+        
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(matchResultsObjects)
+            }, 200)
+        });
+      }
+      this.setData({
+        search: defaultSearch
+      });
+    },
+    ready() {
+      console.log(this.data);
     }
 
   },
@@ -197,6 +259,7 @@ Component({
 
     // @ts-ignore
     inputChange(e) {
+      
       this.setData({
         value: e.detail.value
       });
@@ -206,12 +269,19 @@ Component({
         return;
       }
 
+      console.log(this);
+
+      //This prevents any input from triggering if search is not a function in the paramters
       if (typeof this.data.search !== 'function') {
         return;
       }
 
+
+      console.log(e.detail);      
+
       this.lastSearch = Date.now();
       this.timerId = setTimeout(() => {
+        //I can simply replace this.data.search with my custom search function
         this.data.search(e.detail.value).then(json => {
           this.setData({
             result: json
@@ -232,6 +302,15 @@ Component({
         index,
         item
       });
+    },
+    search(e){
+      /*Function uses the given array of search results (strings) and the current user input (this.data.value)
+      to return a promise in the form of an array of result objects
+      See https://developers.weixin.qq.com/miniprogram/dev/extended/weui/search.html for more details */
+
+      //Get the current user input
+      let userInput = this.data.value;
+      console.log(userInput); 
     }
 
   }
