@@ -141,8 +141,8 @@ Component({
     },
     isNavigator: {
       //Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
-      type: Boolean,
-      value: true
+      type: Boolean
+      
     }
   },
   data: {
@@ -156,12 +156,23 @@ Component({
     // @ts-ignore
     attached() {
       var that = this;
+      
       // @ts-ignore
       if (this.data.focus) {
         this.setData({
           searchState: true
         });
       }
+
+      //If the searchbar is not a navigator (aka on the searchPage), should immediately be focused and in searchState === true
+      if (!this.data.isNavigator){
+        this.setData({
+          searchState: true
+        });
+
+      }
+
+
 
       //Add our default search function. If user adds own search function to parameter, default will be overridden
       var defaultSearch = function (value) {
@@ -236,6 +247,9 @@ Component({
       this.setData({
         search: defaultSearch
       });
+    },
+    ready() {
+      console.log("function is ready- is my thing a navigator? ", this.data.isNavigator);
     }
 
   },
@@ -351,6 +365,11 @@ Component({
         wx.navigateTo({
           url: '../../pages/searchPage/searchPage',
         })
+        //Clear the search page to the original state
+        this.setData({
+          searchState: false
+        });
+        //DEV NOTE: to prevent the searchbar from semi rendering, prevent other functions from being called
       }
       else{
         //Do nothing
