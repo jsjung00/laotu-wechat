@@ -138,6 +138,11 @@ Component({
       //An array of strings of the search results
       type: Array,
       value: []
+    },
+    isNavigator: {
+      //Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
+      type: Boolean,
+      value: true
     }
   },
   data: {
@@ -157,6 +162,7 @@ Component({
           searchState: true
         });
       }
+
       //Add our default search function. If user adds own search function to parameter, default will be overridden
       var defaultSearch = function (value) {
         //console.log("Default search function called. Value is " + value);
@@ -335,8 +341,21 @@ Component({
       //Get the current user input
       let userInput = this.data.value;
       console.log(userInput); 
+    },
+    tapped(){
+      console.log("Searchbar is tapped");
+      //Function is called when user clicks on the search bar. 
+      //If search bar is supposed to act as a navigator (isNavigator === true), redirect to searchPage
+      if (this.data.isNavigator){
+        //Redirect to searchPage
+        wx.navigateTo({
+          url: '../../pages/searchPage/searchPage',
+        })
+      }
+      else{
+        //Do nothing
+      } 
     }
-
   },
   helloWorld: function(e){
     console.log("Hello World");
