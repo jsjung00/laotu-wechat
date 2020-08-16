@@ -5,7 +5,8 @@
     "pages/myevents/myevents",
     "pages/store/store",
     "pages/notification/notification",
-    "pages/product/product"
+    "pages/product/product",
+    "pages/searchPage/searchPage"
   ],
   "window": {
     "navigationStyle": "custom",
