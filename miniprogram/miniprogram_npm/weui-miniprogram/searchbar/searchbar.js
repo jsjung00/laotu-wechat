@@ -191,10 +191,15 @@ Component({
        
         //Get the array of possible search results objects
         let searchResultsObjects = that.data.searchObjectsArray;
-        //Get the array of possible search result titles
-        let searchResultsTitles = searchResultsObjects.map(obj => obj.title);
+        //Get the array of possible search results (each object contains just the title and the unique ID)
+        let searchResultsData = searchResultsObjects.map(function(obj){
+          return {
+            title: obj.title,
+            id: obj._id
+          }
+        });
        
-        if (searchResultsTitles.length < 1){
+        if (searchResultsData.length < 1){
           //Developer did not enter enough search results in to the component
           console.error("Forgot to add possible search results to the component");
         }
@@ -220,9 +225,9 @@ Component({
           //Try getting only results where the first n letters match. Continue to n-1, n-2... 1 letters match
           let userInputSubStr = userInput.substring(0, n);
           //Expect an array as a return value from filter
-          matchResults = searchResultsTitles.filter(function(res){
+          matchResults = searchResultsData.filter(function(res){
             //Lower case the result string so it is not case sensitive
-            let lowerRes = res.toLowerCase(); 
+            let lowerRes = res.title.toLowerCase(); 
             return lowerRes.startsWith(userInputSubStr);
           });
           if (matchResults.length > 0){
@@ -234,20 +239,18 @@ Component({
           }
         }
         
-        //Upload the top 5 matching search results
-        let topSearchResults = matchResults.slice(0, 5);
-        that.setData({
-          topSearchResults
-        });
-        
         //If there are no match results, return an array with a certain text
         if (matchResults.length < 1){
-          matchResults = ["Could not find matching results."];
+          matchResults = [{title: "Could not find matching results.", id: ""}];
         }
+
+        //Limit to max 10 match results
+        matchResults = matchResults.slice(0,10);
+        console.log("matchResults: ", matchResults);
 
         //Create our array of objects that will be used for the searchbar
         let matchResultsObjects = matchResults.map(function(res, index){
-          return ({text: res, value: index + 1});
+          return ({text: res.title, value: index + 1, id: res.id});
         });
         
         return new Promise((resolve, reject) => {
@@ -261,7 +264,7 @@ Component({
       });
     },
     ready() {
-      
+      console.log(this.data.type);
     }
 
   },
@@ -362,7 +365,7 @@ Component({
             //Calls my search function
             
             that.data.search(e.detail.value).then(json => {
-            
+              console.log("result is: ", json);
               that.setData({
                 result: json
               });
@@ -376,17 +379,15 @@ Component({
     // @ts-ignore
     selectResult(e) {
       console.log("selectResult called");
-      //Pass the item that was selected and the top 5 search results to the parent component (whatever page it is on)
+      //Pass the ID and the type of the item
       const {
         index
       } = e.currentTarget.dataset;
       const item = this.data.result[index];
-
-      const topSearchResults = this.data.topSearchResults;
-
+      const type = this.data.type;
       this.triggerEvent('selectresult', {
         item,
-        topSearchResults
+        type
       });
     },
     tapped(){
