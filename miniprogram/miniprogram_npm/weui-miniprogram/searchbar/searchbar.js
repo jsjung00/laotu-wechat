@@ -141,8 +141,7 @@ Component({
     },
     isNavigator: {
       //Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
-      type: Boolean,
-      value: false 
+      type: Boolean
     },
     searchObjectsArray: {
       //An array of search result objects that contain the ID and title and other descriptors 
@@ -253,7 +252,7 @@ Component({
         
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve([{text: '搜索结果', value: 1}, {text: '搜索结果2', value: 2}])
+                resolve(matchResultsObjects)
             }, 200)
         });
       }
@@ -303,7 +302,7 @@ Component({
     },
 
     showInput() {
-      connsole.log("showInput called");
+      console.log("showInput called");
       //If the search bar is a navigator, it should do nothing here
       if (!this.data.isNavigator){
         this.setData({
@@ -323,9 +322,7 @@ Component({
     // @ts-ignore
     inputChange: function(e) {
       var that = this;
-      console.log("input changed called");
-      let event = e;
-      console.log(event);
+      
       this.setData({
         value: e.detail.value
       });
@@ -357,22 +354,23 @@ Component({
           })();
         });
       }
-      //await checkSearchObjectsLoaded();
-      //console.log("After the await: ", this.data.searchObjectsArray);
-      
-      this.lastSearch = Date.now();
-      this.timerId = setTimeout(() => {
-        //Calls my search function
-        
-        this.data.search(e.detail.value).then(json => {
-        
-          this.setData({
-            result: json
-          });
-        }).catch(err => {
-          console.error('search error', err);
-        });
-      }, this.data.throttle); 
+      checkSearchObjectsLoaded()
+        .then(function(){
+          //searchObjectsArray is fully loaded- call our search function
+          that.lastSearch = Date.now();
+          that.timerId = setTimeout(() => {
+            //Calls my search function
+            
+            that.data.search(e.detail.value).then(json => {
+            
+              that.setData({
+                result: json
+              });
+            }).catch(err => {
+              console.error('search error', err);
+            });
+          }, that.data.throttle);
+        })
     },
 
     // @ts-ignore
@@ -393,7 +391,7 @@ Component({
     },
     tapped(){
       console.log("tapped called");
-      /*var that = this;
+      var that = this;
       
       //Function is called when user clicks on the search bar. 
       //If search bar is supposed to act as a navigator (isNavigator === true), redirect to searchPage
@@ -421,7 +419,7 @@ Component({
           url: '../../pages/searchPage/searchPage',
           success: async function(res){
             //Wait for searchObjectsArray to be sent (aka length > 0)
-            //await checkSearchObjectsLoaded();
+            await checkSearchObjectsLoaded();
             
             //Send our data to the searchPage
             res.eventChannel.emit('acceptDataFromOpenerPage', {
@@ -439,7 +437,7 @@ Component({
       else{
         //Do nothing
         console.log("Not a navigator. Do nothing");
-      }*/ 
+      } 
     }
   }
 });
