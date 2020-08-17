@@ -141,7 +141,8 @@ Component({
     },
     isNavigator: {
       //Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
-      type: Boolean 
+      type: Boolean,
+      value: false 
     },
     searchObjectsArray: {
       //An array of search result objects that contain the ID and title and other descriptors 
@@ -179,6 +180,7 @@ Component({
 
       }
 
+      
 
 
       //Add our default search function. If user adds own search function to parameter, default will be overridden
@@ -187,12 +189,12 @@ Component({
         //Should return a promise containing an array of result values
         //Lowercase all of user input so search results are not case sensitive
         let userInput = value.toLowerCase();
-        console.log("User Input is: ", userInput);
+       
         //Get the array of possible search results objects
         let searchResultsObjects = that.data.searchObjectsArray;
         //Get the array of possible search result titles
         let searchResultsTitles = searchResultsObjects.map(obj => obj.title);
-        console.log("Search Result Titles is: ", searchResultsTitles);
+       
         if (searchResultsTitles.length < 1){
           //Developer did not enter enough search results in to the component
           console.error("Forgot to add possible search results to the component");
@@ -202,7 +204,7 @@ Component({
         If not a single letter matches, return an array containing text ["Could not find matching results."] */
         let numChars = userInput.length;
         if (numChars < 1){
-          console.log("numChars < 1");
+         
           //User backspaced all the way, should hide input
           that.setData({
             searchState: false
@@ -248,8 +250,7 @@ Component({
         let matchResultsObjects = matchResults.map(function(res, index){
           return ({text: res, value: index + 1});
         });
-        console.log("Matching results is: ", matchResultsObjects);
-        console.log(that.data.value);
+        
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve([{text: '搜索结果', value: 1}, {text: '搜索结果2', value: 2}])
@@ -261,7 +262,7 @@ Component({
       });
     },
     ready() {
-      console.log("function is ready- is my thing a navigator? ", this.data.isNavigator);
+      
     }
 
   },
@@ -280,6 +281,7 @@ Component({
 
     // @ts-ignore
     inputFocus(e) {
+      console.log("inputFocus called");
       // this.setData({
       //     searchState: true
       // })
@@ -293,6 +295,7 @@ Component({
 
     // @ts-ignore
     inputBlur(e) {
+      console.log("inputBlur called");
       this.setData({
         focus: false
       });
@@ -300,6 +303,7 @@ Component({
     },
 
     showInput() {
+      connsole.log("showInput called");
       //If the search bar is a navigator, it should do nothing here
       if (!this.data.isNavigator){
         this.setData({
@@ -317,9 +321,11 @@ Component({
     },
 
     // @ts-ignore
-    inputChange: async function(e) {
+    inputChange: function(e) {
       var that = this;
-      console.log("input changed called. E.detail.value", e.detail.value);
+      console.log("input changed called");
+      let event = e;
+      console.log(event);
       this.setData({
         value: e.detail.value
       });
@@ -357,9 +363,9 @@ Component({
       this.lastSearch = Date.now();
       this.timerId = setTimeout(() => {
         //Calls my search function
-        console.log("e.detail now", e.detail.value);
+        
         this.data.search(e.detail.value).then(json => {
-          console.log("JSON is", json);
+        
           this.setData({
             result: json
           });
@@ -371,6 +377,7 @@ Component({
 
     // @ts-ignore
     selectResult(e) {
+      console.log("selectResult called");
       //Pass the item that was selected and the top 5 search results to the parent component (whatever page it is on)
       const {
         index
@@ -385,13 +392,13 @@ Component({
       });
     },
     tapped(){
-      console.log("Searchbar is tapped");
-      var that = this;
+      console.log("tapped called");
+      /*var that = this;
       
       //Function is called when user clicks on the search bar. 
       //If search bar is supposed to act as a navigator (isNavigator === true), redirect to searchPage
       if (this.data.isNavigator){
-        console.log("Inside tapped: search bar is navigator");
+       
         //Wait for searchObjectsArray. Function returns a promise only when the searchObjectsArray is not an empty array
         var checkSearchObjectsLoaded = function(){
           return new Promise(function(resolve, reject){
@@ -432,7 +439,7 @@ Component({
       else{
         //Do nothing
         console.log("Not a navigator. Do nothing");
-      } 
+      }*/ 
     }
   }
 });
