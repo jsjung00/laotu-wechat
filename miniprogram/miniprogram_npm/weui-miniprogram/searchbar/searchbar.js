@@ -141,8 +141,15 @@ Component({
     },
     isNavigator: {
       //Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
-      type: Boolean
-      
+      type: Boolean 
+    },
+    searchObjectsArray: {
+      //An array of search result objects that contain the ID and title and other descriptors 
+      type: Array
+    },
+    type: {
+      //Either "product" or "event"
+      type: String
     }
   },
   data: {
@@ -176,14 +183,17 @@ Component({
 
       //Add our default search function. If user adds own search function to parameter, default will be overridden
       var defaultSearch = function (value) {
-        //console.log("Default search function called. Value is " + value);
+        
         //Should return a promise containing an array of result values
         //Lowercase all of user input so search results are not case sensitive
         let userInput = value.toLowerCase();
-        //Get the array of possible search results
-        let searchResultsData = that.data.searchResultsData;
-        
-        if (searchResultsData.length < 1){
+        console.log("User Input is: ", userInput);
+        //Get the array of possible search results objects
+        let searchResultsObjects = that.data.searchObjectsArray;
+        //Get the array of possible search result titles
+        let searchResultsTitles = searchResultsObjects.map(obj => obj.title);
+        console.log("Search Result Titles is: ", searchResultsTitles);
+        if (searchResultsTitles.length < 1){
           //Developer did not enter enough search results in to the component
           console.error("Forgot to add possible search results to the component");
         }
@@ -192,6 +202,7 @@ Component({
         If not a single letter matches, return an array containing text ["Could not find matching results."] */
         let numChars = userInput.length;
         if (numChars < 1){
+          console.log("numChars < 1");
           //User backspaced all the way, should hide input
           that.setData({
             searchState: false
@@ -208,7 +219,7 @@ Component({
           //Try getting only results where the first n letters match. Continue to n-1, n-2... 1 letters match
           let userInputSubStr = userInput.substring(0, n);
           //Expect an array as a return value from filter
-          matchResults = searchResultsData.filter(function(res){
+          matchResults = searchResultsTitles.filter(function(res){
             //Lower case the result string so it is not case sensitive
             let lowerRes = res.toLowerCase(); 
             return lowerRes.startsWith(userInputSubStr);
@@ -221,6 +232,7 @@ Component({
             //Didn't get any results that match the first n chars. Continue...
           }
         }
+        
         //Upload the top 5 matching search results
         let topSearchResults = matchResults.slice(0, 5);
         that.setData({
@@ -236,11 +248,11 @@ Component({
         let matchResultsObjects = matchResults.map(function(res, index){
           return ({text: res, value: index + 1});
         });
-
-        
+        console.log("Matching results is: ", matchResultsObjects);
+        console.log(that.data.value);
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(matchResultsObjects)
+                resolve([{text: '搜索结果', value: 1}, {text: '搜索结果2', value: 2}])
             }, 200)
         });
       }
@@ -272,7 +284,11 @@ Component({
       //     searchState: true
       // })
       // @ts-ignore
-      this.triggerEvent('focus', e.detail);
+      //If the search bar is a navigator, it should do nothing here
+      if (!this.data.isNavigator){
+        this.triggerEvent('focus', e.detail);
+      }
+      
     },
 
     // @ts-ignore
@@ -284,10 +300,13 @@ Component({
     },
 
     showInput() {
-      this.setData({
-        focus: true,
-        searchState: true
-      });
+      //If the search bar is a navigator, it should do nothing here
+      if (!this.data.isNavigator){
+        this.setData({
+          focus: true,
+          searchState: true
+        });
+      }
     },
 
     hideInput() {
@@ -298,9 +317,9 @@ Component({
     },
 
     // @ts-ignore
-    inputChange(e) {
-      
-      console.log("input changed called");
+    inputChange: async function(e) {
+      var that = this;
+      console.log("input changed called. E.detail.value", e.detail.value);
       this.setData({
         value: e.detail.value
       });
@@ -316,13 +335,31 @@ Component({
       if (typeof this.data.search !== 'function') {
         return;
       }
-      console.log("after trigger event");
-           
+      
+      //Wait for the searchObjectsArray to be initialized before we call the search function
+      var checkSearchObjectsLoaded = function(){
+        return new Promise(function(resolve, reject){
+          (function waitForArray(){
+            if (that.data.searchObjectsArray.length > 0){
+              //Data is set
+              return resolve();
+            }
+            else{
+              //Continually loop until the data is set
+              setTimeout(waitForArray, 250);
+            }
+          })();
+        });
+      }
+      //await checkSearchObjectsLoaded();
+      //console.log("After the await: ", this.data.searchObjectsArray);
       
       this.lastSearch = Date.now();
       this.timerId = setTimeout(() => {
         //Calls my search function
+        console.log("e.detail now", e.detail.value);
         this.data.search(e.detail.value).then(json => {
+          console.log("JSON is", json);
           this.setData({
             result: json
           });
@@ -347,37 +384,56 @@ Component({
         topSearchResults
       });
     },
-    search(e){
-      /*Function uses the given array of search results (strings) and the current user input (this.data.value)
-      to return a promise in the form of an array of result objects
-      See https://developers.weixin.qq.com/miniprogram/dev/extended/weui/search.html for more details */
-
-      //Get the current user input
-      let userInput = this.data.value;
-      console.log(userInput); 
-    },
     tapped(){
       console.log("Searchbar is tapped");
+      var that = this;
+      
       //Function is called when user clicks on the search bar. 
       //If search bar is supposed to act as a navigator (isNavigator === true), redirect to searchPage
       if (this.data.isNavigator){
+        console.log("Inside tapped: search bar is navigator");
+        //Wait for searchObjectsArray. Function returns a promise only when the searchObjectsArray is not an empty array
+        var checkSearchObjectsLoaded = function(){
+          return new Promise(function(resolve, reject){
+            (function waitForArray(){
+              if (that.data.searchObjectsArray.length > 0){
+                //Data is set
+                return resolve();
+              }
+              else{
+                //Continually loop until the data is set
+                setTimeout(waitForArray, 250);
+              }
+            })();
+          });
+        }
+
         //Redirect to searchPage
         wx.navigateTo({
+          //Can pass the list of search result objects to the searchPage
           url: '../../pages/searchPage/searchPage',
+          success: async function(res){
+            //Wait for searchObjectsArray to be sent (aka length > 0)
+            //await checkSearchObjectsLoaded();
+            
+            //Send our data to the searchPage
+            res.eventChannel.emit('acceptDataFromOpenerPage', {
+              type: that.data.type,
+              searchObjectsArray: that.data.searchObjectsArray
+            });
+             
+          }
         })
         //Clear the search page to the original state
         this.setData({
           searchState: false
         });
-        //DEV NOTE: to prevent the searchbar from semi rendering, prevent other functions from being called
       }
       else{
         //Do nothing
+        console.log("Not a navigator. Do nothing");
       } 
     }
-  },
-  helloWorld: function(e){
-    console.log("Hello World");
   }
 });
 
