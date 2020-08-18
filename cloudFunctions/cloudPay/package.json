@@ -1,0 +1,18 @@
+{
+  "name": "cloudPay",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "request": "^2.88.2",
+    "wx-server-sdk": "^2.2.0",
+    "xmlreader": "^0.2.3"
+  },
+  "keywords": [],
+  "description": ""
+}

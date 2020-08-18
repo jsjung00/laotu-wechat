@@ -6,7 +6,9 @@
     "pages/store/store",
     "pages/notification/notification",
     "pages/product/product",
-    "pages/searchPage/searchPage"
+    "pages/searchPage/searchPage",
+    "pages/wePay/wePay",
+    "pages/item"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -40,10 +42,10 @@
         "text": "Store"
       },
       {
-        "pagePath": "pages/notification/notification",
+        "pagePath": "pages/wePay/wePay",
         "iconPath": "img/notification.jpg",
         "selectedIconPath": "img/notification.jpg",
-        "text": "Notification"
+        "text": "Pay"
       }
     ]
   },

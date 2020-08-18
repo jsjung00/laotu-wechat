@@ -1,0 +1,2 @@
+<CustomNav title="Pay" isHome="{{true}}"></CustomNav>
+<button id="payButton" bindtap="pay">Pay ¥</button>

@@ -1,0 +1,8 @@
+/* miniprogram/pages/wePay.wxss */
+#payButton{
+  height: 100px;
+  width: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
