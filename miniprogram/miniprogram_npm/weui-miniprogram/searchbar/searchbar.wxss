@@ -1,15 +1,1 @@
-/*
-Note: consider changing the CSS of the search bar. Hopefully the style can remain the same for all pages- else, 
-build a custom component which can take in certain input */
-
-.weui-search-bar__label text{
-  display:inline-block;
-  font-size:14px;
-  vertical-align:middle
-}
-
-
-
-
-
-
+.weui-search-bar__label text{display:inline-block;font-size:14px;vertical-align:middle}
