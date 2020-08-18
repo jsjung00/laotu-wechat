@@ -150,6 +150,101 @@ Component({
           searchState: true
         });
       }
+<<<<<<< HEAD
+=======
+
+      //If the searchbar is not a navigator (aka on the searchPage), should immediately be focused and in searchState === true
+      if (!this.data.isNavigator){
+        this.setData({
+          searchState: true
+        });
+
+      }
+
+      
+
+
+      //Add our default search function. If user adds own search function to parameter, default will be overridden
+      var defaultSearch = function (value) {
+        
+        //Should return a promise containing an array of result values
+        //Lowercase all of user input so search results are not case sensitive
+        let userInput = value.toLowerCase();
+       
+        //Get the array of possible search results objects
+        let searchResultsObjects = that.data.searchObjectsArray;
+        //Get the array of possible search result titles
+        let searchResultsTitles = searchResultsObjects.map(obj => obj.title);
+       
+        if (searchResultsTitles.length < 1){
+          //Developer did not enter enough search results in to the component
+          console.error("Forgot to add possible search results to the component");
+        }
+
+        /*Search result generation: find all results that match the first n letters of the input- if none are found, try n-1.
+        If not a single letter matches, return an array containing text ["Could not find matching results."] */
+        let numChars = userInput.length;
+        if (numChars < 1){
+         
+          //User backspaced all the way, should hide input
+          that.setData({
+            searchState: false
+          });
+          //Return an empty array so that no search results pop up
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve([])
+            }, 200)
+          }); 
+        }
+        var matchResults = [];
+        for (let n = numChars; n > 0 ; n--){
+          //Try getting only results where the first n letters match. Continue to n-1, n-2... 1 letters match
+          let userInputSubStr = userInput.substring(0, n);
+          //Expect an array as a return value from filter
+          matchResults = searchResultsTitles.filter(function(res){
+            //Lower case the result string so it is not case sensitive
+            let lowerRes = res.toLowerCase(); 
+            return lowerRes.startsWith(userInputSubStr);
+          });
+          if (matchResults.length > 0){
+            //Got results that matches the first n chars
+            break;
+          }
+          else{
+            //Didn't get any results that match the first n chars. Continue...
+          }
+        }
+        
+        //Upload the top 5 matching search results
+        let topSearchResults = matchResults.slice(0, 5);
+        that.setData({
+          topSearchResults
+        });
+        
+        //If there are no match results, return an array with a certain text
+        if (matchResults.length < 1){
+          matchResults = ["Could not find matching results."];
+        }
+
+        //Create our array of objects that will be used for the searchbar
+        let matchResultsObjects = matchResults.map(function(res, index){
+          return ({text: res, value: index + 1});
+        });
+        
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(matchResultsObjects)
+            }, 200)
+        });
+      }
+      this.setData({
+        search: defaultSearch
+      });
+    },
+    ready() {
+      
+>>>>>>> parent of 5765083... fixed search bar. Now I need to transmit type to the searchPage
     }
 
   },
@@ -219,18 +314,53 @@ Component({
         }).catch(err => {
           console.error('search error', err);
         });
+<<<<<<< HEAD
       }, this.data.throttle);
+=======
+      }
+      checkSearchObjectsLoaded()
+        .then(function(){
+          //searchObjectsArray is fully loaded- call our search function
+          that.lastSearch = Date.now();
+          that.timerId = setTimeout(() => {
+            //Calls my search function
+            
+            that.data.search(e.detail.value).then(json => {
+            
+              that.setData({
+                result: json
+              });
+            }).catch(err => {
+              console.error('search error', err);
+            });
+          }, that.data.throttle);
+        })
+>>>>>>> parent of 5765083... fixed search bar. Now I need to transmit type to the searchPage
     },
 
     // @ts-ignore
     selectResult(e) {
+<<<<<<< HEAD
+=======
+      console.log("selectResult called");
+      //Pass the item that was selected and the top 5 search results to the parent component (whatever page it is on)
+>>>>>>> parent of 5765083... fixed search bar. Now I need to transmit type to the searchPage
       const {
         index
       } = e.currentTarget.dataset;
       const item = this.data.result[index];
+<<<<<<< HEAD
       this.triggerEvent('selectresult', {
         index,
         item
+=======
+
+      const topSearchResults = this.data.topSearchResults;
+
+      this.triggerEvent('selectresult', {
+        item,
+        topSearchResults
+>>>>>>> parent of 5765083... fixed search bar. Now I need to transmit type to the searchPage
       });
     }
 
