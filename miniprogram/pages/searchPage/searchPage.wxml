@@ -1,0 +1,8 @@
+<!--
+  Not sure why, but I need to not pass in the parameter isNavigator in order for it to be false.
+  It should only be passed in as true in the original page (events, store)
+  Search bar should start out focused
+-->
+<CustomNav isBoth="true"></CustomNav>
+<mp-searchbar bindselectresult="selectResult" focus="true" searchObjectsArray="{{searchObjectsArray}}"></mp-searchbar>
+

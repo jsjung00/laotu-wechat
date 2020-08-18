@@ -1,0 +1,3 @@
+Searchbar
+  * need to make the non-navigator search bar immediately have the cursor blinking
+

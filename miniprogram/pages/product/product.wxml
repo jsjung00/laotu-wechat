@@ -1,0 +1,28 @@
+<!--miniprogram/product.wxml
+    Note: mp-searchbar component uses miniprogram_npm folder since node_modules doesn't work for some reason-->
+<CustomNav isHome="true" title="Products"/>
+<mp-searchbar type="product" isNavigator="{{true}}" bindselectresult="selectResult" searchObjectsArray="{{productArray}}"></mp-searchbar>
+<view id="body_container">
+  <view id = "vertical_tabs_container">
+    <!-- take in an array of objects that contains each tab title-->
+    <block wx:for="{{categoryTabs}}" wx:key="title">
+      <view id="{{item.title}}" bindtap="clickCategoryTab" data-index="{{index}}" class="categoryTab{{categoryActiveIndex == index ? 'Selected' : ''}}">{{item.title}}</view> 
+    </block>  
+  </view>
+  <scroll-view scroll-y id = "table_container">
+    <!-- take in array of product objects-->
+    <block wx:for= "{{productArray}}" wx:key="title">
+      <view class="productContainer">
+        <view class="productImageContainer">
+          <image src="{{item.imageUrl}}" mode="aspectFit" style="height: 100%; width: 100%;"></image>
+        </view>
+        <view class = "descriptionContainer">
+          <text>{{item.title}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>  
+
+
+
+</view>
