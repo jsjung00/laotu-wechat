@@ -4,5 +4,6 @@
   Search bar should start out focused
 -->
 <CustomNav isBoth="true"></CustomNav>
-<mp-searchbar bindselectresult="selectResult" focus="true" searchObjectsArray="{{searchObjectsArray}}"></mp-searchbar>
+<MySearchBar bindselectresult="selectResult" focus="true" searchObjectsArray="{{searchObjectsArray}}"></MySearchBar>
+
 
