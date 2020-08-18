@@ -1,7 +1,7 @@
 <!--miniprogram/product.wxml
     Note: mp-searchbar component uses miniprogram_npm folder since node_modules doesn't work for some reason-->
 <CustomNav isHome="true" title="Products"/>
-<mp-searchbar type="product" isNavigator="{{true}}" bindselectresult="selectResult" searchObjectsArray="{{productArray}}"></mp-searchbar>
+<MySearchBar type="product" isNavigator="{{true}}" bindselectresult="selectResult" searchObjectsArray="{{productArray}}"></MySearchBar>
 <view id="body_container">
   <view id = "vertical_tabs_container">
     <!-- take in an array of objects that contains each tab title-->
