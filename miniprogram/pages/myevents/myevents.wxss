@@ -5,8 +5,6 @@
 }
 .event-container{
   /*background-color: mediumturquoise;*/
-  /* EACH CONTAINER HEIGHT */
-  height: 20vh;
   width: 90%;
   display: flex;
   /* add margin to top and bottom */
@@ -15,7 +13,6 @@
   /*border-style: solid;
   border-width: 2px;
   border-radius: 5px;*/
-  overflow: hidden;
   flex-wrap: wrap;
 }
 .image-container{
@@ -34,23 +31,21 @@
 }
 
 #content-container{
-  height: 80%;
+  height: 20vh;
   width: 100%;
   display: flex;
   border-style: solid;
 }
 
 .fav-container{
-  overflow: hidden;
-  display: flex;
-  align-items: center;
   width: 100%;
-  height: 20%;
-  /*background-color: palegoldenrod;*/
+  background-color: palegoldenrod;
 }
 #favImg-container{
-  /*background-color: palevioletred;*/
+  background-color: palevioletred;
   display: flex;
-  justify-content: flex-start;
-  margin-left: 10rpx;
+  justify-content: center;
+  align-items: center;
+  height: 50rpx;
+  width: 50rpx;
 }

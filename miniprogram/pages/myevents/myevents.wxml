@@ -22,8 +22,8 @@
             </view>
           </view>
           <view class="fav-container">
-            <view id="favImg-container" style="height: 70%; width: {{widths.favImgContainer}}px">
-              <image bindtap="clickHeart" src="{{eventItem.isFavorited ? 'https://tinyurl.com/y2gq5bc8' : 'https://tinyurl.com/y43jth8w'}}" data-id='{{eventItem._id}}' data-index='{{index}}' data-itemindex='{{itemindex}}' style="height: 100%; width:100%" mode="aspectFit"></image>
+            <view id="favImg-container">
+              <image bindtap="clickHeart" src="{{eventItem.isFavorited ? fillHeartSrc: unfillHeartSrc}}" data-id='{{eventItem._id}}' data-index='{{index}}' data-itemindex='{{itemindex}}' style="height: 100%; width:100%;" mode="aspectFit"></image>
             </view>
           </view>
         </view>

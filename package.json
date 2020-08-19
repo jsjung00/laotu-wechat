@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jsjung00/laotu-dev#readme",
   "dependencies": {
     "@miniprogram-component-plus/tabs": "^1.0.0",
+    "weui-icon": "^1.0.0",
     "weui-miniprogram": "^1.0.5"
   }
 }

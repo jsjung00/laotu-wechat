@@ -1,9 +1,9 @@
-/* Consider speeding up the page load by not calculating the width of a container to make it square */
 /** Developer Notes:
  * Once pull from cloud collection, each event is an object that comes preloaded with id, title, ect. 
  * Then, given an array of favEventId's, each event object is given a isFavorited : boolean that is determined by the 
  * array of favEventId's. The boolean is used to determine whether or not to show a full heart or not.  
  */
+
 const app = getApp();
 
 Page({
@@ -21,6 +21,8 @@ Page({
     blankHeartSrc : "https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png",
     clickHeartSrc : "https://w7.pngwing.com/pngs/776/399/png-transparent-heart-computer-icons-red-heart-icon-dark-border-love-heart-desktop-wallpaper.png",
     currHeartSrc : "https://toppng.com/uploads/preview/heart-icon-transparent-icon-symbol-love-black-11553480202wbkavsmiom.png",
+    fillHeartSrc: '../../img/like-filled.svg',
+    unfillHeartSrc: '../../img/like-unfilled.svg'
   },
   //事件处理函数
   bindViewTap: function() {
@@ -34,6 +36,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getEventTabData',
       success: function(res){
+        console.log(res.result.tabsData);
         that.setData({
           tabs : res.result.tabsData
         });
@@ -42,8 +45,8 @@ Page({
       fail: console.error
     });
 
-    //Try to get the height of favImg-container
-    this.favoriteSize();
+    //Depreacted, takes too long, used static div sizes instead- Try to get the height of favImg-container
+    //this.favoriteSize();
 
     
 
@@ -148,21 +151,6 @@ Page({
         tabs
       });
     }
-
-
-
-
-
-    //change the image to the favorited heart
-    /*let currentSrc = this.data.currHeartSrc;
-    let blankHeartSrc = this.data.blankHeartSrc;
-    let clickHeartSrc = this.data.clickHeartSrc;
-    //this switches the images. CHANGE URL IF CHANGE ICONS
-    let newSrc = (currentSrc === blankHeartSrc ? clickHeartSrc : blankHeartSrc);
-    this.setData({
-      currHeartSrc : newSrc
-    });
-    console.log("favorite image change");*/
   },
   navHandler: function(event){
     let that = this;
@@ -320,9 +308,5 @@ Page({
         })*/
     }
     return;
-  },
-  addIsFavorited: function(eventArr){
-    //given an array of event objects, function uses the user's favEventsId's array to add the boolean of whether it is favorited or not
-    //pull userFavEventIds = getFavEventIds();
   }
 })
