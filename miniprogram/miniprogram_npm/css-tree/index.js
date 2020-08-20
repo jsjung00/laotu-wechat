@@ -4,11 +4,11 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781799307, function(require, module, exports) {
+__DEFINE__(1597942294271, function(require, module, exports) {
 module.exports = require('./syntax');
 
-}, function(modId) {var map = {"./syntax":1597781799308}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799308, function(require, module, exports) {
+}, function(modId) {var map = {"./syntax":1597942294272}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294272, function(require, module, exports) {
 function merge() {
     var dest = {};
 
@@ -30,8 +30,8 @@ module.exports = require('./create').create(
     )
 );
 
-}, function(modId) { var map = {"./create":1597781799309,"./config/lexer":1597781799346,"./config/parser":1597781799390,"./config/walker":1597781799419}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799309, function(require, module, exports) {
+}, function(modId) { var map = {"./create":1597942294273,"./config/lexer":1597942294310,"./config/parser":1597942294354,"./config/walker":1597942294383}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294273, function(require, module, exports) {
 var List = require('../common/List');
 var SyntaxError = require('../common/SyntaxError');
 var TokenStream = require('../common/TokenStream');
@@ -117,8 +117,8 @@ exports.create = function(config) {
     return createSyntax(mix({}, config));
 };
 
-}, function(modId) { var map = {"../common/List":1597781799310,"../common/SyntaxError":1597781799311,"../common/TokenStream":1597781799313,"../lexer/Lexer":1597781799317,"../definition-syntax":1597781799336,"../tokenizer":1597781799322,"../parser/create":1597781799337,"../generator/create":1597781799340,"../convertor/create":1597781799342,"../walker/create":1597781799343,"../utils/clone":1597781799344,"../utils/names":1597781799320,"./config/mix":1597781799345}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799310, function(require, module, exports) {
+}, function(modId) { var map = {"../common/List":1597942294274,"../common/SyntaxError":1597942294275,"../common/TokenStream":1597942294277,"../lexer/Lexer":1597942294281,"../definition-syntax":1597942294300,"../tokenizer":1597942294286,"../parser/create":1597942294301,"../generator/create":1597942294304,"../convertor/create":1597942294306,"../walker/create":1597942294307,"../utils/clone":1597942294308,"../utils/names":1597942294284,"./config/mix":1597942294309}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294274, function(require, module, exports) {
 //
 //                              list
 //                            ┌──────┐
@@ -649,7 +649,7 @@ List.prototype.replace = function(oldItem, newItemOrList) {
 module.exports = List;
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799311, function(require, module, exports) {
+__DEFINE__(1597942294275, function(require, module, exports) {
 var createCustomError = require('../utils/createCustomError');
 var MAX_LINE_LENGTH = 100;
 var OFFSET_CORRECTION = 60;
@@ -733,8 +733,8 @@ var SyntaxError = function(message, source, offset, line, column) {
 
 module.exports = SyntaxError;
 
-}, function(modId) { var map = {"../utils/createCustomError":1597781799312}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799312, function(require, module, exports) {
+}, function(modId) { var map = {"../utils/createCustomError":1597942294276}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294276, function(require, module, exports) {
 module.exports = function createCustomError(name, message) {
     // use Object.create(), because some VMs prevent setting line/column otherwise
     // (iOS Safari 10 even throws an exception)
@@ -754,7 +754,7 @@ module.exports = function createCustomError(name, message) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799313, function(require, module, exports) {
+__DEFINE__(1597942294277, function(require, module, exports) {
 var constants = require('../tokenizer/const');
 var TYPE = constants.TYPE;
 var NAME = constants.NAME;
@@ -965,8 +965,8 @@ TokenStream.prototype = {
 
 module.exports = TokenStream;
 
-}, function(modId) { var map = {"../tokenizer/const":1597781799314,"../tokenizer/utils":1597781799315}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799314, function(require, module, exports) {
+}, function(modId) { var map = {"../tokenizer/const":1597942294278,"../tokenizer/utils":1597942294279}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294278, function(require, module, exports) {
 // CSS Syntax Module Level 3
 // https://www.w3.org/TR/css-syntax-3/
 var TYPE = {
@@ -1009,7 +1009,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799315, function(require, module, exports) {
+__DEFINE__(1597942294279, function(require, module, exports) {
 var charCodeDef = require('./char-code-definitions');
 var isDigit = charCodeDef.isDigit;
 var isHexDigit = charCodeDef.isHexDigit;
@@ -1254,8 +1254,8 @@ module.exports = {
     findWhiteSpaceEnd: findWhiteSpaceEnd
 };
 
-}, function(modId) { var map = {"./char-code-definitions":1597781799316}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799316, function(require, module, exports) {
+}, function(modId) { var map = {"./char-code-definitions":1597942294280}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294280, function(require, module, exports) {
 var EOF = 0;
 
 // https://drafts.csswg.org/css-syntax-3/
@@ -1507,7 +1507,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799317, function(require, module, exports) {
+__DEFINE__(1597942294281, function(require, module, exports) {
 var SyntaxReferenceError = require('./error').SyntaxReferenceError;
 var MatchError = require('./error').MatchError;
 var names = require('../utils/names');
@@ -1831,8 +1831,8 @@ Lexer.prototype = {
 
 module.exports = Lexer;
 
-}, function(modId) { var map = {"./error":1597781799318,"../utils/names":1597781799320,"./generic":1597781799321,"../definition-syntax/parse":1597781799326,"../definition-syntax/generate":1597781799319,"../definition-syntax/walk":1597781799329,"./prepare-tokens":1597781799330,"./match-graph":1597781799331,"./match":1597781799332,"./trace":1597781799333,"./search":1597781799334,"./structure":1597781799335}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799318, function(require, module, exports) {
+}, function(modId) { var map = {"./error":1597942294282,"../utils/names":1597942294284,"./generic":1597942294285,"../definition-syntax/parse":1597942294290,"../definition-syntax/generate":1597942294283,"../definition-syntax/walk":1597942294293,"./prepare-tokens":1597942294294,"./match-graph":1597942294295,"./match":1597942294296,"./trace":1597942294297,"./search":1597942294298,"./structure":1597942294299}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294282, function(require, module, exports) {
 var createCustomError = require('../utils/createCustomError');
 var generate = require('../definition-syntax/generate');
 
@@ -1927,8 +1927,8 @@ module.exports = {
     MatchError: MatchError
 };
 
-}, function(modId) { var map = {"../utils/createCustomError":1597781799312,"../definition-syntax/generate":1597781799319}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799319, function(require, module, exports) {
+}, function(modId) { var map = {"../utils/createCustomError":1597942294276,"../definition-syntax/generate":1597942294283}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294283, function(require, module, exports) {
 function noop(value) {
     return value;
 }
@@ -2060,7 +2060,7 @@ module.exports = function(node, options) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799320, function(require, module, exports) {
+__DEFINE__(1597942294284, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var keywords = Object.create(null);
 var properties = Object.create(null);
@@ -2167,7 +2167,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799321, function(require, module, exports) {
+__DEFINE__(1597942294285, function(require, module, exports) {
 var tokenizer = require('../tokenizer');
 var isIdentifierStart = tokenizer.isIdentifierStart;
 var isHexDigit = tokenizer.isHexDigit;
@@ -2754,8 +2754,8 @@ module.exports = {
     '-ms-legacy-expression': func('expression')
 };
 
-}, function(modId) { var map = {"../tokenizer":1597781799322,"./generic-an-plus-b":1597781799324,"./generic-urange":1597781799325}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799322, function(require, module, exports) {
+}, function(modId) { var map = {"../tokenizer":1597942294286,"./generic-an-plus-b":1597942294288,"./generic-urange":1597942294289}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294286, function(require, module, exports) {
 var TokenStream = require('../common/TokenStream');
 var adoptBuffer = require('../common/adopt-buffer');
 
@@ -3348,8 +3348,8 @@ Object.keys(utils).forEach(function(key) {
 
 module.exports = tokenize;
 
-}, function(modId) { var map = {"../common/TokenStream":1597781799313,"../common/adopt-buffer":1597781799323,"./const":1597781799314,"./char-code-definitions":1597781799316,"./utils":1597781799315}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799323, function(require, module, exports) {
+}, function(modId) { var map = {"../common/TokenStream":1597942294277,"../common/adopt-buffer":1597942294287,"./const":1597942294278,"./char-code-definitions":1597942294280,"./utils":1597942294279}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294287, function(require, module, exports) {
 var MIN_SIZE = 16 * 1024;
 var SafeUint32Array = typeof Uint32Array !== 'undefined' ? Uint32Array : Array; // fallback on Array when TypedArray is not supported
 
@@ -3362,7 +3362,7 @@ module.exports = function adoptBuffer(buffer, size) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799324, function(require, module, exports) {
+__DEFINE__(1597942294288, function(require, module, exports) {
 var isDigit = require('../tokenizer').isDigit;
 var cmpChar = require('../tokenizer').cmpChar;
 var TYPE = require('../tokenizer').TYPE;
@@ -3600,8 +3600,8 @@ module.exports = function anPlusB(token, getNextToken) {
     return 0;
 };
 
-}, function(modId) { var map = {"../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799325, function(require, module, exports) {
+}, function(modId) { var map = {"../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294289, function(require, module, exports) {
 var isHexDigit = require('../tokenizer').isHexDigit;
 var cmpChar = require('../tokenizer').cmpChar;
 var TYPE = require('../tokenizer').TYPE;
@@ -3762,8 +3762,8 @@ module.exports = function urange(token, getNextToken) {
     return 0;
 };
 
-}, function(modId) { var map = {"../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799326, function(require, module, exports) {
+}, function(modId) { var map = {"../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294290, function(require, module, exports) {
 var Tokenizer = require('./tokenizer');
 var TAB = 9;
 var N = 10;
@@ -4333,8 +4333,8 @@ parse('[a&&<b>#|<\'c\'>*||e() f{2} /,(% g#{1,2} h{2,})]!');
 
 module.exports = parse;
 
-}, function(modId) { var map = {"./tokenizer":1597781799327}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799327, function(require, module, exports) {
+}, function(modId) { var map = {"./tokenizer":1597942294291}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294291, function(require, module, exports) {
 var SyntaxError = require('./SyntaxError');
 
 var TAB = 9;
@@ -4391,8 +4391,8 @@ Tokenizer.prototype = {
 
 module.exports = Tokenizer;
 
-}, function(modId) { var map = {"./SyntaxError":1597781799328}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799328, function(require, module, exports) {
+}, function(modId) { var map = {"./SyntaxError":1597942294292}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294292, function(require, module, exports) {
 var createCustomError = require('../utils/createCustomError');
 
 module.exports = function SyntaxError(message, input, offset) {
@@ -4408,8 +4408,8 @@ module.exports = function SyntaxError(message, input, offset) {
     return error;
 };
 
-}, function(modId) { var map = {"../utils/createCustomError":1597781799312}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799329, function(require, module, exports) {
+}, function(modId) { var map = {"../utils/createCustomError":1597942294276}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294293, function(require, module, exports) {
 var noop = function() {};
 
 function ensureFunction(value) {
@@ -4464,7 +4464,7 @@ module.exports = function(node, options, context) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799330, function(require, module, exports) {
+__DEFINE__(1597942294294, function(require, module, exports) {
 var tokenize = require('../tokenizer');
 var TokenStream = require('../common/TokenStream');
 var tokenStream = new TokenStream();
@@ -4539,8 +4539,8 @@ module.exports = function(value, syntax) {
     return syntax.generate(value, astToTokens);
 };
 
-}, function(modId) { var map = {"../tokenizer":1597781799322,"../common/TokenStream":1597781799313}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799331, function(require, module, exports) {
+}, function(modId) { var map = {"../tokenizer":1597942294286,"../common/TokenStream":1597942294277}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294295, function(require, module, exports) {
 var parse = require('../definition-syntax/parse');
 
 var MATCH = { type: 'Match' };
@@ -4997,8 +4997,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../definition-syntax/parse":1597781799326}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799332, function(require, module, exports) {
+}, function(modId) { var map = {"../definition-syntax/parse":1597942294290}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294296, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var matchGraph = require('./match-graph');
 var MATCH = matchGraph.MATCH;
@@ -5629,8 +5629,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"./match-graph":1597781799331,"../tokenizer/const":1597781799314}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799333, function(require, module, exports) {
+}, function(modId) { var map = {"./match-graph":1597942294295,"../tokenizer/const":1597942294278}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294297, function(require, module, exports) {
 function getTrace(node) {
     function shouldPutToTrace(syntax) {
         if (syntax === null) {
@@ -5712,7 +5712,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799334, function(require, module, exports) {
+__DEFINE__(1597942294298, function(require, module, exports) {
 var List = require('../common/List');
 
 function getFirstMatchNode(matchNode) {
@@ -5779,8 +5779,8 @@ module.exports = {
     matchFragments: matchFragments
 };
 
-}, function(modId) { var map = {"../common/List":1597781799310}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799335, function(require, module, exports) {
+}, function(modId) { var map = {"../common/List":1597942294274}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294299, function(require, module, exports) {
 var List = require('../common/List');
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -5945,8 +5945,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../common/List":1597781799310}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799336, function(require, module, exports) {
+}, function(modId) { var map = {"../common/List":1597942294274}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294300, function(require, module, exports) {
 module.exports = {
     SyntaxError: require('./SyntaxError'),
     parse: require('./parse'),
@@ -5954,8 +5954,8 @@ module.exports = {
     walk: require('./walk')
 };
 
-}, function(modId) { var map = {"./SyntaxError":1597781799328,"./parse":1597781799326,"./generate":1597781799319,"./walk":1597781799329}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799337, function(require, module, exports) {
+}, function(modId) { var map = {"./SyntaxError":1597942294292,"./parse":1597942294290,"./generate":1597942294283,"./walk":1597942294293}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294301, function(require, module, exports) {
 var OffsetToLocation = require('../common/OffsetToLocation');
 var SyntaxError = require('../common/SyntaxError');
 var TokenStream = require('../common/TokenStream');
@@ -6246,8 +6246,8 @@ module.exports = function createParser(config) {
     };
 };
 
-}, function(modId) { var map = {"../common/OffsetToLocation":1597781799338,"../common/SyntaxError":1597781799311,"../common/TokenStream":1597781799313,"../common/List":1597781799310,"../tokenizer":1597781799322,"../tokenizer/const":1597781799314,"../tokenizer/utils":1597781799315,"./sequence":1597781799339}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799338, function(require, module, exports) {
+}, function(modId) { var map = {"../common/OffsetToLocation":1597942294302,"../common/SyntaxError":1597942294275,"../common/TokenStream":1597942294277,"../common/List":1597942294274,"../tokenizer":1597942294286,"../tokenizer/const":1597942294278,"../tokenizer/utils":1597942294279,"./sequence":1597942294303}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294302, function(require, module, exports) {
 var adoptBuffer = require('./adopt-buffer');
 var isBOM = require('../tokenizer').isBOM;
 
@@ -6340,8 +6340,8 @@ OffsetToLocation.prototype = {
 
 module.exports = OffsetToLocation;
 
-}, function(modId) { var map = {"./adopt-buffer":1597781799323,"../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799339, function(require, module, exports) {
+}, function(modId) { var map = {"./adopt-buffer":1597942294287,"../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294303, function(require, module, exports) {
 var TYPE = require('../tokenizer').TYPE;
 var WHITESPACE = TYPE.WhiteSpace;
 var COMMENT = TYPE.Comment;
@@ -6397,8 +6397,8 @@ module.exports = function readSequence(recognizer) {
     return children;
 };
 
-}, function(modId) { var map = {"../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799340, function(require, module, exports) {
+}, function(modId) { var map = {"../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294304, function(require, module, exports) {
 var sourceMap = require('./sourceMap');
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -6466,8 +6466,8 @@ module.exports = function createGenerator(config) {
     };
 };
 
-}, function(modId) { var map = {"./sourceMap":1597781799341}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799341, function(require, module, exports) {
+}, function(modId) { var map = {"./sourceMap":1597942294305}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294305, function(require, module, exports) {
 var SourceMapGenerator = require('source-map/lib/source-map-generator').SourceMapGenerator;
 var trackNodes = {
     Atrule: true,
@@ -6565,7 +6565,7 @@ module.exports = function generateSourceMap(handlers) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799342, function(require, module, exports) {
+__DEFINE__(1597942294306, function(require, module, exports) {
 var List = require('../common/List');
 
 module.exports = function createConvertors(walk) {
@@ -6595,8 +6595,8 @@ module.exports = function createConvertors(walk) {
     };
 };
 
-}, function(modId) { var map = {"../common/List":1597781799310}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799343, function(require, module, exports) {
+}, function(modId) { var map = {"../common/List":1597942294274}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294307, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var noop = function() {};
 
@@ -6861,7 +6861,7 @@ module.exports = function createWalker(config) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799344, function(require, module, exports) {
+__DEFINE__(1597942294308, function(require, module, exports) {
 var List = require('../common/List');
 
 module.exports = function clone(node) {
@@ -6884,8 +6884,8 @@ module.exports = function clone(node) {
     return result;
 };
 
-}, function(modId) { var map = {"../common/List":1597781799310}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799345, function(require, module, exports) {
+}, function(modId) { var map = {"../common/List":1597942294274}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294309, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var shape = {
     generic: true,
@@ -6982,7 +6982,7 @@ module.exports = function(dest, src) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799346, function(require, module, exports) {
+__DEFINE__(1597942294310, function(require, module, exports) {
 var data = require('../../../data');
 
 module.exports = {
@@ -6992,8 +6992,8 @@ module.exports = {
     node: require('../node')
 };
 
-}, function(modId) { var map = {"../../../data":1597781799347,"../node":1597781799349}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799347, function(require, module, exports) {
+}, function(modId) { var map = {"../../../data":1597942294311,"../node":1597942294313}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294311, function(require, module, exports) {
 var mdnProperties = require('mdn-data/css/properties.json');
 var mdnSyntaxes = require('mdn-data/css/syntaxes.json');
 var patch = require('./patch.json');
@@ -7029,8 +7029,8 @@ module.exports = {
     types: buildDictionary(mdnSyntaxes, patch.syntaxes)
 };
 
-}, function(modId) { var map = {"./patch.json":1597781799348}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799348, function(require, module, exports) {
+}, function(modId) { var map = {"./patch.json":1597942294312}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294312, function(require, module, exports) {
 module.exports = {
   "properties": {
     "-moz-background-clip": {
@@ -7714,7 +7714,7 @@ module.exports = {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799349, function(require, module, exports) {
+__DEFINE__(1597942294313, function(require, module, exports) {
 module.exports = {
     AnPlusB: require('./AnPlusB'),
     Atrule: require('./Atrule'),
@@ -7758,8 +7758,8 @@ module.exports = {
     WhiteSpace: require('./WhiteSpace')
 };
 
-}, function(modId) { var map = {"./AnPlusB":1597781799350,"./Atrule":1597781799351,"./AtrulePrelude":1597781799353,"./AttributeSelector":1597781799354,"./Block":1597781799355,"./Brackets":1597781799356,"./CDC":1597781799357,"./CDO":1597781799358,"./ClassSelector":1597781799359,"./Combinator":1597781799360,"./Comment":1597781799361,"./Declaration":1597781799362,"./DeclarationList":1597781799363,"./Dimension":1597781799364,"./Function":1597781799365,"./HexColor":1597781799366,"./Identifier":1597781799367,"./IdSelector":1597781799368,"./MediaFeature":1597781799369,"./MediaQuery":1597781799370,"./MediaQueryList":1597781799371,"./Nth":1597781799372,"./Number":1597781799373,"./Operator":1597781799374,"./Parentheses":1597781799375,"./Percentage":1597781799376,"./PseudoClassSelector":1597781799377,"./PseudoElementSelector":1597781799378,"./Ratio":1597781799379,"./Raw":1597781799352,"./Rule":1597781799380,"./Selector":1597781799381,"./SelectorList":1597781799382,"./String":1597781799383,"./StyleSheet":1597781799384,"./TypeSelector":1597781799385,"./UnicodeRange":1597781799386,"./Url":1597781799387,"./Value":1597781799388,"./WhiteSpace":1597781799389}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799350, function(require, module, exports) {
+}, function(modId) { var map = {"./AnPlusB":1597942294314,"./Atrule":1597942294315,"./AtrulePrelude":1597942294317,"./AttributeSelector":1597942294318,"./Block":1597942294319,"./Brackets":1597942294320,"./CDC":1597942294321,"./CDO":1597942294322,"./ClassSelector":1597942294323,"./Combinator":1597942294324,"./Comment":1597942294325,"./Declaration":1597942294326,"./DeclarationList":1597942294327,"./Dimension":1597942294328,"./Function":1597942294329,"./HexColor":1597942294330,"./Identifier":1597942294331,"./IdSelector":1597942294332,"./MediaFeature":1597942294333,"./MediaQuery":1597942294334,"./MediaQueryList":1597942294335,"./Nth":1597942294336,"./Number":1597942294337,"./Operator":1597942294338,"./Parentheses":1597942294339,"./Percentage":1597942294340,"./PseudoClassSelector":1597942294341,"./PseudoElementSelector":1597942294342,"./Ratio":1597942294343,"./Raw":1597942294316,"./Rule":1597942294344,"./Selector":1597942294345,"./SelectorList":1597942294346,"./String":1597942294347,"./StyleSheet":1597942294348,"./TypeSelector":1597942294349,"./UnicodeRange":1597942294350,"./Url":1597942294351,"./Value":1597942294352,"./WhiteSpace":1597942294353}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294314, function(require, module, exports) {
 var cmpChar = require('../../tokenizer').cmpChar;
 var isDigit = require('../../tokenizer').isDigit;
 var TYPE = require('../../tokenizer').TYPE;
@@ -8058,8 +8058,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799351, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294315, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 var rawMode = require('./Raw').mode;
 
@@ -8168,8 +8168,8 @@ module.exports = {
     walkContext: 'atrule'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322,"./Raw":1597781799352}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799352, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286,"./Raw":1597942294316}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294316, function(require, module, exports) {
 var tokenizer = require('../../tokenizer');
 var TYPE = tokenizer.TYPE;
 
@@ -8258,8 +8258,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799353, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294317, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var SEMICOLON = TYPE.Semicolon;
@@ -8312,8 +8312,8 @@ module.exports = {
     walkContext: 'atrulePrelude'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799354, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294318, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -8480,8 +8480,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799355, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294319, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 var rawMode = require('./Raw').mode;
 
@@ -8574,8 +8574,8 @@ module.exports = {
     walkContext: 'block'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322,"./Raw":1597781799352}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799356, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286,"./Raw":1597942294316}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294320, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var LEFTSQUAREBRACKET = TYPE.LeftSquareBracket;
@@ -8611,8 +8611,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799357, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294321, function(require, module, exports) {
 var CDC = require('../../tokenizer').TYPE.CDC;
 
 module.exports = {
@@ -8633,8 +8633,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799358, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294322, function(require, module, exports) {
 var CDO = require('../../tokenizer').TYPE.CDO;
 
 module.exports = {
@@ -8655,8 +8655,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799359, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294323, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -8687,8 +8687,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799360, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294324, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -8745,8 +8745,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799361, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294325, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var COMMENT = TYPE.Comment;
@@ -8784,8 +8784,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799362, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294326, function(require, module, exports) {
 var isCustomProperty = require('../../utils/names').isCustomProperty;
 var TYPE = require('../../tokenizer').TYPE;
 var rawMode = require('./Raw').mode;
@@ -8940,8 +8940,8 @@ function getImportant() {
     return important === 'important' ? true : important;
 }
 
-}, function(modId) { var map = {"../../utils/names":1597781799320,"../../tokenizer":1597781799322,"./Raw":1597781799352}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799363, function(require, module, exports) {
+}, function(modId) { var map = {"../../utils/names":1597942294284,"../../tokenizer":1597942294286,"./Raw":1597942294316}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294327, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 var rawMode = require('./Raw').mode;
 
@@ -8992,8 +8992,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322,"./Raw":1597781799352}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799364, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286,"./Raw":1597942294316}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294328, function(require, module, exports) {
 var consumeNumber = require('../../tokenizer/utils').consumeNumber;
 var TYPE = require('../../tokenizer').TYPE;
 
@@ -9024,8 +9024,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer/utils":1597781799315,"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799365, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer/utils":1597942294279,"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294329, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var RIGHTPARENTHESIS = TYPE.RightParenthesis;
@@ -9067,8 +9067,8 @@ module.exports = {
     walkContext: 'function'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799366, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294330, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var HASH = TYPE.Hash;
@@ -9096,8 +9096,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799367, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294331, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -9119,8 +9119,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799368, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294332, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var HASH = TYPE.Hash;
@@ -9149,8 +9149,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799369, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294333, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -9228,8 +9228,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799370, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294334, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var WHITESPACE = TYPE.WhiteSpace;
@@ -9299,8 +9299,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799371, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294335, function(require, module, exports) {
 var COMMA = require('../../tokenizer').TYPE.Comma;
 
 module.exports = {
@@ -9338,8 +9338,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799372, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294336, function(require, module, exports) {
 module.exports = {
     name: 'Nth',
     structure: {
@@ -9393,7 +9393,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799373, function(require, module, exports) {
+__DEFINE__(1597942294337, function(require, module, exports) {
 var NUMBER = require('../../tokenizer').TYPE.Number;
 
 module.exports = {
@@ -9413,8 +9413,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799374, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294338, function(require, module, exports) {
 // '/' | '*' | ',' | ':' | '+' | '-'
 module.exports = {
     name: 'Operator',
@@ -9438,7 +9438,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799375, function(require, module, exports) {
+__DEFINE__(1597942294339, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var LEFTPARENTHESIS = TYPE.LeftParenthesis;
@@ -9474,8 +9474,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799376, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294340, function(require, module, exports) {
 var consumeNumber = require('../../tokenizer/utils').consumeNumber;
 var TYPE = require('../../tokenizer').TYPE;
 
@@ -9504,8 +9504,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer/utils":1597781799315,"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799377, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer/utils":1597942294279,"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294341, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -9568,8 +9568,8 @@ module.exports = {
     walkContext: 'function'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799378, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294342, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -9633,8 +9633,8 @@ module.exports = {
     walkContext: 'function'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799379, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294343, function(require, module, exports) {
 var isDigit = require('../../tokenizer').isDigit;
 var TYPE = require('../../tokenizer').TYPE;
 
@@ -9702,8 +9702,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799380, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294344, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 var rawMode = require('./Raw').mode;
 
@@ -9759,8 +9759,8 @@ module.exports = {
     walkContext: 'rule'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322,"./Raw":1597781799352}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799381, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286,"./Raw":1597942294316}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294345, function(require, module, exports) {
 module.exports = {
     name: 'Selector',
     structure: {
@@ -9795,7 +9795,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799382, function(require, module, exports) {
+__DEFINE__(1597942294346, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var COMMA = TYPE.Comma;
@@ -9836,8 +9836,8 @@ module.exports = {
     walkContext: 'selector'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799383, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294347, function(require, module, exports) {
 var STRING = require('../../tokenizer').TYPE.String;
 
 module.exports = {
@@ -9857,8 +9857,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799384, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294348, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var WHITESPACE = TYPE.WhiteSpace;
@@ -9941,8 +9941,8 @@ module.exports = {
     walkContext: 'stylesheet'
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799385, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294349, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var IDENT = TYPE.Ident;
@@ -9997,8 +9997,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799386, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294350, function(require, module, exports) {
 var isHexDigit = require('../../tokenizer').isHexDigit;
 var cmpChar = require('../../tokenizer').cmpChar;
 var TYPE = require('../../tokenizer').TYPE;
@@ -10173,8 +10173,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799387, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294351, function(require, module, exports) {
 var isWhiteSpace = require('../../tokenizer').isWhiteSpace;
 var cmpStr = require('../../tokenizer').cmpStr;
 var TYPE = require('../../tokenizer').TYPE;
@@ -10245,8 +10245,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799388, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294352, function(require, module, exports) {
 module.exports = {
     name: 'Value',
     structure: {
@@ -10268,7 +10268,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799389, function(require, module, exports) {
+__DEFINE__(1597942294353, function(require, module, exports) {
 var WHITESPACE = require('../../tokenizer').TYPE.WhiteSpace;
 var SPACE = Object.freeze({
     type: 'WhiteSpace',
@@ -10296,8 +10296,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799390, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294354, function(require, module, exports) {
 module.exports = {
     parseContext: {
         default: 'StyleSheet',
@@ -10324,22 +10324,22 @@ module.exports = {
     node: require('../node')
 };
 
-}, function(modId) { var map = {"../scope":1597781799391,"../atrule":1597781799399,"../pseudo":1597781799405,"../node":1597781799349}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799391, function(require, module, exports) {
+}, function(modId) { var map = {"../scope":1597942294355,"../atrule":1597942294363,"../pseudo":1597942294369,"../node":1597942294313}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294355, function(require, module, exports) {
 module.exports = {
     AtrulePrelude: require('./atrulePrelude'),
     Selector: require('./selector'),
     Value: require('./value')
 };
 
-}, function(modId) { var map = {"./atrulePrelude":1597781799392,"./selector":1597781799394,"./value":1597781799395}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799392, function(require, module, exports) {
+}, function(modId) { var map = {"./atrulePrelude":1597942294356,"./selector":1597942294358,"./value":1597942294359}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294356, function(require, module, exports) {
 module.exports = {
     getNode: require('./default')
 };
 
-}, function(modId) { var map = {"./default":1597781799393}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799393, function(require, module, exports) {
+}, function(modId) { var map = {"./default":1597942294357}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294357, function(require, module, exports) {
 var cmpChar = require('../../tokenizer').cmpChar;
 var cmpStr = require('../../tokenizer').cmpStr;
 var TYPE = require('../../tokenizer').TYPE;
@@ -10428,8 +10428,8 @@ module.exports = function defaultRecognizer(context) {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799394, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294358, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var DELIM = TYPE.Delim;
@@ -10511,8 +10511,8 @@ module.exports = {
     getNode: getNode
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799395, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294359, function(require, module, exports) {
 module.exports = {
     getNode: require('./default'),
     '-moz-element': require('../function/element'),
@@ -10521,8 +10521,8 @@ module.exports = {
     'var': require('../function/var')
 };
 
-}, function(modId) { var map = {"./default":1597781799393,"../function/element":1597781799396,"../function/expression":1597781799397,"../function/var":1597781799398}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799396, function(require, module, exports) {
+}, function(modId) { var map = {"./default":1597942294357,"../function/element":1597942294360,"../function/expression":1597942294361,"../function/var":1597942294362}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294360, function(require, module, exports) {
 // https://drafts.csswg.org/css-images-4/#element-notation
 // https://developer.mozilla.org/en-US/docs/Web/CSS/element
 module.exports = function() {
@@ -10538,7 +10538,7 @@ module.exports = function() {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799397, function(require, module, exports) {
+__DEFINE__(1597942294361, function(require, module, exports) {
 // legacy IE function
 // expression( <any-value> )
 module.exports = function() {
@@ -10548,7 +10548,7 @@ module.exports = function() {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799398, function(require, module, exports) {
+__DEFINE__(1597942294362, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 var rawMode = require('../node/Raw').mode;
 
@@ -10576,8 +10576,8 @@ module.exports = function() {
     return children;
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322,"../node/Raw":1597781799352}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799399, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286,"../node/Raw":1597942294316}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294363, function(require, module, exports) {
 module.exports = {
     'font-face': require('./font-face'),
     'import': require('./import'),
@@ -10586,8 +10586,8 @@ module.exports = {
     'supports': require('./supports')
 };
 
-}, function(modId) { var map = {"./font-face":1597781799400,"./import":1597781799401,"./media":1597781799402,"./page":1597781799403,"./supports":1597781799404}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799400, function(require, module, exports) {
+}, function(modId) { var map = {"./font-face":1597942294364,"./import":1597942294365,"./media":1597942294366,"./page":1597942294367,"./supports":1597942294368}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294364, function(require, module, exports) {
 module.exports = {
     parse: {
         prelude: null,
@@ -10598,7 +10598,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799401, function(require, module, exports) {
+__DEFINE__(1597942294365, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var STRING = TYPE.String;
@@ -10640,8 +10640,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799402, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294366, function(require, module, exports) {
 module.exports = {
     parse: {
         prelude: function() {
@@ -10656,7 +10656,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799403, function(require, module, exports) {
+__DEFINE__(1597942294367, function(require, module, exports) {
 module.exports = {
     parse: {
         prelude: function() {
@@ -10671,7 +10671,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799404, function(require, module, exports) {
+__DEFINE__(1597942294368, function(require, module, exports) {
 var TYPE = require('../../tokenizer').TYPE;
 
 var WHITESPACE = TYPE.WhiteSpace;
@@ -10762,8 +10762,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"../../tokenizer":1597781799322}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799405, function(require, module, exports) {
+}, function(modId) { var map = {"../../tokenizer":1597942294286}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294369, function(require, module, exports) {
 module.exports = {
     'dir': require('./dir'),
     'has': require('./has'),
@@ -10777,8 +10777,8 @@ module.exports = {
     'slotted': require('./slotted')
 };
 
-}, function(modId) { var map = {"./dir":1597781799406,"./has":1597781799407,"./lang":1597781799408,"./matches":1597781799409,"./not":1597781799411,"./nth-child":1597781799412,"./nth-last-child":1597781799414,"./nth-last-of-type":1597781799415,"./nth-of-type":1597781799417,"./slotted":1597781799418}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799406, function(require, module, exports) {
+}, function(modId) { var map = {"./dir":1597942294370,"./has":1597942294371,"./lang":1597942294372,"./matches":1597942294373,"./not":1597942294375,"./nth-child":1597942294376,"./nth-last-child":1597942294378,"./nth-last-of-type":1597942294379,"./nth-of-type":1597942294381,"./slotted":1597942294382}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294370, function(require, module, exports) {
 module.exports = {
     parse: function() {
         return this.createSingleNodeList(
@@ -10788,7 +10788,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799407, function(require, module, exports) {
+__DEFINE__(1597942294371, function(require, module, exports) {
 module.exports = {
     parse: function() {
         return this.createSingleNodeList(
@@ -10798,7 +10798,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799408, function(require, module, exports) {
+__DEFINE__(1597942294372, function(require, module, exports) {
 module.exports = {
     parse: function() {
         return this.createSingleNodeList(
@@ -10808,11 +10808,11 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799409, function(require, module, exports) {
+__DEFINE__(1597942294373, function(require, module, exports) {
 module.exports = require('./common/selectorList');
 
-}, function(modId) { var map = {"./common/selectorList":1597781799410}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799410, function(require, module, exports) {
+}, function(modId) { var map = {"./common/selectorList":1597942294374}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294374, function(require, module, exports) {
 module.exports = {
     parse: function selectorList() {
         return this.createSingleNodeList(
@@ -10822,15 +10822,15 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799411, function(require, module, exports) {
+__DEFINE__(1597942294375, function(require, module, exports) {
 module.exports = require('./common/selectorList');
 
-}, function(modId) { var map = {"./common/selectorList":1597781799410}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799412, function(require, module, exports) {
+}, function(modId) { var map = {"./common/selectorList":1597942294374}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294376, function(require, module, exports) {
 module.exports = require('./common/nthWithOfClause');
 
-}, function(modId) { var map = {"./common/nthWithOfClause":1597781799413}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799413, function(require, module, exports) {
+}, function(modId) { var map = {"./common/nthWithOfClause":1597942294377}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294377, function(require, module, exports) {
 var ALLOW_OF_CLAUSE = true;
 
 module.exports = {
@@ -10842,15 +10842,15 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799414, function(require, module, exports) {
+__DEFINE__(1597942294378, function(require, module, exports) {
 module.exports = require('./common/nthWithOfClause');
 
-}, function(modId) { var map = {"./common/nthWithOfClause":1597781799413}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799415, function(require, module, exports) {
+}, function(modId) { var map = {"./common/nthWithOfClause":1597942294377}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294379, function(require, module, exports) {
 module.exports = require('./common/nth');
 
-}, function(modId) { var map = {"./common/nth":1597781799416}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799416, function(require, module, exports) {
+}, function(modId) { var map = {"./common/nth":1597942294380}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294380, function(require, module, exports) {
 var DISALLOW_OF_CLAUSE = false;
 
 module.exports = {
@@ -10862,11 +10862,11 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799417, function(require, module, exports) {
+__DEFINE__(1597942294381, function(require, module, exports) {
 module.exports = require('./common/nth');
 
-}, function(modId) { var map = {"./common/nth":1597781799416}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799418, function(require, module, exports) {
+}, function(modId) { var map = {"./common/nth":1597942294380}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294382, function(require, module, exports) {
 module.exports = {
     parse: function compoundSelector() {
         return this.createSingleNodeList(
@@ -10876,12 +10876,12 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799419, function(require, module, exports) {
+__DEFINE__(1597942294383, function(require, module, exports) {
 module.exports = {
     node: require('../node')
 };
 
-}, function(modId) { var map = {"../node":1597781799349}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781799307);
+}, function(modId) { var map = {"../node":1597942294313}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1597942294271);
 })()
 //# sourceMappingURL=index.js.map

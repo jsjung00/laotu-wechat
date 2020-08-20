@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781800355, function(require, module, exports) {
+__DEFINE__(1597942295319, function(require, module, exports) {
 
 
 /**
@@ -96,8 +96,8 @@ module.exports = SVGO;
 // Offer ES module interop compatibility.
 module.exports.default = SVGO;
 
-}, function(modId) {var map = {"./svgo/config.js":1597781800356,"./svgo/svg2js.js":1597781800357,"./svgo/plugins.js":1597781800363,"./svgo/jsAPI.js":1597781800358,"./svgo/tools.js":1597781800364,"./svgo/js2svg.js":1597781800365}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800356, function(require, module, exports) {
+}, function(modId) {var map = {"./svgo/config.js":1597942295320,"./svgo/svg2js.js":1597942295321,"./svgo/plugins.js":1597942295327,"./svgo/jsAPI.js":1597942295322,"./svgo/tools.js":1597942295328,"./svgo/js2svg.js":1597942295329}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295320, function(require, module, exports) {
 
 
 var FS = require('fs');
@@ -350,7 +350,7 @@ function loadPlugin(config, name, path) {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800357, function(require, module, exports) {
+__DEFINE__(1597942295321, function(require, module, exports) {
 
 
 var SAX = require('sax'),
@@ -552,8 +552,8 @@ module.exports = function(data, callback) {
 
 };
 
-}, function(modId) { var map = {"./jsAPI.js":1597781800358,"./css-class-list":1597781800360,"./css-style-declaration":1597781800361}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800358, function(require, module, exports) {
+}, function(modId) { var map = {"./jsAPI.js":1597942295322,"./css-class-list":1597942295324,"./css-style-declaration":1597942295325}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295322, function(require, module, exports) {
 
 
 var cssSelect = require('css-select');
@@ -927,8 +927,8 @@ JSAPI.prototype.renameElem = function(name) {
 
 };
 
-}, function(modId) { var map = {"./css-select-adapter":1597781800359}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800359, function(require, module, exports) {
+}, function(modId) { var map = {"./css-select-adapter":1597942295323}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295323, function(require, module, exports) {
 
 
 var baseCssAdapter = require('css-select-base-adapter');
@@ -984,7 +984,7 @@ var svgoCssSelectAdapter = baseCssAdapter(svgoCssSelectAdapterMin);
 module.exports = svgoCssSelectAdapter;
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800360, function(require, module, exports) {
+__DEFINE__(1597942295324, function(require, module, exports) {
 
 
 var values = require('object.values');
@@ -1124,7 +1124,7 @@ CSSClassList.prototype.contains = function(className) {
 
 module.exports = CSSClassList;
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800361, function(require, module, exports) {
+__DEFINE__(1597942295325, function(require, module, exports) {
 
 
 var csstree = require('css-tree'),
@@ -1411,8 +1411,8 @@ CSSStyleDeclaration.prototype.setProperty = function(propertyName, value, priori
 
 module.exports = CSSStyleDeclaration;
 
-}, function(modId) { var map = {"../css-tools":1597781800362}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800362, function(require, module, exports) {
+}, function(modId) { var map = {"../css-tools":1597942295326}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295326, function(require, module, exports) {
 
 
 var csstree     = require('css-tree'),
@@ -1637,7 +1637,7 @@ module.exports.getCssStr = getCssStr;
 module.exports.setCssStr = setCssStr;
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800363, function(require, module, exports) {
+__DEFINE__(1597942295327, function(require, module, exports) {
 
 
 /**
@@ -1741,7 +1741,7 @@ function full(data, info, plugins) {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800364, function(require, module, exports) {
+__DEFINE__(1597942295328, function(require, module, exports) {
 
 
 var FS = require('fs');
@@ -1899,7 +1899,7 @@ exports.checkIsDir = function(path) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800365, function(require, module, exports) {
+__DEFINE__(1597942295329, function(require, module, exports) {
 
 
 var EOL = require('os').EOL,
@@ -2249,8 +2249,8 @@ JS2SVG.prototype.createText = function(text) {
 
 };
 
-}, function(modId) { var map = {"../../plugins/_collections.js":1597781800366}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800366, function(require, module, exports) {
+}, function(modId) { var map = {"../../plugins/_collections.js":1597942295330}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295330, function(require, module, exports) {
 
 
 // http://www.w3.org/TR/SVG11/intro.html#Definitions
@@ -4811,6 +4811,6 @@ exports.colorsProps = [
 ];
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781800355);
+return __REQUIRE__(1597942295319);
 })()
 //# sourceMappingURL=index.js.map

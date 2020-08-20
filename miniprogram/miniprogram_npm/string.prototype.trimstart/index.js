@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781800350, function(require, module, exports) {
+__DEFINE__(1597942295314, function(require, module, exports) {
 
 
 var callBind = require('es-abstract/helpers/callBind');
@@ -24,8 +24,8 @@ define(bound, {
 
 module.exports = bound;
 
-}, function(modId) {var map = {"./implementation":1597781800351,"./polyfill":1597781800352,"./shim":1597781800353}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800351, function(require, module, exports) {
+}, function(modId) {var map = {"./implementation":1597942295315,"./polyfill":1597942295316,"./shim":1597942295317}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295315, function(require, module, exports) {
 
 
 var callBind = require('es-abstract/helpers/callBind');
@@ -40,7 +40,7 @@ module.exports = function trimStart() {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800352, function(require, module, exports) {
+__DEFINE__(1597942295316, function(require, module, exports) {
 
 
 var implementation = require('./implementation');
@@ -57,8 +57,8 @@ module.exports = function getPolyfill() {
 	return String.prototype.trimStart || String.prototype.trimLeft;
 };
 
-}, function(modId) { var map = {"./implementation":1597781800351}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781800353, function(require, module, exports) {
+}, function(modId) { var map = {"./implementation":1597942295315}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942295317, function(require, module, exports) {
 
 
 var define = require('define-properties');
@@ -74,7 +74,7 @@ module.exports = function shimTrimStart() {
 	return polyfill;
 };
 
-}, function(modId) { var map = {"./polyfill":1597781800352}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781800350);
+}, function(modId) { var map = {"./polyfill":1597942295316}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1597942295314);
 })()
 //# sourceMappingURL=index.js.map

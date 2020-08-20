@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781799540, function(require, module, exports) {
+__DEFINE__(1597942294504, function(require, module, exports) {
 var csstree = require('css-tree');
 var parse = csstree.parse;
 var compress = require('./compress');
@@ -147,8 +147,8 @@ module.exports = {
     }, csstree)
 };
 
-}, function(modId) {var map = {"./compress":1597781799541,"../package.json":1597781799580}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799541, function(require, module, exports) {
+}, function(modId) {var map = {"./compress":1597942294505,"../package.json":1597942294544}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294505, function(require, module, exports) {
 var List = require('css-tree').List;
 var clone = require('css-tree').clone;
 var usageUtils = require('./usage');
@@ -347,8 +347,8 @@ module.exports = function compress(ast, options) {
     };
 };
 
-}, function(modId) { var map = {"./usage":1597781799542,"./clean":1597781799543,"./replace":1597781799552,"./restructure":1597781799567}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799542, function(require, module, exports) {
+}, function(modId) { var map = {"./usage":1597942294506,"./clean":1597942294507,"./replace":1597942294516,"./restructure":1597942294531}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294506, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function buildMap(list, caseInsensitive) {
@@ -430,7 +430,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799543, function(require, module, exports) {
+__DEFINE__(1597942294507, function(require, module, exports) {
 var walk = require('css-tree').walk;
 var handlers = {
     Atrule: require('./Atrule'),
@@ -452,8 +452,8 @@ module.exports = function(ast, options) {
     });
 };
 
-}, function(modId) { var map = {"./Atrule":1597781799544,"./Comment":1597781799546,"./Declaration":1597781799547,"./Raw":1597781799548,"./Rule":1597781799549,"./TypeSelector":1597781799550,"./WhiteSpace":1597781799551}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799544, function(require, module, exports) {
+}, function(modId) { var map = {"./Atrule":1597942294508,"./Comment":1597942294510,"./Declaration":1597942294511,"./Raw":1597942294512,"./Rule":1597942294513,"./TypeSelector":1597942294514,"./WhiteSpace":1597942294515}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294508, function(require, module, exports) {
 var resolveKeyword = require('css-tree').keyword;
 var { hasNoChildren } = require('./utils');
 
@@ -521,8 +521,8 @@ module.exports = function cleanAtrule(node, item, list) {
     }
 };
 
-}, function(modId) { var map = {"./utils":1597781799545}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799545, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294509}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294509, function(require, module, exports) {
 module.exports = {
     hasNoChildren: function(node) {
         return !node || !node.children || node.children.isEmpty();
@@ -533,13 +533,13 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799546, function(require, module, exports) {
+__DEFINE__(1597942294510, function(require, module, exports) {
 module.exports = function cleanComment(data, item, list) {
     list.remove(item);
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799547, function(require, module, exports) {
+__DEFINE__(1597942294511, function(require, module, exports) {
 module.exports = function cleanDeclartion(node, item, list) {
     if (node.value.children && node.value.children.isEmpty()) {
         list.remove(item);
@@ -547,7 +547,7 @@ module.exports = function cleanDeclartion(node, item, list) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799548, function(require, module, exports) {
+__DEFINE__(1597942294512, function(require, module, exports) {
 var { isNodeChildrenList } = require('./utils');
 
 module.exports = function cleanRaw(node, item, list) {
@@ -558,8 +558,8 @@ module.exports = function cleanRaw(node, item, list) {
     }
 };
 
-}, function(modId) { var map = {"./utils":1597781799545}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799549, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294509}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294513, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var walk = require('css-tree').walk;
 var { hasNoChildren } = require('./utils');
@@ -654,8 +654,8 @@ module.exports = function cleanRule(node, item, list, options) {
     }
 };
 
-}, function(modId) { var map = {"./utils":1597781799545}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799550, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294509}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294514, function(require, module, exports) {
 // remove useless universal selector
 module.exports = function cleanTypeSelector(node, item, list) {
     var name = item.data.name;
@@ -677,7 +677,7 @@ module.exports = function cleanTypeSelector(node, item, list) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799551, function(require, module, exports) {
+__DEFINE__(1597942294515, function(require, module, exports) {
 var { isNodeChildrenList } = require('./utils');
 
 function isSafeOperator(node) {
@@ -709,8 +709,8 @@ module.exports = function cleanWhitespace(node, item, list) {
     }
 };
 
-}, function(modId) { var map = {"./utils":1597781799545}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799552, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294509}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294516, function(require, module, exports) {
 var walk = require('css-tree').walk;
 var handlers = {
     Atrule: require('./Atrule'),
@@ -736,8 +736,8 @@ module.exports = function(ast) {
     });
 };
 
-}, function(modId) { var map = {"./Atrule":1597781799553,"./AttributeSelector":1597781799555,"./Value":1597781799556,"./Dimension":1597781799561,"./Percentage":1597781799563,"./Number":1597781799562,"./String":1597781799564,"./Url":1597781799565,"./color":1597781799566}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799553, function(require, module, exports) {
+}, function(modId) { var map = {"./Atrule":1597942294517,"./AttributeSelector":1597942294519,"./Value":1597942294520,"./Dimension":1597942294525,"./Percentage":1597942294527,"./Number":1597942294526,"./String":1597942294528,"./Url":1597942294529,"./color":1597942294530}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294517, function(require, module, exports) {
 var resolveKeyword = require('css-tree').keyword;
 var compressKeyframes = require('./atrule/keyframes');
 
@@ -748,8 +748,8 @@ module.exports = function(node) {
     }
 };
 
-}, function(modId) { var map = {"./atrule/keyframes":1597781799554}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799554, function(require, module, exports) {
+}, function(modId) { var map = {"./atrule/keyframes":1597942294518}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294518, function(require, module, exports) {
 module.exports = function(node) {
     node.block.children.each(function(rule) {
         rule.prelude.children.each(function(simpleselector) {
@@ -773,7 +773,7 @@ module.exports = function(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799555, function(require, module, exports) {
+__DEFINE__(1597942294519, function(require, module, exports) {
 // Can unquote attribute detection
 // Adopted implementation of Mathias Bynens
 // https://github.com/mathiasbynens/mothereff.in/blob/master/unquoted-attributes/eff.js
@@ -809,7 +809,7 @@ module.exports = function(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799556, function(require, module, exports) {
+__DEFINE__(1597942294520, function(require, module, exports) {
 var resolveName = require('css-tree').property;
 var handlers = {
     'font': require('./property/font'),
@@ -831,8 +831,8 @@ module.exports = function compressValue(node) {
     }
 };
 
-}, function(modId) { var map = {"./property/font":1597781799557,"./property/font-weight":1597781799558,"./property/background":1597781799559,"./property/border":1597781799560}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799557, function(require, module, exports) {
+}, function(modId) { var map = {"./property/font":1597942294521,"./property/font-weight":1597942294522,"./property/background":1597942294523,"./property/border":1597942294524}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294521, function(require, module, exports) {
 module.exports = function compressFont(node) {
     var list = node.children;
 
@@ -880,7 +880,7 @@ module.exports = function compressFont(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799558, function(require, module, exports) {
+__DEFINE__(1597942294522, function(require, module, exports) {
 module.exports = function compressFontWeight(node) {
     var value = node.children.head.data;
 
@@ -905,7 +905,7 @@ module.exports = function compressFontWeight(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799559, function(require, module, exports) {
+__DEFINE__(1597942294523, function(require, module, exports) {
 var List = require('css-tree').List;
 
 module.exports = function compressBackground(node) {
@@ -977,7 +977,7 @@ module.exports = function compressBackground(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799560, function(require, module, exports) {
+__DEFINE__(1597942294524, function(require, module, exports) {
 function removeItemAndRedundantWhiteSpace(list, item) {
     var prev = item.prev;
     var next = item.next;
@@ -1011,7 +1011,7 @@ module.exports = function compressBorder(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799561, function(require, module, exports) {
+__DEFINE__(1597942294525, function(require, module, exports) {
 var packNumber = require('./Number').pack;
 var LENGTH_UNIT = {
     // absolute length units
@@ -1069,8 +1069,8 @@ module.exports = function compressDimension(node, item) {
     }
 };
 
-}, function(modId) { var map = {"./Number":1597781799562}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799562, function(require, module, exports) {
+}, function(modId) { var map = {"./Number":1597942294526}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294526, function(require, module, exports) {
 var OMIT_PLUSSIGN = /^(?:\+|(-))?0*(\d*)(?:\.0*|(\.\d*?)0*)?$/;
 var KEEP_PLUSSIGN = /^([\+\-])?0*(\d*)(?:\.0*|(\.\d*?)0*)?$/;
 var unsafeToRemovePlusSignAfter = {
@@ -1112,7 +1112,7 @@ module.exports = function(node, item) {
 module.exports.pack = packNumber;
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799563, function(require, module, exports) {
+__DEFINE__(1597942294527, function(require, module, exports) {
 var lexer = require('css-tree').lexer;
 var packNumber = require('./Number').pack;
 var blacklist = new Set([
@@ -1150,8 +1150,8 @@ module.exports = function compressPercentage(node, item) {
     }
 };
 
-}, function(modId) { var map = {"./Number":1597781799562}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799564, function(require, module, exports) {
+}, function(modId) { var map = {"./Number":1597942294526}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294528, function(require, module, exports) {
 module.exports = function(node) {
     var value = node.value;
 
@@ -1166,7 +1166,7 @@ module.exports = function(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799565, function(require, module, exports) {
+__DEFINE__(1597942294529, function(require, module, exports) {
 var UNICODE = '\\\\[0-9a-f]{1,6}(\\r\\n|[ \\n\\r\\t\\f])?';
 var ESCAPE = '(' + UNICODE + '|\\\\[^\\n\\r\\f0-9a-fA-F])';
 var NONPRINTABLE = '\u0000\u0008\u000b\u000e-\u001f\u007f';
@@ -1202,7 +1202,7 @@ module.exports = function(node) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799566, function(require, module, exports) {
+__DEFINE__(1597942294530, function(require, module, exports) {
 var lexer = require('css-tree').lexer;
 var packNumber = require('./Number').pack;
 
@@ -1714,8 +1714,8 @@ module.exports = {
     compressHex: compressHex
 };
 
-}, function(modId) { var map = {"./Number":1597781799562}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799567, function(require, module, exports) {
+}, function(modId) { var map = {"./Number":1597942294526}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294531, function(require, module, exports) {
 var prepare = require('./prepare/index');
 var mergeAtrule = require('./1-mergeAtrule');
 var initialMergeRuleset = require('./2-initialMergeRuleset');
@@ -1752,8 +1752,8 @@ module.exports = function(ast, options) {
     options.logger('restructRuleset', ast);
 };
 
-}, function(modId) { var map = {"./prepare/index":1597781799568,"./1-mergeAtrule":1597781799572,"./2-initialMergeRuleset":1597781799573,"./3-disjoinRuleset":1597781799575,"./4-restructShorthand":1597781799576,"./6-restructBlock":1597781799577,"./7-mergeRuleset":1597781799578,"./8-restructRuleset":1597781799579}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799568, function(require, module, exports) {
+}, function(modId) { var map = {"./prepare/index":1597942294532,"./1-mergeAtrule":1597942294536,"./2-initialMergeRuleset":1597942294537,"./3-disjoinRuleset":1597942294539,"./4-restructShorthand":1597942294540,"./6-restructBlock":1597942294541,"./7-mergeRuleset":1597942294542,"./8-restructRuleset":1597942294543}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294532, function(require, module, exports) {
 var resolveKeyword = require('css-tree').keyword;
 var walk = require('css-tree').walk;
 var generate = require('css-tree').generate;
@@ -1798,8 +1798,8 @@ module.exports = function prepare(ast, options) {
     };
 };
 
-}, function(modId) { var map = {"./createDeclarationIndexer":1597781799569,"./processSelector":1597781799570}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799569, function(require, module, exports) {
+}, function(modId) { var map = {"./createDeclarationIndexer":1597942294533,"./processSelector":1597942294534}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294533, function(require, module, exports) {
 var generate = require('css-tree').generate;
 
 function Index() {
@@ -1833,7 +1833,7 @@ module.exports = function createDeclarationIndexer() {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799570, function(require, module, exports) {
+__DEFINE__(1597942294534, function(require, module, exports) {
 var generate = require('css-tree').generate;
 var specificity = require('./specificity');
 
@@ -1929,8 +1929,8 @@ module.exports = function freeze(node, usageData) {
     node.pseudoSignature = hasPseudo && Object.keys(pseudos).sort().join(',');
 };
 
-}, function(modId) { var map = {"./specificity":1597781799571}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799571, function(require, module, exports) {
+}, function(modId) { var map = {"./specificity":1597942294535}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294535, function(require, module, exports) {
 module.exports = function specificity(simpleSelector) {
     var A = 0;
     var B = 0;
@@ -1989,7 +1989,7 @@ module.exports = function specificity(simpleSelector) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799572, function(require, module, exports) {
+__DEFINE__(1597942294536, function(require, module, exports) {
 var List = require('css-tree').List;
 var resolveKeyword = require('css-tree').keyword;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -2099,7 +2099,7 @@ module.exports = function rejoinAtrule(ast, options) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799573, function(require, module, exports) {
+__DEFINE__(1597942294537, function(require, module, exports) {
 var walk = require('css-tree').walk;
 var utils = require('./utils');
 
@@ -2148,8 +2148,8 @@ module.exports = function initialMergeRule(ast) {
     });
 };
 
-}, function(modId) { var map = {"./utils":1597781799574}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799574, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294538}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294538, function(require, module, exports) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function isEqualSelectors(a, b) {
@@ -2303,7 +2303,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799575, function(require, module, exports) {
+__DEFINE__(1597942294539, function(require, module, exports) {
 var List = require('css-tree').List;
 var walk = require('css-tree').walk;
 
@@ -2348,7 +2348,7 @@ module.exports = function disjoinRule(ast) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799576, function(require, module, exports) {
+__DEFINE__(1597942294540, function(require, module, exports) {
 var List = require('css-tree').List;
 var generate = require('css-tree').generate;
 var walk = require('css-tree').walk;
@@ -2779,7 +2779,7 @@ module.exports = function restructBlock(ast, indexer) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799577, function(require, module, exports) {
+__DEFINE__(1597942294541, function(require, module, exports) {
 var resolveProperty = require('css-tree').property;
 var resolveKeyword = require('css-tree').keyword;
 var walk = require('css-tree').walk;
@@ -3082,7 +3082,7 @@ module.exports = function restructBlock(ast) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799578, function(require, module, exports) {
+__DEFINE__(1597942294542, function(require, module, exports) {
 var walk = require('css-tree').walk;
 var utils = require('./utils');
 
@@ -3170,8 +3170,8 @@ module.exports = function mergeRule(ast) {
     });
 };
 
-}, function(modId) { var map = {"./utils":1597781799574}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799579, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294538}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294543, function(require, module, exports) {
 var List = require('css-tree').List;
 var walk = require('css-tree').walk;
 var utils = require('./utils');
@@ -3350,8 +3350,8 @@ module.exports = function restructRule(ast) {
     });
 };
 
-}, function(modId) { var map = {"./utils":1597781799574}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799580, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294538}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294544, function(require, module, exports) {
 module.exports = {
   "_from": "csso@^4.0.2",
   "_id": "csso@4.0.3",
@@ -3452,6 +3452,6 @@ module.exports = {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781799540);
+return __REQUIRE__(1597942294504);
 })()
 //# sourceMappingURL=index.js.map

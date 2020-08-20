@@ -4,11 +4,11 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781799285, function(require, module, exports) {
+__DEFINE__(1597942294249, function(require, module, exports) {
 module.exports = require('./lib');
 
-}, function(modId) {var map = {"./lib":1597781799286}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799286, function(require, module, exports) {
+}, function(modId) {var map = {"./lib":1597942294250}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294250, function(require, module, exports) {
 const
     Cmd = require('./cmd'),
     Opt = require('./opt'),
@@ -24,8 +24,8 @@ module.exports = {
     require
 };
 
-}, function(modId) { var map = {"./cmd":1597781799287,"./opt":1597781799289,"./arg":1597781799291,"./shell":1597781799293}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799287, function(require, module, exports) {
+}, function(modId) { var map = {"./cmd":1597942294251,"./opt":1597942294253,"./arg":1597942294255,"./shell":1597942294257}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294251, function(require, module, exports) {
 /* eslint-disable class-methods-use-this */
 
 
@@ -520,8 +520,8 @@ Cmd.prototype.do = function(argv) {
 
 module.exports = Cmd;
 
-}, function(modId) { var map = {"./coaobject":1597781799288,"./opt":1597781799289,"./arg":1597781799291,"./completion":1597781799292}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799288, function(require, module, exports) {
+}, function(modId) { var map = {"./coaobject":1597942294252,"./opt":1597942294253,"./arg":1597942294255,"./completion":1597942294256}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294252, function(require, module, exports) {
 /* eslint-disable class-methods-use-this */
 
 
@@ -625,7 +625,7 @@ module.exports = class CoaObject {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799289, function(require, module, exports) {
+__DEFINE__(1597942294253, function(require, module, exports) {
 
 
 const
@@ -782,8 +782,8 @@ module.exports = class Opt extends CoaParam {
     }
 };
 
-}, function(modId) { var map = {"./coaparam":1597781799290}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799290, function(require, module, exports) {
+}, function(modId) { var map = {"./coaparam":1597942294254}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294254, function(require, module, exports) {
 
 
 const fs = require('fs');
@@ -910,8 +910,8 @@ module.exports = class CoaParam extends CoaObject {
     }
 };
 
-}, function(modId) { var map = {"./coaobject":1597781799288}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799291, function(require, module, exports) {
+}, function(modId) { var map = {"./coaobject":1597942294252}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294255, function(require, module, exports) {
 
 
 const
@@ -971,8 +971,8 @@ module.exports = class Arg extends CoaParam {
     }
 };
 
-}, function(modId) { var map = {"./coaparam":1597781799290}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799292, function(require, module, exports) {
+}, function(modId) { var map = {"./coaparam":1597942294254}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294256, function(require, module, exports) {
 
 
 const constants = require('constants');
@@ -1150,8 +1150,8 @@ function complete(cmd, opts) {
     });
 }
 
-}, function(modId) { var map = {"./shell":1597781799293}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799293, function(require, module, exports) {
+}, function(modId) { var map = {"./shell":1597942294257}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294257, function(require, module, exports) {
 module.exports = { escape, unescape };
 
 function unescape(w) {
@@ -1168,6 +1168,6 @@ function escape(w) {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781799285);
+return __REQUIRE__(1597942294249);
 })()
 //# sourceMappingURL=index.js.map

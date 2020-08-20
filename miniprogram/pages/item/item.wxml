@@ -11,9 +11,14 @@
     </swiper>
   </view>
   <view id="descContainer">
+    <van-goods-action-icon name="wap-home-o"></van-goods-action-icon>
+    <van-goods-action-icon name="service-o"></van-goods-action-icon>
+    <van-goods-action-icon name="cart-o" badge="{{numItems}}"></van-goods-action-icon>
   </view>
 </view>
-<CustomTabBar tabbarHeight="{{tabbarHeight}}"></CustomTabBar>
+
+<CustomTabBar tabbarHeight="{{tabbarHeight}}" numItems = "{{6}}"></CustomTabBar>
+
 
 
 

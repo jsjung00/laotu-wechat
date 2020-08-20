@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "van-goods-action-icon" : "../../miniprogram_npm/vant-weapp/goods-action-icon",
+    "van-goods-action-button" : "../../miniprogram_npm/vant-weapp/goods-action-button"
+  }
 }

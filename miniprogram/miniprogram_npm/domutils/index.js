@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781799586, function(require, module, exports) {
+__DEFINE__(1597942294550, function(require, module, exports) {
 var DomUtils = module.exports;
 
 [
@@ -20,8 +20,8 @@ var DomUtils = module.exports;
 	});
 });
 
-}, function(modId) {var map = {"./lib/stringify":1597781799587,"./lib/traversal":1597781799588,"./lib/manipulation":1597781799589,"./lib/querying":1597781799590,"./lib/legacy":1597781799591,"./lib/helpers":1597781799592}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799587, function(require, module, exports) {
+}, function(modId) {var map = {"./lib/stringify":1597942294551,"./lib/traversal":1597942294552,"./lib/manipulation":1597942294553,"./lib/querying":1597942294554,"./lib/legacy":1597942294555,"./lib/helpers":1597942294556}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294551, function(require, module, exports) {
 var ElementType = require("domelementtype"),
     getOuterHTML = require("dom-serializer"),
     isTag = ElementType.isTag;
@@ -47,7 +47,7 @@ function getText(elem){
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799588, function(require, module, exports) {
+__DEFINE__(1597942294552, function(require, module, exports) {
 var getChildren = exports.getChildren = function(elem){
 	return elem.children;
 };
@@ -74,7 +74,7 @@ exports.getName = function(elem){
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799589, function(require, module, exports) {
+__DEFINE__(1597942294553, function(require, module, exports) {
 exports.removeElement = function(elem){
 	if(elem.prev) elem.prev.next = elem.next;
 	if(elem.next) elem.next.prev = elem.prev;
@@ -154,7 +154,7 @@ exports.prepend = function(elem, prev){
 
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799590, function(require, module, exports) {
+__DEFINE__(1597942294554, function(require, module, exports) {
 var isTag = require("domelementtype").isTag;
 
 module.exports = {
@@ -252,7 +252,7 @@ function findAll(test, rootElems){
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799591, function(require, module, exports) {
+__DEFINE__(1597942294555, function(require, module, exports) {
 var ElementType = require("domelementtype");
 var isTag = exports.isTag = ElementType.isTag;
 
@@ -342,7 +342,7 @@ exports.getElementsByTagType = function(type, element, recurse, limit){
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799592, function(require, module, exports) {
+__DEFINE__(1597942294556, function(require, module, exports) {
 // removeSubsets
 // Given an array of nodes, remove any member that is contained by another.
 exports.removeSubsets = function(nodes) {
@@ -486,6 +486,6 @@ exports.uniqueSort = function(nodes) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781799586);
+return __REQUIRE__(1597942294550);
 })()
 //# sourceMappingURL=index.js.map

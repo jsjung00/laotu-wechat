@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781799300, function(require, module, exports) {
+__DEFINE__(1597942294264, function(require, module, exports) {
 
 
 module.exports = CSSselect;
@@ -100,8 +100,8 @@ CSSselect.iterate = selectAll;
 CSSselect._compileUnsafe = compileUnsafe;
 CSSselect._compileToken = compileRaw.compileToken;
 
-}, function(modId) {var map = {"./lib/compile.js":1597781799301}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799301, function(require, module, exports) {
+}, function(modId) {var map = {"./lib/compile.js":1597942294265}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294265, function(require, module, exports) {
 /*
 	compiles a selector to an executable function
 */
@@ -322,8 +322,8 @@ compile.compileToken = compileToken;
 compile.compileUnsafe = compileUnsafe;
 compile.Pseudos = Pseudos;
 
-}, function(modId) { var map = {"./sort.js":1597781799302,"./procedure.json":1597781799303,"./general.js":1597781799304,"./pseudos.js":1597781799306}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799302, function(require, module, exports) {
+}, function(modId) { var map = {"./sort.js":1597942294266,"./procedure.json":1597942294267,"./general.js":1597942294268,"./pseudos.js":1597942294270}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294266, function(require, module, exports) {
 module.exports = sortByProcedure;
 
 /*
@@ -405,8 +405,8 @@ function getProcedure(token) {
     return proc;
 }
 
-}, function(modId) { var map = {"./procedure.json":1597781799303}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799303, function(require, module, exports) {
+}, function(modId) { var map = {"./procedure.json":1597942294267}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294267, function(require, module, exports) {
 module.exports = {
 	"universal": 50,
 	"tag": 30,
@@ -420,7 +420,7 @@ module.exports = {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799304, function(require, module, exports) {
+__DEFINE__(1597942294268, function(require, module, exports) {
 var attributes = require("./attributes.js");
 var Pseudos = require("./pseudos");
 
@@ -539,8 +539,8 @@ module.exports = {
     }
 };
 
-}, function(modId) { var map = {"./attributes.js":1597781799305,"./pseudos":1597781799306}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799305, function(require, module, exports) {
+}, function(modId) { var map = {"./attributes.js":1597942294269,"./pseudos":1597942294270}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294269, function(require, module, exports) {
 var falseFunc = require("boolbase").falseFunc;
 
 //https://github.com/slevithan/XRegExp/blob/master/src/xregexp.js#L469
@@ -733,7 +733,7 @@ module.exports = {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799306, function(require, module, exports) {
+__DEFINE__(1597942294270, function(require, module, exports) {
 /*
 	pseudo selectors
 
@@ -1188,7 +1188,7 @@ module.exports = {
     pseudos: pseudos
 };
 
-}, function(modId) { var map = {"./attributes.js":1597781799305}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781799300);
+}, function(modId) { var map = {"./attributes.js":1597942294269}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1597942294264);
 })()
 //# sourceMappingURL=index.js.map

@@ -4,13 +4,13 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1597781799257, function(require, module, exports) {
+__DEFINE__(1597942294221, function(require, module, exports) {
 
 
 module.exports = require('./lib/argparse');
 
-}, function(modId) {var map = {"./lib/argparse":1597781799258}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799258, function(require, module, exports) {
+}, function(modId) {var map = {"./lib/argparse":1597942294222}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294222, function(require, module, exports) {
 
 
 module.exports.ArgumentParser = require('./argument_parser.js');
@@ -26,8 +26,8 @@ module.exports.RawDescriptionHelpFormatter =
 module.exports.RawTextHelpFormatter =
   require('./help/added_formatters.js').RawTextHelpFormatter;
 
-}, function(modId) { var map = {"./argument_parser.js":1597781799259,"./namespace":1597781799278,"./action":1597781799264,"./help/formatter.js":1597781799277,"./const.js":1597781799260,"./help/added_formatters.js":1597781799279}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799259, function(require, module, exports) {
+}, function(modId) { var map = {"./argument_parser.js":1597942294223,"./namespace":1597942294242,"./action":1597942294228,"./help/formatter.js":1597942294241,"./const.js":1597942294224,"./help/added_formatters.js":1597942294243}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294223, function(require, module, exports) {
 /**
  * class ArgumentParser
  *
@@ -1190,8 +1190,8 @@ ArgumentParser.prototype.error = function (err) {
 
 module.exports = ArgumentParser;
 
-}, function(modId) { var map = {"./const":1597781799260,"./utils":1597781799261,"./action_container":1597781799262,"./argument/error":1597781799274,"./help/formatter":1597781799277,"./namespace":1597781799278}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799260, function(require, module, exports) {
+}, function(modId) { var map = {"./const":1597942294224,"./utils":1597942294225,"./action_container":1597942294226,"./argument/error":1597942294238,"./help/formatter":1597942294241,"./namespace":1597942294242}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294224, function(require, module, exports) {
 //
 // Constants
 //
@@ -1215,7 +1215,7 @@ module.exports.REMAINDER = '...';
 module.exports._UNRECOGNIZED_ARGS_ATTR = '_unrecognized_args';
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799261, function(require, module, exports) {
+__DEFINE__(1597942294225, function(require, module, exports) {
 
 
 exports.repeat = function (str, num) {
@@ -1275,7 +1275,7 @@ exports.trimEnd = function (str) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799262, function(require, module, exports) {
+__DEFINE__(1597942294226, function(require, module, exports) {
 /** internal
  * class ActionContainer
  *
@@ -1759,8 +1759,8 @@ ActionContainer.prototype._handleConflictResolve = function (action, conflOption
   });
 };
 
-}, function(modId) { var map = {"./const":1597781799260,"./utils":1597781799261,"./action/help":1597781799263,"./action/append":1597781799265,"./action/append/constant":1597781799266,"./action/count":1597781799267,"./action/store":1597781799268,"./action/store/constant":1597781799269,"./action/store/true":1597781799270,"./action/store/false":1597781799271,"./action/version":1597781799272,"./action/subparsers":1597781799273,"./argument/error":1597781799274,"./argument/group":1597781799275,"./argument/exclusive":1597781799276}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799263, function(require, module, exports) {
+}, function(modId) { var map = {"./const":1597942294224,"./utils":1597942294225,"./action/help":1597942294227,"./action/append":1597942294229,"./action/append/constant":1597942294230,"./action/count":1597942294231,"./action/store":1597942294232,"./action/store/constant":1597942294233,"./action/store/true":1597942294234,"./action/store/false":1597942294235,"./action/version":1597942294236,"./action/subparsers":1597942294237,"./argument/error":1597942294238,"./argument/group":1597942294239,"./argument/exclusive":1597942294240}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294227, function(require, module, exports) {
 /*:nodoc:*
  * class ActionHelp
  *
@@ -1809,8 +1809,8 @@ ActionHelp.prototype.call = function (parser) {
   parser.exit();
 };
 
-}, function(modId) { var map = {"../action":1597781799264,"../const":1597781799260}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799264, function(require, module, exports) {
+}, function(modId) { var map = {"../action":1597942294228,"../const":1597942294224}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294228, function(require, module, exports) {
 /**
  * class Action
  *
@@ -1958,8 +1958,8 @@ Action.prototype.call = function () {
   throw new Error('.call() not defined');// Not Implemented error
 };
 
-}, function(modId) { var map = {"./const":1597781799260}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799265, function(require, module, exports) {
+}, function(modId) { var map = {"./const":1597942294224}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294229, function(require, module, exports) {
 /*:nodoc:*
  * class ActionAppend
  *
@@ -2014,8 +2014,8 @@ ActionAppend.prototype.call = function (parser, namespace, values) {
   namespace.set(this.dest, items);
 };
 
-}, function(modId) { var map = {"../action":1597781799264,"../const":1597781799260}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799266, function(require, module, exports) {
+}, function(modId) { var map = {"../action":1597942294228,"../const":1597942294224}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294230, function(require, module, exports) {
 /*:nodoc:*
  * class ActionAppendConstant
  *
@@ -2064,8 +2064,8 @@ ActionAppendConstant.prototype.call = function (parser, namespace) {
   namespace.set(this.dest, items);
 };
 
-}, function(modId) { var map = {"../../action":1597781799264}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799267, function(require, module, exports) {
+}, function(modId) { var map = {"../../action":1597942294228}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294231, function(require, module, exports) {
 /*:nodoc:*
  * class ActionCount
  *
@@ -2107,8 +2107,8 @@ ActionCount.prototype.call = function (parser, namespace) {
   namespace.set(this.dest, (namespace[this.dest] || 0) + 1);
 };
 
-}, function(modId) { var map = {"../action":1597781799264}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799268, function(require, module, exports) {
+}, function(modId) { var map = {"../action":1597942294228}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294232, function(require, module, exports) {
 /*:nodoc:*
  * class ActionStore
  *
@@ -2160,8 +2160,8 @@ ActionStore.prototype.call = function (parser, namespace, values) {
   namespace.set(this.dest, values);
 };
 
-}, function(modId) { var map = {"../action":1597781799264,"../const":1597781799260}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799269, function(require, module, exports) {
+}, function(modId) { var map = {"../action":1597942294228,"../const":1597942294224}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294233, function(require, module, exports) {
 /*:nodoc:*
  * class ActionStoreConstant
  *
@@ -2206,8 +2206,8 @@ ActionStoreConstant.prototype.call = function (parser, namespace) {
   namespace.set(this.dest, this.constant);
 };
 
-}, function(modId) { var map = {"../../action":1597781799264}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799270, function(require, module, exports) {
+}, function(modId) { var map = {"../../action":1597942294228}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294234, function(require, module, exports) {
 /*:nodoc:*
  * class ActionStoreTrue
  *
@@ -2235,8 +2235,8 @@ var ActionStoreTrue = module.exports = function ActionStoreTrue(options) {
 };
 util.inherits(ActionStoreTrue, ActionStoreConstant);
 
-}, function(modId) { var map = {"./constant":1597781799269}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799271, function(require, module, exports) {
+}, function(modId) { var map = {"./constant":1597942294233}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294235, function(require, module, exports) {
 /*:nodoc:*
  * class ActionStoreFalse
  *
@@ -2265,8 +2265,8 @@ var ActionStoreFalse = module.exports = function ActionStoreFalse(options) {
 };
 util.inherits(ActionStoreFalse, ActionStoreConstant);
 
-}, function(modId) { var map = {"./constant":1597781799269}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799272, function(require, module, exports) {
+}, function(modId) { var map = {"./constant":1597942294233}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294236, function(require, module, exports) {
 /*:nodoc:*
  * class ActionVersion
  *
@@ -2315,8 +2315,8 @@ ActionVersion.prototype.call = function (parser) {
   parser.exit(0, formatter.formatHelp());
 };
 
-}, function(modId) { var map = {"../action":1597781799264,"../const":1597781799260}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799273, function(require, module, exports) {
+}, function(modId) { var map = {"../action":1597942294228,"../const":1597942294224}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294237, function(require, module, exports) {
 /** internal
  * class ActionSubparsers
  *
@@ -2467,8 +2467,8 @@ ActionSubparsers.prototype.call = function (parser, namespace, values) {
 
 module.exports = ActionSubparsers;
 
-}, function(modId) { var map = {"../action":1597781799264,"../const":1597781799260,"../argument/error":1597781799274}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799274, function(require, module, exports) {
+}, function(modId) { var map = {"../action":1597942294228,"../const":1597942294224,"../argument/error":1597942294238}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294238, function(require, module, exports) {
 
 
 
@@ -2521,7 +2521,7 @@ module.exports = function (argument, message) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799275, function(require, module, exports) {
+__DEFINE__(1597942294239, function(require, module, exports) {
 /** internal
  * class ArgumentGroup
  *
@@ -2598,8 +2598,8 @@ ArgumentGroup.prototype._removeAction = function (action) {
 };
 
 
-}, function(modId) { var map = {"../action_container":1597781799262}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799276, function(require, module, exports) {
+}, function(modId) { var map = {"../action_container":1597942294226}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294240, function(require, module, exports) {
 /** internal
  * class MutuallyExclusiveGroup
  *
@@ -2655,8 +2655,8 @@ MutuallyExclusiveGroup.prototype._removeAction = function (action) {
 };
 
 
-}, function(modId) { var map = {"./group":1597781799275}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799277, function(require, module, exports) {
+}, function(modId) { var map = {"./group":1597942294239}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294241, function(require, module, exports) {
 /**
  * class HelpFormatter
  *
@@ -3453,8 +3453,8 @@ HelpFormatter.prototype._getHelpString = function (action) {
   return action.help;
 };
 
-}, function(modId) { var map = {"../const":1597781799260,"../utils":1597781799261}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799278, function(require, module, exports) {
+}, function(modId) { var map = {"../const":1597942294224,"../utils":1597942294225}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294242, function(require, module, exports) {
 /**
  * class Namespace
  *
@@ -3532,8 +3532,8 @@ Namespace.prototype.unset = function (key, defaultValue) {
   return defaultValue;
 };
 
-}, function(modId) { var map = {"./utils":1597781799261}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1597781799279, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1597942294225}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1597942294243, function(require, module, exports) {
 
 
 var util    = require('util');
@@ -3622,7 +3622,7 @@ RawTextHelpFormatter.prototype._splitLines = function (text) {
 
 module.exports.RawTextHelpFormatter = RawTextHelpFormatter;
 
-}, function(modId) { var map = {"../const":1597781799260,"../utils":1597781799261,"./formatter.js":1597781799277}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1597781799257);
+}, function(modId) { var map = {"../const":1597942294224,"../utils":1597942294225,"./formatter.js":1597942294241}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1597942294221);
 })()
 //# sourceMappingURL=index.js.map

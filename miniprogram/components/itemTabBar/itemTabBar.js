@@ -6,6 +6,10 @@ Component({
   properties: {
     tabbarHeight: {
       type: Number
+    },
+    numItems : {
+      //number of items in the shopping cart
+      type: Number
     }
   },
 

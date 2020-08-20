@@ -1,4 +1,6 @@
 /* components/itemTabBar.wxss */
 .tabbarContainer{
   background-color: lime;
+  padding: 3rpx 5rpx 3rpx 5rpx;
 }
+
