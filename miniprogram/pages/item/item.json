@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "CustomNavBar" : "../../components/navbar/navbar",
-    "CustomTabBar" : "../../components/itemTabBar/itemTabBar",
     "van-goods-action-icon" : "../../miniprogram_npm/vant-weapp/goods-action-icon"
   }
 }
