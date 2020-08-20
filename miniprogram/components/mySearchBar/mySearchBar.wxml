@@ -14,8 +14,10 @@
   <view wx:if="{{cancel && searchState}}" class="weui-search-bar__cancel-btn" bindtap="hideInput">{{cancelText}}</view>
 </view>
 
-<mp-cells ext-class=" {{'searchbar-result ' + extClass}}" wx:if="{{searchState && result.length > 0}}">
-  <mp-cell class="result" bindtap="selectResult" body-class="weui-cell_primary" data-index="{{index}}" wx:for="{{result}}" wx:key="index" hover>
-      <view>{{item.text}}</view>
-  </mp-cell>
-</mp-cells>
+<view class="results" wx:if="{{searchState && result.length > 0}}">
+  <view class="result" bindtap="selectResult" data-index="{{index}}" wx:for="{{result}}" wx:key="index">
+    <!--DEV note: need to change the CSS-->
+    <icon class="smallIcon" type="search" size="14"></icon>
+    <view>{{item.text}}</view>
+  </view>
+</view>

@@ -8,7 +8,7 @@
     "pages/product/product",
     "pages/searchPage/searchPage",
     "pages/wePay/wePay",
-    "pages/item"
+    "pages/item/item"
   ],
   "window": {
     "navigationStyle": "custom",

@@ -285,16 +285,17 @@ Component({
     // @ts-ignore
     selectResult(e) {
       console.log("selectResult called");
-      //Pass the ID and the type of the item
       const {
         index
       } = e.currentTarget.dataset;
       const item = this.data.result[index];
       const type = this.data.type;
-      this.triggerEvent('selectresult', {
+      //Navigate to item page and pass the itemID and the type
+
+      /*this.triggerEvent('selectresult', {
         item,
         type
-      });
+      });*/
     },
     tapped(){
       console.log("tapped called");

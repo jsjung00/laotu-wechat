@@ -45,6 +45,14 @@
   border-color: lightgray;
   border-width: 1px;
 }
+.noCapsule{
+  background-color: white;
+  height: 30px;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
 
 .icon-container{
   width: 50%;

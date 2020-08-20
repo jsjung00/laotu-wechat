@@ -2,6 +2,8 @@
     "usingComponents": {
         "CustomNav" : "../../components/navbar/navbar",
         "CustomTabs" : "../../components/tabs/tabs",
-        "NavTab" : "../../components/navtab/navtab"
+        "NavTab" : "../../components/navtab/navtab",
+        "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell",
+        "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells"
     }
 }

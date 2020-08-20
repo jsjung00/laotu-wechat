@@ -1,0 +1,16 @@
+<CustomNavBar isBack ="{{true}}"></CustomNavBar>
+<view id="body">
+  <!-- Add the sliding image component-->
+  <view id="swiperContainer">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}">
+      <block wx:for="{{itemImages}}" wx:key="*this" wx:for-item="imgSrc">
+        <swiper-item>
+          <image src="{{imgSrc}}" mode="aspectFit"></image>    
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+
+

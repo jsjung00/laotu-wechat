@@ -1,7 +1,8 @@
 <!-- I need to have three cases 
     1) I have both left and home
     2) I have only home
-    3) I have none-->
+    3) I only have back
+    4) I have none-->
 
 <custom-component>
   <view class="top-buffer" style="height: {{statusHeight}}px"></view>
@@ -25,6 +26,14 @@
         <view class="icon-container">
           <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
             <image mode="aspectFit" src=".././../img/home.png"></image>  
+          </navigator>
+        </view>
+      </view>
+      <!--If there is only back, show no capsule border-->
+      <view wx:elif="{{isBack}}" class="noCapsule" style="width:{{capsuleHalfWidth}}px">
+        <view class="icon-container">
+          <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+            <image mode="aspectFit" src=".././../img/left-arrow.png"></image>  
           </navigator>
         </view>
       </view>

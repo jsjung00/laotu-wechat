@@ -1,1 +1,20 @@
-.weui-search-bar__label text{display:inline-block;font-size:14px;vertical-align:middle}
+.weui-search-bar__label text{
+  display:inline-block;
+  font-size:14px;
+  vertical-align:middle
+}
+
+/* Going to have to make the CSS responsive */
+.result{
+  height: 3em;
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+  padding-left: 1em; 
+  border-bottom: 1px solid #D3D3D3;
+  font-size: 14px;
+}
+
+.smallIcon{
+  margin-right: 5px;
+}

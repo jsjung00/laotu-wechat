@@ -5,6 +5,12 @@ Page({
    * Page initial data
    */
   data: {
+    indicatorDots: true,
+    autoplay: false,
+    interval: 2000,
+    duration: 500,
+    vertical: false,
+    itemImages : [], //array of imgSrcs which are strings
 
   },
 
@@ -12,6 +18,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    //Get the itemID and the type
+    
+    //Upload the item images
+
 
   },
 

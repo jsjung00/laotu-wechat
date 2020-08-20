@@ -1,0 +1,15 @@
+/* miniprogram/pages/item.wxss */
+page{
+  height: 100%;
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+}
+#body{
+  /* Body will take up the rest of the space apart from the navbar and tabbar */
+  flex-grow: 1;
+  background-color: lightpink;
+  display: flex;
+  flex-direction: column;
+  width: 750rpx;
+}

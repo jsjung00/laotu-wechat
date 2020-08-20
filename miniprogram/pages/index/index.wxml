@@ -64,10 +64,10 @@
             </view>
           </view>
         </navigator>
-        <navigator class= "tr_container" url = "../coupons/coupons">
+        <navigator class= "tr_container" url = "../item/item">
           <view class = "tr">
             <view id = "faq-container" class = "table_text">
-              <text id="faq" style="font-size : {{font_sizes.faq}}px">FAQ</text>
+              <text id="faq" style="font-size : {{font_sizes.faq}}px">Item Page</text>
             </view>
             <view class = "next_icon">
               <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
@@ -84,7 +84,7 @@
             </view>
           </view>
         </navigator>
-        <navigator class= "tr_container" url = "../coupons/coupons">
+        <navigator class= "tr_container" url = "../notification/notification">
           <view class = "tr">
             <view id="support-container" class = "table_text">
               <text id="support" style="font-size : {{font_sizes.support}}px">Tech Help</text>
