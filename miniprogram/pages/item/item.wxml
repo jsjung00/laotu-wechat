@@ -10,7 +10,10 @@
       </block>
     </swiper>
   </view>
+  <view id="descContainer">
+  </view>
 </view>
+<CustomTabBar tabbarHeight="{{tabbarHeight}}"></CustomTabBar>
 
 
 

@@ -4,7 +4,9 @@ Component({
    * Component properties
    */
   properties: {
-
+    tabbarHeight: {
+      type: Number
+    }
   },
 
   /**
@@ -12,6 +14,12 @@ Component({
    */
   data: {
 
+  },
+  /* Component lifecycle */
+  lifetimes: {
+    ready: function(){
+      
+    }
   },
 
   /**

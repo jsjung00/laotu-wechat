@@ -78,7 +78,10 @@ App({
         //Upload screen height and window height
         let screenHeight = result.screenHeight;
         this.globalData.screenHeight = screenHeight;
+        let windowHeight = result.windowHeight;
         this.globalData.windowHeight = result.windowHeight;
+        //Upload the tabbarHeight
+        this.globalData.tabbarHeight = screenHeight - windowHeight;
       },
     })
   },

@@ -1,4 +1,6 @@
 // miniprogram/pages/item.js
+const app = getApp();
+
 Page({
 
   /**
@@ -11,15 +13,21 @@ Page({
     duration: 500,
     vertical: false,
     itemImages : [], //array of imgSrcs which are strings
-
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    //Set the tabbar Height to pass into the CustomTabBar component
+    let tabbarHeight = app.globalData.tabbarHeight;
+    this.setData({
+      tabbarHeight
+    });
+    console.log(this.data.tabbarHeight);
+
     //Get the itemID and the type
-    
+
     //Upload the item images
 
 

@@ -44,6 +44,7 @@ Page({
 
     var that = this;
     that.sizes();
+
     //NOTE: I am not going to use fitText because it is too slow. Rather, I will hard code the values.
     /*
     //wait for sizes to update and userInfo to be uploaded

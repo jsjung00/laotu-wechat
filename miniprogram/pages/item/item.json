@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "CustomNavBar" : "../../components/navbar/navbar"
+    "CustomNavBar" : "../../components/navbar/navbar",
+    "CustomTabBar" : "../../components/itemTabBar/itemTabBar"
   }
 }

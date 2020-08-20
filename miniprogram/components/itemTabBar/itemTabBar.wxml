@@ -1,2 +1,2 @@
 <!--components/itemTabBar.wxml-->
-<text>components/itemTabBar.wxml</text>
+<view class="tabbarContainer" style="height: {{tabbarHeight}}px; width: 750rpx"></view>
