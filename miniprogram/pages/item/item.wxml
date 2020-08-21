@@ -11,6 +11,7 @@
     </swiper>
   </view>
   <view id="descContainer">
+    <vant-goods-action-icon icon="chat-o"></vant-goods-action-icon>
   </view>
 </view>
 <!--<CustomTabBar tabbarHeight="{{tabbarHeight}}" numItems = "{{6}}"></CustomTabBar>-->

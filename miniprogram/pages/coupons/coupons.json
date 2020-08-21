@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "CustomNav" : "../../components/navbar/navbar",
-    "mp-tabs" : "@miniprogram-component-plus/tabs"
+    "mp-tabs" : "@miniprogram-component-plus/tabs",
+    "vant-goods-action-icon": "../../dist/goods-action-icon"
   },
   "window": {
     "navigationStyle" : "custom"
