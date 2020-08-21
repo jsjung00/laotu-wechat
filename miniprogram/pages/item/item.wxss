@@ -1,3 +1,5 @@
+/*
+* Consider making the swiper container square and having a policy where the uploaded images must be square
 /* miniprogram/pages/item.wxss */
 page{
   height: 100%;

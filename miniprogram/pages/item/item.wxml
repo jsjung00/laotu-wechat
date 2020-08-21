@@ -2,18 +2,15 @@
 <view id="body">
   <!-- Add the sliding image component-->
   <view id="swiperContainer">
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height: 100%; width: 100%">
       <block wx:for="{{itemImages}}" wx:key="*this" wx:for-item="imgSrc">
         <swiper-item>
-          <image src="{{imgSrc}}" mode="aspectFit"></image>    
+          <image src="{{imgSrc}}" mode="aspectFill" style="width: 100%; height: 100%;"></image>    
         </swiper-item>
       </block>
     </swiper>
   </view>
   <view id="descContainer">
-    <van-goods-action-icon name="wap-home-o"></van-goods-action-icon>
-    <van-goods-action-icon name="service-o"></van-goods-action-icon>
-    <van-goods-action-icon name="cart-o" badge="{{numItems}}"></van-goods-action-icon>
   </view>
 </view>
 <!--<CustomTabBar tabbarHeight="{{tabbarHeight}}" numItems = "{{6}}"></CustomTabBar>-->

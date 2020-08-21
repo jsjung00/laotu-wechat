@@ -32,11 +32,19 @@ Page({
   selectResult: function(e){
     //Function should be called when the user clicks on the searchbar in the previous page to open this page.
     //Receive the list of search result strings and the search function the search bar can use to choose results.
-  
+    console.log("Search Page selectresult called");
     let itemID = e.detail.item.id;
     let type = this.data.type;
-    //Use ID to navigate to a specific page
-    console.log("[DEV] Navigate to: " + itemID);
-
+    
+    //Navigate to the Item Page and send type and itemID
+    wx.navigateTo({
+      url: '../item/item',
+      success: function(res){
+        res.eventChannel.emit('acceptDataFromOpenerPage', {type: type, id: itemID});
+      },
+      fail: function(err){
+        console.error(err);
+      }
+    });
   }
 })

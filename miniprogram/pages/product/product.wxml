@@ -1,6 +1,7 @@
 <!--miniprogram/product.wxml
     Note: mp-searchbar component uses miniprogram_npm folder since node_modules doesn't work for some reason-->
 <CustomNav isHome="true" title="Products"/>
+<!-- NOTE: type parameter should be either 'product' or 'event'-->
 <MySearchBar type="product" isNavigator="{{true}}" bindselectresult="selectResult" searchObjectsArray="{{productArray}}"></MySearchBar>
 <view id="body_container">
   <view id = "vertical_tabs_container">

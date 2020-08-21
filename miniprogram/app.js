@@ -13,6 +13,14 @@ App({
         traceUser: true,
       })
     }
+
+    //Upload fonts for Vant
+    wx.loadFontFace({
+      family: 'someFamily',
+      source: 'url("https://img.yzcdn.cn/vant/vant-icon-d3825a.woff2")',
+      success: console.log,
+      fail: console.error
+    });
     
 
     //upload the capsle button information to help build nav bar

@@ -289,13 +289,11 @@ Component({
         index
       } = e.currentTarget.dataset;
       const item = this.data.result[index];
-      const type = this.data.type;
-      //Navigate to item page and pass the itemID and the type
+      //Navigate to item page and pass the itemID
 
-      /*this.triggerEvent('selectresult', {
-        item,
-        type
-      });*/
+      this.triggerEvent('selectresult', {
+        item
+      });
     },
     tapped(){
       console.log("tapped called");
