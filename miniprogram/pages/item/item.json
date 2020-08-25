@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "CustomNavBar" : "../../components/navbar/navbar",
-    "vant-goods-action-icon" : "../../vantDist/goods-action-icon"
+    "vant-goods-action-icon" : "../../vantDist/goods-action-icon",
+    "CustomTabBar" : "../../components/itemTabBar/itemTabBar"
   }
 }

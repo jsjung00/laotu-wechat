@@ -95,6 +95,8 @@ function VantComponent(vantOptions = {}) {
   options.options = {
     multipleSlots: true,
     addGlobalClass: true,
+    /*Changed the style Isolation so the page hosting the component can affect the style */
+    styleIsolation: 'apply-shared'
   };
   Component(options);
 }

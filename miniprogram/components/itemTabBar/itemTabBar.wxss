@@ -1,6 +1,55 @@
+/*
+NOTE: Not sure how to really customize the icon. Simply changed the icon size by changing the font-size.
+iconsContainer is hardCoded- change when iconSize or number of icons changes.
+*/
+.iconCustom{
+  font-size: 30px !important;
+}
+
 /* components/itemTabBar.wxss */
 .tabbarContainer{
   background-color: lime;
-  padding: 3rpx 5rpx 3rpx 5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.insidePaddingContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: thistle;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+/* HardCode: each icon width is 50px; 2px space for 3 icons means 8 + (3*50) = 158px width */
+.iconsContainer{
+  height: 50px;
+  width: 158px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonsContainer{
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 100%;
+  flex-grow: 1;
+  align-items: center;
+  background-color: teal;
+}
+.vantButton{
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-grow: 1;
+  background-color: white;
+}
+
+
+
+
 

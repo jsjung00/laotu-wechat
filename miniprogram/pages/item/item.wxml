@@ -1,3 +1,6 @@
+<import src="../itemTabBarTemp/itemTabBarTemp.wxml"></import>
+<import src="../template/template.wxml"></import>
+
 <CustomNavBar isBack ="{{true}}"></CustomNavBar>
 <view id="body">
   <!-- Add the sliding image component-->
@@ -11,10 +14,10 @@
     </swiper>
   </view>
   <view id="descContainer">
-    <vant-goods-action-icon icon="chat-o"></vant-goods-action-icon>
+    <template is="itemTabBarTemp"></template>
   </view>
 </view>
-<!--<CustomTabBar tabbarHeight="{{tabbarHeight}}" numItems = "{{6}}"></CustomTabBar>-->
+<CustomTabBar tabbarHeight="{{tabbarHeight}}"></CustomTabBar>
 
 
 

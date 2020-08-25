@@ -16,6 +16,8 @@ page{
   width: 750rpx;
 }
 
+@import "../template/template.wxss";
+
 #swiperContainer{
   /*Have the swiper be 40% of the body */
   height: 40%;
@@ -28,4 +30,9 @@ page{
   flex-grow: 1;
   width: 100%;
   background-color: white;
+}
+
+CustomTabBar{
+  /* position it at the very bottom */
+  margin-top: auto;
 }

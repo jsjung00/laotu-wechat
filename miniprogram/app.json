@@ -8,7 +8,9 @@
     "pages/product/product",
     "pages/searchPage/searchPage",
     "pages/wePay/wePay",
-    "pages/item/item"
+    "pages/item/item",
+    "pages/template/template",
+    "pages/itemTabBarTemp/itemTabBarTemp"
   ],
   "window": {
     "navigationStyle": "custom",

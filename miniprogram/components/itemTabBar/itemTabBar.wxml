@@ -1,22 +1,17 @@
 <!--components/itemTabBar.wxml-->
 <view class="tabbarContainer" style="height: {{tabbarHeight}}px; width: 750rpx">
-  <van-goods-action-icon name="wap-home-o"></van-goods-action-icon>
-  <van-goods-action-icon name="service-o"></van-goods-action-icon>
-  <van-goods-action-icon name="cart-o" badge="{{numItems}}"></van-goods-action-icon>
-  
-  
-  
-  
-  
-  <!--<view class="tabIcon" style="height: {{tabbarHeight}}px; width: {{tabbarHeight}}px">
-    <image mode="aspectFit" style="height: 100%; width: 100%;" src="../../img/home.png"></image>
+  <!--Contains every element- used so tabbarContainer can have a suitable padding-->
+  <view class="insidePaddingContainer">
+    <view class="iconsContainer">
+      <vant-goods-action-icon icon="wap-home-o" text="Home" icon-class="iconCustom"></vant-goods-action-icon>
+      <vant-goods-action-icon icon="service-o" text="Help" icon-class="iconCustom"></vant-goods-action-icon>
+      <vant-goods-action-icon icon="cart-o" text="My Cart" icon-class="iconCustom"></vant-goods-action-icon>
+    </view>
+    <view class="buttonsContainer">
+      <vant-goods-action-button class="vantButton" custom-class="vantButton" text="Add to Cart"></vant-goods-action-button>
+      <vant-goods-action-button class="vantButton" text="Buy Now"></vant-goods-action-button>
+    </view>
+   
   </view>
-  <view class="tabIcon">
-    <image mode="aspectFit" style="height: 100%; width: 100%;" src="../../"></image>
-  </view>
-  <view class="tabIcon">
-    <image mode="aspectFit" style="height: 100%; width: 100%;" src=""></image>
-  </view>
-  <button class="tabButton cart" type="primary"></button>
-  <button class="tabButton buy" type="primary"></button>-->
+  
 </view>
