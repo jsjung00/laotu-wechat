@@ -24,15 +24,55 @@ page{
   width: 100%;
   background-color: lightsteelblue;
 }
-
-#descContainer{
-  /*The description will fill the rest of the body */
+#customDescContainer{
   flex-grow: 1;
+  width: 750rpx;
+  display: flex;
+  background-color: lightgoldenrodyellow;
+}
+
+.descContainer{
+  /* Inherit the height of customDescContainer */
+  height: 100%;
   width: 100%;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: darkgray;
+}
+
+.priceCard{
+  /* Has two block elements- the title row and the main row */
+  display: block;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  background-color: crimson;
+  min-height: 200px;
+  height: 40%;
+  width: 100%; 
+}
+#titleRow{
+  display: flex;
+
+}
+.mp-icon-hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
+.descBox {
+  background-color: darkgoldenrod;
+  width: 100%;
+  /* Take up the rest of the description container height */
+  flex-grow: 1;
+}
+
+#descPriceRow{
+  display: flex;
+  padding: 3rpx 3rpx 3rpx 3rpx;
+
 }
 
 CustomTabBar{
   /* position it at the very bottom */
   margin-top: auto;
 }
+

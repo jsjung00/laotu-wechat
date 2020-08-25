@@ -1,0 +1,21 @@
+/* components/itemDesc.wxss */
+.descContainer{
+  background-color: orange;
+  display: flex;
+  flex-wrap: wrap;
+  /* This is a flex item from the item Page */
+  flex-grow: 1;
+}
+
+.descCard{
+  /* take up the rest of the space*/
+  flex-grow: 1;
+  background-color: bisque;
+  padding: 5rpx 5rpx 5rpx 5rpx;
+  
+}
+
+.descBox{
+  min-height: 20%;
+  background-color: aliceblue;  
+}

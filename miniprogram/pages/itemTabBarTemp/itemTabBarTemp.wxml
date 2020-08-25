@@ -1,0 +1,6 @@
+<!--miniprogram/pages/itemTabBarTemp.wxml-->
+<template name="itemTabBar">
+  <vant-goods-action-icon icon="wap-home-o" text="Home"></vant-goods-action-icon>
+  <vant-goods-action-icon icon="service-o" text="Help"></vant-goods-action-icon>
+  <vant-goods-action-icon icon="cart-o" text="My Cart"></vant-goods-action-icon>
+</template>

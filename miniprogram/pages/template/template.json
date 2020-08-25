@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "vant-goods-action-icon" : "../../vantDist/goods-action-icon"
+  }
+}

@@ -32,13 +32,14 @@ Page({
     eventChannel.on('acceptDataFromOpenerPage', function(data){
       let id = data.id;
       let type = data.type;
-      console.log("id is: ", id, "type is ", type);
+      //upload the item type
+      that.setData({
+        type
+      });
+      //upload Item Data
       that.uploadItemData(id, type);
-
     });
-
-    //Upload the item images
-
+    //DEV: Note the race condition. The item data needs to be uploaded before the page is shown.
 
   },
   uploadItemData: function(id, type){
@@ -69,7 +70,14 @@ Page({
       //Get the event info using the id
       db.collection('events').doc(id).get()
       .then(function(res){
-        console.log(res.data);
+        let priceStr = res.data.price;
+        let title = res.data.title;
+        let itemImages = res.data.swiperImageUrls;
+        that.setData({
+          priceStr: priceStr,
+          title: title,
+          itemImages : itemImages
+        });
       })
       .catch(err => console.error(err));
     }

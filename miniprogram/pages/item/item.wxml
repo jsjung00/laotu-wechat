@@ -13,9 +13,44 @@
       </block>
     </swiper>
   </view>
-  <view id="descContainer">
-    <template is="itemTabBarTemp"></template>
+  <view id="customDescContainer">
+    <!-- Takes in the item type: "product" or "event" and displays accordingly-->
+    <block wx:if="{{type === 'product'}}">
+      <view class="descContainer">
+        <!-- Contains the price, title, and buttons-->
+        <view class="priceCard">
+          <!-- Contains two block elements and padding-->
+          <view id="titleRow">
+            <text>Title</text>
+            <!--Contains the favorite and forward icon-->
+            <view id="iconsContainer" style="display:flex">
+              <view hover-class="mp-icon-hover">
+                <mp-icon icon="like" size="{{30}}" color="black" type="{{true ? 'field' : 'outline'}}"></mp-icon>
+              </view>
+              <view hover-class="mp-icon-hover">
+                <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
+              </view>
+              
+            </view>
+          </view>
+          <view id="mainRow">
+            <view id="leftBox"></view>
+            <view id="rightBox"></view>
+          </view>   
+        </view>
+        <!-- Contains the item description-->
+        <view class="descBox"></view>  
+      </view>
+    </block>
+    <block wx:elif="{{type === 'event'}}">
+      <text>Event</text>
+    </block>
+    <block wx:else>
+      <text>Error- only product or event are valid parameters for itemDesc component.</text>
+    </block>
+
   </view>
+  
 </view>
 <CustomTabBar tabbarHeight="{{tabbarHeight}}"></CustomTabBar>
 

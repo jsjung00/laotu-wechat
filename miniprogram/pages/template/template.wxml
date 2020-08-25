@@ -1,0 +1,6 @@
+<!--miniprogram/pages/template/template.wxml-->
+<template name="itemTabBarTemp">
+  <text>Here is my template</text>
+  <vant-goods-action-icon icon="chat-o"></vant-goods-action-icon>
+</template>
+
