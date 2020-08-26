@@ -13,15 +13,15 @@
       </block>
     </swiper>
   </view>
+  <!-- Takes in the item type: "product" or "event" and displays accordingly-->
   <view id="customDescContainer">
-    <!-- Takes in the item type: "product" or "event" and displays accordingly-->
     <block wx:if="{{itemType === 'product'}}">
       <view class="descContainer">
         <!-- Contains the price, title, and buttons-->
         <view class="priceCard">
           <!-- Contains two block elements and padding-->
           <view id="titleRow">
-            <text>Title</text>
+            <text>{{title ? title : 'Loading...'}}</text>
             <!--Contains the favorite and forward icon-->
             <view id="iconsContainer" style="display:flex">
               <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
@@ -34,8 +34,22 @@
             </view>
           </view>
           <view id="mainRow">
-            <view id="leftBox"></view>
-            <view id="rightBox"></view>
+            <!--Contains description and category tags-->
+            <view class="viewPadding" id="leftBox">
+              <view id="desc">
+                <text>{{descSummary}}</text>
+              </view>
+              <!--Contains buttons that label the categories (like flairs)-->
+              <view id="categoryButtons">
+                <view wx:for="{{itemCategories}}" wx:for-index="idx" wx:for-item="category">
+                  <button class="mini-btn" type="primary" >{{category}}</button>
+                </view>
+              </view>
+            </view>
+            <!--Contains price-->
+            <view id="rightBox">
+              <text>{{priceStr}}</text>
+            </view>
           </view>   
         </view>
         <!-- Contains the item description-->

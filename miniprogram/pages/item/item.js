@@ -64,15 +64,19 @@ Page({
       //Get the product info using the id
       db.collection('products').doc(itemID).get()
         .then(function(res){
-          let priceStr = res.data.price;
+          let priceStr = res.data.priceStr;
           let title = res.data.title;
           let itemImages = res.data.swiperImageUrls;
+          let itemCategories = res.data.itemCategories;
+          let descSummary = res.data.descSummary;
           console.log(itemImages);
           //Upload the data to the page data
           that.setData({
             priceStr : priceStr,
             title: title,
-            itemImages: itemImages
+            itemImages: itemImages,
+            itemCategories: itemCategories,
+            descSummary : descSummary 
           });
         })
         .catch(err => console.error(err));
@@ -84,10 +88,14 @@ Page({
         let priceStr = res.data.price;
         let title = res.data.title;
         let itemImages = res.data.swiperImageUrls;
+        let itemCategories = res.data.itemCategories;
+        let descSummary = res.data.descSummary;
         that.setData({
           priceStr: priceStr,
           title: title,
-          itemImages : itemImages
+          itemImages : itemImages,
+          itemCategories: itemCategories,
+          descSummary : descSummary
         });
       })
       .catch(err => console.error(err));

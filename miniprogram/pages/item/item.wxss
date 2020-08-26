@@ -1,6 +1,10 @@
 /*
 * Consider making the swiper container square and having a policy where the uploaded images must be square
 /* miniprogram/pages/item.wxss */
+view {
+  box-sizing: border-box;
+}
+
 page{
   height: 100%;
   width: 750rpx;
@@ -31,6 +35,10 @@ page{
   background-color: lightgoldenrodyellow;
 }
 
+.viewPadding{
+  padding: 20rpx 20rpx 20rpx 20rpx;
+}
+
 .descContainer{
   /* Inherit the height of customDescContainer */
   height: 100%;
@@ -42,7 +50,8 @@ page{
 
 .priceCard{
   /* Has two block elements- the title row and the main row */
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: 20rpx 20rpx 20rpx 20rpx;
   background-color: crimson;
   min-height: 200px;
@@ -51,7 +60,54 @@ page{
 }
 #titleRow{
   display: flex;
+  background-color: darkgreen;
+  align-items: center;
+  font-size: 50rpx;
+}
 
+#mainRow{
+  display: flex;
+  flex-grow: 1;
+  margin-top: 20rpx;
+  background-color: darkkhaki;
+}
+#rightBox{
+  height: 100%;
+  min-width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40rpx;
+}
+
+#desc{
+  flex-grow: 1;
+  font-size: 25rpx;
+}
+#categoryButtons{
+  display: flex;
+}
+.mini-btn{
+  margin-right: 20rpx;
+  height: 30rpx;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+#leftBox{
+  height: 100%;
+  /* Take up the rest of the space */
+  flex-grow: 1;
+  background-color: darkmagenta;
+  display: flex;
+  flex-direction: column;
+}
+
+#iconsContainer{
+  /* Place icons Container at the very right */
+  margin-left: auto;
+  background-color: darkgray;
 }
 .mp-icon-hover{
   background-color: rgba(0, 0, 0, 0.1);
