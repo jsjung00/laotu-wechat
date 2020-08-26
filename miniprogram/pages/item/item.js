@@ -53,7 +53,7 @@ Page({
     //Update the isFavorited boolean
     this.updateIsFavorited();
   },
-  uploadItemData: function(id, type){
+  uploadItemData: function(itemID, type){
     var that = this;
     //Upload the item data that is necessary. Fetches data by calling wx.cloud query using id and type
     const db = wx.cloud.database({
@@ -62,7 +62,7 @@ Page({
 
     if (type === "product"){
       //Get the product info using the id
-      db.collection('products').doc('product1').get()
+      db.collection('products').doc(itemID).get()
         .then(function(res){
           let priceStr = res.data.price;
           let title = res.data.title;
@@ -79,7 +79,7 @@ Page({
     }
     else if (type === "event"){
       //Get the event info using the id
-      db.collection('events').doc(id).get()
+      db.collection('events').doc(itemID).get()
       .then(function(res){
         let priceStr = res.data.price;
         let title = res.data.title;
@@ -254,7 +254,6 @@ Page({
       if (itemType === 'product'){
         db.collection('userFavProducts').doc(openID).get()
           .then(function(res){
-            //add item if doesn't exist
             var favProducts = res.data.favProducts;
             if (favProducts.includes(itemID)){
               //Item exist, delete itemID from favList
@@ -269,24 +268,29 @@ Page({
                 }
               });
             }
-            //item exists, do nothing
+            //item not in list, do nothing
           })
           .catch(err => console.error(err));
       } 
       else if (itemType === 'event'){
+        //If item is in fav list, delete item
         db.collection('userFavEvents').doc(openID).get()
           .then(function(res){
-            //add item if doesn't exist
             var favEvents = res.data.favEvents;
-            if (!favEvents.includes(itemID)){
-              //Item doesn't exist, add itemID to the end of the array
+            if (favEvents.includes(itemID)){
+              //Item exist, delete itemID from favList
+              const itemIndex = favEvents.indexOf(itemID);
+              favEvents.splice(itemIndex, 1);
               db.collection('userFavEvents').doc(openID).update({
                 data: {
-                  favEvents : _.push(itemID) 
+                  favEvents : favEvents 
+                },
+                fail: function(err){
+                  console.error(err)
                 }
               });
             }
-            //item exists, do nothing
+            //item not in list, do nothing
           })
           .catch(err => console.error(err));
       }
