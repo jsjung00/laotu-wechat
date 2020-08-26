@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    var that = this;
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -14,14 +15,17 @@ App({
       })
     }
 
-    //Upload fonts for Vant
-    wx.loadFontFace({
-      family: 'someFamily',
-      source: 'url("https://img.yzcdn.cn/vant/vant-icon-d3825a.woff2")',
-      success: console.log,
-      fail: console.error
-    });
-    
+    //Upload user info
+    wx.cloud.callFunction({
+      name: 'getUserInfo'
+    })
+      .then(function(res){
+        let data = res.result;
+        let openid = data.openid;
+        //set openid to globalData;
+        that.globalData.openid = openid;
+      })
+      .catch(err => console.log("Failed to get user info in app.js", err))
 
     //upload the capsle button information to help build nav bar
     this.globalData.headerButtonPos = wx.getMenuButtonBoundingClientRect();

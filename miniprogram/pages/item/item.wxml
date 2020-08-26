@@ -15,7 +15,7 @@
   </view>
   <view id="customDescContainer">
     <!-- Takes in the item type: "product" or "event" and displays accordingly-->
-    <block wx:if="{{type === 'product'}}">
+    <block wx:if="{{itemType === 'product'}}">
       <view class="descContainer">
         <!-- Contains the price, title, and buttons-->
         <view class="priceCard">
@@ -24,10 +24,10 @@
             <text>Title</text>
             <!--Contains the favorite and forward icon-->
             <view id="iconsContainer" style="display:flex">
-              <view hover-class="mp-icon-hover">
-                <mp-icon icon="like" size="{{30}}" color="black" type="{{true ? 'field' : 'outline'}}"></mp-icon>
+              <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
+                <mp-icon icon="like" size="{{30}}" color="black" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
               </view>
-              <view hover-class="mp-icon-hover">
+              <view hover-class="mp-icon-hover" hover-stay-time="{{200}}">
                 <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
               </view>
               
@@ -42,7 +42,7 @@
         <view class="descBox"></view>  
       </view>
     </block>
-    <block wx:elif="{{type === 'event'}}">
+    <block wx:elif="{{itemType === 'event'}}">
       <text>Event</text>
     </block>
     <block wx:else>
