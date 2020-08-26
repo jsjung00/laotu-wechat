@@ -38,6 +38,11 @@ page{
 .viewPadding{
   padding: 20rpx 20rpx 20rpx 20rpx;
 }
+.paddingElement{
+  /* used in a container that has padding-top 10rpx and padding-bottom 10rpx to space each element 20rpx */
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
 
 .descContainer{
   /* Inherit the height of customDescContainer */
@@ -46,6 +51,8 @@ page{
   display: flex;
   flex-direction: column;
   background-color: darkgray;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
 }
 
 .priceCard{

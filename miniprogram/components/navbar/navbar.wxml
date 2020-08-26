@@ -1,4 +1,4 @@
-<!-- I need to have three cases 
+<!-- I need to have four cases 
     1) I have both left and home
     2) I have only home
     3) I only have back
@@ -32,7 +32,7 @@
       <!--If there is only back, show no capsule border-->
       <view wx:elif="{{isBack}}" class="noCapsule" style="width:{{capsuleHalfWidth}}px">
         <view class="icon-container">
-          <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+          <navigator class="completeChild" open-type="navigateBack">
             <image mode="aspectFit" src=".././../img/left-arrow.png"></image>  
           </navigator>
         </view>

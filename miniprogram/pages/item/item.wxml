@@ -18,7 +18,7 @@
     <block wx:if="{{itemType === 'product'}}">
       <view class="descContainer">
         <!-- Contains the price, title, and buttons-->
-        <view class="priceCard">
+        <view class="priceCard paddingElement">
           <!-- Contains two block elements and padding-->
           <view id="titleRow">
             <text>{{title ? title : 'Loading...'}}</text>
@@ -53,7 +53,9 @@
           </view>   
         </view>
         <!-- Contains the item description-->
-        <view class="descBox"></view>  
+        <view class="descBox paddingElement viewPadding">
+          <text>Some stuff goes here.</text>
+        </view>  
       </view>
     </block>
     <block wx:elif="{{itemType === 'event'}}">
