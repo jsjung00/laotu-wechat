@@ -3,6 +3,7 @@
  * For the favorite functionality, pull the isFavorited boolean from the cloud database (user's favlist)
  * Any updates are made to the local page data boolean. When page closes, update the boolean to the cloud
  * Loading note: takes a while for isFavorited to be set.  
+ * [Future speed]: Consider passing the item data from events so it doesn't have to query from the cloud (lazy load?)
  */
 const app = getApp();
 

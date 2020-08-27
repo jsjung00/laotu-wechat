@@ -40,5 +40,26 @@ Page({
    */
   onUnload: function () {
 
+  },
+  eventClicked: function(e){
+    //Function is called when user clicks on card
+    //Navigate to the item page
+    let type = 'event';
+    let itemID = e.currentTarget.dataset.itemid._id;
+    console.log("event itemID is", itemID);
+
+    wx.navigateTo({
+      url: '../item/item',
+      success: function(res){
+        res.eventChannel.emit('acceptDataFromOpenerPage', {type: type, id: itemID});
+      },
+      fail: function(err){
+        console.error(err);
+      }
+    });
+  },
+  buyClicked: function(e){
+    //Function is called when the user clicks on the buy button
+    //
   }
 })
