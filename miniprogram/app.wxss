@@ -29,3 +29,11 @@
 view{
   box-sizing: border-box;
 }
+
+.mini-btn{
+  margin-right: 20rpx;
+  height: 30rpx;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+}

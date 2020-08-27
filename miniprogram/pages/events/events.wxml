@@ -6,8 +6,26 @@
   <!--For each event in eventsArray we are going to have a card-->
   <view class="card viewPadding" style="margin-top: 20rpx" wx:for="{{eventsArray}}" wx:key="unique" wx:for-item="event">
     <view class="imageContainer">
-      <image src=""></image>
+      <image mode="aspectFill" style="height: 100%; width: 100%" src="{{event.imgSrc}}"></image>
     </view>
-    <view class="descContainer"></view>
+    <view class="descContainer">
+      <view class="titleRow viewPadding">
+        <text>{{event.title}}</text>
+      </view>
+      <view class="descRow viewPadding">
+        <text>{{event.dateStr}}</text>
+        <text>{{event.locationStr}}</text>
+      </view>
+      <!--Contains buttons that label the tags (like flairs)-->
+      <view class="tagsRow viewPadding">
+        <view wx:for="{{event.tags}}" wx:for-index="idx" wx:for-item="tag">
+          <button class="mini-btn" type="primary" >{{tag}}</button>
+        </view>
+      </view>
+      <view class="priceRow viewPadding">
+        <text class="priceText">{{event.priceStr}}</text>
+        <button class="buy-btn">Buy</button>
+      </view>
+    </view>
   </view>
 </view>
