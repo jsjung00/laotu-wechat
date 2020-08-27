@@ -21,6 +21,7 @@ Page({
     eventChannel.on('acceptDataFromOpenerPage', function(data) {
       let type = data.type;
       let searchObjectsArray = data.searchObjectsArray;
+      console.log(searchObjectsArray);
       //upload the type and searchObjectsArray
       that.setData({
         type: type,

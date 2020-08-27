@@ -10,7 +10,8 @@
     "pages/wePay/wePay",
     "pages/item/item",
     "pages/template/template",
-    "pages/itemTabBarTemp/itemTabBarTemp"
+    "pages/itemTabBarTemp/itemTabBarTemp",
+    "pages/events/events"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -32,7 +33,7 @@
         "text": "My Profile"
       },
       {
-        "pagePath": "pages/myevents/myevents",
+        "pagePath": "pages/events/events",
         "iconPath": "img/event.png",
         "selectedIconPath": "img/event.png",
         "text": "Event"

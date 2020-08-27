@@ -77,9 +77,5 @@ Page({
     this.setData({
       productArray: products
     });
-  },
-  selectResult: function(e){
-    console.log("RESULT SELECTED");
-    console.log(e);
   }
 })

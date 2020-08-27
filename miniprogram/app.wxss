@@ -9,3 +9,23 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.viewPadding {
+  /*used for a container with a single child that wants to pad all around */
+  padding: 20rpx 20rpx 20rpx 20rpx;
+}
+
+.spacedVerticalContainer{
+  /*used to evenly space items vertically in a container*/
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.spacedVerticalElement{
+  /* an element in a spacedVerticalContainer */
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+view{
+  box-sizing: border-box;
+}

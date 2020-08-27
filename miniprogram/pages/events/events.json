@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "CustomNav" : "../../components/navbar/navbar",
+    "CustomSearch" : "../../components/mySearchBar/mySearchBar"
+  }
 }

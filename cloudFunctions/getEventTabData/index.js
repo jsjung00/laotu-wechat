@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
   /*Get all upcoming Events as an array*/
   //Get the total number of records
   const upcomingCountResult = await db.collection('events').where({
-    datetime: _.gt(db.serverDate())
+    minDateTime: _.gt(db.serverDate())
   }).count();
   const upcomingTotal = upcomingCountResult.total;
   //Calculate number of batch calls we need to make to get all records
@@ -24,7 +24,7 @@ exports.main = async (event, context) => {
   const upcomingTasks = [];
   for (let i = 0; i < upcomingBatchTimes; i++){
     const promise = db.collection('events').where({
-      datetime: _.gt(db.serverDate())
+      minDateTime: _.gt(db.serverDate())
     }).skip(i * MAX_LIMIT).limit(MAX_LIMIT).get();
     upcomingTasks.push(promise);
   }
@@ -41,7 +41,7 @@ exports.main = async (event, context) => {
   /*Get all past Events as an array*/
   //Get the total number of records
   const pastCountResult = await db.collection('events').where({
-    datetime: _.lte(db.serverDate())
+    minDateTime: _.lte(db.serverDate())
   }).count();
   const pastTotal = pastCountResult.total;
   //Calculate number of batch calls we need to make to get all records
@@ -50,7 +50,7 @@ exports.main = async (event, context) => {
   const pastTasks = [];
   for (let i = 0; i < pastBatchTimes; i++){
     const promise = db.collection('events').where({
-      datetime: _.lte(db.serverDate())
+      minDateTime: _.lte(db.serverDate())
     }).skip(i * MAX_LIMIT).limit(MAX_LIMIT).get();
     pastTasks.push(promise);
   }

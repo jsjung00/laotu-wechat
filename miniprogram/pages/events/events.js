@@ -1,4 +1,7 @@
 // miniprogram/pages/events.js
+/**
+ * Get eventsArray from cloud and upload to page data for searchBar
+ */
 Page({
 
   /**
@@ -11,7 +14,17 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
+    //Get an array of search result objects (events)
+    let eventsResponse = await wx.cloud.callFunction({
+      name: "getEventsArray"
+    })
+    let events = eventsResponse.result.events.data;
+    console.log("Events array is: ", events);
+    //Upload our products array into the page data
+    this.setData({
+      eventsArray: events
+    }); 
 
   },
 
@@ -23,44 +36,9 @@ Page({
   },
 
   /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
 
   }
 })

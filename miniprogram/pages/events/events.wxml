@@ -1,2 +1,13 @@
-<!--miniprogram/pages/events.wxml-->
-<text>miniprogram/pages/events.wxml</text>
+<CustomNav title="Events" isHome="{{true}}"></CustomNav>
+<!--Set isNavigator to true so clicking on the result will open a searchPage-->
+<CustomSearch type="event" isNavigator="{{true}}" searchObjectsArray="{{eventsArray}}"></CustomSearch>
+<!-- The CSS margins is wack- hacky solution to evenly space elements-->
+<view id="bodyContainer" style="padding-bottom: 20rpx;">
+  <!--For each event in eventsArray we are going to have a card-->
+  <view class="card viewPadding" style="margin-top: 20rpx" wx:for="{{eventsArray}}" wx:key="unique" wx:for-item="event">
+    <view class="imageContainer">
+      <image src=""></image>
+    </view>
+    <view class="descContainer"></view>
+  </view>
+</view>

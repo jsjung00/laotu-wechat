@@ -1,4 +1,7 @@
 // components/mySearchBar.js
+/**
+ * parmeters: searchResultsObjects, isNavigator, type
+ */
 Component({
   options: {
     addGlobalClass: true
@@ -21,8 +24,7 @@ Component({
       value: ''
     },
     search: {
-      // 返回Promise的函数
-      // @ts-ignore
+      // Optional function that returns a promise. See wechat searchbbar for more details
       type: Function,
       value: null
     },
@@ -46,15 +48,16 @@ Component({
       value: []
     },
     isNavigator: {
-      //Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
+      //[REQUIRED] Parent page should pass is this boolean to determine whether or not the search bar should redirect to the searchPage
       type: Boolean
     },
     searchObjectsArray: {
-      //An array of search result objects that contain the ID and title and other descriptors 
+      //[REQUIRED] An array of search result objects that contain the ID and title and other descriptors
+      //ex: [{"_id" : "product1", "title" : "Organic Carrots"}, {}] 
       type: Array
     },
     type: {
-      //Either "product" or "event"
+      //[REQUIRED] Either "product" or "event"
       type: String
     }
   },
@@ -253,7 +256,6 @@ Component({
         return new Promise(function(resolve, reject){
           (function waitForArray(){
             if (that.data.searchObjectsArray.length > 0){
-              //Data is set
               return resolve();
             }
             else{
@@ -289,8 +291,8 @@ Component({
         index
       } = e.currentTarget.dataset;
       const item = this.data.result[index];
+      //Going to trigger the selectresult bind in the searchPage.wxml
       //Navigate to item page and pass the itemID
-
       this.triggerEvent('selectresult', {
         item
       });
@@ -302,37 +304,49 @@ Component({
       //Function is called when user clicks on the search bar. 
       //If search bar is supposed to act as a navigator (isNavigator === true), redirect to searchPage
       if (this.data.isNavigator){
+        console.log("inside if navigator block");
        
         //Wait for searchObjectsArray. Function returns a promise only when the searchObjectsArray is not an empty array
         var checkSearchObjectsLoaded = function(){
           return new Promise(function(resolve, reject){
+            var numLoops = 20;
             (function waitForArray(){
               if (that.data.searchObjectsArray.length > 0){
                 //Data is set
                 return resolve();
               }
               else{
+                console.log("Looping for searchObjectsArray...");
                 //Continually loop until the data is set
                 setTimeout(waitForArray, 250);
+                numLoops -= 1;
+                if (numLoops < 1){
+                  return reject("Failed to get searchObjectsArray within reasonable time.");
+                }
               }
             })();
           });
         }
-
+        console.log("Navigating to searchPage...");
         //Redirect to searchPage
         wx.navigateTo({
           //Can pass the list of search result objects to the searchPage
           url: '../../pages/searchPage/searchPage',
           success: async function(res){
             //Wait for searchObjectsArray to be sent (aka length > 0)
-            await checkSearchObjectsLoaded();
-            
+            try{
+              await checkSearchObjectsLoaded();
+            } catch{
+              console.error("mySearchBar: check that searchObjectsArray was correctly passed as a parameter. Failed to get");
+            }
             //Send our data to the searchPage
             res.eventChannel.emit('acceptDataFromOpenerPage', {
               type: that.data.type,
               searchObjectsArray: that.data.searchObjectsArray
             });
-             
+          },
+          fail: function(err){
+            console.log("Failed to navigate to searchPage");
           }
         })
         //Clear the search page to the original state
