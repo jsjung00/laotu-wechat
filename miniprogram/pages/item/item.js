@@ -1,9 +1,12 @@
 // miniprogram/pages/item.js
 /**
  * For the favorite functionality, pull the isFavorited boolean from the cloud database (user's favlist)
- * Any updates are made to the local page data boolean. When page closes, update the boolean to the cloud
- * Loading note: takes a while for isFavorited to be set.  
+ *    Any updates are made to the local page data boolean. When page closes, update the boolean to the cloud
+ *    Loading note: takes a while for isFavorited to be set.  
  * [Future speed]: Consider passing the item data from events so it doesn't have to query from the cloud (lazy load?)
+ * 
+ * Race condition: user clicks on heart and closes page before local boolean is uploaded.
+ *  Solution: Have a rendering page until everything is loaded. Add a small delay before page closes 
  */
 const app = getApp();
 
@@ -51,8 +54,10 @@ Page({
 
   },
   onUnload: function(){
-    //Update the isFavorited boolean
-    this.updateIsFavorited();
+    var that = this;
+    //Consider having a timeout to prevent race condition with clickHeart updating local boolean and updateIsFavorited uploading
+    //local boolean to cloud
+    setTimeout(() => that.updateIsFavorited(), 500);
   },
   uploadItemData: function(itemID, type){
     var that = this;
@@ -106,13 +111,12 @@ Page({
     }
   },
   setIsFavorited: function(itemID, type){
-    //Parameters: receive itemID and type of item ('product' or 'event')
+    //Function is called on load. Pulls the boolean from the cloud and sets to the local data
+    //Parameters: itemID and type of item ('product' or 'event')
     var that = this;
     //DEVNOTE: globalData retrieval may be slow (maybe race condition?)
     var openID = app.globalData.openid;
-
-    console.log("setIsFavorited()");
-    //Function is called onLoad and sets the isFavorited boolean to the page
+  
     
     //Query the item using its id and type
     const db = wx.cloud.database({
@@ -194,18 +198,45 @@ Page({
       console.error("In setIsFavorited(): should only have either 'event' or 'product' type available");
     }
   },
-  clickHeart: function(){
+  clickHeart: async function(){
+    var that = this;
     console.log("clickHeart()");
     //Function is called when heart is clicked. Inverses the local page boolean
+    //In order to prevent a race condition where pull data from isFavorited before isFavorited is set, wait
+    //until isFavorited != null.
+    var checkIsFavoritedSet = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 20;
+        (function waitForIsFavorited(){
+          if (that.data.isFavorited == null){
+            //Continually loop until the data is set
+            setTimeout(waitForIsFavorited, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("clickHeart(): Is Favorited took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    //Wait for isFavorited to be set into the data
+    await checkIsFavoritedSet();
+
     let pastIsFavorited = this.data.isFavorited;
     let isFavorited = !pastIsFavorited;
     this.setData({isFavorited});
   },
   updateIsFavorited: function(){
+    console.log("updateIsFav()");
     //Function called on page close. Gets current boolean and updates the user's fav item list
-    //Check that itemID and type is set
+    //Return immediately if itemID or itemType were not set and no changes were made
     if (this.data.itemID == null || this.data.itemType == null){
-      console.log("updateIsFavorited() race condition: itemID and type not set before page closes");
+      console.log("itemID or itemType not set before page close: isFavorited not set, no changes were made.");
+      return;
     }
     let itemID = this.data.itemID;
     let itemType = this.data.itemType;
@@ -309,7 +340,7 @@ Page({
 
     }
     else {
-      console.error("Race condition: isFavorited is not set from onLoad before page close");
+      console.log("User closed page before isFavorited set. No changes were made.");
     }
   }
 

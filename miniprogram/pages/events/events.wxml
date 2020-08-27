@@ -4,7 +4,7 @@
 <!-- The CSS margins is wack- hacky solution to evenly space elements-->
 <view id="bodyContainer" style="padding-bottom: 20rpx;">
   <!--For each event in eventsArray we are going to have a card-->
-  <view class="card viewPadding" style="margin-top: 20rpx" data-itemID="{{event}}"wx:for="{{eventsArray}}" wx:key="unique" wx:for-item="event" bindtap="eventClicked">
+  <view class="card viewPadding" style="margin-top: 20rpx" data-itemID="{{event._id}}"wx:for="{{eventsArray}}" wx:key="unique" wx:for-item="event" bindtap="eventClicked">
     <view class="imageContainer">
       <image mode="aspectFill" style="height: 100%; width: 100%" src="{{event.imgSrc}}"></image>
     </view>

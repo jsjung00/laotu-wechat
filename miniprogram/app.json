@@ -11,7 +11,8 @@
     "pages/item/item",
     "pages/template/template",
     "pages/itemTabBarTemp/itemTabBarTemp",
-    "pages/events/events"
+    "pages/events/events",
+    "pages/profile/profile"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -28,9 +29,9 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "img/profile.png",
-        "selectedIconPath": "img/profile.png",
-        "text": "My Profile"
+        "iconPath": "img/home.png",
+        "selectedIconPath": "img/home.png",
+        "text": "Home"
       },
       {
         "pagePath": "pages/events/events",
@@ -45,10 +46,10 @@
         "text": "Store"
       },
       {
-        "pagePath": "pages/wePay/wePay",
-        "iconPath": "img/notification.jpg",
-        "selectedIconPath": "img/notification.jpg",
-        "text": "Pay"
+        "pagePath": "pages/profile/profile",
+        "iconPath": "img/profile.png",
+        "selectedIconPath": "img/profile.png",
+        "text": "My Profile"
       }
     ]
   },

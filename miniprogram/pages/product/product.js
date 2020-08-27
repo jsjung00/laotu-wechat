@@ -77,5 +77,23 @@ Page({
     this.setData({
       productArray: products
     });
+  },
+  productClicked: function(e){
+    //Function is called when the user clicks on the product card
+    //Navigate to the item page
+   
+    let type = 'product';
+    let itemID = e.currentTarget.dataset.itemid;
+    console.log("event itemID is", itemID);
+
+    wx.navigateTo({
+      url: '../item/item',
+      success: function(res){
+        res.eventChannel.emit('acceptDataFromOpenerPage', {type: type, id: itemID});
+      },
+      fail: function(err){
+        console.error(err);
+      }
+    });
   }
 })

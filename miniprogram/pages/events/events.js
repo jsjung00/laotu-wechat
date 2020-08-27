@@ -45,7 +45,7 @@ Page({
     //Function is called when user clicks on card
     //Navigate to the item page
     let type = 'event';
-    let itemID = e.currentTarget.dataset.itemid._id;
+    let itemID = e.currentTarget.dataset.itemid;
     console.log("event itemID is", itemID);
 
     wx.navigateTo({

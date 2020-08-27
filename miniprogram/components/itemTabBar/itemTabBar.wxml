@@ -3,12 +3,12 @@
   <!--Contains every element- used so tabbarContainer can have a suitable padding-->
   <view class="insidePaddingContainer">
     <view class="iconsContainer">
-      <vant-goods-action-icon icon="wap-home-o" text="Home" icon-class="iconCustom" link-type="switchTab"></vant-goods-action-icon>
+      <vant-goods-action-icon icon="wap-home-o" text="Home" icon-class="iconCustom" link-type="switchTab" url="../../pages/index/index"></vant-goods-action-icon>
       <vant-goods-action-icon icon="service-o" text="Help" icon-class="iconCustom"></vant-goods-action-icon>
-      <vant-goods-action-icon icon="cart-o" text="My Cart" icon-class="iconCustom"></vant-goods-action-icon>
+      <vant-goods-action-icon icon="cart-o" text="My Cart" icon-class="iconCustom" info="{{numItems > 0 ? numItems : null}}"></vant-goods-action-icon>
     </view>
     <view class="buttonsContainer">
-      <vant-goods-action-button class="vantButton" custom-class="vantButton" text="Add to Cart"></vant-goods-action-button>
+      <vant-goods-action-button class="vantButton" custom-class="vantButton" text="Add to Cart" bindtap="addItem"></vant-goods-action-button>
       <vant-goods-action-button class="vantButton" text="Buy Now"></vant-goods-action-button>
     </view>
    

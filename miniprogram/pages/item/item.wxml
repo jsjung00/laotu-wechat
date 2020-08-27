@@ -68,7 +68,7 @@
   </view>
   
 </view>
-<CustomTabBar tabbarHeight="{{tabbarHeight}}"></CustomTabBar>
+<CustomTabBar tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}"></CustomTabBar>
 
 
 

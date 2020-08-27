@@ -1,0 +1,109 @@
+<view id="container">
+  <CustomNav title="Profile"/> 
+  <!--- <mp-navigation-bar id="weui-nav" title="UI testing" back="true" background="#008000"></mp-navigation-bar> -->
+  <view id="body_container">
+      <view id = "profile_container" class="profile">
+        <view id = "picture_container" class="profile" style="width: {{widths.picture_container}}px">
+          <!--<image mode="aspectFit" src="{{userInfo.avatarUrl}}"></image>-->
+          <open-data style="height: 100%" mode="aspectFill" type="userAvatarUrl"></open-data> 
+        </view>
+        <view id = "profile_text-container" class="profile">
+          <open-data type="userNickName" class="profile" id="profile_text" style="font-size : {{font_sizes.profile_text}}vh"></open-data>
+        </view>
+      </view>
+      <view id = "icons_container">
+        <view class="icon_container" style="width: {{widths.icon_container}}px">
+          <navigator class = "icon_nav" url="../favorites/favorites" open-type="navigate" >
+            <view class="icon" id="favorite-icon">
+              <image style = "width: 70%; height: 70%" class = "icon_image" mode = "aspectFit" src="https://img.icons8.com/cotton/2x/like.png"></image>
+            </view>
+          </navigator>
+          <view class="icon_text" id="favorite-container">
+            <text id="favorite" style="font-size: {{font_sizes.favorite}}vh">Favorites</text>
+          </view>
+        </view>
+        <view class="icon_container" style="width: {{widths.icon_container}}px">
+          <navigator class = "icon_nav" url="../coupons/coupons" open-type="navigate">
+            <view class="icon" id="coupons-icon">
+              <image style = "width: 70%; height: 70%" class = "icon_image" mode = "aspectFit" src="https://cdn4.iconfinder.com/data/icons/thefreeforty/30/thefreeforty_label-512.png"></image>
+            </view>
+          </navigator>
+          <view class="icon_text" id="coupons-container">
+            <text id="coupons" style="font-size: {{font_sizes.coupons}}vh">Coupons</text>
+          </view>
+        </view>
+        <view class="icon_container" style="width: {{widths.icon_container}}px">
+          <navigator class = "icon_nav" url="../coupons/coupons" open-type="navigate">
+            <view class="icon" id="more-icon">
+              <image style = "width: 70%; height: 70%" class = "icon_image" mode = "aspectFit" src="https://icon-library.com/images/more-icon-png/more-icon-png-18.jpg"></image>
+            </view>
+          </navigator>
+          <view class="icon_text" id="more-container">
+            <text id="more" style="font-size: {{font_sizes.more}}vh">More</text>
+          </view>
+        </view>
+      </view>
+      <view id = "table_container">
+        <navigator class= "tr_container" url = "../myevents/myevents" open-type="switchTab">
+          <view class = "tr">
+            <view id = "event-container" class = "table_text">
+              <text id = "event" style="font-size : {{font_sizes.event}}px">My Events</text>
+            </view>
+            <view class = "next_icon">
+              <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
+            </view>
+          </view>
+        </navigator>
+        <navigator class= "tr_container" url = "../coupons/coupons">
+          <view class = "tr">
+            <view id = "order-container" class = "table_text">
+              <text id="order" style="font-size : {{font_sizes.order}}px">My Orders</text>
+            </view>
+            <view class = "next_icon">
+              <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
+            </view>
+          </view>
+        </navigator>
+        <navigator class= "tr_container" url = "../item/item">
+          <view class = "tr">
+            <view id = "faq-container" class = "table_text">
+              <text id="faq" style="font-size : {{font_sizes.faq}}px">Item Page</text>
+            </view>
+            <view class = "next_icon">
+              <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
+            </view>
+          </view>
+        </navigator>
+        <navigator class= "tr_container" url = "../coupons/coupons">
+          <view class = "tr">
+            <view id="customer-container" class = "table_text">
+              <text id="customer" style="font-size : {{font_sizes.customer}}px">Help Service</text>
+            </view>
+            <view class = "next_icon">
+              <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
+            </view>
+          </view>
+        </navigator>
+        <navigator class= "tr_container" url = "../notification/notification">
+          <view class = "tr">
+            <view id="support-container" class = "table_text">
+              <text id="support" style="font-size : {{font_sizes.support}}px">Tech Help</text>
+            </view>
+            <view class = "next_icon">
+              <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
+            </view>
+          </view>
+        </navigator>
+        <navigator class= "tr_container" url = "../coupons/coupons">
+          <view class = "tr">
+            <view id="settings-container" class = "table_text">
+              <text id="settings" style="font-size : {{font_sizes.settings}}px">Settings</text>
+            </view>
+            <view class = "next_icon">
+              <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
+            </view>
+          </view>
+        </navigator>
+      </view>
+  </view>
+</view>

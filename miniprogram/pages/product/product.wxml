@@ -12,13 +12,13 @@
   </view>
   <scroll-view scroll-y id = "table_container">
     <!-- take in array of product objects-->
-    <block wx:for= "{{productArray}}" wx:key="title">
-      <view class="productContainer">
+    <block wx:for= "{{productArray}}" wx:key="title" wx:for-item="product">
+      <view class="productContainer" bindtap="productClicked" data-itemid="{{product._id}}">
         <view class="productImageContainer">
-          <image src="{{item.imageUrl}}" mode="aspectFit" style="height: 100%; width: 100%;"></image>
+          <image src="{{product.imageUrl}}" mode="aspectFill" style="height: 100%; width: 100%;"></image>
         </view>
         <view class = "descriptionContainer">
-          <text>{{item.title}}</text>
+          <text>{{product.title}}</text>
         </view>
       </view>
     </block>
