@@ -1,5 +1,5 @@
 <!--components/itemTabBar.wxml-->
-<view class="tabbarContainer" style="height: {{tabbarHeight}}px; width: 750rpx">
+<view wx:if="{{!_isTabBarHidden}}" class="tabbarContainer" style="height: {{tabbarHeight}}px; width: 750rpx; display: {{false ? 'none' : 'flex'}};">
   <!--Contains every element- used so tabbarContainer can have a suitable padding-->
   <view class="insidePaddingContainer">
     <view class="iconsContainer">

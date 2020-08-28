@@ -20,6 +20,22 @@ Component({
     itemType: {
       //Required: parent will pass the item type ('product' or 'event') 
       type: String
+    },
+    isTabBarHidden : {
+      //Required: Used to hide the component. Item page passes this 
+      type: Boolean,
+      observer: function(newVal, oldVal, changedPath){
+        console.log("my old value is: ", oldVal);
+        console.log("my new value is: ", newVal);
+        //Get the new value and set _isTabBarHidden which is used to render the component
+        this.setData({_isTabBarHidden : newVal})
+      }
+    },
+    _isTabBarHidden : {
+      // This is a (copy) of the variable above. Whenever isTabBarHidden is changed, its value will placed here
+      //By default, tabBar is not hidden
+      type: Boolean,
+      value: false 
     }
   },
 
@@ -94,6 +110,10 @@ Component({
    * Component methods
    */
   methods: {
-
+    addItem: function(e){
+      //Function is called when the user clicks on the add to Cart button
+      //Trigger the event "addToCart" in the parent page which should
+      this.triggerEvent('addToCart');
+    }
   }
 })

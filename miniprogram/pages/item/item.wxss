@@ -139,3 +139,11 @@ CustomTabBar{
   margin-top: auto;
 }
 
+#cartPopUpContainer{
+  /* This is visible when addToCart() changes displayPopUp to true */
+  z-index: 1;
+  background-color: thistle;
+  min-height: 30vh;
+  width: 100%;  
+}
+

@@ -68,7 +68,12 @@
   </view>
   
 </view>
-<CustomTabBar tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}"></CustomTabBar>
+<view id="cartPopUpContainer" wx:if="{{displayPopUp}}">  
+</view>
+
+<!-- When the add to cart button is tapped, the tabBar will trigger the addToCart function in this js file
+      addToCart function will set isTabBarHidden=true, which will then pass to component and cause tabBar to not render in wxif-->
+<CustomTabBar isTabBarHidden="{{isTabBarHidden}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="addToCart"></CustomTabBar>
 
 
 

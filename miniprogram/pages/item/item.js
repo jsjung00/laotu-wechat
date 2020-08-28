@@ -21,7 +21,9 @@ Page({
     interval: 2000,
     duration: 500,
     vertical: false,
-    itemImages : [], //array of imgSrcs which are strings
+    itemImages : [], //array of imgSrcs which are strings,
+    isTabBarHidden: false,
+    displayPopUp: false
   },
 
   /**
@@ -110,13 +112,33 @@ Page({
       console.error("Need to insert either 'product' or 'event' into the searchBar parameter");
     }
   },
-  setIsFavorited: function(itemID, type){
+  setIsFavorited: async function(itemID, type){
     //Function is called on load. Pulls the boolean from the cloud and sets to the local data
     //Parameters: itemID and type of item ('product' or 'event')
     var that = this;
-    //DEVNOTE: globalData retrieval may be slow (maybe race condition?)
+    //Wait for openID to be passed
     var openID = app.globalData.openid;
-  
+    var checkOpenID = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForOpenID(){
+          openID = app.globalData.openid;
+          if (openID == null){
+            //Continually loop until the data is set
+            setTimeout(waitForOpenID, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("setisFavorited(): openID took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkOpenID();
     
     //Query the item using its id and type
     const db = wx.cloud.database({
@@ -124,10 +146,6 @@ Page({
     });
 
     if (type === 'product'){
-      //Assert that openID has been defined
-      if (openID.length < 1){
-        throw new Error("setIsFavorited(): race condition. OpenID has not been fetched from global data");
-      }
       //Query from the userFavProducts
       const products = db.collection('userFavProducts');
       products.doc(openID).get()
@@ -160,10 +178,6 @@ Page({
 
     } 
     else if (type === 'event'){
-      //Assert that openID has been defined
-      if (openID.length < 1){
-        throw new Error("setIsFavorited(): race condition. OpenID has not been fetched from global data");
-      }
       //Query from the userFavProducts
       const events = db.collection('userFavEvents');
       events.doc(openID).get()
@@ -342,6 +356,14 @@ Page({
     else {
       console.log("User closed page before isFavorited set. No changes were made.");
     }
+  },
+  addToCart: function(e){
+    //Function is triggered by the tabbar component when add to cart button is tapped
+    //Change the isTabBarHidden to true which will then be passed to the tabBar component and hide it
+    this.setData({
+      displayPopUp : true,
+      isTabBarHidden : true
+    });
   }
 
   
