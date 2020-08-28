@@ -68,7 +68,28 @@
   </view>
   
 </view>
-<view id="cartPopUpContainer" wx:if="{{displayPopUp}}">  
+<view id="cartPopUpContainer" class="spacedVerticalContainer sidePadding" wx:if="{{displayPopUp}}">
+  <!--Contains the image on left and title and price on right-->
+  <view id="cardContainer" class="spacedVerticalElement">
+    <view id="imageContainer">
+      <image mode="aspectFill" src="{{coverImageSrc}}" style="height: 100%; width: 100%;"></image>
+    </view>
+    <view id="descContainer" class="viewPadding">
+      <text>{{title ? title : 'Loading...'}}</text>
+      <text>{{priceStr}}</text>
+    </view>
+  </view>
+  <!--Contains picker to adjust quantity-->
+  <view id="quantityContainer" class="spacedVerticalElement">
+    <text>Quantity</text>
+    <vant-stepper value="{{1}}" input-width="60px" button-size="45px" min="1" max="99"></vant-stepper>
+  </view>
+  <!--Contains add to cart and buy buttons-->
+  <view id="buttonsContainer" class="spacedVerticalElement">
+    <!--DEV: Figure out how to customize the button (weUI? button css?)-->
+    <button id="addToCartButton" class="cartButton">Add to Cart</button>
+    <button id="buyButton" class="cartButton">Buy Now</button>
+  </view>  
 </view>
 
 <!-- When the add to cart button is tapped, the tabBar will trigger the addToCart function in this js file

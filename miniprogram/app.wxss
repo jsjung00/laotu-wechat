@@ -25,6 +25,11 @@
   margin-top: 10rpx;
   margin-bottom: 10rpx;
 }
+.sidePadding{
+  /* Used to pad left and right */
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
 
 view{
   box-sizing: border-box;

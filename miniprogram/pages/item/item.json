@@ -4,6 +4,7 @@
     "vant-goods-action-icon" : "../../vantDist/goods-action-icon",
     "CustomTabBar" : "../../components/itemTabBar/itemTabBar",
     "CustomDesc" : "../../components/itemDesc/itemDesc",
-    "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon"
+    "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon",
+    "vant-stepper" : "../../vantDist/stepper"
   }
 }

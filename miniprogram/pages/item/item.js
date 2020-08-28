@@ -77,6 +77,7 @@ Page({
           let itemImages = res.data.swiperImageUrls;
           let itemCategories = res.data.itemCategories;
           let descSummary = res.data.descSummary;
+          let coverImageSrc = res.data.imageUrl;
           console.log(itemImages);
           //Upload the data to the page data
           that.setData({
@@ -84,7 +85,8 @@ Page({
             title: title,
             itemImages: itemImages,
             itemCategories: itemCategories,
-            descSummary : descSummary 
+            descSummary : descSummary,
+            coverImageSrc : coverImageSrc  
           });
         })
         .catch(err => console.error(err));
@@ -98,12 +100,14 @@ Page({
         let itemImages = res.data.swiperImageUrls;
         let itemCategories = res.data.itemCategories;
         let descSummary = res.data.descSummary;
+        let coverImageSrc = res.data.imageUrl;
         that.setData({
           priceStr: priceStr,
           title: title,
           itemImages : itemImages,
           itemCategories: itemCategories,
-          descSummary : descSummary
+          descSummary : descSummary,
+          coverImageSrc : coverImageSrc
         });
       })
       .catch(err => console.error(err));

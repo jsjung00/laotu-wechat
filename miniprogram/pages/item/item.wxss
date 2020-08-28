@@ -139,11 +139,58 @@ CustomTabBar{
   margin-top: auto;
 }
 
+/* CSS for the pop up product card */
 #cartPopUpContainer{
   /* This is visible when addToCart() changes displayPopUp to true */
   z-index: 1;
   background-color: thistle;
-  min-height: 30vh;
-  width: 100%;  
+  min-height: 50vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+#cardContainer{
+  min-height: 30%;
+  background-color: peachpuff;
+  display: flex;
+}
+#imageContainer{
+  width: 40%;
+  height: 100%;
+  background-color: seashell;
+}
+#descContainer{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* I want my items to start at the bottom */
+  justify-content: flex-end;
+  background-color: salmon;
+}
+
+#quantityContainer{
+  min-height: 20%;
+  /* Should take up the rest of the space */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* I want my quantity things to be on the bottom */
+  justify-content: flex-end;
+  background-color: pink;
+}
+#buttonsContainer{
+  min-height: 10%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: powderblue;
+}
+
+.cartButtons{
+  width: 40%;
+  display: flex;
+  align-items: center;
+}
+
+
 
