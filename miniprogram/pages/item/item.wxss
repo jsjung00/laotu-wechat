@@ -139,6 +139,10 @@ CustomTabBar{
   margin-top: auto;
 }
 
+.blurredElement{
+  filter: blur(8px);
+}
+
 /* CSS for the pop up product card */
 #cartPopUpContainer{
   /* This is visible when addToCart() changes displayPopUp to true */
@@ -148,6 +152,10 @@ CustomTabBar{
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+#closeContainer{
+  display: flex;
+  justify-content: flex-end;
 }
 
 #cardContainer{

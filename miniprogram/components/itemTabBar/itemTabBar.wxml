@@ -5,7 +5,8 @@
     <view class="iconsContainer">
       <vant-goods-action-icon icon="wap-home-o" text="Home" icon-class="iconCustom" link-type="switchTab" url="../../pages/index/index"></vant-goods-action-icon>
       <vant-goods-action-icon icon="service-o" text="Help" icon-class="iconCustom"></vant-goods-action-icon>
-      <vant-goods-action-icon icon="cart-o" text="My Cart" icon-class="iconCustom" info="{{numItems > 0 ? numItems : null}}"></vant-goods-action-icon>
+      <!-- _numItems is a value that is set by numItems which is passed in from the parent page. Only the parent changes the value-->
+      <vant-goods-action-icon icon="cart-o" text="My Cart" icon-class="iconCustom" info="{{_numItems > 0 ? _numItems : null}}"></vant-goods-action-icon>
     </view>
     <view class="buttonsContainer">
       <vant-goods-action-button class="vantButton" custom-class="vantButton" text="Add to Cart" bindtap="addItem"></vant-goods-action-button>

@@ -2,7 +2,8 @@
 <import src="../template/template.wxml"></import>
 
 <CustomNavBar isBack ="{{true}}"></CustomNavBar>
-<view id="body">
+<!-- The background page should be blurred if backgroundBlur == true-->
+<view id="body" class="{{backgroundBlur ? 'blurredElement' : ''}}">
   <!-- Add the sliding image component-->
   <view id="swiperContainer">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" style="height: 100%; width: 100%">
@@ -68,7 +69,16 @@
   </view>
   
 </view>
+<!--This is the popup card on the bottom half of the screen that allows the user to choose a quantity
+    Visible only when addToCart() is activated and displayPopUp is true-->
 <view id="cartPopUpContainer" class="spacedVerticalContainer sidePadding" wx:if="{{displayPopUp}}">
+  <!--Contains the X out button on the right of this container-->
+  <view id="closeContainer">
+    <!--X button will trigger clickClose() on tap-->
+    <view hover-class="mp-icon-hover" bindtap="clickClose" hover-stay-time="{{200}}">
+      <mp-icon icon="close" size="{{25}}"></mp-icon>
+    </view>
+  </view>
   <!--Contains the image on left and title and price on right-->
   <view id="cardContainer" class="spacedVerticalElement">
     <view id="imageContainer">
@@ -82,19 +92,19 @@
   <!--Contains picker to adjust quantity-->
   <view id="quantityContainer" class="spacedVerticalElement">
     <text>Quantity</text>
-    <vant-stepper value="{{1}}" input-width="60px" button-size="45px" min="1" max="99"></vant-stepper>
+    <vant-stepper value="{{1}}" input-width="60px" button-size="45px" min="1" max="99" bind:change="quantityChange"></vant-stepper>
   </view>
   <!--Contains add to cart and buy buttons-->
   <view id="buttonsContainer" class="spacedVerticalElement">
     <!--DEV: Figure out how to customize the button (weUI? button css?)-->
-    <button id="addToCartButton" class="cartButton">Add to Cart</button>
+    <button id="addToCartButton" class="cartButton" bindtap="addToCart">Add to Cart</button>
     <button id="buyButton" class="cartButton">Buy Now</button>
   </view>  
 </view>
 
 <!-- When the add to cart button is tapped, the tabBar will trigger the addToCart function in this js file
       addToCart function will set isTabBarHidden=true, which will then pass to component and cause tabBar to not render in wxif-->
-<CustomTabBar isTabBarHidden="{{isTabBarHidden}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="addToCart"></CustomTabBar>
+<CustomTabBar numItems="{{numCartItems}}" isTabBarHidden="{{isTabBarHidden}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="tabBarAddToCart"></CustomTabBar>
 
 
 

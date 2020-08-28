@@ -6,7 +6,11 @@
  * [Future speed]: Consider passing the item data from events so it doesn't have to query from the cloud (lazy load?)
  * 
  * Race condition: user clicks on heart and closes page before local boolean is uploaded.
- *  Solution: Have a rendering page until everything is loaded. Add a small delay before page closes 
+ *  Solution: Have a rendering page until everything is loaded. Add a small delay before page closes
+ * 
+ * For the card pop up functionality, when the add to cart or buy now button is clicked in the itemTabBar component, the addToCart()
+ * function here is triggered which sets displayPopUp = true and isTabBarHidden = true. The itemTabBar.js listens for any
+ * change and will be able to get the isTabBarHidden = true in order to hide the component. 
  */
 const app = getApp();
 
@@ -23,7 +27,10 @@ Page({
     vertical: false,
     itemImages : [], //array of imgSrcs which are strings,
     isTabBarHidden: false,
-    displayPopUp: false
+    displayPopUp: false,
+    backgroundBlur : false,
+    //numCartItems : null (will be set in onLoad)
+    itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
   },
 
   /**
@@ -31,23 +38,26 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    //Upload number of cartItems
+    that.uploadNumCartItems();
+
     //Set the tabbar Height to pass into the CustomTabBar component
     let tabbarHeight = app.globalData.tabbarHeight;
     this.setData({
       tabbarHeight
     });
 
-    //Get the itemID and the type
+    //Get the itemID and the type and set to local storage
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', function(data){
       let id = data.id;
       let type = data.type;
-      //upload the item type and id
+      //Upload the item type and id
       that.setData({
         itemID : id,
         itemType: type
       });
-      //upload Item Data
+      //Upload Item Data
       //DEV: Note the race condition. The item data needs to be uploaded before the page is shown.
       that.uploadItemData(id, type);
       //Check if the item is favorited and set the isFavorited data
@@ -117,7 +127,8 @@ Page({
     }
   },
   setIsFavorited: async function(itemID, type){
-    //Function is called on load. Pulls the boolean from the cloud and sets to the local data
+    //Function is called on load. Determines if the item is favorited from the cloud (checks if item in user's favitem list)
+    // and sets to the local data
     //Parameters: itemID and type of item ('product' or 'event')
     var that = this;
     //Wait for openID to be passed
@@ -250,7 +261,7 @@ Page({
   },
   updateIsFavorited: function(){
     console.log("updateIsFav()");
-    //Function called on page close. Gets current boolean and updates the user's fav item list
+    //Function called on page close. Gets current isFavorited boolean and updates the user's fav item list
     //Return immediately if itemID or itemType were not set and no changes were made
     if (this.data.itemID == null || this.data.itemType == null){
       console.log("itemID or itemType not set before page close: isFavorited not set, no changes were made.");
@@ -361,12 +372,87 @@ Page({
       console.log("User closed page before isFavorited set. No changes were made.");
     }
   },
-  addToCart: function(e){
-    //Function is triggered by the tabbar component when add to cart button is tapped
-    //Change the isTabBarHidden to true which will then be passed to the tabBar component and hide it
+  uploadNumCartItems : async function(){
+    console.log("uploadNumCartItems()");
+    //Function is called onload. Calculates the number of items in the user's cart and sets to local storage
+    //which will be passed to the itemTabBar for it to render the cart icon.
+    
+    let cartResponse = await wx.cloud.callFunction({
+      name: 'getUserCart'
+    });
+    let cartProducts = cartResponse.result.cartProducts;
+    let numCartItems = cartProducts.length;
+    //Set the number to the local storage
+    this.setData({
+      numCartItems
+    });
+  },
+  tabBarAddToCart: function(e){
+    //Function is triggered by the tabbar component (see itemTabBar.js) when add to cart button is tapped
+    //Change the isTabBarHidden to true which will then be passed to the tabBar component and hide the tabbar
+    //Change displayPopUp to true in order to show the popUp that allows user to choose quantity
+    //Change backgroundBlur to true to blur out the background
     this.setData({
       displayPopUp : true,
-      isTabBarHidden : true
+      isTabBarHidden : true,
+      backgroundBlur : true
+    });
+  },
+  quantityChange : function(e){
+    //Function is triggered when the stepper quantity is increased
+    //Upload the new quantity
+    this.setData({itemQuantity: e.detail});
+  },
+  addToCart : async function(e){
+    //Function is triggered when the user clicks the addToCart button in the cardPopUp
+    //Upload the item and the quantity to the cloud
+    //Wait for the itemID
+    var that = this;
+    var checkItemID = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForItemID(){
+          var itemID = that.data.itemID;
+          if (itemID == null){
+            //Continually loop until the data is set
+            setTimeout(waitForItemID, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("setisFavorited(): openID took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkItemID();
+    var itemID = this.data.itemID;
+
+    //Get the quantity that is in the vant stepper
+    let itemQuantity = this.data.itemQuantity;
+    console.log("itemQuanitity is ", itemQuantity);
+    //Upload the item and itemQuantity to user's cart
+    let result = await wx.cloud.callFunction({
+      name : 'addItemToCart',
+      data : {
+        itemid : itemID,
+        quantity : itemQuantity
+      }
+    });
+
+  },
+  clickClose : function(e){
+    //Function is called when the close button is tapped.
+    //Should set displayPopUp to false, isTabBarHidden to false, and backgroundBlur to false to undo everything
+
+    console.log("clickClose()");
+    this.setData({
+      displayPopUp : false,
+      isTabBarHidden : false,
+      backgroundBlur : false
     });
   }
 

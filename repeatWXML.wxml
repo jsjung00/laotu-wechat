@@ -1,0 +1,4 @@
+<!-- This is the container for any icon that needs to have a hover class-->
+<view hover-class="mp-icon-hover" bindtap="clickClose" hover-stay-time="{{200}}">
+  <mp-icon icon="close" size="{{25}}"></mp-icon>
+</view>
