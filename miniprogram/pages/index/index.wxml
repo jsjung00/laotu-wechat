@@ -1,1 +1,23 @@
-<text>Home Page</text>
+<CustomNav title="Laotu"></CustomNav>
+<view id="bodyContainer" class="spacedVerticalContainer sidePadding">
+  <view id="aboveSwiperContainer" class="spacedVerticalElement">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
+      <block wx:for="{{aboveSwiperImages}}" wx:key="*this" wx:for-item="imgSrc">
+        <swiper-item>
+         <image src="{{imgSrc}}" mode="aspectFill" style="width: 100%; height: 100%;"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view id="belowSwiperContainer" class="spacedVerticalElement">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
+      <block wx:for="{{belowSwiperImages}}" wx:key="*this" wx:for-item="imgSrc">
+        <swiper-item>
+         <image src="{{imgSrc}}" mode="aspectFill" style="width: 100%; height: 100%;"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view id="featureEventsContainer" class="featureContainer spacedVerticalElement"></view>
+  <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement"></view>
+</view>

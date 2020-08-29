@@ -25,6 +25,7 @@ Page({
     interval: 2000,
     duration: 500,
     vertical: false,
+    circular: true,
     itemImages : [], //array of imgSrcs which are strings,
     isTabBarHidden: false,
     displayPopUp: false,

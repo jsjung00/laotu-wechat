@@ -2,9 +2,9 @@
 NOTE: Not sure how to really customize the icon. Simply changed the icon size by changing the font-size.
 iconsContainer is hardCoded- change when iconSize or number of icons changes.
 */
-.iconCustom{
+/*.iconCustom{
   font-size: 30px !important;
-}
+}*/
 
 /* components/itemTabBar.wxss */
 .tabbarContainer{
