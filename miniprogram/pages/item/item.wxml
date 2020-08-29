@@ -1,4 +1,4 @@
-<import src="../itemTabBarTemp/itemTabBarTemp.wxml"></import>
+<import src="../../components/itemTabBar/itemTabBar.wxml"></import>
 <import src="../template/template.wxml"></import>
 
 <CustomNavBar isBack ="{{true}}"></CustomNavBar>
@@ -29,9 +29,10 @@
                 <mp-icon icon="like" size="{{30}}" color="black" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
               </view>
               <view hover-class="mp-icon-hover" hover-stay-time="{{200}}">
-                <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
+                  <button open-type="share">
+                    <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
+                  </button>
               </view>
-              
             </view>
           </view>
           <view id="mainRow">
