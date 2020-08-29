@@ -18,6 +18,17 @@
       </block>
     </swiper>
   </view>
-  <view id="featureEventsContainer" class="featureContainer spacedVerticalElement"></view>
+  <view id="featureEventsContainer" class="featureContainer spacedVerticalElement">
+    <itemCard imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
+      <view slot="topRow">
+        <view id="titleRow">
+          <text id="titleText">Carrots</text>
+          <button id="moreButton" size="mini">More</button>
+        </view>
+      </view>
+      <view slot="bodyRow">$20</view>
+      <view slot="bottomRow">Buy</view>
+    </itemCard>
+  </view>
   <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement"></view>
 </view>

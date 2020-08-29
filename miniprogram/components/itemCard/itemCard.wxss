@@ -1,1 +1,25 @@
 /* components/itemCard.wxss */
+.itemCardContainer{
+  /* By default, we make it a certain height and width */
+  display: flex; 
+  background-color: #E1CEC9;
+}
+.leftContainer{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #EBE6E5;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+}
+.rightContainer{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #DFD8DC;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+}
+.grow{
+  flex-grow: 1
+}

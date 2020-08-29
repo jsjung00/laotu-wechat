@@ -27,6 +27,16 @@ page{
 .featureContainer{
   min-height: 20vh;
   background-color: #F5F3E7;
+  display: flex;
+}
+
+#titleRow{
+  display: flex;
+  width: 300rpx;
+  background-color: seashell;
+}
+#moreButton{
+  margin-left: auto;
 }
 
 
