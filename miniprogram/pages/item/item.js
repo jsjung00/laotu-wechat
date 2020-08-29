@@ -260,6 +260,10 @@ Page({
     let isFavorited = !pastIsFavorited;
     this.setData({isFavorited});
   },
+  onShareAppMessage: function (shareParams) {
+    console.log("function onShareAppMessage")
+    console.log(shareParams)
+  },
   updateIsFavorited: function(){
     console.log("updateIsFav()");
     //Function called on page close. Gets current isFavorited boolean and updates the user's fav item list

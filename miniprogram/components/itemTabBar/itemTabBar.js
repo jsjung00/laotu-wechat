@@ -73,6 +73,11 @@ Component({
       //Function is called when the user clicks on the add to Cart button
       //Trigger the event "addToCart" in the parent page which should
       this.triggerEvent('addToCart');
-    }
+    },
+    handleContact: function(e) {
+      console.log("function handleContact")
+      console.log(e.detail.path)
+      console.log(e.detail.query)
+  }
   }
 })
