@@ -37,9 +37,20 @@ Page({
     let cartQuantityObjectsResp = await wx.cloud.callFunction({
       name : 'getUserCart'
     });
-    let _cartQuantityObjects = cartDetailObjectsResp.result.cartProducts;
-    //For each object, we need to add the price : Number 
+    console.log(cartQuantityObjectsResp);
+    let _cartQuantityObjects = cartQuantityObjectsResp.result.cartProducts;
     
+    //For each object, we need to add the price : Number 
+    var getPrice = function(productID){
+      let _productObject = cartDetailObjects.filter(obj => obj._id == productID);
+      if (_productObject.length < 1){
+        throw new Error("Could not find object to corresponding productID. shoppingCart onload()");
+      }
+      let price = _productObject[0].price;
+      return price;
+    }
+    let cartQuantityObjects = _cartQuantityObjects.map(obj => Object.assign(obj, {price : getPrice(obj.itemid)}));
+    console.log("cart", cartQuantityObjects);
 
     
     
