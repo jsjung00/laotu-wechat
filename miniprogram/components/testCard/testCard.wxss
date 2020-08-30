@@ -1,0 +1,27 @@
+/* components/testCard.wxss */
+.testCardContainer{
+  background-color: skyblue;
+  height:100%;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.first{
+  background-color: slateblue;
+}
+.second{
+  background-color: slategray;
+  flex-grow: 1;
+  width: 100%;
+}
+.firstContainer{
+  width: 100%;
+  height: 60%;
+  background-color: snow;
+}
+.secondContainer{
+  width:100%;
+  flex-grow: 1;
+  background-color: springgreen;
+}

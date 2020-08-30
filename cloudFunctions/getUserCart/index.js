@@ -12,7 +12,6 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openID = wxContext.OPENID;
   //Get the user's cart
-
   let cartResponse = await db.collection('userCart').where({
     _openid : openID
   }).get();

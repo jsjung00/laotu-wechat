@@ -1,3 +1,1 @@
-0) I need the order page done by Thursday Night China Time
-1) Not going to develop the reviews functionality
-2) 
+0) Fix the cardItem component. Weird things happen when the slot content is too big and container size is too small

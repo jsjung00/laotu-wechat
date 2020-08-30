@@ -1,0 +1,43 @@
+<!--miniprogram/pages/shoppingCart.wxml-->
+<CustomNav isBack="{{true}}"></CustomNav>
+<view id="bodyContainer" class="spacedVerticalContainer sidePadding">
+  <view id="titleContainer" class="spacedVerticalElement">Shopping Cart</view>
+  <!--Container contains all of the product cards-->
+  <view id="productCardsContainer" class="spacedVerticalContainer spacedVerticalElement">
+    <!-- detail is an object that follows the object in collection 'product' and a isHidden boolean-->
+    <block wx:for="{{cartDetailObjects}}" wx:for-item="detail" wx:for-index="idx">
+      <view id="cardContainer" class="spacedVerticalElement">
+        <itemCard style="flex-grow:1; width: 100%" imageSrc="{{detail.imageUrl}}">
+          <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+          <view slot="topRow" style="width: 100%; height: 100%">
+            <!--The titleRow view container needs to have height and with 100%-->
+            <view id="titleRow" class="slotContent">
+              <text id="titleText">{{detail.title}}</text>
+            </view>
+          </view>
+          <view slot="bodyRow" style="width: 100%; height: 100%">
+            <view id="bodyRow" class="slotContent">
+              <text>{{detail.descSummary}}</text>
+            </view>
+          </view>
+          <view slot="bottomRow" style="width: 100%; height: 100%">
+            <view id="bottomRow" class="slotContent">
+              <text>¥{{detail.price}}</text>
+              <vant-stepper value="{{detail.quantity}}" input-width="40px" button-size="30px" min="1" max="99" bind:change="quantityChange" data-idx="{{idx}}"></vant-stepper>
+            </view>
+          </view>
+        </itemCard>
+      </view>
+    </block>
+  </view>
+  <view id="priceContainer" class="spacedVerticalElement">
+    <text>Sub total</text>
+    <text id="subTotalPriceText">¥{{subTotal}}</text>
+  </view>
+  <!--Contains the checkout and the return back button. Note margin-bottom: 100px;-->
+  <view id="buttonsContainer" class="spacedVerticalContainer">
+    <vant-button type="primary" class="spacedVerticalElement" color="#282828" block>Checkout</vant-button>
+    <view class="spacedVerticalElement" style="text-align: center;">Continue shopping</view>
+  </view>
+
+</view>

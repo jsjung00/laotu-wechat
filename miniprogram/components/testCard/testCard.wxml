@@ -1,0 +1,10 @@
+<!--components/testCard.wxml-->
+<view class="testCardContainer">
+  <view class="firstContainer">
+    <slot name="first"></slot>
+  </view>
+  <view class="secondContainer">
+    <slot name="second"></slot>
+  </view>
+
+</view>
