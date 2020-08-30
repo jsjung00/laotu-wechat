@@ -19,7 +19,7 @@ Page({
    * Page initial data
    */
   data: {
-    subTotal : "Loading" 
+    subTotal : 0.1 
   },
 
   /**
@@ -120,6 +120,13 @@ Page({
 
     //Update the subTotal
     this.setSubTotal();
+  },
+  clickCheckout : function(e) {
+    console.log("clickCheckout()");
+    console.log("e", e)
+    wx.navigateTo({
+      url: '../../pages/wePay/wePay?subtotal=' + e.currentTarget.dataset.subtotal,
+    });
   }
 
 
