@@ -36,7 +36,7 @@
   </view>
   <!--Contains the checkout and the return back button. Note margin-bottom: 100px;-->
   <view id="buttonsContainer" class="spacedVerticalContainer">
-    <vant-button type="primary" class="spacedVerticalElement" color="#282828" block>Checkout</vant-button>
+    <vant-button type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">Checkout</vant-button>
     <view class="spacedVerticalElement" style="text-align: center;">Continue shopping</view>
   </view>
 
