@@ -1,7 +1,8 @@
 <!--This card contains an image on the left and a description box on the right. 
     The description box has three slots (topRow, bodyRow, and bottomRow)
     Component should be enclosed in a view container with desired size and should be given
-  <itemCard style="width: 100%; height: 100%"> or some variation-->
+  <itemCard style="width: 100%; height: 100%"> or some variation
+    See index page under featureEventsContainer for usage-->
 <view class="itemCardContainer">
   <!--Contains the image-->
   <view class="leftContainer">

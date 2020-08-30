@@ -11,3 +11,58 @@ page{
   flex-direction: column;
   background-color: thistle;
 }
+#titleContainer{
+  border-bottom: 7rpx solid black;
+  font-size: 25px;
+  font-weight: bold;
+}
+#productCardsContainer{
+  display: flex;
+  flex-direction: column;
+}
+#cardContainer{
+  height: 20vh;
+  width: 100%;
+  border-bottom: 5rpx solid gray;
+}
+
+#titleText{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.slotContent{
+  height: 100%;
+  width: 100%;
+}
+#bodyRow{
+  font-size: 10px;
+  color: rgb(51, 51, 51);
+}
+
+#bottomRow{
+  font-size: 20px;
+  color: rgb(29, 29, 29);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#priceContainer{
+  display: flex;
+  justify-content: space-between;
+}
+#subTotalPriceText{
+  font-size: 20px;
+  font-weight: bold;
+}
+#buttonsContainer{
+  width: 100%;
+  margin-top: auto;
+  display: block;
+  /*display: flex;
+  flex-direction: column;*/
+  align-items: center;
+  margin-bottom: 100px;
+  
+}

@@ -17,7 +17,7 @@ Page({
    * Page initial data
    */
   data: {
-    
+    subTotal : "Loading" 
   },
 
   /**
@@ -50,16 +50,36 @@ Page({
       return price;
     }
     let cartQuantityObjects = _cartQuantityObjects.map(obj => Object.assign(obj, {price : getPrice(obj.itemid)}));
-    console.log("cart", cartQuantityObjects);
-
+    //Upload cartQuantityObjects to the page data
+    this.setData({cartQuantityObjects});
     
-    
+    //Upload the price
+    this.setSubTotal();
 
 
   },
-  click: function(){
-    console.log("click()");
-    this.setData({isHidden: true});
+  setSubTotal: function(){
+    //Called whenever the quantity is changed. Calculates the price using cartQuantityObjects array
+    let cartQuantityObjects = this.data.cartQuantityObjects;
+    console.log(cartQuantityObjects);
+    var subTotal = 0;
+    cartQuantityObjects.forEach(obj => subTotal += (obj.price * obj.quantity));
+    console.log("subtotal is ", subTotal);
+    this.setData({subTotal});
+    
+  },
+  quantityChange : function(e){
+    //Called when the stepper quantity is changed
+    let cardIndex = e.currentTarget.dataset.idx;
+    //update the cartQuantityObjects array with the new quantity
+    let cartQuantityObjects = this.data.cartQuantityObjects;
+    console.log("current quantity: ", e.detail);
+    cartQuantityObjects[cardIndex].quantity = e.detail;
+    this.setData({cartQuantityObjects});
+
+    //Update the subTotal
+    this.setSubTotal();
   }
+
 
 })

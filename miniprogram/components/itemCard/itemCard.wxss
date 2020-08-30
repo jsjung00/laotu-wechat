@@ -17,7 +17,8 @@
   padding: 20rpx 20rpx 20rpx 20rpx;
 }
 .rightContainer{
-  flex-grow: 1;
+  width: 60%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #DFD8DC;
