@@ -23,7 +23,7 @@
           <view slot="bottomRow" style="width: 100%; height: 100%">
             <view id="bottomRow" class="slotContent">
               <text>¥{{detail.price}}</text>
-              <vant-stepper value="{{1}}" input-width="40px" button-size="30px" min="1" max="99" bind:change="quantityChange" data-idx="{{idx}}"></vant-stepper>
+              <vant-stepper value="{{detail.quantity}}" input-width="40px" button-size="30px" min="1" max="99" bind:change="quantityChange" data-idx="{{idx}}"></vant-stepper>
             </view>
           </view>
         </itemCard>
