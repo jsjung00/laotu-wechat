@@ -2,15 +2,21 @@
     The description box has three slots (title, body, bottom)
     Component should be enclosed in a view container with desired size and display flex. This will become the
     size of container due to the flex-grow: 1-->
-<view class="itemCardContainer" style="flex-grow: 1">
+<view class="itemCardContainer">
   <!--Contains the image-->
   <view class="leftContainer">
     <image mode="aspectFill" src="{{imageSrc}}" style="height:100%; width: 100%"></image>
   </view>
   <!--Contains the description-->
   <view class="rightContainer">
-    <slot name="topRow"></slot>
-    <slot name="bodyRow" class="grow"></slot>
-    <slot name="bottomRow"></slot>
+    <view class="topRowContainer">
+      <slot name="topRow"></slot>
+    </view>
+    <view class="bodyRowContainer">
+      <slot name="bodyRow"></slot>
+    </view>
+    <view class="bottomRowContainer">
+      <slot name="bottomRow"></slot>
+    </view>
   </view>
 </view>

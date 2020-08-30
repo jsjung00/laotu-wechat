@@ -1,8 +1,11 @@
 /* components/itemCard.wxss */
 .itemCardContainer{
-  /* By default, we make it a certain height and width */
+  /* NOTE: the itemCard component should be in a container with desired size and should have
+      <itemCard style="width: 100%; height: 100%"/> */
+  height: 100%;
+  width: 100%;
   display: flex; 
-  background-color: #E1CEC9;
+  background-color: orange;
 }
 .leftContainer{
   width: 40%;
@@ -20,6 +23,19 @@
   background-color: #DFD8DC;
   padding: 20rpx 20rpx 20rpx 20rpx;
 }
-.grow{
-  flex-grow: 1
+.topRowContainer{
+  width: 100%;
+  height: 30%;
+  /*background-color: springgreen;*/
+}
+.bodyRowContainer{
+  width: 100%;
+  /* Body takes up the rest of the container */
+  flex-grow:1;
+  /*background-color: steelblue;*/
+}
+.bottomRowContainer{
+  width: 100%;
+  height: 30%;
+  /*background-color: teal;*/
 }

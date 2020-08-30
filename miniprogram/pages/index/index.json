@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "CustomNav" : "../../components/navbar/navbar",
-    "itemCard" : "../../components/itemCard/itemCard"
+    "itemCard" : "../../components/itemCard/itemCard",
+    "testCard" : "../../components/testCard/testCard"
   }
 }

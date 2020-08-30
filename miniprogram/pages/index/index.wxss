@@ -25,18 +25,36 @@ page{
 }
 
 .featureContainer{
-  min-height: 20vh;
+  height: 30vh;
   background-color: #F5F3E7;
   display: flex;
+  flex-direction: column;
+}
+.aboveRow{
+  display: flex;
+  min-height: 10%;
+  justify-content: space-between;
+  background-color: #D4CFBD
+}
+
+.slotContent{
+  height: 100%;
+  width: 100%;
 }
 
 #titleRow{
   display: flex;
-  width: 300rpx;
-  background-color: seashell;
+  height: 100%;
+  width: 100%;
+}
+#bodyRow{
+  display: flex;
+  flex-direction: column;
 }
 #moreButton{
-  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
