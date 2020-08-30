@@ -1,0 +1,13 @@
+/* miniprogram/pages/shoppingCart.wxss */
+page{
+  height: 100%;
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+}
+#bodyContainer{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: thistle;
+}

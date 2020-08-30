@@ -44,14 +44,7 @@
       </view>
     </itemCard>
   </view>
-  <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement" style="display:flex">
-    <testCard style="height:100%; width:100%">
-      <!-- Need to pass in 100% for height and width for the slot to take up the desired size as defined in component
-          denoted by slotContainer-->
-      <view slot="first" style="background-color: blue;height:100%; width:100%">
-        Here is some text
-      </view>
-      <view slot="second" style="background-color: burlywood; height: 50%; width:100%"></view>
-    </testCard>
+  <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement">
+    
   </view>
 </view>

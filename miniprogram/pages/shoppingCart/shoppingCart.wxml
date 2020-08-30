@@ -1,0 +1,3 @@
+<!--miniprogram/pages/shoppingCart.wxml-->
+<CustomNav title="Shopping Cart" isBack="{{true}}"></CustomNav>
+<view id="bodyContainer" class="spacedVerticalContainer sidePadding"></view>

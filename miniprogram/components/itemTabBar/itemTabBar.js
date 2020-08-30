@@ -78,6 +78,13 @@ Component({
       console.log("function handleContact")
       console.log(e.detail.path)
       console.log(e.detail.query)
-  }
+    },
+    clickCartIcon : function(e){
+      //Function is called when user clicks on the cart icon. Should redirect to shopping cart page
+      console.log("clickCartIcon()");
+      wx.navigateTo({
+        url: '../../pages/shoppingCart/shoppingCart',
+      });
+    }
   }
 })
