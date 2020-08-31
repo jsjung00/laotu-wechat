@@ -8,7 +8,11 @@
  *    [{id: "", quantity: Number, price: Number}].
  * To calculate the price, there is a local variable called totalPrice which is simply the sum of the quantity*price in the
  *    cartQuantity array.
+ * When card is deleted, the isHidden attribute for that index is set to true in the cartDetailsObjects. The corresponding itemID
+ *    object is deleted from cartQuantityArray (which will later change the user's cart in the cloud)
  * When page closes, the userCart is updated (the quantity and the items in the array may change) 
+ * For the loading screen, there is a boolean called pageReady which is set to true once the cartDetails and cartQuantityObjects
+ *    arrays are both set to the local data.
 
  */
 
@@ -19,13 +23,14 @@ Page({
    * Page initial data
    */
   data: {
-    subTotal : "Loading" 
+    subTotal : 0
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
+    var that = this;
     //Grab the array of cartDetailObjects from the cloud
     let cartDetailObjectsResp = await wx.cloud.callFunction({
       name: 'getCartDetailObjects'
@@ -54,8 +59,6 @@ Page({
     //Upload cartDetailObjects to the page data
     this.setData({cartDetailObjects});
 
-    
-    
     //For each quantity object, we need to add the price : Number 
     var getPrice = function(productID){
       let _productObject = cartDetailObjects.filter(obj => obj._id == productID);
@@ -72,6 +75,9 @@ Page({
     //Upload the price
     this.setSubTotal();
 
+    //Set our pageReady boolean as true and display the page
+    let pageReady = true;
+    this.setData({pageReady});
 
   },
   onUnload : async function(e){
@@ -126,6 +132,25 @@ Page({
     wx.navigateTo({
       url: '../../pages/wePay/wePay?subtotal=' + e.currentTarget.dataset.subtotal,
     });
+  },
+  clickTrash: function(e){
+    //Called when the trash icon in the card is clicked. 
+    //Change the card's isHidden attribute to true
+    console.log("clickTrash()");
+    let cardIndex = e.currentTarget.dataset.idx;
+    
+    let cartDetailObjects = this.data.cartDetailObjects;
+    cartDetailObjects[cardIndex].isHidden = true;
+    this.setData({cartDetailObjects});
+    
+    //Remove the item from the cartQuantityObjects array
+    let itemID = cartDetailObjects[cardIndex]._id;
+    let _cartQuantityObjects = this.data.cartQuantityObjects;
+    let cartQuantityObjects = _cartQuantityObjects.filter(quantObj => quantObj.itemid != itemID);
+    //Update the cartQuantityObjects array in the local data
+    this.setData({cartQuantityObjects});
+    //Change the price
+    this.setSubTotal();
   }
 
 

@@ -4,12 +4,21 @@ page{
   width: 750rpx;
   display: flex;
   flex-direction: column;
+  background-color: #f2f2f2;
 }
+#loadingBodyContainer{
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
 #bodyContainer{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background-color: thistle;
+  /*background-color: thistle;*/
 }
 #titleContainer{
   border-bottom: 7rpx solid black;
@@ -21,15 +30,20 @@ page{
   flex-direction: column;
 }
 #cardContainer{
-  height: 20vh;
+  height: 30vh;
   width: 100%;
-  border-bottom: 5rpx solid gray;
+  border-radius: 10px;
+  background-color: white;
 }
 
+#aboveRow{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  
+}
 #titleRow{
   display: flex;
-  flex-direction: column;
-  background-color: green;
 }
 #closeContainer{
   align-self: flex-end;

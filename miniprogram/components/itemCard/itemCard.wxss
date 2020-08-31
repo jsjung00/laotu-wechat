@@ -9,7 +9,7 @@
   /*background-color: orange;*/
 }
 .aboveContainer, .belowContainer{
-  height: 20%;
+  height: 10%;
   width: 100%;
 }
 .mainContainer{

@@ -34,7 +34,7 @@
 
 .capsule{
   border-radius: 500px;
-  background-color: white;
+  /*background-color: white;*/
   height: 30px;
   display: flex;
   overflow: hidden;
@@ -46,7 +46,7 @@
   border-width: 1px;
 }
 .noCapsule{
-  background-color: white;
+  /*background-color: white;*/
   height: 30px;
   display: flex;
   overflow: hidden;

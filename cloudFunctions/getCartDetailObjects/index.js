@@ -1,5 +1,5 @@
 /**
- * Function is called in shopping cart.
+ * Function is called in shopping cart. Uses the userCart productID array to build the array.
  * Parameters : None
  * Return : Array containing the cartDetailObjects [{_id:"", titleStr: "",...}] which is from collection 'products' 
  */
