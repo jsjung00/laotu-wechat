@@ -44,8 +44,10 @@ page{
 
 #titleRow{
   display: flex;
-  height: 100%;
   width: 100%;
+  border-style: solid;
+  flex-wrap: wrap;
+  flex-basis: auto;
 }
 #bodyRow{
   display: flex;

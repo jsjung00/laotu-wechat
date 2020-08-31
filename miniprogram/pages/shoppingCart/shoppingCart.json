@@ -3,6 +3,7 @@
     "CustomNav" : "../../components/navbar/navbar",
     "itemCard" : "../../components/itemCard/itemCard",
     "vant-stepper" : "../../vantDist/stepper/index",
-    "vant-button" : "../../vantDist/button/index"
+    "vant-button" : "../../vantDist/button/index",
+    "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon"
   }
 }

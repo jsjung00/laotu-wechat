@@ -1,4 +1,6 @@
-<!--This card contains an image on the left and a description box on the right. 
+<!--Parameters : isAbove: Boolean, isBelow: Boolean, determines whether or not to render a slot 
+    This card contains threee rows- an optional above row, an optional below row, and the body row.
+    The body row has an image on the left and a description box on the right. 
     The description box has three slots (topRow, bodyRow, and bottomRow)
     Component should be enclosed in a view container with desired size and should be given
   <itemCard style="width: 100%; height: 100%"> or some variation

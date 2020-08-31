@@ -8,7 +8,7 @@
  *    [{id: "", quantity: Number, price: Number}].
  * To calculate the price, there is a local variable called totalPrice which is simply the sum of the quantity*price in the
  *    cartQuantity array.
- *When page closes, the userCart is updated (the quantity and the items in the array may change) 
+ * When page closes, the userCart is updated (the quantity and the items in the array may change) 
 
  */
 
@@ -19,7 +19,7 @@ Page({
    * Page initial data
    */
   data: {
-    subTotal : 0.1 
+    subTotal : "Loading" 
   },
 
   /**
@@ -123,7 +123,6 @@ Page({
   },
   clickCheckout : function(e) {
     console.log("clickCheckout()");
-    console.log("e", e)
     wx.navigateTo({
       url: '../../pages/wePay/wePay?subtotal=' + e.currentTarget.dataset.subtotal,
     });

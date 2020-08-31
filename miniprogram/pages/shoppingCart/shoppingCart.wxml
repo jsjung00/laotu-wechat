@@ -10,9 +10,13 @@
         <itemCard style="flex-grow:1; width: 100%" imageSrc="{{detail.imageUrl}}">
           <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
           <view slot="topRow" style="width: 100%; height: 100%">
-            <!--The titleRow view container needs to have height and with 100%-->
+            <!--The titleRow view container needs to have height and width 100%-->
             <view id="titleRow" class="slotContent">
-              <text id="titleText">{{detail.title}}</text>
+              <!--X button will trigger clickTrash() on tap-->
+              <view id="closeContainer" hover-class="mp-icon-hover" bindtap="clickTrash" hover-stay-time="{{200}}">
+                <mp-icon icon="delete" size="{{25}}"></mp-icon>
+              </view>
+              <text id="titleText">{{detail.title}}No</text>
             </view>
           </view>
           <view slot="bodyRow" style="width: 100%; height: 100%">
@@ -34,10 +38,9 @@
     <text>Sub total</text>
     <text id="subTotalPriceText">¥{{subTotal}}</text>
   </view>
-  <!--Contains the checkout and the return back button. Note margin-bottom: 100px;-->
+  <!--Contains the checkout and the return back button. Note margin-bottom: 10%;-->
   <view id="buttonsContainer" class="spacedVerticalContainer">
     <vant-button type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">Checkout</vant-button>
     <view class="spacedVerticalElement" style="text-align: center;">Continue shopping</view>
   </view>
-
 </view>

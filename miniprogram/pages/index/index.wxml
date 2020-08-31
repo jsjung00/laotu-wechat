@@ -29,11 +29,13 @@
     <!--Has width 100% and flex-grow:1 to define the size-->
     <itemCard style="flex-grow:1; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
       <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-      <view slot="topRow" style="width: 100%; height: 100%">
+      <view slot="topRow" style="width: 100%;">
         <!--The titleRow view container needs to have height and with 100%-->
-        <view id="titleRow" class="slotContent">
+        <!--<view id="titleRow" class="slotContent">
           <text id="titleText">Carrots</text>
-        </view>
+          <view style="height: 30px; width: 30px">too large</view>
+        </view>-->
+        <view style="height: 50%; width: 100%; background-color: blue;">Big</view>
       </view>
       <view slot="bodyRow" style="width: 100%; height: 100%">
         <view id="bodyRow" class="slotContent">
