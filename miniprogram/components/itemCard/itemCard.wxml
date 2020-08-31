@@ -3,23 +3,41 @@
     The body row has an image on the left and a description box on the right. 
     The description box has three slots (topRow, bodyRow, and bottomRow)
     Component should be enclosed in a view container with desired size and should be given
-  <itemCard style="width: 100%; height: 100%"> or some variation
+    <itemCard style="width: 100%; height: 100%"> or some variation.
+    The above slot, below slot require padding- the component does not pad for it.
     See index page under featureEventsContainer for usage-->
+<!--
+  Still need to figure out how to have responsive font (like max font size)
+-->
 <view class="itemCardContainer">
-  <!--Contains the image-->
-  <view class="leftContainer">
-    <image mode="aspectFill" src="{{imageSrc}}" style="height:100%; width: 100%"></image>
+  <!--Contains the optional above container which is only rendered if isAbove is true-->
+  <view wx:if="{{isAbove}}" class="aboveContainer">
+    <slot name="aboveRow"></slot>
   </view>
-  <!--Contains the description-->
-  <view class="rightContainer">
-    <view class="topRowContainer">
-      <slot name="topRow"></slot>
+  <!-- Contains the image and the description box-->
+  <view class="mainContainer">
+    <!--Contains the image-->
+    <view class="leftContainer">
+      <!--Used to pad the top and bottom by 15%-->
+      <view class="thumbPadding"></view>
+      <image class="thumbImage" mode="aspectFill" src="{{imageSrc}}" style="height:100%; width: 100%"></image>
+      <view class="thumbPadding"></view>
     </view>
-    <view class="bodyRowContainer">
-      <slot name="bodyRow"></slot>
+    <!--Contains the description-->
+    <view class="rightContainer">
+      <view class="topRowContainer">
+        <slot name="topRow"></slot>
+      </view>
+      <view class="bodyRowContainer">
+        <slot name="bodyRow"></slot>
+      </view>
+      <view class="bottomRowContainer">
+        <slot name="bottomRow"></slot>
+      </view>
     </view>
-    <view class="bottomRowContainer">
-      <slot name="bottomRow"></slot>
-    </view>
+  </view>
+  <!--Contains the optional below container which is only displayed if isBelow is true-->
+  <view wx:if="{{isBelow}}" class="belowContainer">
+    <slot name="belowRow"></slot>
   </view>
 </view>

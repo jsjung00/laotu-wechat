@@ -19,23 +19,19 @@
     </swiper>
   </view>
   <view id="featureEventsContainer" class="featureContainer spacedVerticalElement">
-    <view class="aboveRow viewPadding">
-      <text>Feature Events</text>
-      <view hover-class="hoverClass" bindtap="clickMore" hover-stay-time="{{200}}">
-        <text>More ></text>
-      </view>
-      <!--<button size="mini" class="moreButton">More ></button>-->
-    </view>
-    <!--Has width 100% and flex-grow:1 to define the size-->
-    <itemCard style="flex-grow:1; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
+    <!--Has width 100% and height 100% to define the size-->
+    <itemCard isAbove="{{true}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
       <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+      <view slot="aboveRow" style="width: 100%; height: 100%">
+        <view class="slotContent viewPadding aboveRow">
+          <text>Feature Events</text>
+          <view hover-class="hoverClass" bindtap="clickMore" hover-stay-time="{{200}}">
+            <text>More ></text>
+          </view>
+        </view>
+      </view>
       <view slot="topRow" style="width: 100%;">
-        <!--The titleRow view container needs to have height and with 100%-->
-        <!--<view id="titleRow" class="slotContent">
-          <text id="titleText">Carrots</text>
-          <view style="height: 30px; width: 30px">too large</view>
-        </view>-->
-        <view style="height: 50%; width: 100%; background-color: blue;">Big</view>
+        <view style="height: 100%; width: 100%; font-size: 20px;">Big</view>
       </view>
       <view slot="bodyRow" style="width: 100%; height: 100%">
         <view id="bodyRow" class="slotContent">

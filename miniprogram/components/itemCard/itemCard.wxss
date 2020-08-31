@@ -4,39 +4,57 @@
       <itemCard style="width: 100%; height: 100%"/> */
   height: 100%;
   width: 100%;
-  display: flex; 
-  background-color: orange;
+  display: flex;
+  flex-direction: column; 
+  /*background-color: orange;*/
 }
+.aboveContainer, .belowContainer{
+  height: 20%;
+  width: 100%;
+}
+.mainContainer{
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+}
+
 .leftContainer{
   width: 30%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #EBE6E5;
-  padding: 40rpx 20rpx 40rpx 20rpx;
+  flex-direction: column;
+  /*background-color: #EBE6E5;*/
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
+.thumbPadding{
+  width: 100%;
+  height: 15%;
+}
+
 .rightContainer{
   width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #DFD8DC;
-  padding: 20rpx 20rpx 20rpx 20rpx;
+  /*background-color: #DFD8DC;*/
   overflow: hidden;
+  padding: 20rpx 20rpx 20rpx 20rpx;
 }
 .topRowContainer{
   width: 100%;
-  height: 30%;
-  background-color: springgreen;
+  height: 20%;
+  /*background-color: springgreen;*/
+  /*Have max-fontsize with vh trick */
 }
 .bodyRowContainer{
   width: 100%;
   /* Body takes up the rest of the container */
   flex-grow:1;
-  background-color: steelblue;
+  /*background-color: steelblue;*/
 }
 .bottomRowContainer{
   width: 100%;
-  background-color: teal;
+  /*background-color: teal;*/
+  height: 30%;
 }
