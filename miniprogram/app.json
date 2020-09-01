@@ -14,7 +14,8 @@
     "pages/events/events",
     "pages/profile/profile",
     "pages/shoppingCart/shoppingCart",
-    "pages/checkout/checkout"
+    "pages/checkout/checkout",
+    "pages/addUserInfo/addUserInfo"
   ],
   "window": {
     "navigationStyle": "custom",

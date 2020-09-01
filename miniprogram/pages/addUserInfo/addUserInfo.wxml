@@ -1,0 +1,9 @@
+<!--miniprogram/pages/addUserInfo.wxml-->
+<CustomNav isBoth="{{true}}" title="Edit Info"></CustomNav>
+<view id="bodyContainer">
+  <vant-cell-group>
+    <vant-field placeholder="Name" border="{{false}}"></vant-field>
+    <vant-field placeholder="Phone #" border="{{false}}"></vant-field>
+    <vant-field placeholder="Full Address" border="{{false}}"></vant-field>
+  </vant-cell-group>
+</view>

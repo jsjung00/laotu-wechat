@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "CustomNav" : "../../components/navbar/navbar",
+    "vant-field" : "../../vantDist/field/index",
+    "vant-cell": "../../vantDist/cell/index",
+    "vant-cell-group": "../../vantDist/cell-group/index"
+  }
+}

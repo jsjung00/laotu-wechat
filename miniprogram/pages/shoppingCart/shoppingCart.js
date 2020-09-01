@@ -30,6 +30,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
+    console.log("shopping onLoad()");
     var that = this;
     //Grab the array of cartDetailObjects from the cloud
     let cartDetailObjectsResp = await wx.cloud.callFunction({
@@ -58,6 +59,7 @@ Page({
     let cartDetailObjects = _cartDetailObjects.map(obj => Object.assign(obj, {isHidden : false, quantity : getQuantity(obj._id)}));
     //Upload cartDetailObjects to the page data
     this.setData({cartDetailObjects});
+    
 
     //For each quantity object, we need to add the price : Number 
     var getPrice = function(productID){
@@ -71,6 +73,7 @@ Page({
     let cartQuantityObjects = _cartQuantityObjects.map(obj => Object.assign(obj, {price : getPrice(obj.itemid)}));
     //Upload cartQuantityObjects to the page data
     this.setData({cartQuantityObjects});
+    console.log("onLoad cartQaunt:", this.data.cartQuantityObjects);
     
     //Upload the price
     this.setSubTotal();
@@ -81,10 +84,13 @@ Page({
 
   },
   onUnload : async function(e){
+    console.log("shoppingCart unload()");
     //Update the user's cart (items and quantity) by pushing our local cartQuantityArray to the cloud
     //First, we remove the price
-    var newCartProducts = this.data.cartQuantityObjects;
-    newCartProducts.forEach(obj => delete obj.price);
+    let cartProducts = this.data.cartQuantityObjects;  
+    console.log("cartQuantity before anything:", cartProducts);
+    var newCartProducts = [];
+    cartProducts.forEach(obj => newCartProducts.push({itemid : obj.itemid, quantity : obj.quantity}));
 
     const openID = app.globalData.openid;
     if (openID == null){
@@ -123,12 +129,35 @@ Page({
     console.log("current quantity: ", e.detail);
     cartQuantityObjects[cardIndex].quantity = e.detail;
     this.setData({cartQuantityObjects});
+    console.log("quantityChange cartQuant", this.data.cartQuantityObjects);
 
     //Update the subTotal
     this.setSubTotal();
   },
-  clickCheckout : function(e) {
+  clickCheckout : async function(e) {
     console.log("clickCheckout()");
+    //Update the user's cart (items and quantity) by pushing our local cartQuantityArray to the cloud
+    //First, we remove the price
+    let cartProducts = this.data.cartQuantityObjects;  
+    console.log("cartQuantity before anything:", cartProducts);
+    var newCartProducts = [];
+    cartProducts.forEach(obj => newCartProducts.push({itemid : obj.itemid, quantity : obj.quantity}));
+
+    const openID = app.globalData.openid;
+    if (openID == null){
+      throw new Error("clickCheckout(). failed to get openID from global data");
+    }
+    const db = wx.cloud.database({env : 'laotudata-laotu'});
+    let response = await db.collection('userCart').where({
+      _openid : openID
+    }).update({
+      data: {
+        cartProducts : newCartProducts
+      },
+      fail: function(err){
+        console.error(err);
+      }
+    });
     wx.navigateTo({
       url: '../../pages/checkout/checkout?subtotal=' + e.currentTarget.dataset.subtotal,
     });

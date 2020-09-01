@@ -27,7 +27,8 @@ Page({
     let cartDetailObjectsResp = await wx.cloud.callFunction({
       name: 'getCartDetailObjects'
     });
-    let cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
+    let _cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
+    
     
     //Grab the array of cartQuantityObjects from the cloud
     let cartQuantityObjectsResp = await wx.cloud.callFunction({
@@ -35,6 +36,17 @@ Page({
     });
     console.log(cartQuantityObjectsResp);
     let _cartQuantityObjects = cartQuantityObjectsResp.result.cartProducts;
+
+    //Get the quantity of each product and add {quantity: Number} to each cartDetailObject
+    var getQuantity = function(productID){
+      let _quantityObject = _cartQuantityObjects.filter(obj => obj.itemid == productID);
+      if (_quantityObject.length < 1){
+        throw new Error("Could not find object to corresponding productID. shoppingCart onload()");
+      }
+      let quantity = _quantityObject[0].quantity;
+      return quantity;
+    } 
+    let cartDetailObjects = _cartDetailObjects.map(obj => Object.assign(obj, {quantity : getQuantity(obj._id)}));
 
     //For each quantity object, we need to add the price : Number 
     var getPrice = function(productID){
@@ -46,6 +58,8 @@ Page({
       return price;
     }
     let cartQuantityObjects = _cartQuantityObjects.map(obj => Object.assign(obj, {price : getPrice(obj.itemid)}));
+
+    
 
     //Upload cartDetailObjects to the page data
     this.setData({cartDetailObjects});
