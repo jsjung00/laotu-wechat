@@ -63,7 +63,7 @@ Page({
     let phoneNumber = this.data.phoneNumber;
     let phoneCode = this.data.countryCodes[this.data.countryCodeIndex];
     let regionCityDistrictArray = this.data.regionCityDistrictArray;
-    
+
     console.log("phoneCode is: ", phoneCode);
 
     //Make sure that all input have some length
@@ -91,7 +91,7 @@ Page({
         title : "Updated",
         icon: "success",
         duration: 1000
-      })
+      });
       //Upload the user's info to the cloud, under 'userInfo'
       wx.cloud.callFunction({
         name : 'addShippingInfo',

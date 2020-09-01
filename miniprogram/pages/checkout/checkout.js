@@ -75,6 +75,12 @@ Page({
     //Set our pageReady boolean as true and display the page
     let pageReady = true;
     this.setData({pageReady});
+
+    //Determine whether or not the user already has the default shipping address set
+    const db = wx.cloud.database({env: 'laotudata-laotu'});
+    wx.cloud.callFunction({
+      name : 'getUserInfo'
+    });
   },
   payClicked : function(e){
     console.log("checkout page- payClicked()");
