@@ -1,0 +1,9 @@
+<!--miniprogram/pages/addUserInfo.wxml-->
+<CustomNav isBoth="{{true}}" title="Edit Info"></CustomNav>
+<view id="bodyContainer">
+  <mp-form>
+    <mp-cell prop="qq" title="Name" ext-class="">
+      <input bindinput="formInputChange" data-field="qq" class="weui-input" placeholder="Please enter your name"/>
+    </mp-cell>
+  </mp-form>
+</view>

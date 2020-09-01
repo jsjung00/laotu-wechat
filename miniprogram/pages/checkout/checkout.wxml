@@ -30,24 +30,32 @@
       </view>
     </block>
   </view>
+  <view id="orderDetailsContainer" class="spacedVerticalElement spacedVerticalContainer sidePadding">
+    <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">Shipping Address</view>
+    <!--If the user already has the shipping address set up, display address-->
+    <view wx:if="{{addressComplete}}">
+      <vant-cell-group>
+        <vant-cell center title="3838 Compton Way, Oakland CA, 39392" value="edit" is-link link-type="navigateTo" url="../editShippingInfo/editShippingInfo"></vant-cell>
+      </vant-cell-group>
+    </view>
+    <!--If address is not set up, display cell that navigates to edit info page-->
+    <view wx:else>
+      <vant-cell-group>
+        <vant-cell title="Edit Shipping Info" is-link link-type="navigateTo" url="../editShippingInfo/editShippingInfo"></vant-cell>
+      </vant-cell-group>
+    </view>
+  </view>
   <view id="orderPriceContainer" class="spacedVerticalElement spacedVerticalContainer sidePadding">
     <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">Summary</view>
-    <view class="priceDetailRow spacedVerticalElement">
-      <text>Sub total</text>
-      <text>¥{{subTotal}}</text>
-    </view>
-    <view class="priceDetailRow spacedVerticalElement">
-      <text>Shipping</text>
-      <text>¥25</text>
-    </view>
-    <view class="priceDetailRow spacedVerticalElement">
-      <text>Tax</text>
-      <text>¥20</text>
-    </view>
-    <view class="priceDetailRow spacedVerticalElement">
-      <text>Total</text>
-      <text>¥215</text>
-    </view>
+    <vant-cell-group>
+      <vant-cell title="Subtotal" value="¥{{subTotal}}"></vant-cell>
+      <vant-cell title="Shipping" value="{{25}}"></vant-cell>
+      <vant-cell title="Tax" value="¥{{20}}"></vant-cell>
+      <vant-cell>
+        <view slot="title" id="titleCell">Total</view>
+        <view slot="value" id="valueCell">¥200</view>
+      </vant-cell>
+    </vant-cell-group>
   </view>
 </view>
 <view wx:else id="loadingBodyContainer">

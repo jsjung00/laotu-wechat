@@ -1,4 +1,9 @@
 // miniprogram/pages/checkout.js
+/**
+ * Page uses the boolean addressComplete which represents whether or not the user has already set a shipping address.
+ *    addressComplete is determined and set onLoad which queries the collection userInfo
+ * 
+ */
 var app = getApp();
 Page({
 
@@ -6,7 +11,8 @@ Page({
    * Page initial data
    */
   data: {
-    orderTotal : 0.1
+    orderTotal : 0.1,
+    addressComplete : true  
   },
 
   /**

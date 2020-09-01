@@ -15,7 +15,7 @@
     "pages/profile/profile",
     "pages/shoppingCart/shoppingCart",
     "pages/checkout/checkout",
-    "pages/addUserInfo/addUserInfo"
+    "pages/editShippingInfo/editShippingInfo"
   ],
   "window": {
     "navigationStyle": "custom",

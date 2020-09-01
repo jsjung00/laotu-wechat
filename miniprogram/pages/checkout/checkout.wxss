@@ -70,12 +70,26 @@ page{
   align-items: center;
 }
 
+#orderDetailsContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+}
+
 #orderPriceContainer{
   display: flex;
   flex-direction: column;
   width: 100%;
   background-color: white;
   border-radius: 5px;
+}
+#titleCell{
+  font-weight: bold;
+}
+#valueCell{
+  color: black;
 }
 .priceDetailRow{
   display: flex;

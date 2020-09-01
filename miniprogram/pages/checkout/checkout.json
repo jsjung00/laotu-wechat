@@ -6,6 +6,8 @@
     "vant-button" : "../../vantDist/button/index",
     "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon",
     "mp-loading" : "../../miniprogram_npm/weui-miniprogram/loading/loading",
-    "checkoutTabBar" : "../../components/checkoutTabBar/checkoutTabBar"
+    "checkoutTabBar" : "../../components/checkoutTabBar/checkoutTabBar",
+    "vant-cell" : "../../vantDist/cell/index",
+    "vant-cell-group" : "../../vantDist/cell-group/index"
   }
 }

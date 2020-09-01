@@ -83,10 +83,10 @@
             </view>
           </view>
         </navigator>
-        <navigator class= "tr_container" url = "../notification/notification">
+        <navigator class= "tr_container" url = "../editShippingInfo/editShippingInfo">
           <view class = "tr">
             <view id="support-container" class = "table_text">
-              <text id="support" style="font-size : {{font_sizes.support}}px">Tech Help</text>
+              <text id="support" style="font-size : {{font_sizes.support}}px">Edit Shipping Info</text>
             </view>
             <view class = "next_icon">
               <image mode="aspectFit" src = "https://www.pinclipart.com/picdir/big/36-365084_png-free-clip-angle-right-slider-arrow-icon.png"></image>
