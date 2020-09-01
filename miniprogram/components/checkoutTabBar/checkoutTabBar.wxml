@@ -1,0 +1,8 @@
+<!--components/checkoutTabBar.wxml-->
+<view class="container" style="height: {{tabBarHeight}}px">
+  <!--Calculate the margin in JS to place button vertically in the center-->
+  <view style="height: {{buttonMarginTop}}px; display: block;"></view>
+  <!--Forced height to 44px-->
+  <vant-button class="button" type="primary" color="#282828" bindtap="payClicked" block>WeChat Pay</vant-button>
+</view>
+

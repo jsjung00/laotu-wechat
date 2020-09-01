@@ -1,4 +1,3 @@
-/* miniprogram/pages/shoppingCart.wxss */
 page{
   height: 100%;
   width: 750rpx;
@@ -17,8 +16,8 @@ page{
 #bodyContainer{
   flex-grow: 1;
   display: flex;
+  width: 100%;
   flex-direction: column;
-  /*background-color: thistle;*/
 }
 #titleContainer{
   border-bottom: 7rpx solid black;
@@ -71,20 +70,15 @@ page{
   align-items: center;
 }
 
-#priceContainer{
+#orderPriceContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+}
+.priceDetailRow{
   display: flex;
   justify-content: space-between;
 }
-#subTotalPriceText{
-  font-size: 20px;
-  font-weight: bold;
-}
-#buttonsContainer{
-  width: 100%;
-  margin-top: auto;
-  display: block;
-  /*display: flex;
-  flex-direction: column;*/
-  align-items: center;
-  margin-bottom: 10%; 
-}
+

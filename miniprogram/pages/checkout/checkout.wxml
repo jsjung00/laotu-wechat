@@ -1,0 +1,57 @@
+<CustomNav isBack="{{true}}"></CustomNav>
+<!-- Display a loading document until both cartDetailObjects and cartQuantityObjects are uploaded-->
+<view wx:if="{{pageReady}}" id="bodyContainer" class="spacedVerticalContainer sidePadding">
+  <view id="titleContainer" class="spacedVerticalElement">Checkout</view>
+  <!--Container contains all of the product cards-->
+  <view id="productCardsContainer" class="spacedVerticalContainer spacedVerticalElement">
+    <!-- detail is an object that follows the object in collection 'product' and a isHidden boolean-->
+    <block wx:for="{{cartDetailObjects}}" wx:for-item="detail" wx:for-index="idx">
+      <view id="cardContainer" class="spacedVerticalElement">
+        <itemCard style="height: 100%; width: 100%" imageSrc="{{detail.imageUrl}}">
+          <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+          <view slot="topRow" style="width: 100%; height: 100%">
+            <!--The titleRow view container needs to have height and width 100%-->
+            <view id="titleRow" class="slotContent">
+              <text id="titleText">{{detail.title}}</text>
+            </view>
+          </view>
+          <view slot="bodyRow" style="width: 100%; height: 100%">
+            <view id="bodyRow" class="slotContent">
+              <text>{{detail.descSummary}}</text>
+            </view>
+          </view>
+          <view slot="bottomRow" style="width: 100%; height: 100%">
+            <view id="bottomRow" class="slotContent">
+              <text>¥{{detail.price}}</text>
+              <vant-stepper value="{{detail.quantity}}" input-width="40px" button-size="30px" min="1" max="99" bind:change="quantityChange" data-idx="{{idx}}"></vant-stepper>
+            </view>
+          </view>
+        </itemCard>
+      </view>
+    </block>
+  </view>
+  <view id="orderPriceContainer" class="spacedVerticalElement spacedVerticalContainer sidePadding">
+    <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">Summary</view>
+    <view class="priceDetailRow spacedVerticalElement">
+      <text>Sub total</text>
+      <text>¥{{subTotal}}</text>
+    </view>
+    <view class="priceDetailRow spacedVerticalElement">
+      <text>Shipping</text>
+      <text>¥25</text>
+    </view>
+    <view class="priceDetailRow spacedVerticalElement">
+      <text>Tax</text>
+      <text>¥20</text>
+    </view>
+    <view class="priceDetailRow spacedVerticalElement">
+      <text>Total</text>
+      <text>¥215</text>
+    </view>
+  </view>
+</view>
+<view wx:else id="loadingBodyContainer">
+  <mp-loading type="dot-gray" style="height: 20%; width: 50%"></mp-loading>
+</view>
+<!--Note the clunky calculation: necessary to have the button vertically aligned-->
+<checkoutTabBar bindpay="payClicked" wx:if="{{pageReady}}" tabBarHeight="{{tabBarHeight}}" buttonMarginTop="{{(tabBarHeight - 44) / 2}}"></checkoutTabBar>

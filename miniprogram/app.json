@@ -13,7 +13,8 @@
     "pages/itemTabBarTemp/itemTabBarTemp",
     "pages/events/events",
     "pages/profile/profile",
-    "pages/shoppingCart/shoppingCart"
+    "pages/shoppingCart/shoppingCart",
+    "pages/checkout/checkout"
   ],
   "window": {
     "navigationStyle": "custom",

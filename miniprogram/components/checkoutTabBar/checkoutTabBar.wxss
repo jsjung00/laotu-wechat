@@ -1,0 +1,8 @@
+/* components/checkoutTabBar.wxss */
+.container{
+  width: 750rpx;
+  display: block;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}

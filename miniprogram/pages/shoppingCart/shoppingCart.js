@@ -130,7 +130,7 @@ Page({
   clickCheckout : function(e) {
     console.log("clickCheckout()");
     wx.navigateTo({
-      url: '../../pages/wePay/wePay?subtotal=' + e.currentTarget.dataset.subtotal,
+      url: '../../pages/checkout/checkout?subtotal=' + e.currentTarget.dataset.subtotal,
     });
   },
   clickTrash: function(e){
