@@ -10,5 +10,24 @@ page{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+#form{
+  background-color: white;
+  border-radius: 5px;
+}
+.labelLeftMargin{
+  margin-left: 20px;
+}
+.normalFontSize{
+  /*used for weui-select */
+  font-size: 20px;
+}
+.clist_navitem{
+  font-size: 20px;
+}
 
+#buttonContainer{
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 10%;
 }

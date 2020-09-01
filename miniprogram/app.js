@@ -17,7 +17,7 @@ App({
 
     //Upload user info
     wx.cloud.callFunction({
-      name: 'getUserInfo'
+      name: 'getIDInfo'
     })
       .then(function(res){
         let data = res.result;

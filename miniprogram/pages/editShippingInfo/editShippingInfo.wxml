@@ -1,9 +1,40 @@
 <!--miniprogram/pages/addUserInfo.wxml-->
 <CustomNav isBoth="{{true}}" title="Edit Info"></CustomNav>
-<view id="bodyContainer">
-  <mp-form>
-    <mp-cell prop="qq" title="Name" ext-class="">
-      <input bindinput="formInputChange" data-field="qq" class="weui-input" placeholder="Please enter your name"/>
+<view id="bodyContainer" class="viewPadding">
+  <mp-form id="form">
+    <mp-cell prop="name" title="Name" ext-class="">
+      <input bindinput="nameInputChange" data-field="name" class="weui-input" placeholder="Enter your name"/>
     </mp-cell>
+  <mp-cell prop="streetName" title="Street Name" ext-class="">
+    <input bindinput="streetInputChange" data-field="streetName" class="weui-input" placeholder="Enter your street name"/>
+  </mp-cell>
+  <!--Contains the picker for the ['region', 'city', 'district']-->
+  <view class="weui-cell weui-cell_select">
+    <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label labelLeftMargin">Region</view>
+    </view>
+    <view class="weui-cell__bd">
+        <picker style="height:auto; width: auto" mode="region" bindchange="bindRegionChange" value="{{regionCityDistrictArray}}">
+          <!--weui-select has a fixed height so we need to override to fit all text-->  
+          <view style="height: auto !important;" 
+            class="weui-select weui-select_in-select-after">{{regionCityDistrictArray[0]}}, {{regionCityDistrictArray[1]}}, {{regionCityDistrictArray[2]}}</view>
+        </picker>
+    </view>
+  </view>
+  <!--Allows user to choose phone area code and input phone #-->
+  <view class="weui-cell">
+    <view class="weui-cell__hd" style="width: 105px">
+        <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
+            <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
+        </picker>
+    </view>
+    <view class="weui-cell__bd weui-cell__bd_in-select-before ">
+        <input bindinput="mobileInputChange" class="weui-input" type="number" datafield="mobile" placeholder="Enter your phone number" />
+    </view>
+  </view>
   </mp-form>
+  <!--Contains the Confirm button. Note: 10% from the bottom-->
+  <view id="buttonContainer">
+    <button class="weui-btn" type="primary" bindtap="submitForm">Confirm</button>
+  </view>
 </view>
