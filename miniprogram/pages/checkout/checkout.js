@@ -228,6 +228,7 @@ Page({
         .catch(err => console.error(err));
       
       //Send our transaction to wePay
+      
     }
     else{
       //order information is incomplete/invalid
