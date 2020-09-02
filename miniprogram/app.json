@@ -15,14 +15,11 @@
     "pages/profile/profile",
     "pages/shoppingCart/shoppingCart",
     "pages/checkout/checkout",
-    "pages/editShippingInfo/editShippingInfo"
+    "pages/editShippingInfo/editShippingInfo",
+    "pages/testUI/testUI"
   ],
   "window": {
-    "navigationStyle": "custom",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFFF00",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "backgroundColor": "#FFFFFE",
@@ -53,6 +50,12 @@
         "iconPath": "img/profile.png",
         "selectedIconPath": "img/profile.png",
         "text": "My Profile"
+      },
+      {
+        "pagePath": "pages/testUI/testUI",
+        "iconPath": "img/profile.png",
+        "selectedIconPath": "img/profile.png",
+        "text": "Test"
       }
     ]
   },

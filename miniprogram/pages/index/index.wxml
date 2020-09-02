@@ -18,18 +18,18 @@
       </block>
     </swiper>
   </view>
-  <view id="featureEventsContainer" class="featureContainer spacedVerticalElement">
-    <!--Has width 100% and height 100% to define the size-->
-    <itemCard isAbove="{{true}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
-      <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-      <view slot="aboveRow" style="width: 100%; height: 100%">
-        <view class="slotContent viewPadding aboveRow">
-          <text>Feature Events</text>
-          <view hover-class="hoverClass" bindtap="clickMore" hover-stay-time="{{200}}">
-            <text>More ></text>
-          </view>
-        </view>
+  <!--<view slot="aboveRow" style="width: 100%; height: 100%">
+    <view class="slotContent viewPadding aboveRow">
+      <text>Feature Events</text>
+      <view hover-class="hoverClass" bindtap="clickMore" hover-stay-time="{{200}}">
+        <text>More ></text>
       </view>
+    </view>
+  </view>-->
+  <view class="featureContainer spacedVerticalElement">
+    <!--Has width 100% and height 100% to fit the container size-->
+    <itemCard isAbove="{{false}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
+      <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
       <view slot="topRow" style="width: 100%;">
         <view style="height: 100%; width: 100%; font-size: 20px;">Big</view>
       </view>
@@ -43,6 +43,5 @@
     </itemCard>
   </view>
   <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement">
-    
   </view>
 </view>

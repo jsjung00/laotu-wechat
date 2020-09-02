@@ -1,0 +1,8 @@
+/* components/testNavBar.wxss */
+.body{
+  height: 100px;
+  width: 750rpx;
+  background-color: yellow;
+  position: fixed; 
+   top: 0;
+}

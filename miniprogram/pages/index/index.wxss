@@ -1,12 +1,10 @@
 page{
   height: 100%;
   width: 750rpx;
-  display: flex;
-  flex-direction: column;
+  background-color: violet;
 }
 #bodyContainer{
-  /* Body will take up the rest of the space apart from the navbar and tabbar */
-  flex-grow: 1;
+  min-height: 100%;
   background-color: #CCD4BF;
   display: flex;
   flex-direction: column;
@@ -26,7 +24,8 @@ page{
 
 .featureContainer{
   height: 30vh;
-  background-color: #F5F3E7;
+  width: 100%;
+  background-color: yellow;
   display: flex;
   flex-direction: column;
 }

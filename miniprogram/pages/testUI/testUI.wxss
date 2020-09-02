@@ -1,0 +1,20 @@
+/* miniprogram/pages/testUI.wxss */
+page{
+  height: 100%;
+  width: 750rpx;
+  background-color: blue;
+}
+
+#bodyContainer{
+  min-height:50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: tomato;
+}
+
+#all{
+  height: 800px;
+  width: 100%;
+  background-color: tomato;
+}

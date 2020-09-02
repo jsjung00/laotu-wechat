@@ -5,45 +5,48 @@
     4) I have none-->
 
 <custom-component>
-  <view class="top-buffer" style="height: {{statusHeight}}px"></view>
-  <view class="nav-container">
-    <view class="outside" id= "icons-container" style="width : {{capsuleContainerWidth}}px">
-      <!-- If there are both back and home buttons-->
-      <view wx:if="{{isBoth}}" class="capsule" style="width : {{capsuleWidth}}px">
-        <view class="icon-container">
-          <navigator class = "completeChild" open-type="navigateBack">
-            <image class="icon" mode="aspectFit" src="../../img/left-arrow.png"></image>
-          </navigator>
+  <view class="allContainer">
+    <view class="top-buffer" style="height: {{statusHeight}}px; width: 100%; background-color: blue"></view>
+    <view class="nav-container">
+      <view class="outside" id= "icons-container" style="width : {{capsuleContainerWidth}}px">
+        <!-- If there are both back and home buttons-->
+        <view wx:if="{{isBoth}}" class="capsule" style="width : {{capsuleWidth}}px">
+          <view class="icon-container">
+            <navigator class = "completeChild" open-type="navigateBack">
+              <image class="icon" mode="aspectFit" src="../../img/left-arrow.png"></image>
+            </navigator>
+          </view>
+          <view class="icon-container">
+            <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+              <image class="icon" mode="aspectFit" src="../../img/home.png"></image>
+            </navigator>
+          </view>
         </view>
-        <view class="icon-container">
-          <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
-            <image class="icon" mode="aspectFit" src="../../img/home.png"></image>
-          </navigator>
+        <!-- If there is only home-->      
+        <view wx:elif="{{isHome}}" class="capsule" style="width:{{capsuleHalfWidth}}px">
+          <view class="icon-container">
+            <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
+              <image mode="aspectFit" src=".././../img/home.png"></image>  
+            </navigator>
+          </view>
         </view>
+        <!--If there is only back, show no capsule border-->
+        <view wx:elif="{{isBack}}" class="noCapsule" style="width:{{capsuleHalfWidth}}px">
+          <view class="icon-container">
+            <navigator class="completeChild" open-type="navigateBack">
+              <image mode="aspectFit" src=".././../img/left-arrow.png"></image>  
+            </navigator>
+          </view>
+        </view>
+        <!-- If there is neither home nor back (homepage)-->
+        <view wx:else>
+        </view> 
       </view>
-      <!-- If there is only home-->      
-      <view wx:elif="{{isHome}}" class="capsule" style="width:{{capsuleHalfWidth}}px">
-        <view class="icon-container">
-          <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
-            <image mode="aspectFit" src=".././../img/home.png"></image>  
-          </navigator>
-        </view>
+      <view class = "title-container">
+        <text id="title">{{title}}</text>
       </view>
-      <!--If there is only back, show no capsule border-->
-      <view wx:elif="{{isBack}}" class="noCapsule" style="width:{{capsuleHalfWidth}}px">
-        <view class="icon-container">
-          <navigator class="completeChild" open-type="navigateBack">
-            <image mode="aspectFit" src=".././../img/left-arrow.png"></image>  
-          </navigator>
-        </view>
-      </view>
-      <!-- If there is neither home nor back (homepage)-->
-      <view wx:else>
-      </view> 
+      <view class="outside" style="width : {{capsuleContainerWidth}}px"></view>
     </view>
-    <view class = "title-container">
-      <text id="title">{{title}}</text>
-    </view>
-    <view class="outside" style="width : {{capsuleContainerWidth}}px"></view>
   </view>
+  <view style="height: {{statusHeight + 44}}px; width: 100%;"></view>
 </custom-component>

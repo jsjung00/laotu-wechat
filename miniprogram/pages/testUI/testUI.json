@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "CustomNav" : "../../components/navbar/navbar",
+    "testNavBar" : "../../components/testNavBar/testNavBar"
+  }
+}
