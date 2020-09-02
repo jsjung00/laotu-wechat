@@ -7,7 +7,8 @@
  *    the edit was successful.
  * If page fails to set, upload 'shippingInfoEdit' : false to show that edit failed.
  * Parent page that navigates to this must pass '?setUserInfo=boolean' in the navigateTo URL
- *     
+ * shippingInfo : {name : str, streetName : str, phoneCode : Number, phoneNumber: string,
+ *                 regionCityDistrictArray : ['regionStr', 'cityStr', 'districtStr']}     
  */
 var app = getApp();
 

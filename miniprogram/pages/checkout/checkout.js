@@ -15,9 +15,17 @@ Page({
    * Page initial data
    */
   data: {
-    orderTotal : 0.1,
+    //orderTotal : 
     //shippingInfoComplete
-    //fromAbovePage : Boolean (true if the user has just navigated back to the checkout)  
+    //fromAbovePage : Boolean (true if the user has just navigated back to the checkout)
+    //city
+    //province
+    //district
+    //streetName
+    //name
+    //phoneNumber
+    //phoneCode
+    //cartDetailObjects  
       
   },
 
@@ -105,7 +113,11 @@ Page({
         streetName: shippingInfo.streetName,
         city : shippingInfo.regionCityDistrictArray[1],
         district : shippingInfo.regionCityDistrictArray[2],
-        name : shippingInfo.name        
+        province : shippingInfo.regionCityDistrictArray[0],
+        phoneNumber : shippingInfo.phoneNumber,
+        phoneCode : shippingInfo.phoneCode,
+        name : shippingInfo.name ,
+        regionCityDistrictArray : shippingInfo.regionCityDistrictArray            
         });
     }
     //If not complete, the wxml will render an button to link to editShippingInfo
@@ -173,7 +185,11 @@ Page({
           streetName: shippingInfo.streetName,
           city : shippingInfo.regionCityDistrictArray[1],
           district : shippingInfo.regionCityDistrictArray[2],
-          name : shippingInfo.name        
+          province : shippingInfo.regionCityDistrictArray[0],
+          phoneNumber : shippingInfo.phoneNumber,
+          phoneCode : shippingInfo.phoneCode,
+          name : shippingInfo.name ,
+          regionCityDistrictArray : shippingInfo.regionCityDistrictArray       
         });
         this.setData({shippingInfoComplete : true});
       }
@@ -192,9 +208,34 @@ Page({
     //Called when the user clicks on the pay button
     //Check that the order detail (shippingInfo) is set and complete
     if (this.data.shippingInfoComplete === true){
-      console.log("can continue with the payment");
+      //Upload the order information to the userInfo
+
+      var currentOrderObject = {
+        streetName: this.data.streetName,
+        phoneNumber : this.data.phoneNumber,
+        phoneCode : this.data.phoneCode,
+        name : this.data.name,
+        regionCityDistrictArray : this.data.regionCityDistrictArray,
+        totalPrice : this.data.orderTotal,
+        cartQuantityObjects : this.data.cartQuantityObjects  
+      };
+      wx.cloud.callFunction({
+        name : 'addOrderObject',
+        data : {
+          newOrderObject : currentOrderObject
+        }
+      }).then(() => console.log("Successfully added order object to cloud"))
+        .catch(err => console.error(err));
+      
+      //Send our transaction to wePay
     }
     else{
+      //order information is incomplete/invalid
+      wx.showToast({
+        title : "Missing Order Details",
+        icon : 'none',
+        duration: 1000
+      });
       console.log("shipping details is incomplete");
     }
     
