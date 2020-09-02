@@ -7,6 +7,10 @@
  *    editShippingInfo.js will upload 'shippingInfo' to globalData.
  * On page show (if page came from a higher layer page), reupload the shippingInfo data to display the right data
  *    and change the shippingInfoComplete = true   
+ * 
+ * cartDetailObjects: [{_id:str, title:str,....}] Array of objects in the checkout that take on the same datastructure as 
+ *    objects in 'products' cloud collection
+ * cartQuantityObjects : [{itemid: str, quantity: number, price: number}, {}]
  */
 var app = getApp();
 Page({
@@ -39,11 +43,14 @@ Page({
     this.setData({
       tabBarHeight
     });
-
     //Upload the subtotal passed from the shopping cart page
-    let subTotal = options.subtotal;
+    //Convert the string to a number
+    let subTotal = parseInt(options.subtotal);
+
     this.setData({subTotal});
+    
     var that = this;
+
     //Grab the array of cartDetailObjects from the cloud
     let cartDetailObjectsResp = await wx.cloud.callFunction({
       name: 'getCartDetailObjects'
@@ -83,6 +90,8 @@ Page({
     this.setData({cartDetailObjects});
     //Upload cartQuantityObjects to the page data
     this.setData({cartQuantityObjects});
+    //Upload shipping and total cost
+    this.uploadOrderCosts();
     
     //Set our pageReady boolean as true and display the page
     let pageReady = true;
@@ -203,7 +212,45 @@ Page({
     //The user has navigated to another page upwards
     this.setData({fromAbovePage : true});
   },
-  payClicked : function(e){
+  uploadOrderCosts : async function(e){
+    console.log("uploadOrderCosts");
+    //Upload the shippingCost and totalCost
+    //Make sure that cartDetailObjects is set
+    var that = this;
+    var cartDetailObjects;
+    var checkCartDetailObjects = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForCartDetailObjects(){
+          cartDetailObjects = that.data.cartDetailObjects;
+          if (cartDetailObjects == null){
+            //Continually loop until the data is set
+            setTimeout(waitForCartDetailObjects, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("checkout uploadOrderCosts(): cartDetailObjects took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkCartDetailObjects();
+    //Calculate the total shippingCost
+    var shippingCost = 0;
+    cartDetailObjects.forEach(obj => shippingCost += obj.shippingCost)
+    var subTotal = this.data.subTotal;
+    var totalFee = subTotal + shippingCost;
+    this.setData({
+      shippingCost : shippingCost,
+      totalFee : totalFee
+    });
+  },
+  payClicked : async function(e){
+    var that = this;
     console.log("checkout page- payClicked()");
     //Called when the user clicks on the pay button
     //Check that the order detail (shippingInfo) is set and complete
@@ -228,6 +275,48 @@ Page({
         .catch(err => console.error(err));
       
       //Send our transaction to wePay
+    
+      //Make sure that the totalFee is fully calculated before we send it off to be transacted
+      var totalFee;
+      var checkFee = function(){
+        return new Promise(function(resolve, reject){
+          var numLoops = 40;
+          (function waitForFee(){
+            totalFee = that.data.totalFee;
+            if (totalFee == null){
+              //Continually loop until the data is set
+              setTimeout(waitForFee, 250);
+              numLoops -= 1;
+              console.log("looping checkFee");
+              //Only allow max 20 loops
+              if (numLoops < 1){
+                reject("checkout payClicked(): took too long for totalFee to be calculated.");
+              }
+            }
+            else{
+              return resolve();
+            }
+          })();
+        });
+      }
+      try{
+        await checkFee();
+      }catch (e){
+        console.log(e);
+        throw new Error("Total Fee failed to calculate within 5 seconds. Break the program.");
+      };  
+
+      try{
+        var res = await wx.cloud.callFunction({
+          name : 'sendPay',
+          data : {
+            totalFee : totalFee 
+          }
+        })
+      }catch (e){
+        console.error("Failed to make transaction to sendPay", e);
+      }
+      console.log("res is", res);
       
     }
     else{

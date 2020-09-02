@@ -63,11 +63,10 @@
     <view style="font-weight: bold; width: 100%" class="spacedVerticalElement">Summary</view>
     <vant-cell-group>
       <vant-cell title="Subtotal" value="¥{{subTotal}}"></vant-cell>
-      <vant-cell title="Shipping" value="{{25}}"></vant-cell>
-      <vant-cell title="Tax" value="¥{{20}}"></vant-cell>
+      <vant-cell title="Shipping" value="¥{{shippingCost}}"></vant-cell>
       <vant-cell>
         <view slot="title" id="titleCell">Total</view>
-        <view slot="value" id="valueCell">¥200</view>
+        <view slot="value" id="valueCell">¥{{totalFee}}</view>
       </vant-cell>
     </vant-cell-group>
   </view>

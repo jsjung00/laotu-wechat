@@ -1,4 +1,4 @@
-/**
+/** [DEPRECATED: DO NOT USE]
  * Sends a payment of a specified amount to Laotu Admin.
  * Parameters: 'total_fee' (total transaction amount), 'spbill_create_ip' (IPV4 address of the machine that calls the API)
  */
@@ -21,14 +21,14 @@ const random = require('random.js');
 const body = "Laotu-Products";
 const notify_url = 'http://www.weixin.qq.com/wxpay/pay.php';
 const trade_type = 'JSAPI';
-const key = 'laotu666JustinQiantiChelly202008';
+
 
 // 云函数入口函数
 exports.main = async (event, context) => {
   const out_trade_no = Date.parse(new Date()).toString()
   const total_fee = event.total_fee
   const spbill_create_ip = event.spbill_create_ip
-  let stringA = `appid=${appid}&body=${body}&mch_id=${mch_id}&nonce_str=${random}&notify_url=${notify_url}&openid=${openid}&out_trade_no=${out_trade_no}&spbill_create_ip=${spbill_create_ip}&total_fee=${total_fee}&trade_type=${trade_type}&key=laotu666JustinQiantiChelly202008`
+  let stringA = `appid=${appid}&body=${body}&mch_id=${mch_id}&nonce_str=${random}&notify_url=${notify_url}&openid=${openid}&out_trade_no=${out_trade_no}&spbill_create_ip=${spbill_create_ip}&total_fee=${total_fee}&trade_type=${trade_type}&key=`
   var sign = crypto.createHash('md5').update(stringA).digest('hex').toUpperCase()
   let dataBody = reqData(
     appid,

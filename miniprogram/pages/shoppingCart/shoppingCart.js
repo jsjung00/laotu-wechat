@@ -13,6 +13,10 @@
  * When page closes, the userCart is updated (the quantity and the items in the array may change) 
  * For the loading screen, there is a boolean called pageReady which is set to true once the cartDetails and cartQuantityObjects
  *    arrays are both set to the local data.
+ * 
+ * cartDetailObjects: [{_id:str, title:str,....}] Array of objects in the checkout that take on the same datastructure as 
+ *    objects in 'products' cloud collection
+ * cartQuantityObjects : [{itemid: str, quantity: number, price: number}, {}]
 
  */
 
