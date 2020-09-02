@@ -83,7 +83,7 @@
             </view>
           </view>
         </navigator>
-        <navigator class= "tr_container" url = "../editShippingInfo/editShippingInfo">
+        <navigator class= "tr_container" url = "../editShippingInfo/editShippingInfo?setUserInfo=true">
           <view class = "tr">
             <view id="support-container" class = "table_text">
               <text id="support" style="font-size : {{font_sizes.support}}px">Edit Shipping Info</text>

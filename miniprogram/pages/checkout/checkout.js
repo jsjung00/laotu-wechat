@@ -1,8 +1,12 @@
 // miniprogram/pages/checkout.js
 /**
- * Page uses the boolean addressComplete which represents whether or not the user has already set a shipping address.
- *    addressComplete is determined and set onLoad which queries the collection userInfo
- * 
+ * Page uses the boolean shippingInfoComplete which represents whether or not the user has already set a shipping info.
+ *    shippingInfoComplete is determined and set onLoad and onShow which queries the collection 'userInfo'
+ * If default shippingInfo from userInfo is already set, then display the default shipping info. Else, ask to enter info. 
+ *    In both cases, if the user decides to edit/enter info, navigate to editShippingInfo and pass in '?setUserInfo=false'
+ *    editShippingInfo.js will upload 'shippingInfo' to globalData.
+ * On page show (if page came from a higher layer page), reupload the shippingInfo data to display the right data
+ *    and change the shippingInfoComplete = true   
  */
 var app = getApp();
 Page({
@@ -12,13 +16,16 @@ Page({
    */
   data: {
     orderTotal : 0.1,
-    addressComplete : true  
+    //shippingInfoComplete
+    //fromAbovePage : Boolean (true if the user has just navigated back to the checkout)  
+      
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
+    var that = this;
     //Set the tabbar Height to pass into the CustomTabBar component
     let tabBarHeight = app.globalData.tabbarHeight;
     this.setData({
@@ -34,7 +41,6 @@ Page({
       name: 'getCartDetailObjects'
     });
     let _cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
-    
     
     //Grab the array of cartQuantityObjects from the cloud
     let cartQuantityObjectsResp = await wx.cloud.callFunction({
@@ -65,8 +71,6 @@ Page({
     }
     let cartQuantityObjects = _cartQuantityObjects.map(obj => Object.assign(obj, {price : getPrice(obj.itemid)}));
 
-    
-
     //Upload cartDetailObjects to the page data
     this.setData({cartDetailObjects});
     //Upload cartQuantityObjects to the page data
@@ -77,14 +81,122 @@ Page({
     this.setData({pageReady});
 
     //Determine whether or not the user already has the default shipping address set
-    const db = wx.cloud.database({env: 'laotudata-laotu'});
-    wx.cloud.callFunction({
+    let userInfoResp = await wx.cloud.callFunction({
       name : 'getUserInfo'
     });
+    let userInfo = userInfoResp.result.userInfo[0];
+    let shippingInfo = userInfo.shippingInfo;
+    console.log(userInfo);
+    //Check if the shippingInfo is empty (will either be {} or complete due to the tests in editShoppingInfo)
+    var shippingInfoComplete;
+    if (shippingInfo == null){
+      shippingInfoComplete = false;
+    }
+    else if (Object.values(shippingInfo).length < 1){
+      shippingInfoComplete = false;
+    }
+    else{
+      shippingInfoComplete = true;
+    }
+    this.setData({shippingInfoComplete});
+    //If complete, upload the streetName, the city, the district, and the name
+    if (shippingInfoComplete){
+      this.setData({
+        streetName: shippingInfo.streetName,
+        city : shippingInfo.regionCityDistrictArray[1],
+        district : shippingInfo.regionCityDistrictArray[2],
+        name : shippingInfo.name        
+        });
+    }
+    //If not complete, the wxml will render an button to link to editShippingInfo
+  },
+  onShow : async function(e){
+    //Called when the page first loads and also when the user returns back to the page
+    //Reupload shipping/order data if user has returned from edit order/shipping details page
+    if (this.data.fromAbovePage === true){
+      console.log("Navigated back to checkout");
+      //Determine whether or not user successfully edited (added in) shipping info details
+      var shippingInfoEdited;
+      var checkShippingInfoEdit = function(){
+        return new Promise(function(resolve, reject){
+          var numLoops = 40;
+          (function waitForShippingInfoEdit(){
+            shippingInfoEdited = app.globalData.shippingInfoEdited;
+            if (shippingInfoEdited == null){
+              //Continually loop until the data is set
+              setTimeout(waitForShippingInfoEdit, 250);
+              numLoops -= 1;
+              //Only allow max 20 loops
+              if (numLoops < 1){
+                reject("checkout onshow(): shippingInfoEdited took too long to set.");
+              }
+            }
+            else{
+              return resolve();
+            }
+          })();
+        });
+      }
+      await checkShippingInfoEdit();
+      if (shippingInfoEdited === false){
+        //User did not edit the address, keep things the same
+        return;
+      }
+      else{
+        //User edited the address, change the shippingInfo in the page data 
+        //Grab shippingInfo from globalData that is set by editShippingInfo.js
+        var shippingInfo;
+        //Make sure to wait for shippingInfo
+        var checkShippingInfo = function(){
+          return new Promise(function(resolve, reject){
+            var numLoops = 40;
+            (function waitForShippingInfo(){
+              shippingInfo = app.globalData.shippingInfo;
+              if (shippingInfo == null){
+                //Continually loop until the data is set
+                setTimeout(waitForShippingInfo, 250);
+                numLoops -= 1;
+                //Only allow max 20 loops
+                if (numLoops < 1){
+                  reject("checkout onshow(): shippingInfo took too long to set.");
+                }
+              }
+              else{
+                return resolve();
+              }
+            })();
+          });
+        }
+        await checkShippingInfo();
+        //Upload our shippingInfo and change the shippingInfoComplete boolean to true
+        this.setData({
+          streetName: shippingInfo.streetName,
+          city : shippingInfo.regionCityDistrictArray[1],
+          district : shippingInfo.regionCityDistrictArray[2],
+          name : shippingInfo.name        
+        });
+        this.setData({shippingInfoComplete : true});
+      }
+    } 
+    else {
+      //Page has just loaded
+      return; 
+    }
+  },
+  onHide : function(e){
+    //The user has navigated to another page upwards
+    this.setData({fromAbovePage : true});
   },
   payClicked : function(e){
     console.log("checkout page- payClicked()");
-    //Let's send money!
+    //Called when the user clicks on the pay button
+    //Check that the order detail (shippingInfo) is set and complete
+    if (this.data.shippingInfoComplete === true){
+      console.log("can continue with the payment");
+    }
+    else{
+      console.log("shipping details is incomplete");
+    }
     
   }
 })

@@ -1,5 +1,11 @@
 <!--miniprogram/pages/addUserInfo.wxml-->
-<CustomNav isBoth="{{true}}" title="Edit Info"></CustomNav>
+<view wx:if="{{setUserInfo}}">
+  <CustomNav isBoth="{{true}}" title="Default Info"></CustomNav>
+</view>
+<view wx:else>
+  <CustomNav isBack="{{true}}" title="Edit Info"></CustomNav>
+</view>
+
 <view id="bodyContainer" class="viewPadding">
   <mp-form id="form">
     <mp-cell prop="name" title="Name" ext-class="">

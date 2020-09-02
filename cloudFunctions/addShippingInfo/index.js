@@ -1,5 +1,6 @@
 // Called from editShippingInfo page. Parameters: 'name','streetName','regionCityDistrictArray','phoneCode','phoneNumber'
 // Updates the user's shippinginfo object using the parameters - inits user record if does not exist.
+//  Note that the shipping info object keys are exactly 'name', 'streetName', ect...
 const cloud = require('wx-server-sdk')
 
 cloud.init({
