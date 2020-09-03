@@ -1,5 +1,7 @@
 // miniprogram/pages/item.js
 /**
+ * To display the item, the page accepts the itemID and type (NOTE: only pass in 'product', 'event' is deprecated)
+ *  through the parent page event called 'acceptDataFromOpenerPage'.
  * For the favorite functionality, pull the isFavorited boolean from the cloud database (user's favlist)
  *    Any updates are made to the local page data boolean. When page closes, update the boolean to the cloud
  *    Loading note: takes a while for isFavorited to be set.  

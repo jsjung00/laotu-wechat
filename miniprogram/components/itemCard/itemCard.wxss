@@ -21,7 +21,7 @@ view{
   flex: 1 0 10px;
   width: 100%;
   display: flex;
-  background-color: tomato;
+  background-color: white;
 }
 
 .leftContainer{
@@ -43,24 +43,24 @@ view{
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #DFD8DC;
+  /*background-color: #DFD8DC;*/
   overflow: hidden;
   padding: 20rpx 20rpx 20rpx 20rpx;
 }
 .topRowContainer{
   width: 100%;
   height: 20%;
-  background-color: springgreen;
+  /*background-color: springgreen;*/
   /*Have max-fontsize with vh trick */
 }
 .bodyRowContainer{
   width: 100%;
   /* Body takes up the rest of the container */
   flex-grow:1;
-  background-color: steelblue;
+  /*background-color: steelblue;*/
 }
 .bottomRowContainer{
   width: 100%;
-  background-color: teal;
+  /*background-color: teal;*/
   height: 30%;
 }

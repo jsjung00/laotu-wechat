@@ -27,21 +27,32 @@
     </view>
   </view>-->
   <view class="featureContainer spacedVerticalElement">
-    <!--Has width 100% and height 100% to fit the container size-->
-    <itemCard isAbove="{{false}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="https://www.jessicagavin.com/wp-content/uploads/2019/02/carrots-7-1200.jpg">
-      <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-      <view slot="topRow" style="width: 100%;">
-        <view style="height: 100%; width: 100%; font-size: 20px;">Big</view>
-      </view>
-      <view slot="bodyRow" style="width: 100%; height: 100%">
-        <view id="bodyRow" class="slotContent">
-          <text>Date and Time</text>
-          <text>Location: Beijing</text>
-          <text>Happy time with nature</text>
-        </view>
-      </view>
-    </itemCard>
+    <swiper wx:if="{{eventObjects.length > 0}}" indicator-dots="{{true}}" autoplay="{{false}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
+      <block wx:for="{{eventObjects}}" wx:key="*this" wx:for-item="eventObject">
+        <swiper-item>
+          <!--Has width 100% and height 100% to fit the container size-->
+          <itemCard isAbove="{{false}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="{{eventObject.thumbUrl}}">
+            <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+            <view slot="topRow" style="width: 100%;">
+              <view style="height: 100%; width: 100%; font-size: 20px; font-weight:bold">{{eventObject.title}}</view>
+            </view>
+            <view slot="bodyRow" style="width: 100%; height: 100%;">
+              <view id="bodyRow" class="slotContent">
+                <text>{{eventObject.descSummary}}</text>
+                <text>{{eventObject.locationStr}}</text>
+              </view>
+            </view>
+          </itemCard>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
-  <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement">
-  </view>
+  <scroll-view wx:if="{{productObjects.length > 0}}" id="featureProductsContainer" scroll-x="{{true}}" class="spacedVerticalElement">
+    <block wx:for="{{productObjects}}" wx:key="*this" wx:for-item="productObject">
+      <view class="productContainer">
+        <view class="productImageContainer"></view>
+        <view class="productDescContainer"></view>
+      </view>
+    </block>
+  </scroll-view>
 </view>

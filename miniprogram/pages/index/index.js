@@ -48,7 +48,32 @@ Page({
       featureProductsID
     });
     
-    console.log(this.data.aboveSwiperImages);
+    //Grab the featured Events and Products objects from cloud function
+    try{
+      var featuredResp = await wx.cloud.callFunction({
+        name : 'getFeaturedObjects'
+      });
+    } catch (e){
+      console.error("Failed to get featured objects from cloud", e);
+      var reloadPage = () => {wx.switchTab({
+        url: '../index/index',
+      })};
+      wx.showToast({
+        title: 'Network Crash',
+        icon : 'none',
+        complete : reloadPage
+      });
+    }
+
+    let featuredObject = featuredResp.result;
+    let eventObjects = featuredObject.eventObjects;
+    let productObjects = featuredObject.productObjects;
+    //Upload the featured event and product objects to the page data
+    this.setData({
+      eventObjects,
+      productObjects
+    });
+    
 
   }
 })
