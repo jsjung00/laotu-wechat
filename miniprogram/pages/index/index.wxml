@@ -47,12 +47,25 @@
       </block>
     </swiper>
   </view>
-  <scroll-view wx:if="{{productObjects.length > 0}}" id="featureProductsContainer" scroll-x="{{true}}" class="spacedVerticalElement">
-    <block wx:for="{{productObjects}}" wx:key="*this" wx:for-item="productObject">
-      <view class="productContainer">
-        <view class="productImageContainer"></view>
-        <view class="productDescContainer"></view>
+  <scroll-view wx:if="{{productObjects.length > 0}}" id="featureProductsContainer" scroll-x="true" enable-flex="true" class="spacedVerticalElement spacedHorizontalContainer abovePadding">
+    <view style="height: 100%; width: 100%; background-color: gray; border: 5px solid black;">
+      <view style="height: 100%; width: 100%; background-color: blue; border: 5px solid white;">
       </view>
-    </block>
+    </view>
+    <!--<block wx:for="{{productObjects}}" wx:key="*this" wx:for-item="productObject">
+      <view class="productContainer spacedHorizontalElement">
+        <view class="productImageContainer">
+          <image mode="aspectFill" src="{{productObject.thumbUrl}}" style="height: 100%; width:100%"></image>
+        </view>
+        <view class="productDescContainer spacedVerticalContainer sidePadding">
+          <view class="spacedVerticalElement">
+            <text>{{productObject.title}}</text>
+          </view>
+          <view class="spacedVerticalElement" style="font-weight: bold; color:red; font-size: 20px;">
+            <text>¥{{productObject.price}}</text>
+          </view>
+        </view>
+      </view>
+    </block>-->
   </scroll-view>
 </view>
