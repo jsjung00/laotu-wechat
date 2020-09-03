@@ -1,11 +1,6 @@
 {
   "usingComponents": {
     "CustomNav" : "../../components/navbar/navbar",
-    "testNavBar" : "../../components/testNavBar/testNavBar",
-    "vant-tabbar": "../../vantDist/tabbar/index",
-    "vant-tabbar-item": "../../vantDist/tabbar-item/index"
-  },
-  "tabBar" : {
-    "custom": true
+    "testNavBar" : "../../components/testNavBar/testNavBar"
   }
 }

@@ -10,7 +10,6 @@ Page({
     interval: 2000,
     duration: 500,
     circular: true,
-    active: 0
     //aboveSwiperImages: ["url", "url"] //For the aboveSwiper
     //belowSwiperImages: ["url","url"]
     //featureEventsID : ["id", "id"]
@@ -51,9 +50,5 @@ Page({
     
     console.log(this.data.aboveSwiperImages);
 
-  },
-  onTabChange(event) {
-    // event.detail 的值为当前选中项的索引
-    this.setData({ active: event.detail });
   }
 })

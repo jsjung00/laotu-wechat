@@ -24,38 +24,32 @@
   "tabBar": {
     "backgroundColor": "#FFFFFE",
     "borderStyle": "#D3D3D3",
-    "selectedColor": "#D3D3D3",
-    "color": "#131313",
+    "selectedColor": "#131313",
+    "color": "#ADADAD",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "weUIIconSrc/home-o.png",
-        "selectedIconPath": "weUIIconSrc/home.png",
+        "iconPath": "weUISvg/home-o.png",
+        "selectedIconPath": "weUISvg/home.png",
         "text": "Home"
       },
       {
         "pagePath": "pages/events/events",
-        "iconPath": "img/event.png",
-        "selectedIconPath": "img/event.png",
+        "iconPath": "weUISvg/tag-o.png",
+        "selectedIconPath": "weUISvg/tag.png",
         "text": "Event"
       },
       {
         "pagePath": "pages/product/product",
-        "iconPath": "img/store.jpg",
-        "selectedIconPath": "img/store.jpg",
+        "iconPath": "weUISvg/shop-o.png",
+        "selectedIconPath": "weUISvg/shop.png",
         "text": "Store"
       },
       {
         "pagePath": "pages/profile/profile",
-        "iconPath": "img/profile.png",
-        "selectedIconPath": "img/profile.png",
+        "iconPath": "weUISvg/me-o.png",
+        "selectedIconPath": "weUISvg/me.png",
         "text": "My Profile"
-      },
-      {
-        "pagePath": "pages/testUI/testUI",
-        "iconPath": "img/profile.png",
-        "selectedIconPath": "img/profile.png",
-        "text": "Test"
       }
     ]
   },
