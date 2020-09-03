@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: async function () {
     var that = this;
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -27,15 +27,18 @@ App({
       })
       .catch(err => console.log("Failed to get user info in app.js", err))
 
-    //upload the capsle button information to help build nav bar
-    this.globalData.headerButtonPos = wx.getMenuButtonBoundingClientRect();
+    //Upload the information of the built-in right capsule button to globalData
+    try{
+      var capsulePosition = wx.getMenuButtonBoundingClientRect();
+      this.globalData.capsulePosition = capsulePosition;
+    }catch(e){
+      console.error("App.js: failed to get capsule button information client rect", e);
+    }
     
-    // 展示本地存储能力
+    //Default app.js that I did not change
     var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
+    logs.unshift(Date.now());
+    wx.setStorageSync('logs', logs);
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -64,55 +67,43 @@ App({
         }
       },
       fail: err => console.log("Get setting failed") 
-    })
-    wx.getSystemInfo({
-      success: (result) => {
-        this.globalData.statusHeight = result.statusBarHeight;
-        //Calculate and upload the nav dimension details
-        //here I calculate the height of the button and the top margin of the capsule
-        let capsulePos = this.globalData.headerButtonPos;
-        let capsuleHeight = capsulePos.height;
-        let capsuleWidth = capsulePos.width;
-        let capsuleTop = capsulePos.top;
-        let statusHeight = this.globalData.statusHeight;
-        //margin is top location minus status height
-        let topMargin = capsuleTop - statusHeight; 
-        //NOTE: left margin is always 10px
-        
-        console.log("stat height is " + statusHeight);
-        //we make the capsule in the very middle
-        let navHeight = (2 * topMargin) + capsuleHeight;
-        //we make the capsule container width = capsuleWidth + 20
-        let capsuleContainerWidth = capsuleWidth + 20;
-        this.globalData.capsuleContainerWidth = capsuleContainerWidth;
-        this.globalData.navContainerHeight = navHeight;
+    });
 
-        //Upload screen height and window height
-        let screenHeight = result.screenHeight;
-        this.globalData.screenHeight = screenHeight;
-        let windowHeight = result.windowHeight;
-        this.globalData.windowHeight = result.windowHeight;
-        //Upload the tabbarHeight
-        this.globalData.tabbarHeight = screenHeight - windowHeight;
-      },
-    })
-  },
-  uploadData: function(){
-    //expect eventsData to be an array of objects, favorited is an object with userID's as keys 
-    //upload the events tab data to the global data
-    this.globalData.eventsTabData = eventsTabData;
+    //Grab the systemInfo and upload information about the capsule button and screen
+    try{
+      var res = wx.getSystemInfoSync();
+      let statusHeight = res.statusBarHeight;
+      //Confirm that getMenuButtonBoundingRectClient returned
+      if (capsulePosition == null){
+        throw new Error("Race condition: failed to get buttonClientRect in time");
+      }  
+      let capsuleHeight = capsulePosition.height;
+      let capsuleWidth = capsulePosition.width;
+      let capsuleTop = capsulePosition.top;
+      //Calculate the margin of capsule and the statusBar
+      let capsuleTopMargin = capsuleTop - statusHeight;
+      //Vertically center our capsule with some calculations
+      let navBarHeight = (capsuleTopMargin * 2) + capsuleHeight;
+      //Capsule left-margin is always 10px
+      let capsuleLeftMargin = 10;
+      //Upload statusHeight, navBarHeight, capsuleWidth
+      this.globalData.statusHeight = statusHeight;
+      this.globalData.navBarHeight = navBarHeight;
+      this.globalData.capsuleWidth = capsuleWidth;
+      //Upload screenHeight, windowHeight
+      let screenHeight = res.screenHeight;
+      this.globalData.screenHeight = screenHeight;
+      let windowHeight = res.windowHeight;
+      this.globalData.windowHeight = res.windowHeight;
+      //Upload the tabbarHeight
+      this.globalData.tabbarHeight = screenHeight - windowHeight;  
+    }
+    catch (e){
+      console.error("App.js: Failed to upload information about capsule button and screen", e);
+    }
   },
   globalData: {
     userInfo: null,
-    statusHeight : null,
-    headerButtonPos : {},
-    sysInfo : {},
-    navContainerHeight : null,
-    capsuleContainerWidth : null,
-    screenHeight : 0,
-    windowHeight : 0,
-    eventsTabData: {},
-    favoriteEventsTabData: {},
-    categoryActiveIndex: null
+    sysInfo : {}
   }
 })

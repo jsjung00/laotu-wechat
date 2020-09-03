@@ -1,52 +1,51 @@
 <!-- I need to have four cases 
     1) I have both left and home
-    2) I have only home
-    3) I only have back
+    2) I have only home (Ugly, do not use)
+    3) I only have back (No button)
     4) I have none-->
 
 <custom-component>
   <view class="allContainer">
-    <view class="top-buffer" style="height: {{statusHeight}}px; width: 100%; background-color: blue"></view>
+    <view class="top-buffer" style="height: {{statusHeight}}px; width: 100%;"></view>
     <view class="nav-container">
-      <view class="outside" id= "icons-container" style="width : {{capsuleContainerWidth}}px">
+      <view class="growContainer">
         <!-- If there are both back and home buttons-->
-        <view wx:if="{{isBoth}}" class="capsule" style="width : {{capsuleWidth}}px">
-          <view class="icon-container">
-            <navigator class = "completeChild" open-type="navigateBack">
-              <image class="icon" mode="aspectFit" src="../../img/left-arrow.png"></image>
-            </navigator>
-          </view>
-          <view class="icon-container">
-            <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
-              <image class="icon" mode="aspectFit" src="../../img/home.png"></image>
-            </navigator>
-          </view>
+      <view wx:if="{{isBoth}}" class="capsule" style="width : {{capsuleWidth}}px; height : 30px">
+        <view class="icon-container leftContainer">
+          <navigator class="navigator" open-type="navigateBack">
+            <vant-icon name="arrow-left" size="20px"></vant-icon>
+          </navigator>
         </view>
-        <!-- If there is only home-->      
-        <view wx:elif="{{isHome}}" class="capsule" style="width:{{capsuleHalfWidth}}px">
-          <view class="icon-container">
-            <navigator class="completeChild" open-type="switchTab" url="../../pages/index/index">
-              <image mode="aspectFit" src=".././../img/home.png"></image>  
-            </navigator>
-          </view>
+        <view class="icon-container">
+          <navigator class="navigator" open-type="switchTab" url="../../pages/index/index">
+            <vant-icon name="wap-home-o" size="20px"></vant-icon>
+          </navigator>
         </view>
-        <!--If there is only back, show no capsule border-->
-        <view wx:elif="{{isBack}}" class="noCapsule" style="width:{{capsuleHalfWidth}}px">
-          <view class="icon-container">
-            <navigator class="completeChild" open-type="navigateBack">
-              <image mode="aspectFit" src=".././../img/left-arrow.png"></image>  
-            </navigator>
-          </view>
-        </view>
-        <!-- If there is neither home nor back (homepage)-->
-        <view wx:else>
-        </view> 
       </view>
-      <view class = "title-container">
-        <text id="title">{{title}}</text>
+      <!-- If there is only home-->      
+      <view wx:elif="{{isHome}}">
+        <view class="noCapsule">
+          <navigator class="navigator" open-type="switchTab" url="../../pages/index/index">
+            <vant-icon name="wap-home-o" size="20px"></vant-icon>
+          </navigator>
+        </view>
       </view>
-      <view class="outside" style="width : {{capsuleContainerWidth}}px"></view>
+      <!--If there is only back, show no capsule border-->
+      <view wx:elif="{{isBack}}" class="noCapsule">
+        <view class="noCapsule">
+          <navigator class="navigator" open-type="navigateBack">
+            <vant-icon name="arrow-left" size="20px"></vant-icon>
+          </navigator>
+        </view>
+      </view>
+      <!-- If there is neither home nor back (homepage)-->
+      <view wx:else>
+      </view>
+      </view>
+      <view class="titleText">{{title}}</view>
+      <view class="growContainer" style="height: 100%;"></view> 
     </view>
   </view>
+  <!--Add this because the navbar is fixed and so its height isn't recognized-->
   <view style="height: {{statusHeight + 44}}px; width: 100%;"></view>
 </custom-component>

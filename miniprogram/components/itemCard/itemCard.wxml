@@ -19,9 +19,9 @@
     <!--Contains the image-->
     <view class="leftContainer">
       <!--Used to pad the top and bottom by 15%-->
-      <!--<view class="thumbPadding"></view>
+      <view class="thumbPadding"></view>
       <image class="thumbImage" mode="aspectFill" src="{{imageSrc}}" style="height:100%; width: 100%"></image>
-      <view class="thumbPadding"></view>-->
+      <view class="thumbPadding"></view>
     </view>
     <!--Contains the description-->
     <view class="rightContainer">

@@ -43,7 +43,7 @@
         </view>
       </view>
       <view id = "table_container">
-        <navigator class= "tr_container" url = "../myevents/myevents" open-type="switchTab">
+        <navigator class= "tr_container" url = "../myevents/myevents" open-type="navigate">
           <view class = "tr">
             <view id = "event-container" class = "table_text">
               <text id = "event" style="font-size : {{font_sizes.event}}px">My Events</text>

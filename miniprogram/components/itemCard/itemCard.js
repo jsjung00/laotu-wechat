@@ -4,9 +4,7 @@ Component({
    * Component properties
    */
   options : {
-    multipleSlots : true,
-    virtualHost : false, //true allows the component to grow to the container of the parent (parent container has display: flex)
-    styleIsolation : 'apply-shared' //parent page can change the CSS
+    multipleSlots : true
   },
    properties: {
     imageSrc : {
@@ -25,7 +23,6 @@ Component({
       //<itemCard style=""></itemcard>
     }*/
   },
-  //externalClasses : ['class'],
 
   /**
    * Component initial data

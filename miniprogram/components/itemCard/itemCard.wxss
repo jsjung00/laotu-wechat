@@ -17,8 +17,8 @@ view{
   width: 100%;
 }
 .mainContainer{
-  height: auto;
-  flex-grow: 1;
+  /* My main container initially starts at 10px tall but grows to take up the rest of the height in the container */
+  flex: 1 0 10px;
   width: 100%;
   display: flex;
   background-color: tomato;
