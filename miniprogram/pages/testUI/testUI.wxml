@@ -4,4 +4,10 @@
   <!--<view id="all"></view>-->
   <view style="height: 900px; width: 100%; background-color: orange;">Here's is some text</view>
 </view>
+<vant-tabbar active="{{ active }}" bind:change="onTabChange">
+  <vant-tabbar-item>Home</vant-tabbar-item>
+  <vant-tabbar-item icon="calender-o">Event</vant-tabbar-item>
+  <vant-tabbar-item icon="shop-o">Store</vant-tabbar-item>
+  <vant-tabbar-item icon="user-o">Profile</vant-tabbar-item>
+</vant-tabbar>
 

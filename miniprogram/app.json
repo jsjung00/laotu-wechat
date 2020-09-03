@@ -24,13 +24,13 @@
   "tabBar": {
     "backgroundColor": "#FFFFFE",
     "borderStyle": "#D3D3D3",
-    "selectedColor": "#D03232",
+    "selectedColor": "#D3D3D3",
     "color": "#131313",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "img/home.png",
-        "selectedIconPath": "img/home.png",
+        "iconPath": "weUIIconSrc/home-o.png",
+        "selectedIconPath": "weUIIconSrc/home.png",
         "text": "Home"
       },
       {

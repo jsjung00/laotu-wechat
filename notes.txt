@@ -1,3 +1,8 @@
+Errors:
+  cloud init error:  Error: getaddrinfo ENOTFOUND servicewechat.com
+  
+
+
 For the store, consider having a image upload functionality so the admin can upload an image and convert to URL in the database of products
 
 Consider changing the ordering of the events. Right now it is in chronological order, but that may mean that too many events are far

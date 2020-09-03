@@ -2,6 +2,8 @@
   "usingComponents": {
     "CustomNav" : "../../components/navbar/navbar",
     "itemCard" : "../../components/itemCard/itemCard",
-    "testCard" : "../../components/testCard/testCard"
+    "testCard" : "../../components/testCard/testCard",
+    "vant-tabbar": "../../vantDist/tabbar/index",
+    "vant-tabbar-item": "../../vantDist/tabbar-item/index"
   }
 }

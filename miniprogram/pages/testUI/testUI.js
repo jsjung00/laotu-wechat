@@ -5,7 +5,31 @@ Page({
    * Page initial data
    */
   data: {
-
+    list: [{
+      "text": "Home",
+      "iconPath": "../../images/tabbar_icon_chat_default.png",
+    "selectedIconPath": "../../images/tabbar_icon_chat_active.png",
+      dot: true
+    },
+    {
+        "text": "Event",
+      "iconPath": "../../images/tabbar_icon_setting_default.png",
+      "selectedIconPath": "../../images/tabbar_icon_setting_active.png",
+        badge: 'New'
+    },
+    {
+      "text": "Store",
+    "iconPath": "../../images/tabbar_icon_setting_default.png",
+    "selectedIconPath": "../../images/tabbar_icon_setting_active.png",
+      badge: 'New'
+    },
+    {
+      "text": "Event",
+    "iconPath": "../../images/tabbar_icon_setting_default.png",
+    "selectedIconPath": "../../images/tabbar_icon_setting_active.png",
+      badge: 'New'
+    }],
+    active: 0,
   },
 
   /**
@@ -34,6 +58,10 @@ Page({
    */
   onHide: function () {
 
+  },
+  onTabChange(event) {
+    // event.detail 的值为当前选中项的索引
+    this.setData({ active: event.detail });
   },
 
   /**

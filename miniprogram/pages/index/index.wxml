@@ -45,3 +45,9 @@
   <view id="featureProductsConatainer" class="featureContainer spacedVerticalElement">
   </view>
 </view>
+<vant-tabbar active="{{ active }}" bind:change="onTabChange">
+  <vant-tabbar-item icon="wap-home-o">Home</vant-tabbar-item>
+  <vant-tabbar-item icon="calender-o">Event</vant-tabbar-item>
+  <vant-tabbar-item icon="shop-o">Store</vant-tabbar-item>
+  <vant-tabbar-item icon="user-o">Profile</vant-tabbar-item>
+</vant-tabbar>

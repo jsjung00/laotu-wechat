@@ -10,6 +10,7 @@ Page({
     interval: 2000,
     duration: 500,
     circular: true,
+    active: 0
     //aboveSwiperImages: ["url", "url"] //For the aboveSwiper
     //belowSwiperImages: ["url","url"]
     //featureEventsID : ["id", "id"]
@@ -26,6 +27,14 @@ Page({
       var response = await db.collection('homePageData').limit(1).get();
     }catch{
       console.error("indexJS: Failed to get homePageData from cloud");
+      var reloadPage = () => {wx.switchTab({
+        url: '../index/index',
+      })};
+      wx.showToast({
+        title: 'Network Crash',
+        icon : 'none',
+        complete : reloadPage
+      });
     }
     //Set the page data to the local storage
     var pageData = response.data[0];
@@ -42,5 +51,9 @@ Page({
     
     console.log(this.data.aboveSwiperImages);
 
+  },
+  onTabChange(event) {
+    // event.detail 的值为当前选中项的索引
+    this.setData({ active: event.detail });
   }
 })
