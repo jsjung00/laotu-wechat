@@ -7,13 +7,41 @@ page{
   flex-direction: column;
 }
 
-#body_container{
-  background-color: wheat;
+
+#bodyContainer{
+  background-color: #f2f2f2;
   width: 100%;
-  /* The body container should take up the rest of the screen height apart from navbar */
-  flex-grow: 1;
+  height: 100%;
   display: flex;
+  flex-direction: column;
 }
+
+vant-tabs{
+  /* Take up the rest of the height if search disappears */
+  flex: 1 0 10%;
+  width: 750rpx;
+  background-color:rgb(213, 187, 187) !important;
+}
+
+#productBody{
+  width: 750rpx;
+  /* NOTE: the product body is only as tall as the elements inside of it */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-sizing: border-box !important;
+}
+.productCard{
+  background-color: bisque;
+  height: 40vh;
+  width: calc(50% - 10rpx);
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  border: 5px solid black;
+  border-radius: 10px;
+  
+}
+
 
 #vertical_tabs_container{
   background-color: tomato;

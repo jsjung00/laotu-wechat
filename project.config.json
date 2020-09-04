@@ -33,7 +33,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.12.1",
+	"libVersion": "2.12.2",
 	"appid": "wx24d2cda715af9d1b",
 	"projectname": "laotu-wechat",
 	"debugOptions": {

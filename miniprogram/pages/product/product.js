@@ -1,4 +1,8 @@
-/**
+/** In order to display the products for a specific category, receives an object from 'getCategoryProducts' which returns
+ *    an array of objects that contain 'categoryName' and 'productObjs'   
+ *    [{'categoryName' : 'All', 'productObjs' : []}, {'categoryName':'Featured', 'productObjs' : []}, {}]
+ *    categoryNames are the values defined by the collection in 'productPageData'
+ *    and productObj is an array of product objects of products in that category 
  */
 Page({
 
@@ -6,51 +10,22 @@ Page({
    * Page initial data
    */
   data: {
-   categoryTabs: [{title: "All"}, {title: "Beijing"}, {title:"Yunan Farm"}, {title: "Sichuan Panda"}],
-   categoryActiveIndex: 0,
-   resultsData: []
+    activeTabIndex : 0
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
-    //Change the active index if the active index is manually set in the global data
-    try{
-      let globalCategoryActiveIndex = this.globalData.categoryActiveIndex;
-      this.setData({
-        categoryActiveIndex: globalCategoryActiveIndex
-      });
-    }
-    catch(err){
-      //If categoryActiveIndex is null, throws err.
-      //Global active index not set- do nothing. 
-    };
     
-    //Query the productArray for the given category title
-    let categoryTitle = this.data.categoryTabs[this.data.categoryActiveIndex].title;
     let productsResponse = await wx.cloud.callFunction({
-      name: "getProductsArray",
-      data: {
-        category: categoryTitle
-      }
-    })
-    let products = productsResponse.result.products.data;
-    
-    //Upload our products array into the page data
-    this.setData({
-      productArray: products
+      name: "getCategoryProducts"
     });
-
-    /* Deprecated- will pass the array of search objects, not search titles 
-    let productTitles = products.map(productObj => productObj.title);
-    this.setData({
-      resultsData: productTitles 
-    }); */
-
-
-    
-
+    console.log(productsResponse);
+    //This is an array of objects which contain {categoryName: str, products : []}
+    let categoryProductsArray = productsResponse.result.data;
+    //Upload the categoryProductsArray to the page
+    this.setData({categoryProductsArray});
   },
   clickCategoryTab: async function(event){
     //Get the tab's index and change the active tab
@@ -95,5 +70,8 @@ Page({
         console.error(err);
       }
     });
+  },
+  onTabChange: function(e){
+    
   }
 })

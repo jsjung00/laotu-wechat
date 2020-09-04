@@ -1,17 +1,29 @@
 <!--miniprogram/product.wxml
     Note: mp-searchbar component uses miniprogram_npm folder since node_modules doesn't work for some reason-->
-<CustomNav isHome="true" title="Products"/>
-<!-- NOTE: type parameter should be either 'product' or 'event'-->
-<MySearchBar type="product" isNavigator="{{true}}"  searchObjectsArray="{{productArray}}"></MySearchBar>
-<view id="body_container">
-  <view id = "vertical_tabs_container">
-    <!-- take in an array of objects that contains each tab title-->
-    <block wx:for="{{categoryTabs}}" wx:key="title">
-      <view id="{{item.title}}" bindtap="clickCategoryTab" data-index="{{index}}" class="categoryTab{{categoryActiveIndex == index ? 'Selected' : ''}}">{{item.title}}</view> 
-    </block>  
-  </view>
+<CustomNav title="Products"/>
+<!--bodyContainer has no padding- productBody functions as the body container and has padding-->
+<view id="bodyContainer">
+  <!-- NOTE: type parameter should be either 'product' or 'event'-->
+  <MySearchBar type="product" isNavigator="{{true}}"  searchObjectsArray="{{productArray}}"></MySearchBar>
+  <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
+    <block wx:for="{{categoryProductsArray}}" wx:key="*this">
+      <vant-tab title="{{item.categoryName}}">
+        <!--Contains the productCards-->
+        <view id="productBody" class="spacedVerticalContainer sidePadding">
+          <!--Note: the width is calculated to leave 20rpx in between cards, margintop/bottom=10rpx-->
+          <view wx:for="{{item.products}}" wx:for-item="product" class="productCard"></view>
+        </view>
+      </vant-tab>
+    </block>
+  </vant-tabs>
+   
+</view>
+
+<!--<view id = "vertical_tabs_container">
+  <block wx:for="{{categoryTabs}}" wx:key="title">
+    <view id="{{item.title}}" bindtap="clickCategoryTab" data-index="{{index}}" class="categoryTab{{categoryActiveIndex == index ? 'Selected' : ''}}">{{item.title}}</view> 
+  </block>
   <scroll-view scroll-y id = "table_container">
-    <!-- take in array of product objects-->
     <block wx:for= "{{productArray}}" wx:key="title" wx:for-item="product">
       <view class="productContainer" bindtap="productClicked" data-itemid="{{product._id}}">
         <view class="productImageContainer">
@@ -22,8 +34,5 @@
         </view>
       </view>
     </block>
-  </scroll-view>  
-
-
-
-</view>
+  </scroll-view>   
+</view>-->
