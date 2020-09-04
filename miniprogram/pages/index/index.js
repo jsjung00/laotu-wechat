@@ -74,7 +74,32 @@ Page({
       eventObjects,
       productObjects
     });
-    
+  },
+  clickEventsMore: function(e){
+    //Called when the user clicks on the more button of the featured events container
+    //Should navigate to an events page that contains only the featured query
+    console.log("DEV: implement navigate to featured events page");
+  },
+  clickProductsMore: function(e){
+    //Called when the user clicks on the more button of the featured products container
 
+  },
+  clickedProductCard: function(e){
+    //Called when user clicks a specific product card
+    let productID = e.currentTarget.dataset.productid;
+    if (productID == null){
+      throw new Error("clickedProductCard: product object could not deliver ID");
+    }
+    //Navigate to the item page and pass the productID
+    wx.navigateTo({
+      url: "../item/item",
+      //Pass in the productID
+      success: function(res){
+        res.eventChannel.emit('acceptDataFromOpenerPage', {id : productID, type : "product"});
+      },
+      fail: function(err){
+        console.error("Failed to pass productID to itempage from index", err);
+      }
+    });
   }
 })

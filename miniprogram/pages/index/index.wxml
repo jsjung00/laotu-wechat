@@ -26,46 +26,63 @@
       </view>
     </view>
   </view>-->
-  <view class="featureContainer spacedVerticalElement">
-    <swiper wx:if="{{eventObjects.length > 0}}" indicator-dots="{{true}}" autoplay="{{false}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
-      <block wx:for="{{eventObjects}}" wx:key="*this" wx:for-item="eventObject">
-        <swiper-item>
-          <!--Has width 100% and height 100% to fit the container size-->
-          <itemCard isAbove="{{false}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="{{eventObject.thumbUrl}}">
-            <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-            <view slot="topRow" style="width: 100%;">
-              <view style="height: 100%; width: 100%; font-size: 20px; font-weight:bold">{{eventObject.title}}</view>
-            </view>
-            <view slot="bodyRow" style="width: 100%; height: 100%;">
-              <view id="bodyRow" class="slotContent">
-                <text>{{eventObject.descSummary}}</text>
-                <text>{{eventObject.locationStr}}</text>
+  <view id="featureEventsContainer" class="spacedVerticalElement">
+    <view class="featureTitleRow viewPadding aboveRow">
+      <text>Featured Events</text>
+      <view hover-class="hoverClass" bindtap="clickEventsMore" hover-stay-time="{{200}}">
+        <text>More ></text>
+      </view>
+    </view>
+    <view class="swiperContainer">
+      <swiper wx:if="{{eventObjects.length > 0}}" indicator-dots="{{true}}" autoplay="{{false}}" duration="{{duration}}" circular="{{circular}}" style="width: 100%; height: 100%">
+        <block wx:for="{{eventObjects}}" wx:key="*this" wx:for-item="eventObject">
+          <swiper-item>
+            <!--Has width 100% and height 100% to fit the container size-->
+            <itemCard isAbove="{{false}}" isBelow="{{false}}" style="height: 100%; width: 100%" imageSrc="{{eventObject.thumbUrl}}">
+              <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+              <view slot="topRow" style="width: 100%;">
+                <view style="height: 100%; width: 100%; font-size: 20px; font-weight:bold">{{eventObject.title}}</view>
               </view>
-            </view>
-          </itemCard>
-        </swiper-item>
-      </block>
-    </swiper>
+              <view slot="bodyRow" style="width: 100%; height: 100%;">
+                <view id="bodyRow" class="slotContent">
+                  <text>{{eventObject.descSummary}}</text>
+                  <text>{{eventObject.locationStr}}</text>
+                </view>
+              </view>
+            </itemCard>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
   </view>
-  <view id="productsContainer">
-    <!--Scroll view is really tricky. Not sure how to add a border radius to the productCards. 
-        See https://blog.csdn.net/JiangYuXuan1994/article/details/82622083-->
-    <scroll-view scroll-x="true">
-      <view id="scrollItemContainer">
-        <view class="productCard" wx:for="{{productObjects}}" wx:key="test" wx:for-item="productObject">
-          <view class="productImageContainer">
-            <image mode="aspectFill" src="{{productObject.thumbUrl}}" style="height: 100%; width:100%"></image>
-          </view>
-          <view class="productDescContainer spacedVerticalContainer sidePadding">
-            <view class="spacedVerticalElement">
-              <text>{{productObject.title}}</text>
+  <view id="featureProductsContainer" class="spacedVerticalElement">
+    <view class="featureTitleRow viewPadding aboveRow">
+      <text>Featured Products</text>
+      <view hover-class="hoverClass" bindtap="clickProductsMore" hover-stay-time="{{200}}">
+        <text>More ></text>
+      </view>
+    </view>
+    <view id="productsContainer">
+      <!--Scroll view is really tricky. Not sure how to add a border radius to the productCards. 
+          See https://blog.csdn.net/JiangYuXuan1994/article/details/82622083-->
+      <scroll-view scroll-x="true">
+        <view id="scrollItemContainer">
+          <view class="productCard" wx:for="{{productObjects}}" wx:key="test" wx:for-item="productObject" data-productid="{{productObject._id}}" bindtap="clickedProductCard">
+            <view class="productImageContainer">
+              <image mode="aspectFill" src="{{productObject.thumbUrl}}" style="height: 100%; width:100%"></image>
             </view>
-            <view class="spacedVerticalElement" style="font-weight: bold; color:red; font-size: 20px;">
-              <text>¥{{productObject.price}}</text>
+            <view class="productDescContainer spacedVerticalContainer sidePadding">
+              <view class="spacedVerticalElement">
+                <text>{{productObject.title}}</text>
+              </view>
+              <view class="spacedVerticalElement" style="font-weight: bold; color:red; font-size: 20px;">
+                <text>¥{{productObject.price}}</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
-    </scroll-view>
+      </scroll-view>
+    </view>
   </view>
+  
 </view>

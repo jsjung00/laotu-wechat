@@ -252,6 +252,10 @@ Page({
   payClicked : async function(e){
     var that = this;
     console.log("checkout page- payClicked()");
+    wx.showLoading({
+      title: 'Processing payment...'
+    });
+
     //Called when the user clicks on the pay button
     //Check that the order detail (shippingInfo) is set and complete
     if (this.data.shippingInfoComplete === true){
@@ -307,16 +311,23 @@ Page({
       };  
 
       try{
+        //Attempt to call our cloud function to send a transaction request
         var res = await wx.cloud.callFunction({
           name : 'sendPay',
           data : {
             totalFee : totalFee 
           }
-        })
+        });
+        wx.hideLoading();
+        console.log("My paymentCloud result", res.result);
+        //Conduct the payment through wx.requestPayment
+        that.pay(res.result);
+
       }catch (e){
         console.error("Failed to make transaction to sendPay", e);
+        wx.showToast({title : 'Failed to make transaction'});
+        wx.hideLoading();
       }
-      console.log("res is", res);
       
     }
     else{
@@ -327,7 +338,19 @@ Page({
         duration: 1000
       });
       console.log("shipping details is incomplete");
-    }
-    
+    }  
+  },
+  pay: function(payData){
+    var that = this;
+    const payment = payData.payment//这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
+    wx.requestPayment({
+      ...payment, 
+      success(res) {
+        console.log('pay success', res)
+      },
+      fail(res) {
+        console.error('pay fail', res)
+      }
+    })
   }
 })

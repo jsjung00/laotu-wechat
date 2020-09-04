@@ -9,7 +9,7 @@
 <view id="bodyContainer" class="viewPadding">
   <mp-form id="form">
     <mp-cell prop="name" title="Name" ext-class="">
-      <input bindinput="nameInputChange" data-field="name" class="weui-input" placeholder="Enter your name"/>
+      <input bindinput="nameInputChange" data-field="name" class="weui-input" placeholder="Enter your full name"/>
     </mp-cell>
   <mp-cell prop="streetName" title="Street Name" ext-class="">
     <input bindinput="streetInputChange" data-field="streetName" class="weui-input" placeholder="Enter your street name"/>

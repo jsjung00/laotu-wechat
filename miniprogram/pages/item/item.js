@@ -2,6 +2,7 @@
 /**
  * To display the item, the page accepts the itemID and type (NOTE: only pass in 'product', 'event' is deprecated)
  *  through the parent page event called 'acceptDataFromOpenerPage'.
+ *  Data object should be {'id':str, 'type':"product"}
  * For the favorite functionality, pull the isFavorited boolean from the cloud database (user's favlist)
  *    Any updates are made to the local page data boolean. When page closes, update the boolean to the cloud
  *    Loading note: takes a while for isFavorited to be set.  
@@ -412,6 +413,13 @@ Page({
   },
   addToCart : async function(e){
     //Function is triggered when the user clicks the addToCart button in the cardPopUp
+    //Show success toast
+    wx.showToast({
+      title: 'Added to cart',
+      icon:  'success',
+      duration : 1000
+    });
+
     //Upload the item and the quantity to the cloud
     //Wait for the itemID
     var that = this;
@@ -440,7 +448,7 @@ Page({
 
     //Get the quantity that is in the vant stepper
     let itemQuantity = this.data.itemQuantity;
-    console.log("itemQuanitity is ", itemQuantity);
+    console.log("itemQuantity is ", itemQuantity);
     //Upload the item and itemQuantity to user's cart
     let result = await wx.cloud.callFunction({
       name : 'addItemToCart',

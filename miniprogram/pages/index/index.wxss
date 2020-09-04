@@ -26,17 +26,22 @@ page{
   background-color: #EEBAB2;
 }
 
-.featureContainer{
-  height: 30vh;
+#featureEventsContainer{
+  height: 40vh;
   width: 100%;
   background-color: yellow;
   display: flex;
   flex-direction: column;
 }
-.aboveRow{
+.featureTitleRow{
   display: flex;
   justify-content: space-between;
-  background-color: #D4CFBD
+  background-color: #EEBAB2;
+  width: 100%;
+}
+.swiperContainer{
+  width: 100%;
+  flex: 1 0 10px;
 }
 
 .slotContent{
@@ -64,34 +69,16 @@ page{
 }
 
 #featureProductsContainer{
+  display: block;
   width: 100%;
-  height: 50vh;
+  height: auto;
   background-color: white;
-}
-#scrollBodyContainer{
-  flex: 1 0 10px;
-  height: 100%;
-  white-space: nowrap;
-  background-color: green;
-  display: inline-block;
-}
-
-.productContainer{
-  width: 40%;
-  display: inline-flex;
-  height: 100%;
-  flex-direction: column;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: black;
-  overflow: hidden;
 }
 
 #productsContainer{
   width: 100%;
   height: 40vh;
-  background-color: white;
+  /*background-color: white;*/
   padding: 20rpx 0rpx;
 }
 #productsContainer scroll-view{
