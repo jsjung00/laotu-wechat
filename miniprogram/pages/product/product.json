@@ -4,6 +4,7 @@
     "mp-searchbar" : "../../miniprogram_npm/weui-miniprogram/searchbar/searchbar",
     "MySearchBar": "../../components/mySearchBar/mySearchBar",
     "vant-tab": "../../vantDist/tab/index",
-    "vant-tabs": "../../vantDist/tabs/index"
+    "vant-tabs": "../../vantDist/tabs/index",
+    "vant-skeleton": "../../vantDist/skeleton/index"
   }
 }

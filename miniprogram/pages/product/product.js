@@ -2,7 +2,8 @@
  *    an array of objects that contain 'categoryName' and 'productObjs'   
  *    [{'categoryName' : 'All', 'productObjs' : []}, {'categoryName':'Featured', 'productObjs' : []}, {}]
  *    categoryNames are the values defined by the collection in 'productPageData'
- *    and productObj is an array of product objects of products in that category 
+ *    and productObj is an array of product objects of products in that category
+ * To control skeleton loading, when categoryProductsArray is set, loading=false
  */
 Page({
 
@@ -10,7 +11,8 @@ Page({
    * Page initial data
    */
   data: {
-    activeTabIndex : 0
+    activeTabIndex : 0,
+    /*loading: true*/
   },
 
   /**
@@ -26,6 +28,12 @@ Page({
     let categoryProductsArray = productsResponse.result.data;
     //Upload the categoryProductsArray to the page
     this.setData({categoryProductsArray});
+
+    //Pass in the array of all productObjects to the searchbar 
+    let _productArray = categoryProductsArray.filter(obj => obj.categoryName === 'All');
+    let productArray = _productArray[0].products;
+    console.log("productArray", productArray);
+    this.setData({productArray : productArray});
   },
   clickCategoryTab: async function(event){
     //Get the tab's index and change the active tab
@@ -71,7 +79,22 @@ Page({
       }
     });
   },
-  onTabChange: function(e){
-    
+  clickedProductCard: function(e){
+    //Called when user clicks a specific product card
+    let productID = e.currentTarget.dataset.productid;
+    if (productID == null){
+      throw new Error("clickedProductCard: product object could not deliver ID");
+    }
+    //Navigate to the item page and pass the productID
+    wx.navigateTo({
+      url: "../item/item",
+      //Pass in the productID
+      success: function(res){
+        res.eventChannel.emit('acceptDataFromOpenerPage', {id : productID, type : "product"});
+      },
+      fail: function(err){
+        console.error("Failed to pass productID to itempage from index", err);
+      }
+    });
   }
 })

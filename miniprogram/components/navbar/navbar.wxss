@@ -11,7 +11,7 @@ view{
   width: 100%;
   top : 0;
   /*Change the z-index so the navbar will be on top of the other material in scroll up */
-  z-index: 2;
+  z-index: 999;
   background-color: white;
 }
 .top-buffer{

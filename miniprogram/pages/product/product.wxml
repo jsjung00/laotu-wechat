@@ -2,22 +2,33 @@
     Note: mp-searchbar component uses miniprogram_npm folder since node_modules doesn't work for some reason-->
 <CustomNav title="Products"/>
 <!--bodyContainer has no padding- productBody functions as the body container and has padding-->
+
 <view id="bodyContainer">
   <!-- NOTE: type parameter should be either 'product' or 'event'-->
-  <MySearchBar type="product" isNavigator="{{true}}"  searchObjectsArray="{{productArray}}"></MySearchBar>
+  <MySearchBar type="product" isNavigator="{{true}}" searchObjectsArray="{{productArray}}"></MySearchBar>
   <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
-    <block wx:for="{{categoryProductsArray}}" wx:key="*this">
+    <block wx:for="{{categoryProductsArray}}" wx:key="unique1">
       <vant-tab title="{{item.categoryName}}">
         <!--Contains the productCards-->
         <view id="productBody" class="spacedVerticalContainer sidePadding">
           <!--Note: the width is calculated to leave 20rpx in between cards, margintop/bottom=10rpx-->
-          <view wx:for="{{item.products}}" wx:for-item="product" class="productCard"></view>
+          <view wx:for="{{item.products}}" wx:for-item="product" data-productid="{{product._id}}"class="productCard" wx:key="unique2" bindtap="clickedProductCard">
+            <view class="imageContainer">
+              <image mode="aspectFill" src="{{product.thumbUrl}}" style="height: 100%; width: 100%"></image>
+            </view>
+            <view class="descContainer spacedVerticalContainer sidePadding">
+              <view class="titleStr">{{product.title}}</view>
+              <view class="descSummary">{{product.descSummary}}</view>
+              <view class="spacedVerticalElement priceStr">{{product.priceStr}}</view>
+              
+            </view>
+          </view>
         </view>
       </vant-tab>
     </block>
-  </vant-tabs>
-   
+  </vant-tabs>  
 </view>
+
 
 <!--<view id = "vertical_tabs_container">
   <block wx:for="{{categoryTabs}}" wx:key="title">

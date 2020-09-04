@@ -1,17 +1,18 @@
 /* miniprogram/product.wxss */
 page{
-  height: 100%;
+  min-height: 100%;
   width: 750rpx;
-  background-color: violet;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 
 #bodyContainer{
-  background-color: #f2f2f2;
+  /*background-color: #f2f2f2;*/
   width: 100%;
-  height: 100%;
+  flex: 1 0 10px;
   display: flex;
   flex-direction: column;
 }
@@ -20,7 +21,7 @@ vant-tabs{
   /* Take up the rest of the height if search disappears */
   flex: 1 0 10%;
   width: 750rpx;
-  background-color:rgb(213, 187, 187) !important;
+  /*background-color:rgb(213, 187, 187) !important;*/
 }
 
 #productBody{
@@ -32,15 +33,40 @@ vant-tabs{
   box-sizing: border-box !important;
 }
 .productCard{
-  background-color: bisque;
-  height: 40vh;
+  background-color: white;
+  height: 23rem;
   width: calc(50% - 10rpx);
   margin-top: 10rpx;
   margin-bottom: 10rpx;
-  border: 5px solid black;
-  border-radius: 10px;
-  
+  overflow: hidden;
+  border-radius: 10px; 
 }
+
+.imageContainer{
+  width: 100%;
+  height: 60%;
+}
+.descContainer{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.titleStr{
+  margin-top: 10rpx;
+  color: #2c2c2c;
+  font-size : 1rem;
+  line-height: 1.25rem;
+}
+.descSummary{
+  font-size: 0.75rem;
+  color: #2c2c2c;
+}
+.priceStr{
+  font-size: 1.25rem;
+  color: red;
+}
+
 
 
 #vertical_tabs_container{
