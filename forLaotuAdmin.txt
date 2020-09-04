@@ -1,0 +1,1 @@
+1) There needs to be at least 3 products in the featured products array

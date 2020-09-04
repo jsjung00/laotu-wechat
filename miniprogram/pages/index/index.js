@@ -68,6 +68,7 @@ Page({
     let featuredObject = featuredResp.result;
     let eventObjects = featuredObject.eventObjects;
     let productObjects = featuredObject.productObjects;
+    console.log("productObj", productObjects);
     //Upload the featured event and product objects to the page data
     this.setData({
       eventObjects,
