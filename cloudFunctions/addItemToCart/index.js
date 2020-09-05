@@ -1,5 +1,5 @@
-// Uploads item and itemQuantity to user's cart. 
-//Parameters: 'itemid' and 'quantity'
+// Uploads item and itemQuantity to user's cart. Called by item.js 
+//Parameters: 'itemid' and 'quantity' (required)
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
   //Upload the itemID and the quantity to the database
   //First get the cartProducts array
   let cartProductsResponse = await db.collection('userCart').where({
-    _openid :'dnehaha'
+    _openid : openID
   }).get();
   //If the user record does not exist, initialize one
   if (cartProductsResponse.data.length < 1){

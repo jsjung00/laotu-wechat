@@ -13,7 +13,9 @@
  * 
  * For the card pop up functionality, when the add to cart or buy now button is clicked in the itemTabBar component, the addToCart()
  * function here is triggered which sets displayPopUp = true and isTabBarHidden = true. The itemTabBar.js listens for any
- * change and will be able to get the isTabBarHidden = true in order to hide the component. 
+ * change and will be able to get the isTabBarHidden = true in order to hide the component.
+ * 
+ * To add item to cart, uploads itemid and quantity to the cloud function 'addItemToCart' 
  */
 const app = getApp();
 
