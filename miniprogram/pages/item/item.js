@@ -38,6 +38,7 @@ Page({
     showPopUp : false,
     pageLoaded : false, //changes to true once page loads
     //dotActive : null (will be set in onLoad)
+    //isFavorited : (will be set in setIsFavorited which is called onLoad)
     itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
   },
 
@@ -221,49 +222,18 @@ Page({
             isFavorited: false
           })
         });
-
     } 
-    else if (type === 'event'){
-      //Query from the userFavProducts
-      const events = db.collection('userFavEvents');
-      events.doc(openID).get()
-        .then(function(res){
-          //User's favlist has been init
-          //Get user's list of favItems
-          let favEvents = res.data.favEvents;
-          //Check if item ID is in the favProducts
-          let isFavorited = favEvents.includes(itemID);
-          console.log("isFav", isFavorited);
-          that.setData({
-            isFavorited
-          });
-        })
-        .catch(function(err){
-          //Need to initialize the user and add an empty favEvents list
-          events.add({
-            data: {
-              _id: openID,
-              favEvents: []
-            }
-          })
-            .then(res => console.log("Successfully initialized user"))
-            .catch(err => console.error("Failed to initialize user", err));
-          //Set the isFavorited to page data as false
-          that.setData({
-            isFavorited: false
-          })
-        });
-    }
     else{
-      console.error("In setIsFavorited(): should only have either 'event' or 'product' type available");
+      console.error("In setIsFavorited(): should only have either 'product' type available");
     }
   },
   clickHeart: async function(){
+    //Note: Heart logo can only be clicked after isFavorited is set 
     var that = this;
     console.log("clickHeart()");
-    //Function is called when heart is clicked. Inverses the local page boolean
+    //Called when heart is clicked. Inverses the local page boolean
     //In order to prevent a race condition where pull data from isFavorited before isFavorited is set, wait
-    //until isFavorited != null.
+    //until isFavorited != null. Therefore, I know that the user's cart has been init by setIsFavorited()
     var checkIsFavoritedSet = function(){
       return new Promise(function(resolve, reject){
         var numLoops = 20;
@@ -332,23 +302,6 @@ Page({
           })
           .catch(err => console.error(err));
       } 
-      else if (itemType === 'event'){
-        db.collection('userFavEvents').doc(openID).get()
-          .then(function(res){
-            //add item if doesn't exist
-            var favEvents = res.data.favEvents;
-            if (!favEvents.includes(itemID)){
-              //Item doesn't exist, add itemID to the end of the array
-              db.collection('userFavEvents').doc(openID).update({
-                data: {
-                  favEvents : _.push(itemID) 
-                }
-              });
-            }
-            //item exists, do nothing
-          })
-          .catch(err => console.error(err));
-      }
       else{
         console.error("Should only be either 'product' or 'event");
       }

@@ -22,8 +22,8 @@
       <view class="descStr">{{descSummary}}</view>
       <view class="priceAndIcons">
         <view class="priceStr">{{priceStr}}</view>
-        <!--Contains the favorite and forward icon-->
-        <view id="iconsContainer" style="display:flex">
+        <!--Contains the favorite and forward icon. Hidden until isFavorited is set-->
+      <view id="iconsContainer" style="display:flex; visibility : {{isFavorited == null ? 'hidden' : 'visible'}}">
           <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
             <mp-icon icon="like" size="{{30}}" color="black" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
           </view>
