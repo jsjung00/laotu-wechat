@@ -17,8 +17,10 @@ exports.main = async (event, context) => {
   let cartProductsResponse = await db.collection('userCart').where({
     _openid : openID
   }).get();
+  console.log(cartProductsResponse);
   //If the user record does not exist, initialize one
   if (cartProductsResponse.data.length < 1){
+    console.log("User Record DNE!");
     //Could not a record for the user- create one with empty cartProducts array
     try{
       await db.collection('userCart').add({
