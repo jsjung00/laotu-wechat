@@ -8,136 +8,81 @@ view {
 page{
   height: 100%;
   width: 750rpx;
+  background-color: teal;
   display: flex;
   flex-direction: column;
 }
-#body{
+#bodyContainer{
   /* Body will take up the rest of the space apart from the navbar and tabbar */
   flex: 1 0 10px;
-  background-color: lightpink;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   width: 750rpx;
+  overflow: auto;
 }
 
 @import "../template/template.wxss";
 
 #swiperContainer{
-  /*Have the swiper be 60% of the body */
-  height: 60%;
+  /*Have the swiper occupy 50% of the screen */
+  height: 50vh;
   width: 100%;
   background-color: lightsteelblue;
 }
-#customDescContainer{
-  flex-grow: 1;
-  width: 750rpx;
-  display: flex;
-  background-color: lightgoldenrodyellow;
-}
-
-.viewPadding{
-  padding: 20rpx 20rpx 20rpx 20rpx;
-}
-.paddingElement{
-  /* used in a container that has padding-top 10rpx and padding-bottom 10rpx to space each element 20rpx */
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
-}
-
-.descContainer{
-  /* Inherit the height of customDescContainer */
-  height: 100%;
+#descContainer{
+  /* I want the descContainer to take up the rest of the body space but have min-height of 25rem */
+  flex: 1 0 15rem;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: darkgray;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  /*background-color: lightgoldenrodyellow;*/
 }
 
 .priceCard{
   /* Has two block elements- the title row and the main row */
-  display: flex;
-  flex-direction: column;
-  padding: 20rpx 20rpx 20rpx 20rpx;
-  background-color: crimson;
-  min-height: 200px;
-  height: 40%;
-  width: 100%; 
-}
-#titleRow{
-  display: flex;
-  background-color: darkgreen;
-  align-items: center;
-  font-size: 50rpx;
-}
-
-#mainRow{
-  display: flex;
-  flex-grow: 1;
-  margin-top: 20rpx;
-  background-color: darkkhaki;
-}
-#rightBox{
-  height: 100%;
-  min-width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40rpx;
-}
-
-#desc{
-  flex-grow: 1;
-  font-size: 25rpx;
-}
-#categoryButtons{
-  display: flex;
-}
-.mini-btn{
-  margin-right: 20rpx;
-  height: 30rpx;
-  font-size: 20rpx;
-  display: flex;
-  align-items: center;
-}
-
-#leftBox{
-  height: 100%;
-  /* Take up the rest of the space */
-  flex-grow: 1;
-  background-color: darkmagenta;
-  display: flex;
-  flex-direction: column;
-}
-
-#iconsContainer{
-  /* Place icons Container at the very right */
-  margin-left: auto;
-  background-color: darkgray;
-}
-.mp-icon-hover{
-  background-color: rgba(0, 0, 0, 0.1);
-  opacity: 0.7;
-}
-
-.descBox {
-  background-color: darkgoldenrod;
+  height: auto;
   width: 100%;
-  /* Take up the rest of the description container height */
-  flex-grow: 1;
+  display: block;
+  /*background-color: crimson;*/
 }
-
-#descPriceRow{
+.titleStr{
   display: flex;
-  padding: 3rpx 3rpx 3rpx 3rpx;
-
+  align-items: center;
+  font-size: 1.25rem;
+}
+.descStr{
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+}
+.priceAndIcons{
+  display: flex;
+  /*background-color:tomato;*/
+}
+.priceStr{
+  height: 100%;
+  flex: 1 0 30%;
+  font-size: 1.5rem;
+  color: red;
+  font-weight: bold;
+}
+.iconsContainer{
+  height: 100%;
+  /*background-color: thistle;*/
+}
+.shareButton{
+  height: 30px;
+  width: 30px;
+}
+.shareButton Button{
+  width:100% !important;
+  height:100% !important;
+  z-index: 2;
+  transform: translate(0, -30px);
+  opacity: 0.01;
 }
 
-CustomTabBar{
-  /* position it at the very bottom */
-  margin-top: auto;
-}
 
 .blurredElement{
   filter: blur(8px);
@@ -168,14 +113,14 @@ CustomTabBar{
   height: 100%;
   background-color: seashell;
 }
+/*
 #descContainer{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  /* I want my items to start at the bottom */
   justify-content: flex-end;
   background-color: salmon;
-}
+}*/
 
 #quantityContainer{
   min-height: 20%;

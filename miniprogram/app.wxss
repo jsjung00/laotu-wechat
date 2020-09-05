@@ -6,6 +6,9 @@ view{
 scroll-view{
   box-sizing: border-box;
 }
+.allPadding{
+  padding: 1rem 1rem 1rem 1rem;
+}
 
 .container {
   height: 100%;

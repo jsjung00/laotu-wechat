@@ -6,46 +6,33 @@ iconsContainer is hardCoded- change when iconSize or number of icons changes.
   font-size: 30px !important;
 }*/
 
+view{
+  box-sizing: border-box;
+}
+
 /* components/itemTabBar.wxss */
 .tabbarContainer{
-  background-color: lightblue;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.insidePaddingContainer{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  /*background-color: thistle;*/
-  margin-left: 10rpx;
-  margin-right: 10rpx;
-}
-
-/* HardCode: each icon width is 50px; 2px space for 3 icons means 8 + (3*50) = 158px width */
-.iconsContainer{
-  height: 50px;
-  width: 158px;
-  display: flex;
-  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
 }
 
 .buttonsContainer{
-  display: flex;
-  padding-left: 5px;
-  padding-right: 5px;
+  /* Should take up the rest of the space after the icons */
+  flex: 1 0 10px;
   height: 100%;
-  flex-grow: 1;
+  display: flex;
   align-items: center;
+  padding: 20rpx 20rpx;
   /*background-color: teal;*/
 }
 .vantButton{
-  margin-left: 5px;
-  margin-right: 5px;
   flex-grow: 1;
+  border-radius: 50px !important;
   /*background-color: white;*/
 }
 

@@ -5,6 +5,10 @@
     "CustomTabBar" : "../../components/itemTabBar/itemTabBar",
     "CustomDesc" : "../../components/itemDesc/itemDesc",
     "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon",
-    "vant-stepper" : "../../vantDist/stepper"
+    "vant-stepper" : "../../vantDist/stepper",
+    "vant-popup": "../../vantDist/popup/index"
+  },
+  "tabBar" : {
+    "custom" : true
   }
 }

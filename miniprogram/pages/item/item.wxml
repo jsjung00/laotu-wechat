@@ -1,9 +1,10 @@
+<!-- Note: only displays products-->
 <import src="../../components/itemTabBar/itemTabBar.wxml"></import>
 <import src="../template/template.wxml"></import>
 
 <CustomNavBar isBack ="{{true}}"></CustomNavBar>
 <!-- The background page should be blurred if backgroundBlur == true-->
-<view id="body" class="{{backgroundBlur ? 'blurredElement' : ''}}">
+<view id="bodyContainer">
   <!-- Add the sliding image component-->
   <view id="swiperContainer">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" circular="{{circular}}" style="height: 100%; width: 100%">
@@ -14,98 +15,37 @@
       </block>
     </swiper>
   </view>
-  <!-- Takes in the item type: "product" or "event" and displays accordingly-->
-  <view id="customDescContainer">
-    <block wx:if="{{itemType === 'product'}}">
-      <view class="descContainer">
-        <!-- Contains the price, title, and buttons-->
-        <view class="priceCard paddingElement">
-          <!-- Contains two block elements and padding-->
-          <view id="titleRow">
-            <text>{{title ? title : 'Loading...'}}</text>
-            <!--Contains the favorite and forward icon-->
-            <view id="iconsContainer" style="display:flex">
-              <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
-                <mp-icon icon="like" size="{{30}}" color="black" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
-              </view>
-              <view hover-class="mp-icon-hover" hover-stay-time="{{200}}">
-                  <button open-type="share">
-                    <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
-                  </button>
-              </view>
-            </view>
+  <view id="descContainer">
+    <!--Contains the price and description-->
+    <view class="priceCard allPadding">
+      <view class="titleStr">{{title}}</view>
+      <view class="descStr">{{descSummary}}</view>
+      <view class="priceAndIcons">
+        <view class="priceStr">{{priceStr}}</view>
+        <!--Contains the favorite and forward icon-->
+        <view id="iconsContainer" style="display:flex">
+          <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
+            <mp-icon icon="like" size="{{30}}" color="black" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
           </view>
-          <view id="mainRow">
-            <!--Contains description and category tags-->
-            <view class="viewPadding" id="leftBox">
-              <view id="desc">
-                <text>{{descSummary}}</text>
-              </view>
-              <!--Contains buttons that label the categories (like flairs)-->
-              <view id="categoryButtons">
-                <view wx:for="{{itemCategories}}" wx:for-index="idx" wx:for-item="category">
-                  <button class="mini-btn" type="primary" >{{category}}</button>
-                </view>
-              </view>
-            </view>
-            <!--Contains price-->
-            <view id="rightBox">
-              <text>{{priceStr}}</text>
-            </view>
-          </view>   
+          <view class="shareButton" hover-class="mp-icon-hover" hover-stay-time="{{200}}">
+            <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
+            <!--Transform our share button on to the mp-icon to overlay it on top-->  
+            <button open-type="share"></button>
+          </view>
         </view>
-        <!-- Contains the item description-->
-        <view class="descBox paddingElement viewPadding">
-          <text>Some stuff goes here.</text>
-        </view>  
       </view>
-    </block>
-    <block wx:elif="{{itemType === 'event'}}">
-      <text>Event</text>
-    </block>
-    <block wx:else>
-      <text>Error- only product or event are valid parameters for itemDesc component.</text>
-    </block>
-
+    </view>
+    <!--Have the images be some fixed height: ex: 30vh-->
+    <view class="descImageContainer"></view>
   </view>
-  
 </view>
-<!--This is the popup card on the bottom half of the screen that allows the user to choose a quantity
-    Visible only when addToCart() is activated and displayPopUp is true-->
-<view id="cartPopUpContainer" class="spacedVerticalContainer sidePadding" wx:if="{{displayPopUp}}">
-  <!--Contains the X out button on the right of this container-->
-  <view id="closeContainer">
-    <!--X button will trigger clickClose() on tap-->
-    <view hover-class="mp-icon-hover" bindtap="clickClose" hover-stay-time="{{200}}">
-      <mp-icon icon="close" size="{{25}}"></mp-icon>
-    </view>
-  </view>
-  <!--Contains the image on left and title and price on right-->
-  <view id="cardContainer" class="spacedVerticalElement">
-    <view id="imageContainer">
-      <image mode="aspectFill" src="{{coverImageSrc}}" style="height: 100%; width: 100%;"></image>
-    </view>
-    <view id="descContainer" class="viewPadding">
-      <text>{{title ? title : 'Loading...'}}</text>
-      <text>{{priceStr}}</text>
-    </view>
-  </view>
-  <!--Contains picker to adjust quantity-->
-  <view id="quantityContainer" class="spacedVerticalElement">
-    <text>Quantity</text>
-    <vant-stepper value="{{1}}" input-width="60px" button-size="45px" min="1" max="99" bind:change="quantityChange"></vant-stepper>
-  </view>
-  <!--Contains add to cart and buy buttons-->
-  <view id="buttonsContainer" class="spacedVerticalElement">
-    <!--DEV: Figure out how to customize the button (weUI? button css?)-->
-    <button id="addToCartButton" class="cartButton" bindtap="addToCart">Add to Cart</button>
-    <button id="buyButton" class="cartButton">Buy Now</button>
-  </view>  
-</view>
+<!--Add this bottom buffer so the tabbar doesn't cover the bodyContainer contents-->
+<view style="height: {{tabbarHeight}}px; width: 100%; background-color: brown;"></view>
+<vant-popup round closeable position="bottom" show="{{showPopUp}}" custom-style="height: 10rem;"bind:close="popUpClose">内容</vant-popup>
 
-<!-- When the add to cart button is tapped, the tabBar will trigger the addToCart function in this js file
+<!-- When the add to cart button is tapped, the tabBar will trigger the tabBarAddToCart function in this js file
       addToCart function will set isTabBarHidden=true, which will then pass to component and cause tabBar to not render in wxif-->
-<CustomTabBar numItems="{{numCartItems}}" isTabBarHidden="{{isTabBarHidden}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="tabBarAddToCart"></CustomTabBar>
+<CustomTabBar numItems="{{numCartItems}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="tabBarAddToCart"></CustomTabBar>
 
 
 

@@ -33,6 +33,7 @@ Page({
     isTabBarHidden: false,
     displayPopUp: false,
     backgroundBlur : false,
+    showPopUp : false,
     //numCartItems : null (will be set in onLoad)
     itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
   },
@@ -50,6 +51,7 @@ Page({
     this.setData({
       tabbarHeight
     });
+    console.log("tabbarHeight", this.data.tabbarHeight);
 
     //Get the itemID and the type and set to local storage
     const eventChannel = this.getOpenerEventChannel();
@@ -401,9 +403,7 @@ Page({
     //Change displayPopUp to true in order to show the popUp that allows user to choose quantity
     //Change backgroundBlur to true to blur out the background
     this.setData({
-      displayPopUp : true,
-      isTabBarHidden : true,
-      backgroundBlur : true
+      showPopUp : true
     });
   },
   quantityChange : function(e){
@@ -469,6 +469,10 @@ Page({
       isTabBarHidden : false,
       backgroundBlur : false
     });
+  },
+  popUpClose : function(e){
+    //Called when the user clicks the x button of the popup
+    this.setData({showPopUp : false});
   }
 
   
