@@ -1,0 +1,22 @@
+<!-- Contains the image and the description box-->
+<view class="itemCardContainer">
+  <!--Contains the image-->
+  <view class="leftContainer">
+    <!--Used to pad the top and bottom by 15%-->
+    <view class="thumbPadding"></view>
+    <image class="thumbImage" mode="aspectFill" src="{{imageSrc}}" style="height:100%; width: 100%"></image>
+    <view class="thumbPadding"></view>
+  </view>
+  <!--Contains the description-->
+  <view class="rightContainer">
+    <view class="topRowContainer">
+      <slot name="topRow"></slot>
+    </view>
+    <view class="bodyRowContainer">
+      <slot name="bodyRow"></slot>
+    </view>
+    <view class="bottomRowContainer">
+      <slot name="bottomRow"></slot>
+    </view>
+  </view>
+</view>

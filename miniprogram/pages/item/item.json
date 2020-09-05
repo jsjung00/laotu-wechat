@@ -2,11 +2,14 @@
   "usingComponents": {
     "CustomNavBar" : "../../components/navbar/navbar",
     "vant-goods-action-icon" : "../../vantDist/goods-action-icon",
+    "vant-goods-action-button" : "../../vantDist/goods-action-button/index",
     "CustomTabBar" : "../../components/itemTabBar/itemTabBar",
     "CustomDesc" : "../../components/itemDesc/itemDesc",
     "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon",
     "vant-stepper" : "../../vantDist/stepper",
-    "vant-popup": "../../vantDist/popup/index"
+    "vant-popup": "../../vantDist/popup/index",
+    "productCard" : "../../components/productCard/productCard",
+    "vant-button" : "../../vantDist/button/index"
   },
   "tabBar" : {
     "custom" : true

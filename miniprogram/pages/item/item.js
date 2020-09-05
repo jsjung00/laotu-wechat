@@ -34,7 +34,8 @@ Page({
     displayPopUp: false,
     backgroundBlur : false,
     showPopUp : false,
-    //numCartItems : null (will be set in onLoad)
+    pageLoaded : false, //changes to true once page loads
+    //dotActive : null (will be set in onLoad)
     itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
   },
 
@@ -43,8 +44,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    //Upload number of cartItems
-    that.uploadNumCartItems();
+    //Upload the dot active boolean
+    that.uploadDotActive();
 
     //Set the tabbar Height to pass into the CustomTabBar component
     let tabbarHeight = app.globalData.tabbarHeight;
@@ -68,10 +69,32 @@ Page({
       that.uploadItemData(id, type);
       //Check if the item is favorited and set the isFavorited data
       that.setIsFavorited(id, type);
+
+      //Set pageLoaded to true
+      console.log("Item page just loaded");
+      that.setData({pageLoaded : true});
     });
 
   },
   onUnload: function(){
+    var that = this;
+    //Consider having a timeout to prevent race condition with clickHeart updating local boolean and updateIsFavorited uploading
+    //local boolean to cloud
+    setTimeout(() => that.updateIsFavorited(), 500);
+  },
+  onShow : function(){
+    //Called onLoad and also when page comes from higher layer
+    //Check whether or not page just loaded- if not, uploadDotActive
+    var that = this;
+    if (this.data.pageLoaded){
+      //Page did not just load
+      console.log("Page did not just load. Race depends on onShow() coming before onLoad() finishes");
+      //Upload dot active
+      that.uploadDotActive();
+    }  
+
+  },
+  onHide : function(){
     var that = this;
     //Consider having a timeout to prevent race condition with clickHeart updating local boolean and updateIsFavorited uploading
     //local boolean to cloud
@@ -93,7 +116,7 @@ Page({
           let itemImages = res.data.swiperImageUrls;
           let itemCategories = res.data.itemCategories;
           let descSummary = res.data.descSummary;
-          let coverImageSrc = res.data.imageUrl;
+          let thumbUrl = res.data.thumbUrl;
           console.log(itemImages);
           //Upload the data to the page data
           that.setData({
@@ -102,7 +125,7 @@ Page({
             itemImages: itemImages,
             itemCategories: itemCategories,
             descSummary : descSummary,
-            coverImageSrc : coverImageSrc  
+            thumbUrl : thumbUrl  
           });
         })
         .catch(err => console.error(err));
@@ -382,19 +405,21 @@ Page({
       console.log("User closed page before isFavorited set. No changes were made.");
     }
   },
-  uploadNumCartItems : async function(){
-    console.log("uploadNumCartItems()");
+  uploadDotActive : async function(){
+    console.log("dotActive()");
     //Function is called onload. Calculates the number of items in the user's cart and sets to local storage
-    //which will be passed to the itemTabBar for it to render the cart icon.
+    //the dotActive boolean which will be passed to the itemTabBar for it to render the cart icon.
     
     let cartResponse = await wx.cloud.callFunction({
       name: 'getUserCart'
     });
     let cartProducts = cartResponse.result.cartProducts;
     let numCartItems = cartProducts.length;
-    //Set the number to the local storage
+    let dotActive = numCartItems > 0;
+    console.log("dotActive is", dotActive);
+    //Set the boolean to the local storage
     this.setData({
-      numCartItems
+      dotActive
     });
   },
   tabBarAddToCart: function(e){
@@ -409,16 +434,20 @@ Page({
   quantityChange : function(e){
     //Function is triggered when the stepper quantity is increased
     //Upload the new quantity
+    console.log("quantity change()");
     this.setData({itemQuantity: e.detail});
   },
   addToCart : async function(e){
+    var that = this;
     //Function is triggered when the user clicks the addToCart button in the cardPopUp
-    //Show success toast
+    //Show success toast and close the pop up
     wx.showToast({
       title: 'Added to cart',
       icon:  'success',
-      duration : 1000
+      duration : 1000,
+      success: that.popUpClose 
     });
+    
 
     //Upload the item and the quantity to the cloud
     //Wait for the itemID
@@ -457,18 +486,57 @@ Page({
         quantity : itemQuantity
       }
     });
+    //
 
   },
-  clickClose : function(e){
-    //Function is called when the close button is tapped.
-    //Should set displayPopUp to false, isTabBarHidden to false, and backgroundBlur to false to undo everything
-
-    console.log("clickClose()");
-    this.setData({
-      displayPopUp : false,
-      isTabBarHidden : false,
-      backgroundBlur : false
+  buyNow : async function(e){
+    //Called when user clicks on buy now button in card pop up
+    wx.navigateTo({
+      url: '../../pages/shoppingCart/shoppingCart',
     });
+    //Close the pop up
+    this.popUpClose();
+
+    //Upload the item and the quantity to the cloud
+    //Wait for the itemID
+    var that = this;
+    var checkItemID = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForItemID(){
+          var itemID = that.data.itemID;
+          if (itemID == null){
+            //Continually loop until the data is set
+            setTimeout(waitForItemID, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("setisFavorited(): openID took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkItemID();
+    var itemID = this.data.itemID;
+
+    //Get the quantity that is in the vant stepper
+    let itemQuantity = this.data.itemQuantity;
+    console.log("itemQuantity is ", itemQuantity);
+    //Upload the item and itemQuantity to user's cart
+    let result = await wx.cloud.callFunction({
+      name : 'addItemToCart',
+      data : {
+        itemid : itemID,
+        quantity : itemQuantity
+      }
+    });
+    console.log("Uploaded item and quantity");
+    
+
   },
   popUpClose : function(e){
     //Called when the user clicks the x button of the popup

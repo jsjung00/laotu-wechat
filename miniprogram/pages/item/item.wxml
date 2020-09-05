@@ -41,12 +41,38 @@
 </view>
 <!--Add this bottom buffer so the tabbar doesn't cover the bodyContainer contents-->
 <view style="height: {{tabbarHeight}}px; width: 100%; background-color: brown;"></view>
-<vant-popup round closeable position="bottom" show="{{showPopUp}}" custom-style="height: 10rem;"bind:close="popUpClose">内容</vant-popup>
+
 
 <!-- When the add to cart button is tapped, the tabBar will trigger the tabBarAddToCart function in this js file
       addToCart function will set isTabBarHidden=true, which will then pass to component and cause tabBar to not render in wxif-->
-<CustomTabBar numItems="{{numCartItems}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="tabBarAddToCart"></CustomTabBar>
+<CustomTabBar dotActive="{{dotActive}}" tabbarHeight="{{tabbarHeight}}" itemType="{{itemType}}" bindaddToCart="tabBarAddToCart"></CustomTabBar>
 
-
-
-
+<vant-popup round closeable position="bottom" show="{{showPopUp}}" custom-style="height:auto; display: block; padding: 1rem"bind:close="popUpClose">
+  <!--Contains the image on left and title and price on right-->
+  <view id="cardContainer" class="spacedVerticalElement">
+    <productCard imageSrc="{{thumbUrl}}" style="width: 100%;">
+      <view slot="topRow">
+        <view style="height: 100%; width: 100%;">{{title}}</view>
+      </view>
+      <view slot="bodyRow">
+        <view id="bodyRow" style="height: 100%; width: 100%;">
+          <view>{{descSummary}}</view>
+        </view>
+      </view>
+      <view slot="bottomRow">
+        <view style="display:flex; align-items: center;">
+          <view>{{priceStr}}</view>
+          <vant-stepper value="{{1}}" input-width="2rem" button-size="1.5rem" min="1" max="99" bind:change="quantityChange" style="margin-left:auto"></vant-stepper>
+        </view>
+      </view>
+    </productCard>
+  </view>
+  <!--Contains add to cart and buy buttons-->
+  <view id="buttonsContainer" class="spacedVerticalElement">
+    <!--DEV: Figure out how to customize the button (weUI? button css?)-->
+      <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="Add to Cart" bindtap="addToCart"></vant-goods-action-button>
+      <vant-goods-action-button class="vantButton" custom-class="vantButton" type="primary" color="#FA003F" text="Buy Now" bindtap="buyNow"></vant-goods-action-button>
+   
+    
+  </view>
+</vant-popup>
