@@ -207,6 +207,7 @@ Page({
             isFavorited
           });
         })
+        //Query throws an error when trying to get data from a non-existent record
         .catch(function(err){
           //Need to initialize the user and add an empty favProducts list
           products.add({

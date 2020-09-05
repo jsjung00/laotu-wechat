@@ -35,6 +35,20 @@ Page({
         complete : reloadPage
       });
     }
+    
+    try{
+      let favEventsResponse = await db.collection('userFavEvents').where({
+        _openid : "dfaidhfoashdfiodsahf"
+      }).get();
+      console.log("NOPE");
+      console.log(favEventsResponse);
+    }catch(e){
+      //User's record does not exist- init record
+      console.log("CONFIRMED");  
+
+    }
+  
+
     //Set the page data to the local storage
     var pageData = response.data[0];
     const aboveSwiperImages = pageData.aboveSwiperImagesSrc;

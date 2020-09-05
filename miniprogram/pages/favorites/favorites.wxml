@@ -1,10 +1,28 @@
-<NavTab title="Favorites" isBoth="true" tabs="{{tabs}}"
-  activeTab="{{activeTab}}" 
-  swiperClass="weui-tabs-swiper"
-  bindtabclick="onTabClick"
-  bindchange="onChange"
-  activeClass="tab-bar-title__selected">
-  <block wx:for="{{tabs}}" wx:key="title">
+<CustomNav isBoth="{{true}}" title="Favorites"></CustomNav>
+<view id="bodyContainer">
+  <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
+    <block wx:for="{{categoryProductsArray}}" wx:key="unique1">
+      <vant-tab title="{{item.categoryName}}">
+        <!--Contains the productCards-->
+        <view id="productBody" class="spacedVerticalContainer sidePadding">
+          <!--Note: the width is calculated to leave 20rpx in between cards, margintop/bottom=10rpx-->
+          <view wx:for="{{item.products}}" wx:for-item="product" data-productid="{{product._id}}"class="productCard" wx:key="unique2" bindtap="clickedProductCard">
+            <view class="imageContainer">
+              <image mode="aspectFill" src="{{product.thumbUrl}}" style="height: 100%; width: 100%"></image>
+            </view>
+            <view class="descContainer spacedVerticalContainer sidePadding">
+              <view class="titleStr">{{product.title}}</view>
+              <view class="descSummary">{{product.descSummary}}</view>
+              <view class="spacedVerticalElement priceStr">{{product.priceStr}}</view>
+              
+            </view>
+          </view>
+        </view>
+      </vant-tab>
+    </block>
+  </vant-tabs>  
+</view>
+  <!--<block wx:for="{{tabs}}" wx:key="title">
     <view class="tab-content" slot="tab-content-{{index}}">
       <block wx:for="{{item.data}}">
         <view class="event-container">
@@ -21,5 +39,5 @@
         </view>
       </block>
     </view>
-  </block>
-</NavTab>
+  </block>-->
+
