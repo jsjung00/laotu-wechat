@@ -30,7 +30,7 @@
     <view class="featureTitleRow viewPadding aboveRow">
       <text>Featured Events</text>
       <view hover-class="hoverClass" bindtap="clickEventsMore" hover-stay-time="{{200}}">
-        <text>More ></text>
+        <vant-icon name="arrow"></vant-icon>
       </view>
     </view>
     <view class="swiperContainer">
@@ -56,10 +56,10 @@
     </view>
   </view>
   <view id="featureProductsContainer" class="spacedVerticalElement">
-    <view class="featureTitleRow viewPadding aboveRow">
+    <view class="featureTitleRow viewPadding aboveRow" bindtap="clickProductsMore">
       <text>Featured Products</text>
-      <view hover-class="hoverClass" bindtap="clickProductsMore" hover-stay-time="{{200}}">
-        <text>More ></text>
+      <view hover-class="hoverClass" hover-stay-time="{{200}}">
+        <vant-icon name="arrow"></vant-icon>
       </view>
     </view>
     <view id="productsContainer">

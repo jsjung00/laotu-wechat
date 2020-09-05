@@ -1,7 +1,7 @@
 /**
  * Called by product.js and returns an object containing arrays of product objects corresponding to a category name.
- *    Note that in the category names there is 'All' and 'Featured' which returns all product objects
- *    and array of featured products under 'featured' respectively
+ *    Note that in the category names there is 'All' which returns all product objects
+ *    and array of featured products whose id exist in the 'featuredIDs' collection
  * Return : {'All' : [{}, {}],
  *            'someCategoryName'  : [{_id : str, title: str, ...},{}],
  *           'someCategoryName'  : [{}, {}],
@@ -52,12 +52,21 @@ exports.main = async (event, context) => {
     }
   });
   let allProducts = allProductsResp.data;
+
+  //** Grab the array of featured product ID's from the collection 'featuredIDs */
+  let _featuredProductIDs = await db.collection('featuredIDs').get();
+  let featuredProductIDs = _featuredProductIDs.data[0].productIDs;
   
   //** For each category, I want to get the productObjects that are in that category **//
   var getProductsInCategory = function(categoryName){
     //If categoryName is 'All' simply return allProducts
     if (categoryName === 'All'){
       return allProducts;
+    }
+    //If categoryName is 'Featured', use the ID's from collection 'featuredIDs' and find product objects that
+    //match the ID's
+    else if (categoryName === 'Featured'){
+       return featuredProductIDs.map(featuredID => allProducts.find(obj => obj._id === featuredID));
     }
     else{
       //filter objects in allProducts that have the right category

@@ -101,5 +101,12 @@ Page({
         console.error("Failed to pass productID to itempage from index", err);
       }
     });
+  },
+  clickProductsMore : function(e){
+    //Called when the user clicks on featured products row
+    //Navigate to the products page and pass in a parameter activeTabIndex : 1 (1 is the index for 'Featured')
+    wx.switchTab({
+      url : "../product/product?activeTabIndex={{1}}"
+    })
   }
 })

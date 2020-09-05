@@ -4,6 +4,7 @@
     "itemCard" : "../../components/itemCard/itemCard",
     "testCard" : "../../components/testCard/testCard",
     "vant-tabbar": "../../vantDist/tabbar/index",
-    "vant-tabbar-item": "../../vantDist/tabbar-item/index"
+    "vant-tabbar-item": "../../vantDist/tabbar-item/index",
+    "vant-icon": "../../vantDist/icon/index"
   }
 }

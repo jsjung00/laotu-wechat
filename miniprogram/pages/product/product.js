@@ -19,11 +19,13 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
-    
+    //Change the activeTabIndex if there is a specified first activeTabIndex
+    console.log("options is", options);
+
     let productsResponse = await wx.cloud.callFunction({
       name: "getCategoryProducts"
     });
-    console.log(productsResponse);
+    console.log("productsResponse", productsResponse);
     //This is an array of objects which contain {categoryName: str, products : []}
     let categoryProductsArray = productsResponse.result.data;
     //Upload the categoryProductsArray to the page
