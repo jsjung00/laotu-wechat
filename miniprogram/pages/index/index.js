@@ -125,7 +125,15 @@ Page({
     //Navigate to the products page and 
     wx.switchTab({
       url : "../product/product"
-    });
-    
+    }); 
+  },
+  clickEventsMore : function(e){
+    //Called when the user clicks on featured products row
+    //Let products page know that the featured products should be the initial tab
+    app.globalData.displayFeaturedEventsTab = true;
+    //Navigate to the products page and 
+    wx.switchTab({
+      url : "../events/events"
+    }); 
   }
 })

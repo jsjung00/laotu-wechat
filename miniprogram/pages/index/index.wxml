@@ -27,9 +27,9 @@
     </view>
   </view>-->
   <view id="featureEventsContainer" class="spacedVerticalElement">
-    <view class="featureTitleRow viewPadding aboveRow">
+    <view class="featureTitleRow viewPadding aboveRow" bindtap="clickEventsMore" >
       <text>Featured Events</text>
-      <view hover-class="hoverClass" bindtap="clickEventsMore" hover-stay-time="{{200}}">
+      <view hover-class="hoverClass" hover-stay-time="{{200}}">
         <vant-icon name="arrow"></vant-icon>
       </view>
     </view>

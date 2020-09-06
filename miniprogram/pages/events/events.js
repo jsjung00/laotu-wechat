@@ -1,7 +1,9 @@
 // miniprogram/pages/events.js
 /**
- * Get eventsArray from cloud and upload to page data for searchBar
+ * See product.js documentation. Quite similar
  */
+var app = getApp();
+
 Page({
 
   /**
@@ -15,6 +17,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
+    var that = this;
     //Get an array of search result objects (events)
     let eventsResponse = await wx.cloud.callFunction({
       name: "getEventsArray"
@@ -34,7 +37,14 @@ Page({
     } catch (e){
       console.error("events.js: failed to call getCategoryEvents() cloud function", e);
     }
-    console.log("CEA", categoryEventArray);
+    //Change the activeTabIndex if the global data specifies to display featured products
+    if (app.globalData.displayFeaturedEventsTab === true){
+      //Get the tab index for featured
+      const featuredTabIndex = categoryEventArray.findIndex(obj => obj.categoryName === 'Featured');
+      //Set the default active tab to the featured tab
+      that.setData({activeTabIndex : featuredTabIndex});
+    } 
+
     //Upload the categoryEventObjects to the page for the swiper
     this.setData({categoryEventArray});
 
@@ -53,21 +63,15 @@ Page({
   onUnload: function () {
 
   },
-  eventClicked: function(e){
+  eventCardClick: function(e){
     //Function is called when user clicks on card
     //Navigate to the item page
-    let type = 'event';
+    console.log("eventCardClick")
     let itemID = e.currentTarget.dataset.itemid;
     console.log("event itemID is", itemID);
 
     wx.navigateTo({
-      url: '../item/item',
-      success: function(res){
-        res.eventChannel.emit('acceptDataFromOpenerPage', {type: type, id: itemID});
-      },
-      fail: function(err){
-        console.error(err);
-      }
+      url: '../eventItem/eventItem?itemid=' + itemID
     });
   },
   buyClicked: function(e){

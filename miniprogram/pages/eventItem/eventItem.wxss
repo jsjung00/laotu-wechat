@@ -1,0 +1,79 @@
+/* miniprogram/pages/eventItem.wxss */
+view {
+  box-sizing: border-box;
+}
+
+page{
+  height: 100%;
+  width: 750rpx;
+  background-color: teal;
+  display: flex;
+  flex-direction: column;
+}
+#bodyContainer{
+  /* Body will take up the rest of the space apart from the navbar and tabbar */
+  flex: 1 0 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  width: 750rpx;
+  overflow: auto;
+}
+
+#swiperContainer{
+  /*Have the swiper occupy 50% of the screen */
+  height: 50vh;
+  width: 100%;
+  background-color: lightsteelblue;
+}
+#descContainer{
+  /* I want the descContainer to take up the rest of the body space but have min-height of 25rem */
+  flex: 1 0 15rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightgoldenrodyellow;*/
+}
+
+.eventCard{
+  height: auto;
+  width: 100%;
+  display: flex;
+  /*background-color: crimson;*/
+}
+.textContainer{
+  /* Should take up the rest of the width beyond the icons */
+  flex: 1 0 10px;
+  height: 100%;
+  display: block;
+}
+
+.titleStr{
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+}
+.descStr{
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+}
+.iconsContainer{
+  height: 100%;
+  width : auto;
+  /* center our icons vertically in the middle */
+  display: flex;
+  align-items: center;
+  /*background-color: thistle;*/
+}
+.shareButton{
+  height: 30px;
+  width: 30px;
+}
+.shareButton Button{
+  width:100% !important;
+  height:100% !important;
+  z-index: 2;
+  transform: translate(0, -30px);
+  opacity: 0.01;
+}

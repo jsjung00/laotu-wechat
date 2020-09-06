@@ -1,0 +1,39 @@
+<!--This page is the equivalent of item.wxml. It displays the event and has a button that allows the 
+    user to connect with Laotu customer service-->
+<CustomNavBar isBack ="{{true}}"></CustomNavBar>
+<!-- The background page should be blurred if backgroundBlur == true-->
+<view id="bodyContainer">
+  <!-- Add the sliding image component-->
+  <view id="swiperContainer">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}" circular="{{circular}}" style="height: 100%; width: 100%">
+      <block wx:for="{{itemImages}}" wx:key="*this" wx:for-item="imgSrc">
+        <swiper-item>
+          <image src="{{imgSrc}}" mode="aspectFill" style="width: 100%; height: 100%;"></image>    
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view id="descContainer">
+    <!--Contains the price and description-->
+    <view class="eventCard allPadding">
+      <view class="textContainer">
+        <view class="titleStr">{{title}}</view>
+        <view class="descStr">{{descSummary}}</view>    
+      </view>
+      <!--Contains the favorite and forward icon. Hidden until isFavorited is set-->
+      <view id="iconsContainer" style="display:flex; visibility : {{isFavorited == null ? 'hidden' : 'visible'}}">
+        <view hover-class="mp-icon-hover" bindtap="clickHeart" hover-stay-time="{{200}}">
+          <mp-icon icon="like" size="{{30}}" color="black" type="{{isFavorited ? 'field' : 'outline'}}"></mp-icon>
+        </view>
+        <view class="shareButton" hover-class="mp-icon-hover" hover-stay-time="{{200}}">
+          <mp-icon icon="share" size="{{30}}" color="black"></mp-icon>
+          <!--Transform our share button on to the mp-icon to overlay it on top-->  
+          <button open-type="share"></button>
+        </view>
+      </view>
+    </view>
+    <!--Have the images be some fixed height: ex: 30vh-->
+    <view class="descImageContainer"></view>
+  </view>
+</view>
+

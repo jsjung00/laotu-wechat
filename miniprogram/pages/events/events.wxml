@@ -7,7 +7,7 @@
       <vant-tab title="{{item.categoryName}}">
         <!--Contains the eventCards-->
         <view id="eventBody" class="spacedVerticalContainer sidePadding">
-          <eventCard wx:for="{{item.events}}" wx:for-item="eventObject" style="width: 100%" imageSrc="{{eventObject.thumbUrl}}">
+          <eventCard wx:for="{{item.events}}" wx:for-item="eventObject" data-itemid="{{eventObject._id}}" bindtap="eventCardClick" style="width: 100%" imageSrc="{{eventObject.thumbUrl}}">
             <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
             <view slot="topRow" style="width: 100%;">
               <view>{{eventObject.title}}</view>

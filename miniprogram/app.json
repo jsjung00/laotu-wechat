@@ -16,7 +16,8 @@
     "pages/shoppingCart/shoppingCart",
     "pages/checkout/checkout",
     "pages/editShippingInfo/editShippingInfo",
-    "pages/testUI/testUI"
+    "pages/testUI/testUI",
+    "pages/eventItem/eventItem"
   ],
   "window": {
     "navigationStyle": "custom"
