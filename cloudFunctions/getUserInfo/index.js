@@ -1,4 +1,5 @@
 // Function will return the user's info record object
+//Parameters: none
 const cloud = require('wx-server-sdk')
 
 cloud.init({env: 'laotudata-laotu'});

@@ -1,3 +1,4 @@
+var util = require('../../utils/util.js');
 // miniprogram/pages/checkout.js
 /**
  * Page uses the boolean shippingInfoComplete which represents whether or not the user has already set a shipping info.
@@ -256,12 +257,35 @@ Page({
       title: 'Processing payment...'
     });
 
+    //Upload the order information to the userInfo
+    var currentDateTime = util.formatTime(new Date());
+    var currentOrderObject = {
+      streetName: this.data.streetName,
+      phoneNumber : this.data.phoneNumber,
+      phoneCode : this.data.phoneCode,
+      name : this.data.name,
+      regionCityDistrictArray : this.data.regionCityDistrictArray,
+      totalPrice : this.data.orderTotal,
+      cartQuantityObjects : this.data.cartQuantityObjects,
+      cartDetailObjects : this.data.cartDetailObjects,
+      dateTime : currentDateTime  
+    };
+    wx.cloud.callFunction({
+      name : 'addOrderObject',
+      data : {
+        newOrderObject : currentOrderObject
+      }
+    }).then(() => console.log("Successfully added order object to cloud"))
+      .catch(err => console.error(err)); 
+
+
     //Called when the user clicks on the pay button
     //Check that the order detail (shippingInfo) is set and complete
     if (this.data.shippingInfoComplete === true){
       //Send our transaction to wePay
     
       //Make sure that the totalFee is fully calculated before we send it off to be transacted
+      //NOTE: if totalFee is set, then our cartDetailObjects and cartQuantityObjects are set as well
       var totalFee;
       var checkFee = function(){
         return new Promise(function(resolve, reject){
@@ -322,6 +346,7 @@ Page({
     }  
   },
   pay: function(payData){
+    //Called once the payment transaction is complete (called by payClicked())
     var that = this;
     const payment = payData.payment;//这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
     const db = wx.cloud.database({env : 'laotudata-laotu', tracerUser: true});
@@ -342,6 +367,7 @@ Page({
           }
         });
         //Upload the order information to the userInfo
+        var currentDateTime = util.formatTime(new Date());
         var currentOrderObject = {
           streetName: this.data.streetName,
           phoneNumber : this.data.phoneNumber,
@@ -349,7 +375,9 @@ Page({
           name : this.data.name,
           regionCityDistrictArray : this.data.regionCityDistrictArray,
           totalPrice : this.data.orderTotal,
-          cartQuantityObjects : this.data.cartQuantityObjects  
+          cartQuantityObjects : this.data.cartQuantityObjects,
+          cartDetailObjects : this.data.cartDetailObjects,
+          dateTime : currentDateTime  
         };
         wx.cloud.callFunction({
           name : 'addOrderObject',

@@ -37,7 +37,7 @@ Page({
     backgroundBlur : false,
     showPopUp : false,
     pageLoaded : false, //changes to true once page loads
-    //dotActive : null (will be set in onLoad)
+    //dotActive : null (will be set in onLoad and onShow only if coming from higher up page navigation)
     //isFavorited : (will be set in setIsFavorited which is called onLoad)
     itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
   },
@@ -85,16 +85,37 @@ Page({
     //local boolean to cloud
     setTimeout(() => that.updateIsFavorited(), 500);
   },
-  onShow : function(){
-    //Called onLoad and also when page comes from higher layer
-    //Check whether or not page just loaded- if not, uploadDotActive
+  onShow : async function(){
+    //Called onLoad and also when page comes from higher layer. Will upload the dotActive
+    //Wait until uploadDotActive in the onLoad has already called() and is not null before I recall the function
+        //I want to avoid a race condition where getUserCart is called twice and there are two records inited  
     var that = this;
-    if (this.data.pageLoaded){
-      //Page did not just load
-      console.log("Page did not just load. Race depends on onShow() coming before onLoad() finishes");
-      //Upload dot active
-      that.uploadDotActive();
-    }  
+    //Wait for dotActive to already be set
+    var dotActive;
+    var checkDotActive = function(){
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForDotActive(){
+          dotActive = that.data.dotActive;
+          if (dotActive == null){
+            //Continually loop until the data is set
+            setTimeout(waitForDotActive, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("onShow(): DotActive took too long to set.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkDotActive();
+    //Upload dot active
+    that.uploadDotActive();
+    
 
   },
   onHide : function(){

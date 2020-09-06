@@ -53,7 +53,7 @@
             </view>
           </view>
         </navigator>
-        <navigator class= "tr_container" url = "../coupons/coupons">
+        <navigator class= "tr_container" url = "../myorders/myorders">
           <view class = "tr">
             <view id = "order-container" class = "table_text">
               <text id="order" style="font-size : {{font_sizes.order}}px">My Orders</text>

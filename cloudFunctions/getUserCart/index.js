@@ -1,4 +1,11 @@
-// Function returns an array that contains user's cartProducts
+/** Called in shoppingcart.js
+ * Returns an array of objects that represent the user's cart. The objects are in the form
+ *    {itemid: String, quantity: Number}
+ * Parameters: none
+ * 
+ * If the user's record does not exist, we init the record with an empty cartProducts array
+ *  */ 
+
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -23,7 +30,8 @@ exports.main = async (event, context) => {
       await db.collection('userCart').add({
       data : {
         _openid : openID,
-        cartProducts : []
+        cartProducts : [],
+        message: "Why did this get created?"
         }
       });
     }catch(e){

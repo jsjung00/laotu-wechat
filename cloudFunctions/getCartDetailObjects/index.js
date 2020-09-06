@@ -1,5 +1,6 @@
 /**
- * Function is called in shopping cart. Uses the userCart productID array to build the array.
+ * Called by shoppingcart.js. Uses the userCart productID array to extract an array of item ID's
+ *    and for each ID, it creates an cartDetailObject which is the object in the collection 'products'
  * Parameters : None
  * Return : Array containing the cartDetailObjects [{_id:"", titleStr: "",...}] which is from collection 'products' 
  */
@@ -18,15 +19,37 @@ const _ = db.command;
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openID = wxContext.OPENID;
-  //First we grab the array of productID's in the user's cart
+  //**First we grab the array of productID's in the user's cart by getting user's cart info from 'userCart'**//
   let cartResponse = await db.collection('userCart').where({
     _openid : openID
   }).get();
-  let cartProducts = cartResponse.data[0].cartProducts;
-  let productIDs = cartProducts.map(obj => obj.itemid);
 
+  //If the user record does not exist, initialize one
+  if (cartResponse.data.length < 1){
+    //Could not get a record for the user- create one with empty cartProducts array
+    try{
+      await db.collection('userCart').add({
+      data : {
+        _openid : openID,
+        cartProducts : [],
+        msg : "from getCartDetailObjects"
+        }
+      });
+    }catch(e){
+      throw new Error("Failed to initialize user record in the cart");
+    }
+    var cartProducts = [];
+    //Since there are no products, there are no product IDs
+    var productIDs = [];
+  }
+  else{
+    var cartProducts = cartResponse.data[0].cartProducts;
+    //Using the cartProducts array, we take the itemid from each productObject
+    var productIDs = cartProducts.map(obj => obj.itemid);
+  }
+  
   //For each id, we query the productObject from collection 'products'
-  //Function takes in productId and returns a promise that contains the data
+  //Function takes in productID and returns a promise that contains the data
   var getProductObject = async function(productID){
     let objectResponse = await db.collection('products').doc(productID).get();
     let objectData = objectResponse.data;

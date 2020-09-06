@@ -1,0 +1,20 @@
+<!--miniprogram/pages/addUserInfo.wxml-->
+<CustomNav isBoth="{{true}}" title="My Orders"></CustomNav>
+<view id="bodyContainer" class="viewPadding">
+  <itemCard wx:for="{{allOrderObjects}}" imageSrc="{{item.thumbUrl}}" style="width: 100%;">
+    <view slot="topRow">
+      <view style="height: 100%; width: 100%;">{{item.title}}</view>
+    </view>
+    <view slot="bodyRow">
+      <view id="bodyRow" style="height: 100%; width: 100%;">
+        <view>{{item.descSummary}}</view>
+      </view>
+    </view>
+    <view slot="bottomRow">
+      <view style="display:flex; align-items: center;">
+        <view>¥{{item.price}}</view>
+        <view style="margin-left:auto">x{{item.quantity}}</view>
+      </view>
+    </view>
+  </itemCard>
+</view>

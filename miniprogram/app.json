@@ -17,7 +17,8 @@
     "pages/checkout/checkout",
     "pages/editShippingInfo/editShippingInfo",
     "pages/testUI/testUI",
-    "pages/eventItem/eventItem"
+    "pages/eventItem/eventItem",
+    "pages/myorders/myorders"
   ],
   "window": {
     "navigationStyle": "custom"

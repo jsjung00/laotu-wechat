@@ -43,12 +43,13 @@ Page({
       name: 'getCartDetailObjects'
     });
     let _cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
+    console.log("_cartdetailobjects", _cartDetailObjects);
     
     //Grab the array of cartQuantityObjects from the cloud
     let cartQuantityObjectsResp = await wx.cloud.callFunction({
       name : 'getUserCart'
     });
-    console.log(cartQuantityObjectsResp);
+    console.log("cartQOResp", cartQuantityObjectsResp);
     let _cartQuantityObjects = cartQuantityObjectsResp.result.cartProducts;
 
     //Get the quantity of each product and add {quantity: Number} to each cartDetailObject
