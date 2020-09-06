@@ -14,37 +14,14 @@ page{
   width: 750rpx;
   overflow: auto;
 }
+.itemCard{
+  background-color: tomato;
+  height: auto;
+  width: 100%;
+  border: 5px solid black;
+}
 
-.tab-content{
+#bodyRow{
   display: flex;
-  align-items: center;
   flex-direction: column;
-}
-.event-container{
-  /*background-color: mediumturquoise;*/
-  border-style: solid;
-  /* EACH CONTAINER HEIGHT */
-  height: 20vh;
-  width: 90%;
-  display: flex;
-  /* add margin to top and bottom */
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  border-width: 2px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.image-container{
-  height: 100%;
-  width: 40%;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-}
-.desc-container{
-  /*background-color: mediumvioletred;*/
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

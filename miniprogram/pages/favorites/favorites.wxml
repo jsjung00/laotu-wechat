@@ -1,21 +1,35 @@
 <CustomNav isBoth="{{true}}" title="Favorites"></CustomNav>
 <view id="bodyContainer">
   <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
-    <block wx:for="{{categoryProductsArray}}" wx:key="unique1">
-      <vant-tab title="{{item.categoryName}}">
-        <!--Contains the productCards-->
+    <block wx:for="{{tabs}}" wx:key="unique3">
+      <vant-tab title="{{item.title}}">
         <view id="productBody" class="spacedVerticalContainer sidePadding">
-          <!--Note: the width is calculated to leave 20rpx in between cards, margintop/bottom=10rpx-->
-          <view wx:for="{{item.products}}" wx:for-item="product" data-productid="{{product._id}}"class="productCard" wx:key="unique2" bindtap="clickedProductCard">
-            <view class="imageContainer">
-              <image mode="aspectFill" src="{{product.thumbUrl}}" style="height: 100%; width: 100%"></image>
-            </view>
-            <view class="descContainer spacedVerticalContainer sidePadding">
-              <view class="titleStr">{{product.title}}</view>
-              <view class="descSummary">{{product.descSummary}}</view>
-              <view class="spacedVerticalElement priceStr">{{product.priceStr}}</view>
-              
-            </view>
+          <view wx:for="{{item.data}}" wx:for-item="object" data-productid="{{product._id}}"class="itemCard" wx:key="unique4" bindtap="clickedItemCard">
+            <!--Display this if it's an event card-->
+            <itemCard wx:if="{{item.title === 'Events'}}" imageSrc="{{object.thumbUrl}}" style="width: 100%">
+              <view slot="topRow" style="width: 100%;">
+                <view>{{object.title}}</view>
+              </view>
+              <view slot="bodyRow" style="width: 100%; height: 100%;">
+                <view id="bodyRow" style="width: 100%; height: 100%">
+                  <view>{{object.descSummary}}</view>
+                  <view>{{object.dateStr}}</view>
+                  <view style="font-weight: 500;">{{object.locationStr}}</view>
+                </view>
+              </view>
+            </itemCard>
+            <!--Display this if its a product card-->
+            <itemCard style="width: 100%" wx:else>
+              <view slot="topRow" style="width: 100%;">
+                <view>{{object.title}}</view>
+              </view>
+              <view slot="bodyRow" style="width: 100%; height: 100%;">
+                <view id="bodyRow" class="slotContent">
+                  <view>{{object.descSummary}}</view>
+                  <view style="font-size: 1.5rem; font-weight: 500; color: red;">{{object.priceStr}}</view>
+                </view>
+              </view>
+            </itemCard>
           </view>
         </view>
       </vant-tab>

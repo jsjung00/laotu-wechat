@@ -20,64 +20,82 @@ const _ = db.command;
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
   const userID = wxContext.OPENID;
-  
-//Try to grab the user's favEvents if it exists. Collection 'userFavEvents' must have _openid: as a key
+  //**Build the array of user fav event objects **//
+  //Try to grab the user's favEvents (list of ID's) if it exists. Collection 'userFavEvents' must have _openid: as a key
   let favEventsResponse = await db.collection('userFavEvents').where({
     _openid : userID
   }).get();
   if (favEventsResponse.data.length < 1){
     //User's record does not exist- init record
-    try{
+    try {
       db.collection('userFavEvents').add({
       data:{
         _openid : userID,
         favEvents : []
         }
       });
-      var favEvents = [];
-    }catch(e){
-      throw new Error("Failed to initialize user record in userFavEvents collection", e);
+      var favEventIDs = [];
+    } catch (error) {
+      throw new Error("Failed to initialize user record in userFavEvents collection");
     }
   }
   else{
     //User's record does exist
-    var favEvents = favEventsResponse.data[0].favEvents;
-    
+    var favEventIDs = favEventsResponse.data[0].favEvents; 
+  }
+
+  //Query the events that have an eventID in favEventsID
+  let _favEvents = await db.collection('events').where({
+    "_id": _.in(favEventIDs) 
+  }).get()
+  
+  console.log("_favevents", _favEvents);
+  let favEvents = _favEvents.data; 
+
+  //**Grab the array of fav product objects *//
+  //Try to grab the user's favEvents (list of ID's) if it exists. Collection 'userFavEvents' must have _openid: as a key
+  let favProductsResponse = await db.collection('userFavProducts').where({
+    _openid : userID
+  }).get();
+
+  if (favProductsResponse.data.length < 1){
+    //User's record does not exist- init record
+    try {
+      db.collection('userFavProducts').add({
+      data:{
+        _openid : userID,
+        favProducts : []
+        }
+      });
+      var favProductIDs = [];
+    } catch (error) {
+      throw new Error("Failed to initialize user record in userFavEvents collection");
+    }
+  }
+  else{
+    //User's record does exist
+    var favProductIDs = favProductsResponse.data[0].favProducts; 
+  }
+  console.log("favProductIDs", favProductIDs);
+
+  //Query the product objects that have an ID in favProductIDs
+  let _favProducts = await db.collection('products').where({
+    "_id": _.in(favProductIDs) 
+  }).get()
+  
+  let favProducts = _favProducts.data; 
+  console.log("favProducts", favProducts);
+  
+  //Create our tabData object
+  var favTabData = [{
+    title: "Events",
+    data: favEvents
+  },{
+    title: "Products",
+    data: favProducts
+  }];
+
+  return{
+    favTabData: favTabData
   }
 }
-
-    /*let favEventsID = favEventsIDResponse.data.favEvents;
-
-    //Query the events that have an eventID in favEventsID
-    let favEventsResponse = await db.collection('events').where({
-      "_id": _.in(favEventsID) 
-    }).get()
-    let favEvents = favEventsResponse.data; 
-    return {
-      favEvents
-    }
-
-    let favEventsResponse = await cloud.callFunction({
-      name: 'getFavEvents',
-      data: {
-        userID : userID
-      }
-    });
-    let favEvents = favEventsResponse.result.favEvents;
-    
-    //Create our tabData object
-    var favTabData = [{
-      title: "Events",
-      data: favEvents
-    },{
-      title: "Items",
-      data: []
-    }];
-    return{
-      favTabData: favTabData
-    }
-  }
-  catch(e){
-    console.error(e);
-  }
-}*/

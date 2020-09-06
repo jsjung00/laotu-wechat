@@ -17,13 +17,18 @@ view{
   height: 100%;
   display: flex;
   flex-direction: column;
-  /*background-color: #EBE6E5;*/
-  padding-left: 1rem;
-  padding-right: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #EBE6E5;
+  padding: 2rem 1rem;
+  overflow: hidden;
 }
-.thumbPadding{
+
+.thumbImage{
+  /* Fix the size of the image container */
   width: 100%;
-  height: 15%;
+  flex: 1 0 10px;
+  background-color: teal;
 }
 
 .rightContainer{
@@ -37,9 +42,10 @@ view{
 }
 .topRowContainer{
   width: 100%;
-  height: 2rem;
+  height: 2.5rem;
   font-size: 1.25rem;
   color: #191919;
+  overflow: hidden;
   /*background-color: springgreen;*/
   /*Have max-fontsize with vh trick */
 }
@@ -48,7 +54,8 @@ view{
   /* Body takes up the rest of the container */
   flex: 1 0 3rem;
   display: block;
-  color: #666666;
+  color: #404040;
+  font-size: 0.9rem;
   /*background-color: steelblue;*/
 }
 .bottomRowContainer{
