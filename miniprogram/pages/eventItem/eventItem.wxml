@@ -36,4 +36,7 @@
     <view class="descImageContainer"></view>
   </view>
 </view>
+<view id="chatButtonContainer">
+  <button open-type="contact" type="primary">Chat With Staff!</button>
+</view>
 

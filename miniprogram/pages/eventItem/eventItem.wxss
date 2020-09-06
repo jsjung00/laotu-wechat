@@ -77,3 +77,12 @@ page{
   transform: translate(0, -30px);
   opacity: 0.01;
 }
+
+#chatButtonContainer{
+  z-index: 2;
+  position: fixed;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  padding: 0rem 1rem;
+}
