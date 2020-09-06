@@ -25,7 +25,6 @@ Page({
     this.setData({
       eventsArray: events
     }); 
-
   },
 
   /**

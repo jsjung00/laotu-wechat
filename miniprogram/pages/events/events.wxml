@@ -22,10 +22,6 @@
           <button class="mini-btn" type="primary" >{{tag}}</button>
         </view>
       </view>
-      <view class="priceRow viewPadding">
-        <text class="priceText">{{event.priceStr}}</text>
-        <button class="buy-btn" bindtap="buyClicked">Buy</button>
-      </view>
     </view>
   </view>
 </view>

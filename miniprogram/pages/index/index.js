@@ -1,5 +1,7 @@
 /**
  * On Load, page gets the home page data from the cloud and sets to local storage.
+ * For the more products or more events redirection, set a global variable boolean called 'displayFeaturedProductsTab' for
+ *    the products page and global variable called 'displayFeaturedEventsTab' which is for events page 
  */
 const app = getApp();
 
@@ -118,9 +120,12 @@ Page({
   },
   clickProductsMore : function(e){
     //Called when the user clicks on featured products row
-    //Navigate to the products page and pass in a parameter activeTabIndex : 1 (1 is the index for 'Featured')
+    //Let products page know that the featured products should be the initial tab
+    app.globalData.displayFeaturedProductsTab = true;
+    //Navigate to the products page and 
     wx.switchTab({
-      url : "../product/product?activeTabIndex={{1}}"
-    })
+      url : "../product/product"
+    });
+    
   }
 })

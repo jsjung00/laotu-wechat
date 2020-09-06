@@ -5,7 +5,8 @@
  *    and productObj is an array of product objects of products in that category
  * To control skeleton loading, when categoryProductsArray is set, loading=false
  */
-Page({
+var app = getApp();
+ Page({
 
   /**
    * Page initial data
@@ -19,8 +20,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
-    //Change the activeTabIndex if there is a specified first activeTabIndex
-    console.log("options is", options);
+    var that = this;
 
     let productsResponse = await wx.cloud.callFunction({
       name: "getCategoryProducts"
@@ -28,6 +28,16 @@ Page({
     console.log("productsResponse", productsResponse);
     //This is an array of objects which contain {categoryName: str, products : []}
     let categoryProductsArray = productsResponse.result.data;
+
+    //Change the activeTabIndex if the global data specifies to display featured products
+    if (app.globalData.displayFeaturedProductsTab === true){
+      //Get the tab index for featured
+      const featuredTabIndex = categoryProductsArray.findIndex(obj => obj.categoryName === 'Featured');
+      //Set the default active tab to the featured tab
+      that.setData({activeTabIndex : featuredTabIndex});
+    } 
+
+
     //Upload the categoryProductsArray to the page
     this.setData({categoryProductsArray});
 
