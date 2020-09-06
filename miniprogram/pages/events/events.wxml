@@ -1,27 +1,27 @@
 <CustomNav title="Events" isHome="{{true}}"></CustomNav>
 <!--Set isNavigator to true so clicking on the result will open a searchPage-->
-<CustomSearch type="event" isNavigator="{{true}}" searchObjectsArray="{{eventsArray}}"></CustomSearch>
-<!-- The CSS margins is wack- hacky solution to evenly space elements-->
-<view id="bodyContainer" style="padding-bottom: 20rpx;">
-  <!--For each event in eventsArray we are going to have a card-->
-  <view class="card viewPadding" style="margin-top: 20rpx" data-itemID="{{event._id}}"wx:for="{{eventsArray}}" wx:key="unique" wx:for-item="event" bindtap="eventClicked">
-    <view class="imageContainer">
-      <image mode="aspectFill" style="height: 100%; width: 100%" src="{{event.imgSrc}}"></image>
-    </view>
-    <view class="descContainer">
-      <view class="titleRow viewPadding">
-        <text>{{event.title}}</text>
-      </view>
-      <view class="descRow viewPadding">
-        <text>{{event.dateStr}}</text>
-        <text>{{event.locationStr}}</text>
-      </view>
-      <!--Contains buttons that label the tags (like flairs)-->
-      <view class="tagsRow viewPadding">
-        <view wx:for="{{event.tags}}" wx:for-index="idx" wx:for-item="tag">
-          <button class="mini-btn" type="primary" >{{tag}}</button>
+<!--<CustomSearch type="event" isNavigator="{{true}}" searchObjectsArray="{{eventsArray}}"></CustomSearch>-->
+<view id="bodyContainer">
+  <vant-tabs active="{{activeTabIndex}}" bind:change="tabChange">
+    <block wx:for="{{categoryEventArray}}" wx:key="unique5">
+      <vant-tab title="{{item.categoryName}}">
+        <!--Contains the eventCards-->
+        <view id="eventBody" class="spacedVerticalContainer sidePadding">
+          <eventCard wx:for="{{item.events}}" wx:for-item="eventObject" style="width: 100%" imageSrc="{{eventObject.thumbUrl}}">
+            <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+            <view slot="topRow" style="width: 100%;">
+              <view>{{eventObject.title}}</view>
+            </view>
+            <view slot="bodyRow" style="width: 100%; height: 100%;">
+              <view style="width: 100%">
+                <text>{{eventObject.descSummary}}</text>
+                <text>{{eventObject.locationStr}}</text>
+              </view>
+            </view>
+          </eventCard>
         </view>
-      </view>
-    </view>
-  </view>
+      </vant-tab>
+    </block>
+  </vant-tabs>  
+  
 </view>

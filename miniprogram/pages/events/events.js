@@ -8,7 +8,7 @@ Page({
    * Page initial data
    */
   data: {
-
+    activeTabIndex : 0
   },
 
   /**
@@ -24,7 +24,20 @@ Page({
     //Upload our products array into the page data
     this.setData({
       eventsArray: events
-    }); 
+    });
+    //Get the array of categoryEventObjects which will be passed to the tabbar swiper
+    try{
+      var _categoryEventArray = await wx.cloud.callFunction({
+        name : "getCategoryEvents"
+      });
+      var categoryEventArray = _categoryEventArray.result.data;
+    } catch (e){
+      console.error("events.js: failed to call getCategoryEvents() cloud function", e);
+    }
+    console.log("CEA", categoryEventArray);
+    //Upload the categoryEventObjects to the page for the swiper
+    this.setData({categoryEventArray});
+
   },
 
   /**

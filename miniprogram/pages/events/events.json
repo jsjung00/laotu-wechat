@@ -1,6 +1,9 @@
 {
   "usingComponents": {
     "CustomNav" : "../../components/navbar/navbar",
-    "CustomSearch" : "../../components/mySearchBar/mySearchBar"
+    "CustomSearch" : "../../components/mySearchBar/mySearchBar",
+    "eventCard" : "../../components/productCard/productCard",
+    "vant-tab": "../../vantDist/tab/index",
+    "vant-tabs": "../../vantDist/tabs/index"
   }
 }

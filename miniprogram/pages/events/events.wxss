@@ -6,12 +6,28 @@ page{
   flex-direction: column;
 }
 
-
 #bodyContainer{
   /* Take up the rest of the space apart from Nav, Search, and Tab */
-  flex-grow: 1;
-  background-color: darksalmon;
+  flex: 1 0 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  width: 100%;
 }
+
+vant-tabs{
+  /* Take up the rest of the height if search disappears */
+  flex: 1 0 10%;
+  width: 750rpx;
+  /*background-color:rgb(66, 58, 124) !important;*/
+}
+
+#eventBody{
+  width: 750rpx;
+  /* NOTE: the product body is only as tall as the elements inside of it */
+  display: block;
+}
+
 
 .card{
   width: 100%;

@@ -13,7 +13,7 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   //Return all events that haven't passed already
   var collection = db.collection('events').where({
-    minDateTime: _.gt(db.serverDate())
+    expirationDateTime: _.gt(db.serverDate())
   });
   //Get every product from the collection and return as an array
   //Get the total number of records

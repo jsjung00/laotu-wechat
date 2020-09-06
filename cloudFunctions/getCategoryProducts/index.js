@@ -1,12 +1,13 @@
 /**
- * Called by product.js and returns an object containing arrays of product objects corresponding to a category name.
+ * Called by product.js and returns an array containing objects which include a category name and product objects
+ *    corresponding to a category name.
  *    Note that in the category names there is 'All' which returns all product objects
  *    and array of featured products whose id exist in the 'featuredIDs' collection
- * Return : {'All' : [{}, {}],
- *            'someCategoryName'  : [{_id : str, title: str, ...},{}],
- *           'someCategoryName'  : [{}, {}],
- *            'Featured' : [{}, {}]
- *  } 
+ * Return : [{'All' : [{}, {}]},
+ *            {'someCategoryName'  : [{_id : str, title: str, ...},{}]},
+ *           {'someCategoryName'  : [{}, {}]},
+ *            {'Featured' : [{}, {}]}
+ *  ] 
  */
 const cloud = require('wx-server-sdk')
 
