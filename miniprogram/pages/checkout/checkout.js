@@ -259,25 +259,6 @@ Page({
     //Called when the user clicks on the pay button
     //Check that the order detail (shippingInfo) is set and complete
     if (this.data.shippingInfoComplete === true){
-      //Upload the order information to the userInfo
-
-      var currentOrderObject = {
-        streetName: this.data.streetName,
-        phoneNumber : this.data.phoneNumber,
-        phoneCode : this.data.phoneCode,
-        name : this.data.name,
-        regionCityDistrictArray : this.data.regionCityDistrictArray,
-        totalPrice : this.data.orderTotal,
-        cartQuantityObjects : this.data.cartQuantityObjects  
-      };
-      wx.cloud.callFunction({
-        name : 'addOrderObject',
-        data : {
-          newOrderObject : currentOrderObject
-        }
-      }).then(() => console.log("Successfully added order object to cloud"))
-        .catch(err => console.error(err));
-      
       //Send our transaction to wePay
     
       //Make sure that the totalFee is fully calculated before we send it off to be transacted
@@ -342,11 +323,41 @@ Page({
   },
   pay: function(payData){
     var that = this;
-    const payment = payData.payment//这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
+    const payment = payData.payment;//这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
+    const db = wx.cloud.database({env : 'laotudata-laotu', tracerUser: true});
     wx.requestPayment({
       ...payment, 
       success(res) {
-        console.log('pay success', res)
+        //Upload the order to the cloud collection 'orders'
+        db.collection('orders').add({
+          data: {
+            orderInfo : res,
+            transactionTime : db.serverDate()
+          },
+          success: function(res){
+            wx.showToast({title: 'Added order info to cloud database', icon: 'none'});
+          },
+          fail: function(res){
+            wx.showToast({title: 'Failed to add order info to cloud database', icon: 'none'});
+          }
+        });
+        //Upload the order information to the userInfo
+        var currentOrderObject = {
+          streetName: this.data.streetName,
+          phoneNumber : this.data.phoneNumber,
+          phoneCode : this.data.phoneCode,
+          name : this.data.name,
+          regionCityDistrictArray : this.data.regionCityDistrictArray,
+          totalPrice : this.data.orderTotal,
+          cartQuantityObjects : this.data.cartQuantityObjects  
+        };
+        wx.cloud.callFunction({
+          name : 'addOrderObject',
+          data : {
+            newOrderObject : currentOrderObject
+          }
+        }).then(() => console.log("Successfully added order object to cloud"))
+          .catch(err => console.error(err)); 
       },
       fail(res) {
         console.error('pay fail', res)
