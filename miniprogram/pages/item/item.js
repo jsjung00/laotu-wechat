@@ -16,8 +16,9 @@
  * change and will be able to get the isTabBarHidden = true in order to hide the component.
  * 
  * To add item to cart, uploads itemid and quantity to the cloud function 'addItemToCart'
- *    To handle race conditions, sets a global variable 'addItemComplete' to true after the item has been added
- *    shoppingCart.js will wait 'addItemComplete' to be true before loading and getting userCart from cloud 
+ *    To handle race conditions, once addItemToCart is set, there is a global variable lock 'addItemLock' = true.
+ *    Once the addItemToCart function is completed, 'addItemLock' will be set to false.
+ *    If 'addItemLock' is true, shoppingCart.js will wait until the item has been successfully added 
  */
 const app = getApp();
 
@@ -454,6 +455,8 @@ Page({
     let itemQuantity = this.data.itemQuantity;
     console.log("itemQuantity is ", itemQuantity);
     //Upload the item and itemQuantity to user's cart
+    //Set my addItemLock to prevent shoppingCart from getting userCart before item has been added
+    app.globalData.addItemLock = true;
     let result = await wx.cloud.callFunction({
       name : 'addItemToCart',
       data : {
@@ -462,8 +465,8 @@ Page({
       }
     });
     console.log("ADDITEMTOCART() COMPLETED");
-    app.globalData.addItemComplete = true;
-    //
+    //Release lock since item has been added
+    app.globalData.addItemLock = false;
 
   },
   buyNow : async function(e){
@@ -505,6 +508,8 @@ Page({
     let itemQuantity = this.data.itemQuantity;
     console.log("itemQuantity is ", itemQuantity);
     //Upload the item and itemQuantity to user's cart
+    //Set my addItemLock to prevent shoppingCart from getting userCart before item has been added
+    app.globalData.addItemLock = true;
     let result = await wx.cloud.callFunction({
       name : 'addItemToCart',
       data : {
@@ -512,10 +517,9 @@ Page({
         quantity : itemQuantity
       }
     });
-    app.globalData.addItemComplete = true;
+    //Release the lock
+    app.globalData.addItemLock = false;
     console.log("ADDITEMTOCART() COMPLETED and set to true");
-    
-    
 
   },
   popUpClose : function(e){

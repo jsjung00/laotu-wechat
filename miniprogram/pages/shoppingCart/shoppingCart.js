@@ -1,9 +1,7 @@
 // miniprogram/pages/shoppingCart.js
 /**
- * Page opens when user clicks on the buy button from item.wxml and is redirected here.
- *    In order to prevent race condition, page needs to wait until item.js sets the global variable 'addItemComplete' to true
- *    before page queries user cart from the cloud. 
- *    Then, page sets 'addItemComplete' to false immediately after to keep the communication going.
+ * If the 'addItemLock' global variable is set to true in item.js, page waits until item is added and lock is released
+ *    This will prevent race condition where page queries a cart that hasn't been updated to add the item
  *    
  * In order to display the cart items, the page uses a local array called cartDetailObjects which is pulled from the cloud and
  *   modified to be of the form [{id: "", titleStr: ""..., isHidden : Boolean, quantity: Number}]. isHidden will determine whether or not the
@@ -43,32 +41,35 @@ Page({
   onLoad: async function (options) {
     console.log("shopping onLoad()");
     var that = this;
-    //To prevent race condition, wait until item.js sends global var 'addItemComplete' to true
-    var checkAddItemComplete = function(){
-      var addItemComplete;
-      return new Promise(function(resolve, reject){
-        var numLoops = 40;
-        (function waitForAddItemComplete(){
-          addItemComplete = app.globalData.addItemComplete;
-          if (addItemComplete != true){
-            //Continually loop until the data is set
-            setTimeout(waitForAddItemComplete, 250);
-            numLoops -= 1;
-            //Only allow max 20 loops
-            if (numLoops < 1){
-              reject("shopping cart onload(): took too long to receive addItemComplete from item.js.");
+    //If item is being added, wait until item has finished adding
+    if (app.globalData.addItemLock === true){
+      //To prevent race condition, wait until item.js sends global var 'addItemComplete' to true
+      var checkAddItemComplete = function(){
+        var addItemLock;
+        return new Promise(function(resolve, reject){
+          var numLoops = 40;
+          (function waitForAddItemComplete(){
+            addItemLock = app.globalData.addItemLock;
+            if (addItemLock === true){
+              //Continually loop until the data is set
+              setTimeout(waitForAddItemComplete, 250);
+              numLoops -= 1;
+              //Only allow max 20 loops
+              if (numLoops < 1){
+                reject("shopping cart onload(): took too long for addItemLock to be realeased by item.js.");
+              }
             }
-          }
-          else{
-            return resolve();
-          }
-        })();
-      });
+            else{
+              return resolve();
+            }
+          })();
+        });
+      }
+      await checkAddItemComplete();
+      console.log("from shoppingCart: addItem completed");
     }
-    await checkAddItemComplete();
-    console.log("from shoppingCart: addItem completed");
-    //Reset addItemComplete to false
-    app.globalData.addItemComplete = false;
+
+    
 
 
     //Grab the array of cartDetailObjects from the cloud

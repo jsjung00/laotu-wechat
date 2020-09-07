@@ -38,25 +38,31 @@ Page({
       });
     }
     
-    try{
-      let favEventsResponse = await db.collection('userFavEvents').where({
-        _openid : "dfaidhfoashdfiodsahf"
-      }).get();
-      console.log("NOPE");
-      console.log(favEventsResponse);
-    }catch(e){
-      //User's record does not exist- init record
-      console.log("CONFIRMED");  
-
-    }
-  
 
     //Set the page data to the local storage
     var pageData = response.data[0];
     const aboveSwiperImages = pageData.aboveSwiperImagesSrc;
     const belowSwiperImages= pageData.belowSwiperImagesSrc;
-    const featureEventsID = pageData.featureEventsID;
-    const featureProductsID = pageData.featureProductsID;
+    //Grab the featureEventIDs and the featureProductIDs from the collection 'featuredIDs'
+    try{
+      var _featuredIDs = await db.collection('featuredIDs').get();
+    }catch{
+      console.error("indexJS: Failed to get featuredIDs from cloud");
+      var reloadPage = () => {wx.switchTab({
+        url: '../index/index',
+      })};
+      wx.showToast({
+        title: 'Network Crash',
+        icon : 'none',
+        complete : reloadPage
+      });
+    }
+    console.log("_fIDS", _featuredIDs);
+    const featuredEventIDs = _featuredIDs.data[0].eventIDs;
+    const featuredProductIDs = _featuredIDs.data[0].productIDs;
+    console.log("FEI", featuredEventIDs);
+
+
     that.setData({
       aboveSwiperImages,
       belowSwiperImages,
@@ -126,6 +132,17 @@ Page({
     wx.switchTab({
       url : "../product/product"
     }); 
+  },
+  clickedEventCard: function(e){
+    //Called when user clicks a specific event card
+    let eventID = e.currentTarget.dataset.eventid;
+    if (eventID == null){
+      throw new Error("clickedEventCard: event object could not deliver ID");
+    }
+    //Navigate to the item page and pass the productID
+    wx.navigateTo({
+      url: "../eventItem/eventItem?itemid=" + eventID
+    });
   },
   clickEventsMore : function(e){
     //Called when the user clicks on featured products row

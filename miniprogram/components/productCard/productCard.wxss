@@ -9,7 +9,7 @@ view{
   height: 12rem;
   width: 100%;
   display: flex;
-  /*background-color: orange;*/
+  background-color: orange;
 }
 
 .leftContainer{

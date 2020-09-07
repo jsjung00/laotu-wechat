@@ -37,6 +37,7 @@ Page({
 
     //Get the itemID and the type and set to local storage
     let itemID = options.itemid;
+    console.log("eventItem options", options);
     //Upload the itemid
     this.setData({
       itemID : itemID

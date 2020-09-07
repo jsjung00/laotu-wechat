@@ -2,7 +2,11 @@
 /**
  * When the component is attached, it gets the number of items in the user's cart.
  * We set numItems to the component local data for the shopping cart icon to render with a quantity.
- * On addToCart(), increase numItems locally +=x and will be updated and itemID will be uploaded to the cloud database 
+ * On addToCart(), increase numItems locally +=x and will be updated and itemID will be uploaded to the cloud database
+ * 
+ * When the user clicks on the cartIcon, will set global variable 'itemNotAdded' to true which will be
+ *     read by shoppingCart.js to not wait for the global variable 'itemAddedComplete' which is true once item is added
+ *     by item.js 
  */
 var app = getApp();
 Component({
