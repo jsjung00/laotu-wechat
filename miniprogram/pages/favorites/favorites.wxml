@@ -4,7 +4,7 @@
     <block wx:for="{{tabs}}" wx:key="unique3">
       <vant-tab title="{{item.title}}">
         <view id="productBody" class="spacedVerticalContainer sidePadding">
-          <view wx:for="{{item.data}}" wx:for-item="object" data-productid="{{product._id}}"class="itemCard" wx:key="unique4" bindtap="clickedItemCard">
+          <view wx:for="{{item.data}}" wx:for-item="object" data-productid="{{product._id}}"class="itemCard spacedVerticalElement" wx:key="unique4" bindtap="clickedItemCard">
             <!--Display this if it's an event card-->
             <itemCard wx:if="{{item.title === 'Events'}}" imageSrc="{{object.thumbUrl}}" style="width: 100%">
               <view slot="topRow" style="width: 100%;">
@@ -19,7 +19,7 @@
               </view>
             </itemCard>
             <!--Display this if its a product card-->
-            <itemCard style="width: 100%" wx:else>
+            <itemCard style="width: 100%" imageSrc="{{object.thumbUrl}}" wx:else>
               <view slot="topRow" style="width: 100%;">
                 <view>{{object.title}}</view>
               </view>

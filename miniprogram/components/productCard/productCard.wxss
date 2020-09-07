@@ -9,7 +9,7 @@ view{
   height: 12rem;
   width: 100%;
   display: flex;
-  background-color: orange;
+  /*background-color: orange;*/
 }
 
 .leftContainer{
@@ -19,7 +19,7 @@ view{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #EBE6E5;
+  /*background-color: #EBE6E5;*/
   padding: 2rem 1rem;
   overflow: hidden;
 }

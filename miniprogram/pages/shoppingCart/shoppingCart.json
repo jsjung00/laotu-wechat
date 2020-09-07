@@ -5,6 +5,7 @@
     "vant-stepper" : "../../vantDist/stepper/index",
     "vant-button" : "../../vantDist/button/index",
     "mp-icon" : "../../miniprogram_npm/weui-miniprogram/icon/icon",
-    "mp-loading" : "../../miniprogram_npm/weui-miniprogram/loading/loading"
+    "mp-loading" : "../../miniprogram_npm/weui-miniprogram/loading/loading",
+    "productCard" : "../../components/productCard/productCard"
   }
 }

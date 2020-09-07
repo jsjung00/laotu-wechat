@@ -117,6 +117,7 @@ Page({
       //Upload cartDetailObjects to the page data
       that.setData({cartDetailObjects});
     }
+    console.log("cartDetailObjects", cartDetailObjects);
     
 
     //For each quantity object, we need to add the price : Number 
@@ -135,6 +136,10 @@ Page({
     
     //Upload the price
     this.setSubTotal();
+
+    //Upload the number of cart items
+    let numCartItems = cartQuantityObjects.length;
+    this.setData({numCartItems});
 
     //Set our pageReady boolean as true and display the page
     let pageReady = true;

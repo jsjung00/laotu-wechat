@@ -7,7 +7,7 @@
     <!-- detail is an object that follows the object in collection 'product' and a isHidden boolean-->
     <block wx:for="{{cartDetailObjects}}" wx:for-item="detail" wx:for-index="idx">
       <view id="cardContainer" class="spacedVerticalElement">
-        <itemCard style="height: 100%; width: 100%" imageSrc="{{detail.imageUrl}}">
+        <itemCard style="height: 100%; width: 100%" imageSrc="{{detail.thumbUrl}}">
           <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
           <view slot="topRow" style="width: 100%; height: 100%">
             <!--The titleRow view container needs to have height and width 100%-->

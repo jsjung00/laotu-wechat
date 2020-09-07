@@ -43,28 +43,7 @@ Page({
   onLoad: function () {
 
     var that = this;
-    that.sizes();
-
-    //NOTE: I am not going to use fitText because it is too slow. Rather, I will hard code the values.
-    /*
-    //wait for sizes to update and userInfo to be uploaded
-    let sizes_promise = this.waitfor(()=>{
-      let sizes_finished = that.data.sizes_finished;
-      let userinfo_finished = that.data.hasUserInfo;
-      return sizes_finished && userinfo_finished;
-    });
-    //after sizes finished (the finished flag in data is set to true), then run fonts()
-    sizes_promise.then(()=>{
-      that.fitText("profile_text", 1);
-      that.fitText("favorite", 1);
-      that.fitText("coupons", 1);
-      that.fitText("more", 1);
-      //for each text in table rows, increase the font size
-      let ids = that.data.tr_textID;
-      ids.forEach(id => {
-        that.fitText(id, 0.8);
-      });
-    });*/
+    this.sizes();
 
     if (app.globalData.userInfo) {
       this.setData({
@@ -202,61 +181,24 @@ Page({
         return;
       }
     }).exec();
-  }
+  },
+  clickLikeIcon: function(){
+    console.log("likeIcon");
+    wx.navigateTo({
+      url: "../favorites/favorites"
+    })
+  },
+  clickCartIcon: function(){
+    console.log("cartIcon");
+    wx.navigateTo({
+      url: "../shoppingCart/shoppingCart"
+    })
+  },
+  clickUserIcon: function(){
+    wx.navigateTo({
+      url: "../editShippingInfo/editShippingInfo?setUserInfo=true"
+    })
+  }    
 
 })
-
-
-function set_picture(){
-  //get the height of the profile container
-  /*let query = wx.createSelectorQuery()
-  console.log(typeof query);
-  console.log(query.select('#picture_container').boundingClientRect());*/
-  wx.createSelectorQuery().select('#picture_container').boundingClientRect(function(rect){
-    console.log(rect.height);
-    //set the width of the height to something else
-    rect.width = "20px";
-    console.log(rect.width);
-  }).exec();
-
-}
-
-//OLD CODE
-/*
-//change the font sizes
-fonts(){
-  //set the font-size to be width container (in vm) / #of characters
-  //change picture_container font size
-  //get the number of characters in text
-  var that = this;
-  //set the fontSize of the container
-  this.set_fontSize("text_container", that.data.texts.profile_text.length);
-},
-//given id of element, num of chars, we 
-// 1) calculate width of element in (vm) 2) divide by numChars 3) set font-size using vm
-//NOTE: WE do not take into account the height of font being larger than the container.
-set_fontSize(id, numChars){
-  console.log("Num Chars: " + numChars);
-  var that = this;
-  wx.getSystemInfo({
-    success: (result) => {
-      let total_width = result.screenWidth;
-      console.log("Total width(px): " + total_width);
-      wx.createSelectorQuery().select('#' + id).boundingClientRect(function (rect){
-        console.log("Width selected");
-        //get the width of the id container
-        let width = rect.width;
-        console.log("Width of container(px): " + width);
-        
-        //this is the width (in vm) of id container
-        let vw_width = width / total_width * 100;
-        let vw_font_size = vw_width / numChars;
-        console.log("Font Size (vw): " + vw_font_size);
-        //upload the font size of the container
-
-
-      }).exec();
-    },
-  });
-},*/
 

@@ -8,17 +8,13 @@
     <!-- detail is an object that follows the object in collection 'product' and a isHidden boolean-->
     <block wx:if="{{!detail.isHidden}}" wx:for="{{cartDetailObjects}}" wx:for-item="detail" wx:for-index="idx">
       <view id="cardContainer" class="spacedVerticalElement">
-        <itemCard isAbove="{{true}}" style="height: 100%; width: 100%" imageSrc="{{detail.imageUrl}}">
-          <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-          <view slot="aboveRow" style="width:100%; height: 100%">
-            <!--Row contains the trash icon-->
-            <view id="aboveRow" class="slotContent sidePadding">
-              <!--X button will trigger clickTrash() on tap-->
-              <view data-idx="{{idx}}" id="closeContainer" hover-class="mp-icon-hover" bindtap="clickTrash" hover-stay-time="{{200}}">
-                <mp-icon icon="delete" size="{{25}}"></mp-icon>
-              </view>
-            </view>    
+        <view id="aboveRow" class="slotContent sidePadding">
+          <!--X button will trigger clickTrash() on tap-->
+          <view data-idx="{{idx}}" id="closeContainer" hover-class="mp-icon-hover" bindtap="clickTrash" hover-stay-time="{{200}}">
+            <mp-icon icon="delete" size="{{25}}"></mp-icon>
           </view>
+        </view>  
+        <productCard style="width: 100%" imageSrc="{{detail.thumbUrl}}">
           <view slot="topRow" style="width: 100%; height: 100%">
             <!--The titleRow view container needs to have height and width 100%-->
             <view id="titleRow" class="slotContent">
@@ -36,24 +32,26 @@
               <vant-stepper value="{{detail.quantity}}" input-width="40px" button-size="30px" min="1" max="99" bind:change="quantityChange" data-idx="{{idx}}"></vant-stepper>
             </view>
           </view>
-        </itemCard>
+        </productCard>
       </view>
     </block>
   </view>
-  <!--If cartQuantityObjects is empty, there is nothing left in the cart-->
-  <view wx:if="{{cartQuantityObjects.length > 0}}"id="priceContainer" class="spacedVerticalElement">
-    <text>Sub total</text>
-    <text id="subTotalPriceText">¥{{subTotal}}</text>
-  </view>
-  <view wx:else class="spacedVerticalElement">
-    <text>Cart is empty</text>
+  <view style="display: block; width: 100%;">
+    <view wx:if="{{numCartItems > 0}}"id="priceContainer" class="spacedVerticalElement">
+      <text>Sub total</text>
+      <text id="subTotalPriceText">¥{{subTotal}}</text>
+    </view>
+    <view id="buttonsContainer" class="spacedVerticalContainer">
+      <!--Only render checkout button if there are items in the cart-->
+      <vant-button wx:if="{{numCartItems > 0}}" type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">Checkout</vant-button>
+      <view class="spacedVerticalElement" style="text-align: center;">Continue shopping</view>
+    </view>
   </view>
   <!--Contains the checkout and the return back button. Note margin-bottom: 10%;-->
-  <view id="buttonsContainer" class="spacedVerticalContainer">
-    <!--Only render checkout button if there are items in the cart-->
-    <vant-button wx:if="{{cartQuantityObjects.length > 0}}" type="primary" class="spacedVerticalElement" color="#282828" block bindtap="clickCheckout" data-subtotal="{{subTotal}}">Checkout</vant-button>
-    <view class="spacedVerticalElement" style="text-align: center;">Continue shopping</view>
-  </view>
+  
+  <!--<view wx:else class="spacedVerticalElement">
+    <text>Cart is empty</text>
+  </view>-->
 </view>
 <view wx:else id="loadingBodyContainer">
   <mp-loading type="dot-gray" style="height: 20%; width: 50%"></mp-loading>

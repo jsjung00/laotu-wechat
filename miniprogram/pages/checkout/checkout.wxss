@@ -14,7 +14,7 @@ page{
 }
 
 #bodyContainer{
-  flex-grow: 1;
+  flex: 1 0 10px;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -32,7 +32,7 @@ page{
   height: 30vh;
   width: 100%;
   border-radius: 10px;
-  background-color: white;
+  background-color: yellow;
 }
 
 #aboveRow{

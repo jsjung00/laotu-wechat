@@ -27,6 +27,12 @@ vant-tabs{
   /* NOTE: the product body is only as tall as the elements inside of it */
   display: block;
 }
+.eventCard{
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 
 .card{

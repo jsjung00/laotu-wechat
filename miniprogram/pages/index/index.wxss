@@ -5,11 +5,10 @@ scroll-view{
 page{
   height: 100%;
   width: 750rpx;
-  background-color: violet;
+  background-color: #f2f2f2;
 }
 #bodyContainer{
   min-height: 100%;
-  background-color: #CCD4BF;
   display: flex;
   flex-direction: column;
   width: 750rpx;
@@ -29,7 +28,6 @@ page{
 #featureEventsContainer{
   height: 40vh;
   width: 100%;
-  background-color: yellow;
   display: flex;
   flex-direction: column;
   
@@ -37,8 +35,10 @@ page{
 .featureTitleRow{
   display: flex;
   justify-content: space-between;
-  background-color: #EEBAB2;
   width: 100%;
+  background-color: #F1DEDC;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 .swiperContainer{
   width: 100%;
@@ -60,6 +60,8 @@ page{
 #bodyRow{
   display: flex;
   flex-direction: column;
+  color: #505050;
+  font-size: 0.9rem;
 }
 #moreButton{
   display: flex;

@@ -26,6 +26,12 @@ App({
         that.globalData.openid = openid;
       })
       .catch(err => console.log("Failed to get user info in app.js", err))
+    
+      //Upload fonts
+      wx.loadFontFace({
+        family: 'Bitstream Vera Serif Bold',
+        source: 'url("https://sungd.github.io/Pacifico.ttf")'
+      });
 
     //Upload the information of the built-in right capsule button to globalData
     try{

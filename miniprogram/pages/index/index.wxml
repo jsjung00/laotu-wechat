@@ -42,7 +42,7 @@
             <itemCard data-eventid="{{eventObject._id}}" bindtap="clickedEventCard" style="height: 100%; width: 100%" isAbove="{{false}}" isBelow="{{false}}" imageSrc="{{eventObject.thumbUrl}}">
               <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
               <view slot="topRow" style="width: 100%;">
-                <view style="height: 100%; width: 100%; font-size: 20px; font-weight:bold">{{eventObject.title}}</view>
+                <view style="height: 100%; width: 100%; font-size: 1.25rem; font-weight:525 !important">{{eventObject.title}}</view>
               </view>
               <view slot="bodyRow" style="width: 100%; height: 100%;">
                 <view id="bodyRow" class="slotContent">
@@ -73,10 +73,10 @@
               <image mode="aspectFill" src="{{productObject.thumbUrl}}" style="height: 100%; width:100%"></image>
             </view>
             <view class="productDescContainer spacedVerticalContainer sidePadding">
-              <view class="spacedVerticalElement">
+              <view class="spacedVerticalElement" style="font-weight: 525;color:#202020">
                 <text>{{productObject.title}}</text>
               </view>
-              <view class="spacedVerticalElement" style="font-weight: bold; color:red; font-size: 20px;">
+              <view class="spacedVerticalElement" style="font-weight: 550; color:red; font-size: 20px;">
                 <text>¥{{productObject.price}}</text>
               </view>
             </view>

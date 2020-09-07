@@ -1,4 +1,4 @@
-<CustomNav title="Events" isHome="{{true}}"></CustomNav>
+<CustomNav title="Events"></CustomNav>
 <!--Set isNavigator to true so clicking on the result will open a searchPage-->
 <!--<CustomSearch type="event" isNavigator="{{true}}" searchObjectsArray="{{eventsArray}}"></CustomSearch>-->
 <view id="bodyContainer">
@@ -7,18 +7,24 @@
       <vant-tab title="{{item.categoryName}}">
         <!--Contains the eventCards-->
         <view id="eventBody" class="spacedVerticalContainer sidePadding">
-          <eventCard wx:for="{{item.events}}" wx:for-item="eventObject" data-itemid="{{eventObject._id}}" bindtap="eventCardClick" style="width: 100%" imageSrc="{{eventObject.thumbUrl}}">
-            <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
-            <view slot="topRow" style="width: 100%;">
-              <view>{{eventObject.title}}</view>
+          <block wx:for="{{item.events}}" wx:for-item="eventObject">
+            <view class="eventCard spacedVerticalElement">
+              <eventCard data-itemid="{{eventObject._id}}" bindtap="eventCardClick" style="width: 100%" imageSrc="{{eventObject.thumbUrl}}">
+                <!--Slot needs to have width and height 100% in order to take up the desired container in the component-->
+                <view slot="topRow" style="width: 100%;">
+                  <view style="color:#202020">{{eventObject.title}}</view>
+                </view>
+                <view slot="bodyRow" style="width: 100%; height: 100%;">
+                  <view style="width: 100%; color: #505050">
+                    <text>{{eventObject.descSummary}}</text>
+                    <text>{{eventObject.locationStr}}</text>
+                  </view>
+                </view>
+              </eventCard>
             </view>
-            <view slot="bodyRow" style="width: 100%; height: 100%;">
-              <view style="width: 100%">
-                <text>{{eventObject.descSummary}}</text>
-                <text>{{eventObject.locationStr}}</text>
-              </view>
-            </view>
-          </eventCard>
+          </block>
+          
+          
         </view>
       </vant-tab>
     </block>

@@ -1,12 +1,14 @@
 /* miniprogram/pages/shoppingCart.wxss */
 page{
-  height: 100%;
+  min-height: 100%;
   width: 750rpx;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
-  background-color: #f2f2f2;
+  overflow: auto;
 }
 #loadingBodyContainer{
+  z-index: 2;
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -15,10 +17,15 @@ page{
 }
 
 #bodyContainer{
-  flex-grow: 1;
+  /* Body contianer should grow to take up rest of space */
+  flex: 1 0 10px;
+  height: auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   /*background-color: thistle;*/
+  /* Have the button container be a little bit off from the button */ 
+  padding-bottom: 3rem;
 }
 #titleContainer{
   border-bottom: 7rpx solid black;
@@ -26,21 +33,22 @@ page{
   font-weight: bold;
 }
 #productCardsContainer{
-  display: flex;
-  flex-direction: column;
+  display: block;
+  height: auto;
+  /*background-color: yellowgreen;*/
 }
 #cardContainer{
-  height: 30vh;
   width: 100%;
-  border-radius: 10px;
   background-color: white;
+  display: block;
+  border-radius: 10px;
+
 }
 
 #aboveRow{
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  
 }
 #titleRow{
   display: flex;
@@ -81,10 +89,10 @@ page{
 }
 #buttonsContainer{
   width: 100%;
-  margin-top: auto;
   display: block;
   /*display: flex;
   flex-direction: column;*/
   align-items: center;
-  margin-bottom: 10%; 
+  padding: 0rem 1rem;
+  margin-top: 2rem; 
 }

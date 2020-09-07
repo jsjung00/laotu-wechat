@@ -20,6 +20,11 @@ Page({
   },
   onLoad: async function(options){
     var that = this;
+    //Upload fonts
+    wx.loadFontFace({
+      family: 'OpenSans-Bold',
+      source: 'url("https://github.com/google/fonts/blob/master/apache/opensans/OpenSans-Bold.ttf")'
+    });
     //Get our page data from the cloud
     const db = wx.cloud.database({
       env: 'laotudata-laotu'
