@@ -1,4 +1,4 @@
-/** Called in shoppingcart.js
+/** Called in shoppingcart.js and item.js
  * Returns an array of objects that represent the user's cart. The objects are in the form
  *    {itemid: String, quantity: Number}
  * Parameters: none

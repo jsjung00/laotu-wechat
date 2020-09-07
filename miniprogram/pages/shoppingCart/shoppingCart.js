@@ -1,5 +1,10 @@
 // miniprogram/pages/shoppingCart.js
 /**
+ * Page opens when user clicks on the buy button from item.wxml and is redirected here.
+ *    In order to prevent race condition, page needs to wait until item.js sets the global variable 'addItemComplete' to true
+ *    before page queries user cart from the cloud. 
+ *    Then, page sets 'addItemComplete' to false immediately after to keep the communication going.
+ *    
  * In order to display the cart items, the page uses a local array called cartDetailObjects which is pulled from the cloud and
  *   modified to be of the form [{id: "", titleStr: ""..., isHidden : Boolean, quantity: Number}]. isHidden will determine whether or not the
  *   itemCard should be displayed (using <view hidden="{{isHidden}}"/>).
@@ -38,34 +43,79 @@ Page({
   onLoad: async function (options) {
     console.log("shopping onLoad()");
     var that = this;
+    //To prevent race condition, wait until item.js sends global var 'addItemComplete' to true
+    var checkAddItemComplete = function(){
+      var addItemComplete;
+      return new Promise(function(resolve, reject){
+        var numLoops = 40;
+        (function waitForAddItemComplete(){
+          addItemComplete = app.globalData.addItemComplete;
+          if (addItemComplete != true){
+            //Continually loop until the data is set
+            setTimeout(waitForAddItemComplete, 250);
+            numLoops -= 1;
+            //Only allow max 20 loops
+            if (numLoops < 1){
+              reject("shopping cart onload(): took too long to receive addItemComplete from item.js.");
+            }
+          }
+          else{
+            return resolve();
+          }
+        })();
+      });
+    }
+    await checkAddItemComplete();
+    console.log("from shoppingCart: addItem completed");
+    //Reset addItemComplete to false
+    app.globalData.addItemComplete = false;
+
+
     //Grab the array of cartDetailObjects from the cloud
-    let cartDetailObjectsResp = await wx.cloud.callFunction({
+    var cartDetailObjectsResp = await wx.cloud.callFunction({
       name: 'getCartDetailObjects'
     });
-    let _cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
-    console.log("_cartdetailobjects", _cartDetailObjects);
+    var _cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
+    console.log("_CARTDETAILOBJECTS", _cartDetailObjects);
     
     //Grab the array of cartQuantityObjects from the cloud
-    let cartQuantityObjectsResp = await wx.cloud.callFunction({
+    var cartQuantityObjectsResp = await wx.cloud.callFunction({
       name : 'getUserCart'
     });
     console.log("cartQOResp", cartQuantityObjectsResp);
-    let _cartQuantityObjects = cartQuantityObjectsResp.result.cartProducts;
+    var _cartQuantityObjects = cartQuantityObjectsResp.result.cartProducts;
 
     //Get the quantity of each product and add {quantity: Number} to each cartDetailObject
     var getQuantity = function(productID){
-      let _quantityObject = _cartQuantityObjects.filter(obj => obj.itemid == productID);
+      console.log("productID is", productID, "type is", typeof productID);
+      let _quantityObject = _cartQuantityObjects.filter(obj => obj.itemid === productID);
       if (_quantityObject.length < 1){
-        throw new Error("Could not find object to corresponding productID. shoppingCart onload()");
+        console.error("RACE Could not find object to corresponding productID. shoppingCart onload()");
+        //The user cart was updated after the cart detail objects was called. Try again
+        throw new Error("shoppingCart.js: retry with updated cartDetailObject"); 
+      } else{
+        let quantity = _quantityObject[0].quantity;
+        return quantity;
       }
-      let quantity = _quantityObject[0].quantity;
-      return quantity;
+      
     } 
     
-    // For each detail object, add "isHidden" : false and quantity: itemQuantity
-    let cartDetailObjects = _cartDetailObjects.map(obj => Object.assign(obj, {isHidden : false, quantity : getQuantity(obj._id)}));
-    //Upload cartDetailObjects to the page data
-    this.setData({cartDetailObjects});
+    try{
+      // For each detail object, add "isHidden" : false and quantity: itemQuantity
+      var cartDetailObjects = _cartDetailObjects.map(obj => Object.assign(obj, {isHidden : false, quantity : getQuantity(obj._id)}));
+      //Upload cartDetailObjects to the page data
+      that.setData({cartDetailObjects});
+    } catch(e){
+      //Try again with updated cartDetailObjects
+      cartDetailObjectsResp = await wx.cloud.callFunction({
+        name: 'getCartDetailObjects'
+      });
+      _cartDetailObjects = cartDetailObjectsResp.result.cartDetailObjects;
+
+      var cartDetailObjects = _cartDetailObjects.map(obj => Object.assign(obj, {isHidden : false, quantity : getQuantity(obj._id)}));
+      //Upload cartDetailObjects to the page data
+      that.setData({cartDetailObjects});
+    }
     
 
     //For each quantity object, we need to add the price : Number 

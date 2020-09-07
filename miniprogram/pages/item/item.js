@@ -15,7 +15,9 @@
  * function here is triggered which sets displayPopUp = true and isTabBarHidden = true. The itemTabBar.js listens for any
  * change and will be able to get the isTabBarHidden = true in order to hide the component.
  * 
- * To add item to cart, uploads itemid and quantity to the cloud function 'addItemToCart' 
+ * To add item to cart, uploads itemid and quantity to the cloud function 'addItemToCart'
+ *    To handle race conditions, sets a global variable 'addItemComplete' to true after the item has been added
+ *    shoppingCart.js will wait 'addItemComplete' to be true before loading and getting userCart from cloud 
  */
 const app = getApp();
 
@@ -36,7 +38,6 @@ Page({
     displayPopUp: false,
     backgroundBlur : false,
     showPopUp : false,
-    pageLoaded : false, //changes to true once page loads
     //dotActive : null (will be set in onLoad and onShow only if coming from higher up page navigation)
     //isFavorited : (will be set in setIsFavorited which is called onLoad)
     itemQuantity : 1 //quantity of items user wants to add to cart. Changed through quantityChange()
@@ -57,7 +58,7 @@ Page({
     });
     console.log("tabbarHeight", this.data.tabbarHeight);
 
-    //Get the itemID and the type and set to local storage
+    //Get the itemID and the type from the parent page (product.js) and set to local storage
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', function(data){
       let id = data.id;
@@ -73,9 +74,6 @@ Page({
       //Check if the item is favorited and set the isFavorited data
       that.setIsFavorited(id, type);
 
-      //Set pageLoaded to true
-      console.log("Item page just loaded");
-      that.setData({pageLoaded : true});
     });
 
   },
@@ -463,11 +461,14 @@ Page({
         quantity : itemQuantity
       }
     });
+    console.log("ADDITEMTOCART() COMPLETED");
+    app.globalData.addItemComplete = true;
     //
 
   },
   buyNow : async function(e){
-    //Called when user clicks on buy now button in card pop up
+    //Called when user clicks on the buy now button in the popup. Redirects to shopping page and uploads the item and quantity
+    //Shopping page will wait for item to be added (see below)
     wx.navigateTo({
       url: '../../pages/shoppingCart/shoppingCart',
     });
@@ -511,7 +512,9 @@ Page({
         quantity : itemQuantity
       }
     });
-    console.log("Uploaded item and quantity");
+    app.globalData.addItemComplete = true;
+    console.log("ADDITEMTOCART() COMPLETED and set to true");
+    
     
 
   },

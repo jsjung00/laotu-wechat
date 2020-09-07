@@ -257,28 +257,6 @@ Page({
       title: 'Processing payment...'
     });
 
-    //Upload the order information to the userInfo
-    var currentDateTime = util.formatTime(new Date());
-    var currentOrderObject = {
-      streetName: this.data.streetName,
-      phoneNumber : this.data.phoneNumber,
-      phoneCode : this.data.phoneCode,
-      name : this.data.name,
-      regionCityDistrictArray : this.data.regionCityDistrictArray,
-      totalPrice : this.data.orderTotal,
-      cartQuantityObjects : this.data.cartQuantityObjects,
-      cartDetailObjects : this.data.cartDetailObjects,
-      dateTime : currentDateTime  
-    };
-    wx.cloud.callFunction({
-      name : 'addOrderObject',
-      data : {
-        newOrderObject : currentOrderObject
-      }
-    }).then(() => console.log("Successfully added order object to cloud"))
-      .catch(err => console.error(err)); 
-
-
     //Called when the user clicks on the pay button
     //Check that the order detail (shippingInfo) is set and complete
     if (this.data.shippingInfoComplete === true){

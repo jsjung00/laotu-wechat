@@ -27,6 +27,7 @@ exports.main = async (event, context) => {
   //If the user record does not exist, initialize one
   if (cartResponse.data.length < 1){
     //Could not get a record for the user- create one with empty cartProducts array
+    console.log("getCartDetailObjects(): user has no record");
     try{
       await db.collection('userCart').add({
       data : {
@@ -39,11 +40,21 @@ exports.main = async (event, context) => {
       throw new Error("Failed to initialize user record in the cart");
     }
     var cartProducts = [];
-    //Since there are no products, there are no product IDs
-    var productIDs = [];
+    //Since there are no products, there are no product IDs and will return an empty array
+    return {
+      cartDetailObjects : []
+    }
   }
   else{
     var cartProducts = cartResponse.data[0].cartProducts;
+    //If cartProducts is empty, reutrn an empty array
+    if (cartProducts.length < 1){
+      console.log("cartProducts is empty. returning empty array");
+      return{
+        cartDetailObjects : []
+      }
+    }
+
     //Using the cartProducts array, we take the itemid from each productObject
     var productIDs = cartProducts.map(obj => obj.itemid);
   }
