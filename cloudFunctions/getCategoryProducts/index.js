@@ -71,7 +71,13 @@ exports.main = async (event, context) => {
     }
     else{
       //filter objects in allProducts that have the right category
-      return allProducts.filter(productObj => productObj.categories.includes(categoryName)); 
+      return allProducts.filter(function(productObj){
+        if (productObj.categories == null){
+          return false;
+        }else{
+          return productObj.categories.includes(categoryName);
+        }
+      }); 
     }
   };
   //Return an array that contains object with keys 'categoryName' and 'products'

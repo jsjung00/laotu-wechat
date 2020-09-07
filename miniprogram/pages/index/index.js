@@ -24,8 +24,10 @@ Page({
     const db = wx.cloud.database({
       env: 'laotudata-laotu'
     });
+
     try{
       var response = await db.collection('homePageData').limit(1).get();
+      console.log("my response is", response);
     }catch{
       console.error("indexJS: Failed to get homePageData from cloud");
       var reloadPage = () => {wx.switchTab({
@@ -44,10 +46,11 @@ Page({
     const aboveSwiperImages = pageData.aboveSwiperImagesSrc;
     const belowSwiperImages= pageData.belowSwiperImagesSrc;
     //Grab the featureEventIDs and the featureProductIDs from the collection 'featuredIDs'
+     //test the featuredIDs collection query
     try{
-      var _featuredIDs = await db.collection('featuredIDs').get();
-    }catch{
-      console.error("indexJS: Failed to get featuredIDs from cloud");
+      var featuredResponse = await db.collection('featuredIDs').get();
+    } catch(e){
+      console.error("Failed to get featuredID's collection", e);
       var reloadPage = () => {wx.switchTab({
         url: '../index/index',
       })};
@@ -57,22 +60,21 @@ Page({
         complete : reloadPage
       });
     }
-    console.log("_fIDS", _featuredIDs);
-    const featuredEventIDs = _featuredIDs.data[0].eventIDs;
-    const featuredProductIDs = _featuredIDs.data[0].productIDs;
-    console.log("FEI", featuredEventIDs);
-
+    var featuredIDs = featuredResponse.data[0];
+    console.log("featuredIDs", featuredIDs);
+    var featuredEventIDs = featuredIDs.eventIDs;
+    var featuredProductIDs = featuredIDs.productIDs;
 
     that.setData({
       aboveSwiperImages,
       belowSwiperImages,
-      featureEventsID,
-      featureProductsID
+      featuredEventIDs,
+      featuredProductIDs
     });
     
     //Grab the featured Events and Products objects from cloud function
     try{
-      var featuredResp = await wx.cloud.callFunction({
+      var featuredObjectsResp = await wx.cloud.callFunction({
         name : 'getFeaturedObjects'
       });
     } catch (e){
@@ -87,7 +89,7 @@ Page({
       });
     }
 
-    let featuredObject = featuredResp.result;
+    let featuredObject = featuredObjectsResp.result;
     let eventObjects = featuredObject.eventObjects;
     let productObjects = featuredObject.productObjects;
     console.log("productObj", productObjects);
